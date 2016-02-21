@@ -1,4 +1,4 @@
-package edu.stevens.cs522.bookstore.Common;
+package edu.stevens.cs522.bookstore.common;
 
 /**
  * Created by Rafael on 2/17/2016.

@@ -1,4 +1,4 @@
-package edu.stevens.cs522.bookstore.listadapters;
+package edu.stevens.cs522.bookstore.layout.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;

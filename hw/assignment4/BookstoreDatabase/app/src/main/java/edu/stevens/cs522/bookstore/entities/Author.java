@@ -9,10 +9,9 @@ public class Author implements Parcelable{
 
 	// NOTE: middleInitial may be NULL!
 
+	protected long id;
 	protected String firstName;
-
 	protected String middleInitial;
-
 	protected String lastName;
 
 	public Author(String firstName, String middleInitial, String lastName) {
@@ -96,5 +95,13 @@ public class Author implements Parcelable{
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 }

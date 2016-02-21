@@ -5,9 +5,14 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.app.ListActivity;
+import android.app.LoaderManager;
+import android.content.ContentValues;
 import android.content.Context;
+import android.content.CursorLoader;
 import android.content.Intent;
+import android.content.Loader;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.ActionMode;
@@ -20,12 +25,13 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
+//import edu.stevens.cs522.bookstore.databases.CartDbAdapter;
 import edu.stevens.cs522.bookstore.R;
-import edu.stevens.cs522.bookstore.databases.CartDbAdapter;
 import edu.stevens.cs522.bookstore.contracts.BookContract;
 import edu.stevens.cs522.bookstore.entities.Book;
+import edu.stevens.cs522.bookstore.providers.BookProvider;
 
-public class BookStoreActivity extends ListActivity {
+public class BookStoreActivity extends Activity implements LoaderManager.LoaderCallbacks<Cursor>{
 
     // Use this when logging errors and warnings.
     @SuppressWarnings("unused")
@@ -37,7 +43,6 @@ public class BookStoreActivity extends ListActivity {
     public static final String SHOPPING_CART_COUNT_KEY = "shopping_cart_count";
     public static final String BOOK_DETAILS_KEY = "book_details";
 
-
     // These are request codes for subactivity request calls
     static final private int ADD_REQUEST = 1;
     static final private int EDIT_REQUEST = ADD_REQUEST + 1;
@@ -45,38 +50,34 @@ public class BookStoreActivity extends ListActivity {
     static final private int SEARCH_REQUEST = CHECKOUT_REQUEST + 1;
     static final private int DETAILS_REQUEST = SEARCH_REQUEST + 1;
 
+    static final private int CURSOR_LOADER_ID = 1;
+
     private ArrayList<Book> shoppingCart;
     protected Object actionMode;
     private static Book selectedItem = null;
     private static int selectedItemIndex = -1;
 
     TextView lblListIsEmpty;
+    ListView cartList;
 
     private Context context = this;
-    private CartDbAdapter dbAdapter;
+//    private CartDbAdapter dbAdapter;
     private SimpleCursorAdapter cursorAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // TODO check if there is saved UI state, and if so, restore it (i.e. the cart contents)
         if (savedInstanceState != null) {
             shoppingCart = savedInstanceState.getParcelableArrayList(STATE_KEY);
         }
 
-        if (shoppingCart == null) shoppingCart = new ArrayList<>();
-
-        // TODO Set the layout (use cart.xml layout)
         setContentView(R.layout.cart);
 
         lblListIsEmpty = (TextView) findViewById(R.id.lblEmptyList);
-        lblListIsEmpty.setVisibility(View.VISIBLE);
+        cartList = (ListView) findViewById(R.id.cartList);
 
-        // TODO use an array adapter to display the cart contents.
-
-        ListView list = getListView();
-        list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+        cartList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 Log.i(TAG, "item long clicked >> position:" + position);
@@ -85,7 +86,7 @@ public class BookStoreActivity extends ListActivity {
                 }
 
                 selectedItemIndex = position;
-                selectedItem = new Book((Cursor)getListView().getAdapter().getItem(selectedItemIndex));
+                selectedItem = new Book((Cursor) cartList.getAdapter().getItem(selectedItemIndex));
 
                 actionMode = BookStoreActivity.this.startActionMode(actionModeCallback);
                 view.setSelected(true);
@@ -93,45 +94,14 @@ public class BookStoreActivity extends ListActivity {
             }
         });
 
-//        CartRowAdapter adapter = new CartRowAdapter(getApplicationContext(), R.layout.cart, shoppingCart);
-//        this.setListAdapter(adapter);
-
-        this.dbAdapter = new CartDbAdapter(context);
-        this.cursorAdapter = getCursorAdapter(null);
-        this.setListAdapter(cursorAdapter);
-
-        try {
-            this.dbAdapter.open();
-            Cursor c = this.dbAdapter.fetchAllBooks();
-            if (c.moveToFirst()){
-                this.cursorAdapter.changeCursor(c);
-                lblListIsEmpty.setVisibility(View.GONE);
-            }
-            this.dbAdapter.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private SimpleCursorAdapter getCursorAdapter(Cursor cursor) {
-//        final Uri data = Uri.parse("content://edu.stevens.cs522.bookstore/Books/");
-//        final Cursor c = managedQuery(data, null, null, null, null);
-
-        String[] from = new String[]{
-                BookContract.TITLE,
-                BookContract.AUTHORS
-        };
-        int[] to = new int[]{
-                R.id.cart_row_title,
-                R.id.cart_row_author
-        };
-        return new SimpleCursorAdapter(this, R.layout.cart_row, cursor, from, to);
+        fillData(null);
+        LoaderManager lm = getLoaderManager();
+        lm.initLoader(CURSOR_LOADER_ID, null, this);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
-        // TODO provide ADD, DELETE and CHECKOUT options
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.bookstore_menu, menu);
         return true;
@@ -156,20 +126,32 @@ public class BookStoreActivity extends ListActivity {
                 startActivityForResult(checkoutIntent, CHECKOUT_REQUEST);
                 return true;
             case R.id.delete:
+//                try {
+//                    dbAdapter.open();
+//                    dbAdapter.delete(selectedItem);
+//                    Cursor c = dbAdapter.fetchAllBooks();
+//                    cursorAdapter.changeCursor(c);
+//                    if (c.moveToFirst()){
+//                        lblListIsEmpty.setVisibility(View.GONE);
+//                    }
+//                    else{
+//                        lblListIsEmpty.setVisibility(View.VISIBLE);
+//                    }
+//                    dbAdapter.close();
+//                } catch (SQLException e) {
+//                    e.printStackTrace();
+//                }
+
+                BookProvider provider = new BookProvider();
+                Uri uri = BookContract.withExtendedPath(selectedItem.getId());
                 try {
-                    dbAdapter.open();
-                    dbAdapter.delete(selectedItem);
-                    Cursor c = dbAdapter.fetchAllBooks();
-                    cursorAdapter.changeCursor(c);
-                    if (c.moveToFirst()){
-                        lblListIsEmpty.setVisibility(View.GONE);
-                    }
-                    else{
-                        lblListIsEmpty.setVisibility(View.VISIBLE);
-                    }
-                    dbAdapter.close();
+                    provider.open()
+                            .delete(uri, null, null);
                 } catch (SQLException e) {
                     e.printStackTrace();
+                }
+                finally {
+                    provider.close();
                 }
                 return true;
             case R.id.details:
@@ -195,29 +177,41 @@ public class BookStoreActivity extends ListActivity {
                     if (intent.hasExtra(SearchBookActivity.BOOK_RESULT_KEY)) {
                         Book newBook = (Book) intent.getParcelableExtra(SearchBookActivity.BOOK_RESULT_KEY);
 //                        shoppingCart.add(newBook);
+//                        try {
+//                            this.dbAdapter.open();
+//                            long result = this.dbAdapter.persist(newBook);
+//                            Log.d("Insert result", String.valueOf(result));
+//                            this.cursorAdapter.changeCursor(this.dbAdapter.fetchAllBooks());
+//                            this.dbAdapter.close();
+//                        } catch (SQLException e) {
+//                            e.printStackTrace();
+//                        }
+                        BookProvider provider = new BookProvider();
                         try {
-                            this.dbAdapter.open();
-                            long result = this.dbAdapter.persist(newBook);
-                            Log.d("Insert result", String.valueOf(result));
-                            this.cursorAdapter.changeCursor(this.dbAdapter.fetchAllBooks());
-                            this.dbAdapter.close();
+                            ContentValues values = new ContentValues();
+                            BookContract.putAll(values, newBook);
+                            provider.open();
+                            provider.insert(provider.CONTENT_URI, values);
+
                         } catch (SQLException e) {
                             e.printStackTrace();
                         }
-
+                        finally {
+//                            provider.close();
+                        }
                         lblListIsEmpty.setVisibility(View.GONE);
                     }
                     break;
                 case CHECKOUT_REQUEST:
-                    try {
-                        this.dbAdapter.open();
-                        this.dbAdapter.deleteAll();
-                        this.cursorAdapter.changeCursor(this.dbAdapter.fetchAllBooks());
-                        this.dbAdapter.close();
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
-                    lblListIsEmpty.setVisibility(View.VISIBLE);
+//                    try {
+//                        this.dbAdapter.open();
+//                        this.dbAdapter.deleteAll();
+//                        this.cursorAdapter.changeCursor(this.dbAdapter.fetchAllBooks());
+//                        this.dbAdapter.close();
+//                    } catch (SQLException e) {
+//                        e.printStackTrace();
+//                    }
+//                    lblListIsEmpty.setVisibility(View.VISIBLE);
                     break;
 
             }
@@ -292,4 +286,56 @@ public class BookStoreActivity extends ListActivity {
             selectedItemIndex = -1;
         }
     };
+
+    public void fillData(Cursor c){
+        String[] from = new String[]{
+                BookContract.TITLE,
+//                BookContract.AUTHORS
+        };
+        int[] to = new int[]{
+                R.id.cart_row_title,
+//                R.id.cart_row_author
+        };
+
+
+        this.cursorAdapter =  new SimpleCursorAdapter(this, R.layout.cart_row, c, from, to);
+        this.cartList.setAdapter(this.cursorAdapter);
+    }
+
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        switch (id){
+            case CURSOR_LOADER_ID:
+                String[] projection = new String[]{
+                        BookContract.ID_FULL,
+                        BookContract.TITLE
+                };
+                return new CursorLoader(this,
+                        BookProvider.CONTENT_URI,
+                        projection,
+                        null, null, null);
+            default:
+                throw new IllegalArgumentException("Unexpected loader id: " + id);
+        }
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        this.cursorAdapter.swapCursor(data);
+        int rows = data.getCount();
+        if (rows > 0) {
+            lblListIsEmpty.setVisibility(View.GONE);
+        }
+        else{
+            lblListIsEmpty.setVisibility(View.VISIBLE);
+        }
+
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+        this.cursorAdapter.swapCursor(null);
+    }
+
+
 }

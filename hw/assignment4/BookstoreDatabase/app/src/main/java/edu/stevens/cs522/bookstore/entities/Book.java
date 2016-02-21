@@ -10,7 +10,7 @@ import edu.stevens.cs522.bookstore.contracts.BookContract;
 public class Book implements Parcelable {
 
     // PRIVATE FIELDS
-    protected int id;
+    protected long id;
 
     protected String title;
 
@@ -23,24 +23,16 @@ public class Book implements Parcelable {
     public Book() {
     }
 
-    public void writeToProvider(ContentValues values) {
-        BookContract.putId(values, this.id);
-        BookContract.putTitle(values, this.title);
-        BookContract.putIsbn(values, this.isbn);
-        BookContract.putPrice(values, this.price);
-    }
-
-    public Book(int id, String title, Author[] author, String isbn, double price) {
+    public Book(long id, String title, Author[] authors, String isbn, double price) {
         this.id = id;
         this.title = title;
-        this.authors = author;
+        this.authors = authors;
         this.isbn = isbn;
         this.price = price;
     }
 
-
-    protected Book(Parcel in) {
-        id = in.readInt();
+    public Book(Parcel in) {
+        id = in.readLong();
         title = in.readString();
         authors = in.createTypedArray(Author.CREATOR);
         isbn = in.readString();
@@ -48,13 +40,12 @@ public class Book implements Parcelable {
     }
 
     public Book(Cursor in) {
-        this.id = BookContract.getId(in);
-        this.title = BookContract.getTitle(in);
-        this.isbn = BookContract.getIsbn(in);
-        this.price = BookContract.getPrice(in);
-        this.authors = BookContract.getAuthors(in);
+        id = BookContract.getId(in);
+        title = BookContract.getTitle(in);
+//        authors = in.createTypedArray(Author.CREATOR);
+        isbn = BookContract.getIsbn(in);
+        price = BookContract.getPrice(in);
     }
-
 
     public static final Creator<Book> CREATOR = new Creator<Book>() {
         @Override
@@ -69,30 +60,36 @@ public class Book implements Parcelable {
     };
 
     @Override
+    public String toString() {
+        return this.title + " - $" + this.price;
+    }
+
+    @Override
     public int describeContents() {
         return 0;
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(id);
+        dest.writeLong(id);
         dest.writeString(title);
         dest.writeTypedArray(authors, flags);
         dest.writeString(isbn);
         dest.writeDouble(price);
     }
 
-    @Override
-    public String toString() {
-        return this.title + " - $" + this.price;
+    public void writeToProvider(ContentValues values) {
+//        BookContract.putId(values, this.id);
+        BookContract.putTitle(values, this.title);
+        BookContract.putIsbn(values, this.isbn);
+        BookContract.putPrice(values, this.price);
     }
 
-    //GETTERS AND SETTERS
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
