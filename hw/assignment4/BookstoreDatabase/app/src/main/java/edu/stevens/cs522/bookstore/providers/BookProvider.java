@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.DatabaseErrorHandler;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteQueryBuilder;
@@ -15,7 +16,6 @@ import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
-import java.sql.SQLException;
 import java.util.HashMap;
 
 import edu.stevens.cs522.bookstore.contracts.AuthorContract;
@@ -39,7 +39,7 @@ public class BookProvider extends ContentProvider {
     private static final String DEFAULT_SORT = BookContract.ID + " ASC";
     //---------------------------------------------------
     private SQLiteDatabase _db;
-//    private final Context _context;
+//    private Context _context;
     private DBHelper _dbHelper;
 
     // SHOULD THIS BE STATIC?
@@ -83,17 +83,14 @@ public class BookProvider extends ContentProvider {
         uriMatcher.addURI(BookContract.AUTHORITY, "books/#", SINGLE_ROW);
     }
 
-
-
     @Override
     public boolean onCreate() {
-        Context context = getContext();
-        _dbHelper = new DBHelper(context);
-//        _db = _dbHelper.getWritableDatabase();
-        return false;
+        this._dbHelper = new DBHelper(getContext());
+        _db = _dbHelper.getWritableDatabase();
+        return (_db == null) ? false : true;
     }
 
-    public BookProvider open() throws SQLException {
+    public BookProvider open(){
         _db = _dbHelper.getWritableDatabase();
         return this;
     }
@@ -106,7 +103,6 @@ public class BookProvider extends ContentProvider {
     @Nullable
     @Override
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
-        _db = _dbHelper.getWritableDatabase();
         SQLiteQueryBuilder builder = new SQLiteQueryBuilder();
         String joinStat = BookContract.TABLE_NAME
                 + " LEFT OUTER JOIN " + AuthorContract.TABLE_NAME
@@ -126,7 +122,7 @@ public class BookProvider extends ContentProvider {
         }
 
         Cursor cursor = builder.query(_db, projection, selection, selectionArgs, null, null, sortOrder);
-//        _db.close();
+        cursor.setNotificationUri(getContext().getContentResolver(), uri);
         return cursor;
     }
 
@@ -145,18 +141,17 @@ public class BookProvider extends ContentProvider {
 
     @Nullable
     @Override
-    public Uri insert(Uri uri, ContentValues values) {
+    public Uri insert(Uri uri, ContentValues values){
         long row = _db.insert(BookContract.TABLE_NAME, null, values);
 
         if (row > 0){
             Uri instanceUri = BookContract.withExtendedPath(row);
-            ContentResolver resolver = getContext().getContentResolver();
-            resolver.notifyChange(instanceUri, null);
+//            ContentResolver resolver = this._context.getContentResolver();
+//            resolver.notifyChange(instanceUri, null);
+            getContext().getContentResolver().notifyChange(instanceUri, null);
             return instanceUri;
         }
-        else {
-            return null;
-        }
+        throw new SQLException("Insertion failed");
     }
 
     @Override
@@ -178,8 +173,7 @@ public class BookProvider extends ContentProvider {
         Cursor cursor = builder.query(_db, null, selection, selectionArgs, null, null, DEFAULT_SORT);
         int rowsChanged = cursor.getCount();
         if(rowsChanged > 0){
-            ContentResolver resolver = getContext().getContentResolver();
-            resolver.notifyChange(CONTENT_URI, null);
+            getContext().getContentResolver().notifyChange(uri, null);
         }
         return rowsChanged;
     }

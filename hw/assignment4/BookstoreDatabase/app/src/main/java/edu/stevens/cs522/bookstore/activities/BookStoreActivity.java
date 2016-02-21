@@ -126,33 +126,17 @@ public class BookStoreActivity extends Activity implements LoaderManager.LoaderC
                 startActivityForResult(checkoutIntent, CHECKOUT_REQUEST);
                 return true;
             case R.id.delete:
+//                BookProvider provider = new BookProvider(this);
+//                Uri uri = BookContract.withExtendedPath(selectedItem.getId());
 //                try {
-//                    dbAdapter.open();
-//                    dbAdapter.delete(selectedItem);
-//                    Cursor c = dbAdapter.fetchAllBooks();
-//                    cursorAdapter.changeCursor(c);
-//                    if (c.moveToFirst()){
-//                        lblListIsEmpty.setVisibility(View.GONE);
-//                    }
-//                    else{
-//                        lblListIsEmpty.setVisibility(View.VISIBLE);
-//                    }
-//                    dbAdapter.close();
-//                } catch (SQLException e) {
+//                    provider.open()
+//                            .delete(uri, null, null);
+//                } catch (Exception e) {
 //                    e.printStackTrace();
 //                }
-
-                BookProvider provider = new BookProvider();
-                Uri uri = BookContract.withExtendedPath(selectedItem.getId());
-                try {
-                    provider.open()
-                            .delete(uri, null, null);
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-                finally {
-                    provider.close();
-                }
+//                finally {
+//                    provider.close();
+//                }
                 return true;
             case R.id.details:
                 Log.i(TAG, "details button clicked");
@@ -176,30 +160,14 @@ public class BookStoreActivity extends Activity implements LoaderManager.LoaderC
                 case SEARCH_REQUEST:
                     if (intent.hasExtra(SearchBookActivity.BOOK_RESULT_KEY)) {
                         Book newBook = (Book) intent.getParcelableExtra(SearchBookActivity.BOOK_RESULT_KEY);
-//                        shoppingCart.add(newBook);
-//                        try {
-//                            this.dbAdapter.open();
-//                            long result = this.dbAdapter.persist(newBook);
-//                            Log.d("Insert result", String.valueOf(result));
-//                            this.cursorAdapter.changeCursor(this.dbAdapter.fetchAllBooks());
-//                            this.dbAdapter.close();
-//                        } catch (SQLException e) {
-//                            e.printStackTrace();
-//                        }
-                        BookProvider provider = new BookProvider();
                         try {
                             ContentValues values = new ContentValues();
                             BookContract.putAll(values, newBook);
-                            provider.open();
-                            provider.insert(provider.CONTENT_URI, values);
-
-                        } catch (SQLException e) {
+                            getContentResolver().insert(BookProvider.CONTENT_URI, values);
+                            lblListIsEmpty.setVisibility(View.GONE);
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
-                        finally {
-//                            provider.close();
-                        }
-                        lblListIsEmpty.setVisibility(View.GONE);
                     }
                     break;
                 case CHECKOUT_REQUEST:

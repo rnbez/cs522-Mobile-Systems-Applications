@@ -10,19 +10,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="62b1a8d2-8df5-4dbb-8798-4574c3ef7fcd" name="Default" comment="">
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522-Mobile-Systems-Applications\hw\assignment4\BookstoreDatabase\app\src\main\java\edu\stevens\cs522\bookstore\contracts\TransitContract.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522-Mobile-Systems-Applications\hw\assignment4\BookstoreDatabase\app\src\main\java\edu\stevens\cs522\bookstore\listadapters\CartRowAdapter.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/entities/Author.java" afterPath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/entities/Author.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/contracts/AuthorContract.java" afterPath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/contracts/AuthorContract.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/entities/Book.java" afterPath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/entities/Book.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/contracts/BookContract.java" afterPath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/contracts/BookContract.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/providers/BookProvider.java" afterPath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/providers/BookProvider.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/activities/BookStoreActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/activities/BookStoreActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/databases/CartDbAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/databases/CartDbAdapter.java" />
-      <change type="MODIFICATION" beforePath="C:\Projects\GitHub\stevens\cs522-Mobile-Systems-Applications\hw\assignment4\BookstoreDatabase\app\src\main\java\edu\stevens\cs522\bookstore\common\CommonAssumptions.java" afterPath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/common/CommonAssumptions.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/cart.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/cart.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/support_v4_23_1_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_v4_23_1_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="BookstoreDatabase.iws" />
@@ -51,39 +40,51 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="BookStoreActivity.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="BookStoreActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/activities/BookStoreActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="192" column="39" selection-start-line="192" selection-start-column="39" selection-end-line="192" selection-end-column="39" />
+            <state vertical-scroll-proportion="0.20938627">
+              <caret line="289" column="13" selection-start-line="289" selection-start-column="13" selection-end-line="289" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#2845#3509#0" expanded="true" />
                 <element signature="e#3508#3509#0" expanded="true" />
                 <element signature="method#onCreateOptionsMenu#0;class#BookStoreActivity#0" expanded="false" />
-                <element signature="method#onOptionsItemSelected#0;class#BookStoreActivity#0" expanded="false" />
-                <element signature="class#9182:11318" expanded="false" />
-                <element signature="e#12750#12751#0" expanded="true" />
-                <element signature="e#12801#12802#0" expanded="true" />
-                <marker date="1456078254686" expanded="true" signature="2845:3509" placeholder="..." />
-                <marker date="1456078254686" expanded="false" signature="4066:4300" placeholder="..." />
-                <marker date="1456078254686" expanded="false" signature="4332:4829" placeholder="..." />
-                <marker date="1456078254686" expanded="true" signature="4859:5961" placeholder="..." />
-                <marker date="1456078254686" expanded="true" signature="4878:5496" placeholder="..." />
-                <marker date="1456078254686" expanded="false" signature="5992:6303" placeholder="..." />
-                <marker date="1456078254686" expanded="false" signature="6324:6382" placeholder="..." />
+                <element signature="method#onActionItemClicked#0;class#7788:9924" expanded="false" />
+                <element signature="e#11356#11357#0" expanded="true" />
+                <element signature="e#11407#11408#0" expanded="true" />
+                <marker date="1456083301023" expanded="true" signature="2845:3509" placeholder="..." />
+                <marker date="1456083301023" expanded="true" signature="4066:4300" placeholder="..." />
+                <marker date="1456083301023" expanded="false" signature="4332:4829" placeholder="..." />
+                <marker date="1456083301023" expanded="true" signature="4859:5346" placeholder="..." />
+                <marker date="1456083301023" expanded="false" signature="5377:5688" placeholder="..." />
+                <marker date="1456083301023" expanded="false" signature="5709:5767" placeholder="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BookProvider.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="BookContract.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/contracts/BookContract.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="60" column="0" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BookProvider.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/providers/BookProvider.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="2.0873015">
-              <caret line="89" column="39" selection-start-line="89" selection-start-column="39" selection-end-line="89" selection-end-column="39" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="151" column="0" selection-start-line="151" selection-start-column="0" selection-end-line="151" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="class#DBHelper#0;class#BookProvider#0" expanded="false" />
+                <element signature="initializer##0;class#BookProvider#0" expanded="false" />
+                <element signature="e#3162#3163#0" expanded="true" />
+                <element signature="e#3189#3190#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -1542,8 +1543,8 @@
         <option value="$PROJECT_DIR$/app/build/intermediates/manifests/full/debug/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/cart.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/providers/BookProvider.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/contracts/BookContract.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/providers/BookProvider.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/activities/BookStoreActivity.java" />
       </list>
     </option>
@@ -1559,8 +1560,8 @@
     <order />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="565" />
-    <option name="width" value="808" />
+    <option name="x" value="443" />
+    <option name="width" value="930" />
     <option name="height" value="735" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -1980,36 +1981,36 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="565" y="0" width="808" height="735" extended-state="0" />
-    <editor active="false" />
+    <frame x="443" y="0" width="930" height="735" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.47016275" sideWeight="0.6813187" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32911393" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.46885812" sideWeight="0.6737968" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32967034" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.49367088" sideWeight="0.78335947" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.47231835" sideWeight="0.70320857" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4159132" sideWeight="0.31868133" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.47016275" sideWeight="0.3262032" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32911393" sideWeight="0.4945055" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32730561" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32698962" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24960753" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28208557" sideWeight="0.5" order="5" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.34719712" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.34602076" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
     </layout>
@@ -2060,46 +2061,16 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/providers/BookProvider.java</url>
-          <line>180</line>
-          <properties />
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/activities/BookStoreActivity.java</url>
-          <line>144</line>
-          <properties />
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/activities/BookStoreActivity.java</url>
-          <line>150</line>
+          <line>134</line>
           <properties />
           <option name="timeStamp" value="9" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/activities/BookStoreActivity.java</url>
-          <line>306</line>
-          <properties />
-          <option name="timeStamp" value="12" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/activities/BookStoreActivity.java</url>
-          <line>336</line>
+          <line>304</line>
           <properties />
           <option name="timeStamp" value="14" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/activities/BookStoreActivity.java</url>
-          <line>290</line>
-          <properties />
-          <option name="timeStamp" value="15" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/activities/BookStoreActivity.java</url>
-          <line>97</line>
-          <properties />
-          <option name="timeStamp" value="16" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/providers/BookProvider.java</url>
@@ -2120,43 +2091,67 @@
           <option name="timeStamp" value="26" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/providers/BookProvider.java</url>
-          <line>127</line>
-          <properties />
-          <option name="timeStamp" value="27" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/activities/BookStoreActivity.java</url>
-          <line>324</line>
-          <properties />
-          <option name="timeStamp" value="28" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/activities/BookStoreActivity.java</url>
-          <line>196</line>
+          <line>168</line>
           <properties />
           <option name="timeStamp" value="30" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/providers/BookProvider.java</url>
-          <line>101</line>
+          <line>98</line>
           <properties />
           <option name="timeStamp" value="31" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/activities/BookStoreActivity.java</url>
-          <line>192</line>
+          <line>165</line>
           <properties />
           <option name="timeStamp" value="32" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/providers/BookProvider.java</url>
-          <line>96</line>
+          <line>144</line>
           <properties />
-          <option name="timeStamp" value="33" />
+          <option name="timeStamp" value="38" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/activities/BookStoreActivity.java</url>
+          <line>291</line>
+          <properties />
+          <option name="timeStamp" value="41" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/providers/BookProvider.java</url>
+          <line>151</line>
+          <properties />
+          <option name="timeStamp" value="42" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/providers/BookProvider.java</url>
+          <line>149</line>
+          <properties />
+          <option name="timeStamp" value="44" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/providers/BookProvider.java</url>
+          <line>93</line>
+          <properties />
+          <option name="timeStamp" value="45" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/providers/BookProvider.java</url>
+          <line>158</line>
+          <properties />
+          <option name="timeStamp" value="47" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/activities/BookStoreActivity.java</url>
+          <line>127</line>
+          <properties />
+          <option name="timeStamp" value="50" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="34" />
+      <option name="time" value="51" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="app">
@@ -2174,17 +2169,15 @@
             <element signature="e#2845#3509#0" expanded="true" />
             <element signature="e#3508#3509#0" expanded="true" />
             <element signature="method#onCreateOptionsMenu#0;class#BookStoreActivity#0" expanded="false" />
-            <element signature="method#onOptionsItemSelected#0;class#BookStoreActivity#0" expanded="false" />
-            <element signature="class#9182:11318" expanded="false" />
-            <element signature="e#12750#12751#0" expanded="true" />
-            <element signature="e#12801#12802#0" expanded="true" />
-            <marker date="1456078254686" expanded="true" signature="2845:3509" placeholder="..." />
-            <marker date="1456078254686" expanded="false" signature="4066:4300" placeholder="..." />
-            <marker date="1456078254686" expanded="false" signature="4332:4829" placeholder="..." />
-            <marker date="1456078254686" expanded="true" signature="4859:5961" placeholder="..." />
-            <marker date="1456078254686" expanded="true" signature="4878:5496" placeholder="..." />
-            <marker date="1456078254686" expanded="false" signature="5992:6303" placeholder="..." />
-            <marker date="1456078254686" expanded="false" signature="6324:6382" placeholder="..." />
+            <element signature="method#onActionItemClicked#0;class#7788:9924" expanded="false" />
+            <element signature="e#11356#11357#0" expanded="true" />
+            <element signature="e#11407#11408#0" expanded="true" />
+            <marker date="1456083301023" expanded="true" signature="2845:3509" placeholder="..." />
+            <marker date="1456083301023" expanded="true" signature="4066:4300" placeholder="..." />
+            <marker date="1456083301023" expanded="false" signature="4332:4829" placeholder="..." />
+            <marker date="1456083301023" expanded="true" signature="4859:5346" placeholder="..." />
+            <marker date="1456083301023" expanded="false" signature="5377:5688" placeholder="..." />
+            <marker date="1456083301023" expanded="false" signature="5709:5767" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -2216,6 +2209,10 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="class#DBHelper#0;class#BookProvider#0" expanded="false" />
+            <element signature="initializer##0;class#BookProvider#0" expanded="false" />
+            <element signature="e#3162#3163#0" expanded="true" />
+            <element signature="e#3189#3190#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2243,14 +2240,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33333334">
           <caret line="66" column="21" selection-start-line="66" selection-start-column="21" selection-end-line="66" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/activities/BookDetailsActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.39238095">
-          <caret line="16" column="8" selection-start-line="16" selection-start-column="8" selection-end-line="16" selection-end-column="8" />
           <folding />
         </state>
       </provider>
@@ -2354,42 +2343,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/contracts/BookContract.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.39285713">
-          <caret line="39" column="47" selection-start-line="39" selection-start-column="47" selection-end-line="39" selection-end-column="47" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-23/com/android/internal/os/ZygoteInit.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3319838">
           <caret line="615" column="0" selection-start-line="615" selection-start-column="0" selection-end-line="615" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-23/android/app/ActivityThread.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33333334">
-          <caret line="3696" column="0" selection-start-line="3696" selection-start-column="0" selection-end-line="3696" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-23/android/content/ContentProvider.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.32539684">
-          <caret line="1016" column="0" selection-start-line="1016" selection-start-column="0" selection-end-line="1016" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-23/android/content/ContentResolver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.30952382">
-          <caret line="490" column="0" selection-start-line="490" selection-start-column="0" selection-end-line="490" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -2402,36 +2359,94 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/activities/BookStoreActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/activities/BookDetailsActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.28761905">
+          <caret line="58" column="57" selection-start-line="58" selection-start-column="57" selection-end-line="58" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-23/android/view/MenuItem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4301887">
+          <caret line="41" column="20" selection-start-line="41" selection-start-column="20" selection-end-line="41" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-23/android/app/ActivityThread.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="192" column="39" selection-start-line="192" selection-start-column="39" selection-end-line="192" selection-end-column="39" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2845#3509#0" expanded="true" />
-            <element signature="e#3508#3509#0" expanded="true" />
-            <element signature="method#onCreateOptionsMenu#0;class#BookStoreActivity#0" expanded="false" />
-            <element signature="method#onOptionsItemSelected#0;class#BookStoreActivity#0" expanded="false" />
-            <element signature="class#9182:11318" expanded="false" />
-            <element signature="e#12750#12751#0" expanded="true" />
-            <element signature="e#12801#12802#0" expanded="true" />
-            <marker date="1456078254686" expanded="true" signature="2845:3509" placeholder="..." />
-            <marker date="1456078254686" expanded="false" signature="4066:4300" placeholder="..." />
-            <marker date="1456078254686" expanded="false" signature="4332:4829" placeholder="..." />
-            <marker date="1456078254686" expanded="true" signature="4859:5961" placeholder="..." />
-            <marker date="1456078254686" expanded="true" signature="4878:5496" placeholder="..." />
-            <marker date="1456078254686" expanded="false" signature="5992:6303" placeholder="..." />
-            <marker date="1456078254686" expanded="false" signature="6324:6382" placeholder="..." />
-          </folding>
+          <caret line="3707" column="0" selection-start-line="3707" selection-start-column="0" selection-end-line="3707" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-23/android/app/Activity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.036101084">
+          <caret line="6421" column="0" selection-start-line="6421" selection-start-column="0" selection-end-line="6421" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-23/android/content/ContentResolver.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33333334">
+          <caret line="1642" column="16" selection-start-line="1642" selection-start-column="16" selection-end-line="1642" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/contracts/BookContract.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="60" column="0" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/providers/BookProvider.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.0873015">
-          <caret line="89" column="39" selection-start-line="89" selection-start-column="39" selection-end-line="89" selection-end-column="39" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="151" column="0" selection-start-line="151" selection-start-column="0" selection-end-line="151" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="class#DBHelper#0;class#BookProvider#0" expanded="false" />
+            <element signature="initializer##0;class#BookProvider#0" expanded="false" />
+            <element signature="e#3162#3163#0" expanded="true" />
+            <element signature="e#3189#3190#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-23/android/content/ContentProvider.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="264" column="0" selection-start-line="264" selection-start-column="0" selection-end-line="264" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/activities/BookStoreActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.20938627">
+          <caret line="289" column="13" selection-start-line="289" selection-start-column="13" selection-end-line="289" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2845#3509#0" expanded="true" />
+            <element signature="e#3508#3509#0" expanded="true" />
+            <element signature="method#onCreateOptionsMenu#0;class#BookStoreActivity#0" expanded="false" />
+            <element signature="method#onActionItemClicked#0;class#7788:9924" expanded="false" />
+            <element signature="e#11356#11357#0" expanded="true" />
+            <element signature="e#11407#11408#0" expanded="true" />
+            <marker date="1456083301023" expanded="true" signature="2845:3509" placeholder="..." />
+            <marker date="1456083301023" expanded="true" signature="4066:4300" placeholder="..." />
+            <marker date="1456083301023" expanded="false" signature="4332:4829" placeholder="..." />
+            <marker date="1456083301023" expanded="true" signature="4859:5346" placeholder="..." />
+            <marker date="1456083301023" expanded="false" signature="5377:5688" placeholder="..." />
+            <marker date="1456083301023" expanded="false" signature="5709:5767" placeholder="..." />
           </folding>
         </state>
       </provider>
