@@ -1,10 +1,8 @@
 package edu.stevens.cs522.bookstore.activities;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 import android.app.Activity;
-import android.app.ListActivity;
 import android.app.LoaderManager;
 import android.content.ContentValues;
 import android.content.Context;
@@ -20,6 +18,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
@@ -31,7 +30,7 @@ import edu.stevens.cs522.bookstore.contracts.BookContract;
 import edu.stevens.cs522.bookstore.entities.Book;
 import edu.stevens.cs522.bookstore.providers.BookProvider;
 
-public class BookStoreActivity extends Activity implements LoaderManager.LoaderCallbacks<Cursor>{
+public class BookStoreActivity extends Activity implements LoaderManager.LoaderCallbacks<Cursor> {
 
     // Use this when logging errors and warnings.
     @SuppressWarnings("unused")
@@ -55,13 +54,15 @@ public class BookStoreActivity extends Activity implements LoaderManager.LoaderC
     private ArrayList<Book> shoppingCart;
     protected Object actionMode;
     private static Book selectedItem = null;
+    private static ArrayList<Book> selectedItems = null;
+    private ArrayList<Long> selectedItemIds = new ArrayList<>();
     private static int selectedItemIndex = -1;
 
     TextView lblListIsEmpty;
     ListView cartList;
 
     private Context context = this;
-//    private CartDbAdapter dbAdapter;
+    //    private CartDbAdapter dbAdapter;
     private SimpleCursorAdapter cursorAdapter;
 
     @Override
@@ -71,30 +72,15 @@ public class BookStoreActivity extends Activity implements LoaderManager.LoaderC
         if (savedInstanceState != null) {
             shoppingCart = savedInstanceState.getParcelableArrayList(STATE_KEY);
         }
+        selectedItems = new ArrayList<>();
 
         setContentView(R.layout.cart);
 
         lblListIsEmpty = (TextView) findViewById(R.id.lblEmptyList);
+
         cartList = (ListView) findViewById(R.id.cartList);
+        initList(null);
 
-        cartList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.i(TAG, "item long clicked >> position:" + position);
-                if (actionMode != null) {
-                    return false;
-                }
-
-                selectedItemIndex = position;
-                selectedItem = new Book((Cursor) cartList.getAdapter().getItem(selectedItemIndex));
-
-                actionMode = BookStoreActivity.this.startActionMode(actionModeCallback);
-                view.setSelected(true);
-                return true;
-            }
-        });
-
-        fillData(null);
         LoaderManager lm = getLoaderManager();
         lm.initLoader(CURSOR_LOADER_ID, null, this);
     }
@@ -120,29 +106,20 @@ public class BookStoreActivity extends Activity implements LoaderManager.LoaderC
             case R.id.checkout:
                 Log.i(TAG, "checkout button clicked");
                 Intent checkoutIntent = new Intent(this, CheckoutActivity.class);
-//                checkoutIntent.putExtra(SHOPPING_CART_KEY, shoppingCart);
                 Log.d("Cart count", String.valueOf(this.cursorAdapter.getCount()));
                 checkoutIntent.putExtra(SHOPPING_CART_COUNT_KEY, this.cursorAdapter.getCount());
                 startActivityForResult(checkoutIntent, CHECKOUT_REQUEST);
                 return true;
             case R.id.delete:
-//                BookProvider provider = new BookProvider(this);
-//                Uri uri = BookContract.withExtendedPath(selectedItem.getId());
-//                try {
-//                    provider.open()
-//                            .delete(uri, null, null);
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//                finally {
-//                    provider.close();
-//                }
-                return true;
-            case R.id.details:
-                Log.i(TAG, "details button clicked");
-                Intent detailsIntent = new Intent(this, BookDetailsActivity.class);
-                detailsIntent.putExtra(BOOK_DETAILS_KEY, selectedItem);
-                startActivityForResult(detailsIntent, DETAILS_REQUEST);
+                for (long id :
+                        selectedItemIds) {
+                    try {
+                        Uri uri = BookContract.withExtendedPath(id);
+                        getContentResolver().delete(uri, null, null);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -164,22 +141,17 @@ public class BookStoreActivity extends Activity implements LoaderManager.LoaderC
                             ContentValues values = new ContentValues();
                             BookContract.putAll(values, newBook);
                             getContentResolver().insert(BookProvider.CONTENT_URI, values);
-                            lblListIsEmpty.setVisibility(View.GONE);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
                     break;
                 case CHECKOUT_REQUEST:
-//                    try {
-//                        this.dbAdapter.open();
-//                        this.dbAdapter.deleteAll();
-//                        this.cursorAdapter.changeCursor(this.dbAdapter.fetchAllBooks());
-//                        this.dbAdapter.close();
-//                    } catch (SQLException e) {
-//                        e.printStackTrace();
-//                    }
-//                    lblListIsEmpty.setVisibility(View.VISIBLE);
+                    try {
+                        getContentResolver().delete(BookContract.CONTENT_URI, null, null);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     break;
 
             }
@@ -211,7 +183,7 @@ public class BookStoreActivity extends Activity implements LoaderManager.LoaderC
             String title = selectedItem != null ? selectedItem.getTitle() : "Edit";
             mode.setTitle(title);
             MenuInflater inf = mode.getMenuInflater();
-            inf.inflate(R.menu.bookstore_item_selected, menu);
+            inf.inflate(R.menu.bookstore_delete_item, menu);
             return true;
         }
 
@@ -255,7 +227,9 @@ public class BookStoreActivity extends Activity implements LoaderManager.LoaderC
         }
     };
 
-    public void fillData(Cursor c){
+    public void initList(final Cursor c) {
+
+
         String[] from = new String[]{
                 BookContract.TITLE,
 //                BookContract.AUTHORS
@@ -266,17 +240,77 @@ public class BookStoreActivity extends Activity implements LoaderManager.LoaderC
         };
 
 
-        this.cursorAdapter =  new SimpleCursorAdapter(this, R.layout.cart_row, c, from, to);
+        this.cursorAdapter = new SimpleCursorAdapter(this, R.layout.cart_row, c, from, to);
         this.cartList.setAdapter(this.cursorAdapter);
+        this.cartList.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
+
+       this.cartList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+           @Override
+           public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+               Intent detailsIntent = new Intent(getApplicationContext(), BookDetailsActivity.class);
+               Book book = new Book((Cursor) cartList.getAdapter().getItem(position));
+               detailsIntent.putExtra(BOOK_DETAILS_KEY, book);
+               startActivityForResult(detailsIntent, DETAILS_REQUEST);
+           }
+       });
+
+        this.cartList.setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener() {
+            @Override
+            public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {
+                if(checked){
+                    selectedItemIds.add(id);
+                }
+                else {
+                    selectedItemIds.remove(selectedItemIds.indexOf(id));
+                }
+
+                int count = selectedItemIds.size();
+                String title = String.valueOf(count);
+                if(count == 1){
+                    title += " book selected";
+                }
+                else{
+                    title += " books selected";
+                }
+                mode.setTitle(title);
+            }
+
+            @Override
+            public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+                MenuInflater inflater = mode.getMenuInflater();
+                inflater.inflate(R.menu.bookstore_delete_item, menu);
+                return true;
+            }
+
+            @Override
+            public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+                return false;
+            }
+
+            @Override
+            public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+                boolean result = onOptionsItemSelected(item);
+                mode.finish();
+                return result;
+            }
+
+            @Override
+            public void onDestroyActionMode(ActionMode mode) {
+                selectedItemIds.clear();
+            }
+        });
+
     }
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        switch (id){
+        switch (id) {
             case CURSOR_LOADER_ID:
                 String[] projection = new String[]{
                         BookContract.ID_FULL,
-                        BookContract.TITLE
+                        BookContract.TITLE,
+                        BookContract.ISBN,
+                        BookContract.PRICE,
                 };
                 return new CursorLoader(this,
                         BookProvider.CONTENT_URI,
@@ -290,11 +324,9 @@ public class BookStoreActivity extends Activity implements LoaderManager.LoaderC
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         this.cursorAdapter.swapCursor(data);
-        int rows = data.getCount();
-        if (rows > 0) {
+        if (data.getCount() > 0) {
             lblListIsEmpty.setVisibility(View.GONE);
-        }
-        else{
+        } else {
             lblListIsEmpty.setVisibility(View.VISIBLE);
         }
 

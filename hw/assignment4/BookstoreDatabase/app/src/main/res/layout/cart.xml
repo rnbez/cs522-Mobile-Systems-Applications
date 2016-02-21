@@ -10,8 +10,7 @@
       android:layout_height="wrap_content"
       android:longClickable="true"
       android:headerDividersEnabled="true"
-      android:clickable="false"
-      android:choiceMode="singleChoice" />
+      android:clickable="true" />
   <TextView
     android:id="@+id/lblEmptyList"
     android:layout_width="match_parent" 

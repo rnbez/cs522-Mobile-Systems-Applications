@@ -34,16 +34,16 @@ public class BookDetailsActivity extends Activity {
         details_isbn.setText((CharSequence) "ISBN: " + book.getIsbn());
 
         details_price.setText((CharSequence) "Price: $" + String.valueOf(book.getPrice()));
-        Author[] authors = book.getAuthors();
-        StringBuilder authorsSb = new StringBuilder("Authors: ");
-        authorsSb.append(authors[0].toString());
-        if (authors.length > 1) {
-            for (int i = 1; i < authors.length; i++) {
-                authorsSb.append(", ")
-                        .append(authors.toString());
-            }
-        }
-        details_authors.setText((CharSequence) authorsSb.toString());
+//        Author[] authors = book.getAuthors();
+//        StringBuilder authorsSb = new StringBuilder("Authors: ");
+//        authorsSb.append(authors[0].toString());
+//        if (authors.length > 1) {
+//            for (int i = 1; i < authors.length; i++) {
+//                authorsSb.append(", ")
+//                        .append(authors.toString());
+//            }
+//        }
+//        details_authors.setText((CharSequence) authorsSb.toString());
     }
 
     @Override

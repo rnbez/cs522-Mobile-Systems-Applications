@@ -146,8 +146,6 @@ public class BookProvider extends ContentProvider {
 
         if (row > 0){
             Uri instanceUri = BookContract.withExtendedPath(row);
-//            ContentResolver resolver = this._context.getContentResolver();
-//            resolver.notifyChange(instanceUri, null);
             getContext().getContentResolver().notifyChange(instanceUri, null);
             return instanceUri;
         }
@@ -158,24 +156,27 @@ public class BookProvider extends ContentProvider {
     public int delete(Uri uri, String selection, String[] selectionArgs) {
         SQLiteQueryBuilder builder = new SQLiteQueryBuilder();
         builder.setTables(BookContract.TABLE_NAME);
+        int count = 0;
+
 
         switch (uriMatcher.match(uri)){
             case ALL_ROWS:
-//                builder.setProjectionMap(new HashMap<String, String>());
+                count = _db.delete(BookContract.TABLE_NAME, selection, selectionArgs);
                 break;
             case SINGLE_ROW:
-                builder.appendWhere(BookContract.ID + " = " + BookContract.getId(uri));
+                selection = BookContract.ID + " = ?";
+                selectionArgs = new String[]{
+                    uri.getLastPathSegment()
+                };
+                count = _db.delete(BookContract.TABLE_NAME, selection, selectionArgs);
                 break;
             default:
                 throw new IllegalArgumentException("Unknown URI " + uri);
         }
-
-        Cursor cursor = builder.query(_db, null, selection, selectionArgs, null, null, DEFAULT_SORT);
-        int rowsChanged = cursor.getCount();
-        if(rowsChanged > 0){
+        if(count > 0){
             getContext().getContentResolver().notifyChange(uri, null);
         }
-        return rowsChanged;
+        return count;
     }
 
     @Override
