@@ -1,0 +1,15 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/order"
+        android:icon="@drawable/ic_menu_confirm"
+        android:showAsAction="ifRoom"
+        android:title="@string/order"/>
+    <item
+        android:id="@+id/cancel"
+        android:icon="@drawable/ic_menu_close"
+        android:showAsAction="ifRoom"
+        android:title="@string/cancel"/>
+
+
+</menu>
