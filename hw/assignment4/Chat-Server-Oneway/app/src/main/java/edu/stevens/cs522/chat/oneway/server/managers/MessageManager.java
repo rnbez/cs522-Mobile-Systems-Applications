@@ -1,33 +1,33 @@
-package edu.stevens.cs522.bookstore.managers;
+package edu.stevens.cs522.chat.oneway.server.managers;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.net.Uri;
 
-import java.lang.Integer;import java.lang.Override;import edu.stevens.cs522.bookstore.contracts.BookContract;
-import edu.stevens.cs522.bookstore.entities.Book;
+import edu.stevens.cs522.chat.oneway.server.contracts.MessageContract;
+import edu.stevens.cs522.chat.oneway.server.entities.Message;
 
 /**
  * Created by Rafael on 2/21/2016.
  */
-public class BookManager extends Manager<Book> {
+public class MessageManager extends Manager<Message> {
 
-    final static Uri CONTENT_URI = BookContract.CONTENT_URI;
+    final static Uri CONTENT_URI = MessageContract.CONTENT_URI;
 
-    public BookManager(Context context, int loaderId, IEntityCreator<Book> creator) {
+    public MessageManager(Context context, int loaderId, IEntityCreator<Message> creator) {
         super(context, loaderId, creator);
     }
 
-    public void persistAsync(final Book book, final IContinue<Uri> callback) {
+    public void persistAsync(final Message message, final IContinue<Uri> callback) {
         ContentValues values = new ContentValues();
-        book.writeToProvider(values);
+        message.writeToProvider(values);
         AsyncContentResolver asyncResolver = getAsyncResolver();
 //        asyncResolver.insertAsync(CONTENT_URI, values, callback);
         asyncResolver.insertAsync(CONTENT_URI,
                 values,
                 new IContinue<Uri>() {
                     public void kontinue(Uri uri) {
-                        book.setId(BookContract.getId(uri));
+                        message.setId(MessageContract.getId(uri));
                         getSyncResolver().notifyChange(uri, null);
                         if(callback != null){
                             callback.kontinue(uri);
@@ -53,7 +53,7 @@ public class BookManager extends Manager<Book> {
     }
 
     @Override
-    protected void executeQuery(Uri uri, IQueryListener<Book> listener) {
+    protected void executeQuery(Uri uri, IQueryListener<Message> listener) {
         super.executeQuery(uri, listener);
     }
 }

@@ -85,7 +85,7 @@ public class BookProvider extends ContentProvider {
     private static final UriMatcher uriMatcher;
     static	{
         String path = CONTENT_URI.getPath().substring(1);
-        uriMatcher = new	UriMatcher(UriMatcher.NO_MATCH);
+        uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
         uriMatcher.addURI(BookContract.AUTHORITY, path, ALL_ROWS);
         uriMatcher.addURI(BookContract.AUTHORITY, path + "/#", SINGLE_ROW);
         projectionMap = new HashMap<String, String>();
@@ -103,14 +103,14 @@ public class BookProvider extends ContentProvider {
         return (_db == null) ? false : true;
     }
 
-    public BookProvider open(){
-        _db = _dbHelper.getWritableDatabase();
-        return this;
-    }
+//    public BookProvider open(){
+//        _db = _dbHelper.getWritableDatabase();
+//        return this;
+//    }
 
-    public void close() {
-        _db.close();
-    }
+//    public void close() {
+//        _db.close();
+//    }
 
 
     @Nullable

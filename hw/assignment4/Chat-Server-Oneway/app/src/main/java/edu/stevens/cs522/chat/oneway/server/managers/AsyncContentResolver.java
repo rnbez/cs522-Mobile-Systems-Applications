@@ -1,12 +1,12 @@
-package edu.stevens.cs522.bookstore.managers;
+package edu.stevens.cs522.chat.oneway.server.managers;
 
 
-import android.database.SQLException;
 import android.content.AsyncQueryHandler;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.database.Cursor;
-import android.net.Uri;import java.lang.Integer;import java.lang.Object;import java.lang.Override;import java.lang.String;import java.lang.SuppressWarnings;
+import android.database.SQLException;
+import android.net.Uri;
 
 /**
  * Created by Rafael on 2/21/2016.

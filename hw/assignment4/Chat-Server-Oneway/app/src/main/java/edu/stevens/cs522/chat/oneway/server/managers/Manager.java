@@ -1,9 +1,9 @@
-package edu.stevens.cs522.bookstore.managers;
+package edu.stevens.cs522.chat.oneway.server.managers;
 
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
-import android.net.Uri;import java.lang.String;
+import android.net.Uri;
 
 /**
  * Created by Rafael on 2/21/2016.

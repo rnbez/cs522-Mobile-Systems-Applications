@@ -1,4 +1,4 @@
-package edu.stevens.cs522.bookstore.managers;
+package edu.stevens.cs522.chat.oneway.server.managers;
 
 import android.app.Activity;
 import android.app.LoaderManager;
@@ -9,8 +9,8 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 
-import java.lang.IllegalArgumentException;import java.lang.IllegalStateException;import java.lang.Override;import java.lang.String;
-import edu.stevens.cs522.bookstore.contracts.BookContract;
+import edu.stevens.cs522.chat.oneway.server.contracts.MessageContract;
+import edu.stevens.cs522.chat.oneway.server.contracts.PeerContract;
 
 /**
  * Created by Rafael on 2/21/2016.
@@ -60,14 +60,27 @@ public class QueryBuilder<T> implements LoaderManager.LoaderCallbacks<Cursor> {
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+
         if (id == loaderId) {
-            String[] projection = new String[]{
-                    BookContract.ID_FULL,
-                    BookContract.TITLE,
-                    BookContract.ISBN,
-                    BookContract.PRICE,
-                    BookContract.AUTHORS,
-            };
+            String[] projection = null;
+            switch (id){
+                case PeerContract.CURSOR_LOADER_ID:
+                    projection = new String[]{
+                            PeerContract.ID_FULL,
+                            PeerContract.NAME,
+                            PeerContract.ADDRESS,
+                            PeerContract.PORT
+                    };
+                    break;
+                case MessageContract.CURSOR_LOADER_ID:
+                    projection = new String[]{
+                            MessageContract.ID_FULL,
+                            MessageContract.MESSAGE_TEXT,
+                    };
+                    break;
+                default:
+                    throw new IllegalArgumentException("Unexpected loader id: " + id);
+            }
             return new CursorLoader(context,
                     uri,
                     projection,
