@@ -42,16 +42,16 @@ public final class BookContract {
     public static final String ID_FULL = TABLE_NAME + "." + ID;
     public static final String TITLE_FULL = TABLE_NAME + "." + TITLE;
     public static final String ISBN_FULL = TABLE_NAME + "." + ISBN;
-    public static final String PRICE_FULL = TABLE_NAME +"." + PRICE;
+    public static final String PRICE_FULL = TABLE_NAME + "." + PRICE;
     public static final String CREATE_TABLE =
             "CREATE TABLE " + TABLE_NAME + "(" +
-                ID + " INTEGER PRIMARY KEY," +
-                TITLE + " TEXT NOT NULL," +
-                PRICE + " REAL NOT NULL," +
-                ISBN + " TEXT NOT NULL" +
-            ");";
+                    ID + " INTEGER PRIMARY KEY," +
+                    TITLE + " TEXT NOT NULL," +
+                    PRICE + " REAL NOT NULL," +
+                    ISBN + " TEXT NOT NULL" +
+                    ");";
 
-    public static Uri withExtendedPath(Object path){
+    public static Uri withExtendedPath(Object path) {
         if (path != null) {
             String stringPath = String.valueOf(path);
             Uri.Builder builder = CONTENT_URI.buildUpon();
@@ -59,19 +59,18 @@ public final class BookContract {
                 builder.appendPath(stringPath);
             }
             return builder.build();
-        }
-        else{
+        } else {
             throw new IllegalArgumentException("Null argument path: " + path);
         }
     }
 
-    public static long getId(Uri uri){
+    public static long getId(Uri uri) {
         return Long.parseLong(uri.getLastPathSegment());
     }
 
-    public static final char SEPARATOR_CHAR =	'|';
+    public static final char SEPARATOR_CHAR = '|';
     private static final Pattern SEPARATOR =
-            Pattern.compile(Character.toString(SEPARATOR_CHAR),	Pattern.LITERAL);
+            Pattern.compile(Character.toString(SEPARATOR_CHAR), Pattern.LITERAL);
 
     public static long getId(Cursor cursor) {
         return cursor.getInt(cursor.getColumnIndexOrThrow(ID));
@@ -104,11 +103,17 @@ public final class BookContract {
     public static Author[] getAuthors(Cursor cursor) {
         String stringAuthors = cursor.getString(cursor.getColumnIndexOrThrow(AUTHORS));
 
+        return getAuthorsFromString(stringAuthors, SEPARATOR_CHAR);
+    }
+
+    public static Author[] getAuthorsFromString(String stringAuthors, char pattern) {
         if (stringAuthors != null && !stringAuthors.isEmpty()) {
-            String[] splittedAuthors = readStringArray(stringAuthors);
+            Pattern separator =
+                    Pattern.compile(Character.toString(pattern), Pattern.LITERAL);
+            String[] splittedAuthors = separator.split(stringAuthors);
             Author[] authors = new Author[splittedAuthors.length];
             for (int i = 0; i < splittedAuthors.length; i++) {
-                authors[i] = new Author(splittedAuthors[i], "","");
+                authors[i] = new Author(splittedAuthors[i]);
             }
             return authors;
         } else {
@@ -117,16 +122,24 @@ public final class BookContract {
     }
 
     public static void putAuthors(ContentValues values, Author[] authors) {
-//        values.put(AUTHORS, aut);
+        StringBuilder builder = new StringBuilder(authors[0].toString());
+        if (authors.length > 1) {
+            for (int i = 1; i < authors.length; i++) {
+                builder.append(BookContract.SEPARATOR_CHAR)
+                        .append(authors[i].toString());
+            }
+        }
+        values.put(AUTHORS, builder.toString());
     }
 
-    public static String[]	readStringArray(String	in)	{
-        return SEPARATOR.split(in);
-    }
+//    public static String[] readStringArray(String in)	{
+//        return SEPARATOR.split(in);
+//    }
 
-    public static void putAll(ContentValues values, Book book){
+    public static void putAll(ContentValues values, Book book) {
         BookContract.putTitle(values, book.getTitle());
         BookContract.putIsbn(values, book.getIsbn());
         BookContract.putPrice(values, book.getPrice());
+        BookContract.putAuthors(values, book.getAuthors());
     }
 }

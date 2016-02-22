@@ -11,6 +11,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import edu.stevens.cs522.bookstore.R;
+import edu.stevens.cs522.bookstore.contracts.BookContract;
 import edu.stevens.cs522.bookstore.entities.Author;
 import edu.stevens.cs522.bookstore.entities.Book;
 
@@ -69,17 +70,14 @@ public class SearchBookActivity extends Activity {
 
     private Author[] getSplittedAuthors() {
         String authorsConcatedList = ((TextView) findViewById(R.id.search_author)).getText().toString();
-        String[] stringAuthors = authorsConcatedList.split(",");
-        Author[] result = new Author[stringAuthors.length];
+//        String[] stringAuthors = authorsConcatedList.split(",");
+//        Author[] result = new Author[stringAuthors.length];
+//
+//        for (int i = 0; i < stringAuthors.length; i++) {
+//            result[i] = new Author(stringAuthors[i]);
+//        }
 
-        for (int i = 0; i < stringAuthors.length; i++) {
-            String[] authorNameArr = stringAuthors[i].split(" ");
-            Author author = new Author(authorNameArr[0].trim(), "", authorNameArr[authorNameArr.length - 1].trim());
-            author.setMiddleInitial(authorNameArr.length > 2 ? authorNameArr[1].trim() : "");
-            result[i] = author;
-        }
-
-        return result;
+        return BookContract.getAuthorsFromString(authorsConcatedList, ',');
     }
 
 }

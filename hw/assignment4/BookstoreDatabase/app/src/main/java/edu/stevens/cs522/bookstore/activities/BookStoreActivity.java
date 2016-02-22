@@ -28,6 +28,7 @@ import android.widget.TextView;
 import edu.stevens.cs522.bookstore.R;
 import edu.stevens.cs522.bookstore.contracts.BookContract;
 import edu.stevens.cs522.bookstore.entities.Book;
+import edu.stevens.cs522.bookstore.layout.adapters.BookAdapter;
 import edu.stevens.cs522.bookstore.providers.BookProvider;
 
 public class BookStoreActivity extends Activity implements LoaderManager.LoaderCallbacks<Cursor> {
@@ -63,7 +64,7 @@ public class BookStoreActivity extends Activity implements LoaderManager.LoaderC
 
     private Context context = this;
     //    private CartDbAdapter dbAdapter;
-    private SimpleCursorAdapter cursorAdapter;
+    private BookAdapter cursorAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -240,7 +241,9 @@ public class BookStoreActivity extends Activity implements LoaderManager.LoaderC
         };
 
 
-        this.cursorAdapter = new SimpleCursorAdapter(this, R.layout.cart_row, c, from, to);
+
+//        this.cursorAdapter = new SimpleCursorAdapter(this, R.layout.cart_row, c, from, to);
+        this.cursorAdapter = new BookAdapter(this, c);
         this.cartList.setAdapter(this.cursorAdapter);
         this.cartList.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
 
@@ -311,6 +314,7 @@ public class BookStoreActivity extends Activity implements LoaderManager.LoaderC
                         BookContract.TITLE,
                         BookContract.ISBN,
                         BookContract.PRICE,
+                        BookContract.AUTHORS,
                 };
                 return new CursorLoader(this,
                         BookProvider.CONTENT_URI,

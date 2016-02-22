@@ -3,105 +3,121 @@ package edu.stevens.cs522.bookstore.entities;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Author implements Parcelable{
-	
-	// DONE: Modify this to implement the Parcelable interface.
+public class Author implements Parcelable {
 
-	// NOTE: middleInitial may be NULL!
+    // DONE: Modify this to implement the Parcelable interface.
 
-	protected long id;
-	protected String firstName;
-	protected String middleInitial;
-	protected String lastName;
+    // NOTE: middleInitial may be NULL!
 
-	public Author(String firstName, String middleInitial, String lastName) {
-		this.firstName = firstName;
-		this.middleInitial = middleInitial;
-		this.lastName = lastName;
-	}
+    protected long id;
+    protected String firstName;
+    protected String middleInitial;
+    protected String lastName;
 
-	protected Author(Parcel in) {
-		firstName = in.readString();
-		middleInitial = in.readString();
-		lastName = in.readString();
-	}
+    public Author(String firstName, String middleInitial, String lastName) {
+        this.firstName = firstName;
+        if (middleInitial != null || !middleInitial.isEmpty()) {
+            this.middleInitial = " " + middleInitial + " ";
+        } else {
+            this.middleInitial = " ";
+        }
+        this.lastName = lastName;
+    }
 
-	public static final Creator<Author> CREATOR = new Creator<Author>() {
-		@Override
-		public Author createFromParcel(Parcel in) {
-			return new Author(in);
-		}
+    public Author(String fullName){
+        String[] authorNameArr = fullName.trim().split(" ");
 
-		@Override
-		public Author[] newArray(int size) {
-			return new Author[size];
-		}
-	};
+        if(authorNameArr.length < 2) throw new IllegalArgumentException("invalid full name: " + fullName);
 
-	/**
-	 * Describe the kinds of special objects contained in this Parcelable's
-	 * marshalled representation.
-	 *
-	 * @return a bitmask indicating the set of special object types marshalled
-	 * by the Parcelable.
-	 */
-	@Override
-	public int describeContents() {
-		return 0;
-	}
+        this.firstName = authorNameArr[0].trim();
+        this.lastName = authorNameArr[authorNameArr.length - 1].trim();
 
-	/**
-	 * Flatten this object in to a Parcel.
-	 *
-	 * @param dest  The Parcel in which the object should be written.
-	 * @param flags Additional flags about how the object should be written.
-	 *              May be 0 or {@link #PARCELABLE_WRITE_RETURN_VALUE}.
-	 */
-	@Override
-	public void writeToParcel(Parcel dest, int flags) {
-		dest.writeString(firstName);
-		dest.writeString(middleInitial);
-		dest.writeString(lastName);
-	}
+        if(authorNameArr.length > 2 ){
+            this.middleInitial = " " + authorNameArr[1].trim() + " ";
+        }
+        else{
+            this.middleInitial = " ";
+        }
+    }
 
-	@Override
-	public String toString() {
-		return this.firstName + " "
-				+ (this.middleInitial != null && !this.middleInitial.isEmpty()
-					? this.middleInitial + " "
-					: " ")
-				+ this.lastName;
-	}
+    protected Author(Parcel in) {
+        firstName = in.readString();
+        middleInitial = in.readString();
+        lastName = in.readString();
+    }
 
-	public String getFirstName() {
-		return firstName;
-	}
+    public static final Creator<Author> CREATOR = new Creator<Author>() {
+        @Override
+        public Author createFromParcel(Parcel in) {
+            return new Author(in);
+        }
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
+        @Override
+        public Author[] newArray(int size) {
+            return new Author[size];
+        }
+    };
 
-	public String getMiddleInitial() {
-		return middleInitial;
-	}
+    /**
+     * Describe the kinds of special objects contained in this Parcelable's
+     * marshalled representation.
+     *
+     * @return a bitmask indicating the set of special object types marshalled
+     * by the Parcelable.
+     */
+    @Override
+    public int describeContents() {
+        return 0;
+    }
 
-	public void setMiddleInitial(String middleInitial) {
-		this.middleInitial = middleInitial;
-	}
+    /**
+     * Flatten this object in to a Parcel.
+     *
+     * @param dest  The Parcel in which the object should be written.
+     * @param flags Additional flags about how the object should be written.
+     *              May be 0 or {@link #PARCELABLE_WRITE_RETURN_VALUE}.
+     */
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(firstName);
+        dest.writeString(middleInitial);
+        dest.writeString(lastName);
+    }
 
-	public String getLastName() {
-		return lastName;
-	}
+    @Override
+    public String toString() {
+        return this.firstName + this.middleInitial + this.lastName;
+    }
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
+    public String getFirstName() {
+        return firstName;
+    }
 
-	public long getId() {
-		return id;
-	}
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
-	public void setId(long id) {
-		this.id = id;
-	}
+    public String getMiddleInitial() {
+        return middleInitial;
+    }
+
+    public void setMiddleInitial(String middleInitial) {
+        this.middleInitial = middleInitial;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 }

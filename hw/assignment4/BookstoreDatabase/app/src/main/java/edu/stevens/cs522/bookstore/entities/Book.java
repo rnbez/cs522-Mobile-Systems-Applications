@@ -42,7 +42,7 @@ public class Book implements Parcelable {
     public Book(Cursor in) {
         id = BookContract.getId(in);
         title = BookContract.getTitle(in);
-//        authors = in.createTypedArray(Author.CREATOR);
+        authors = BookContract.getAuthors(in);
         isbn = BookContract.getIsbn(in);
         price = BookContract.getPrice(in);
     }

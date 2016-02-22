@@ -6,7 +6,12 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 import edu.stevens.cs522.bookstore.R;
 import edu.stevens.cs522.bookstore.entities.Author;
@@ -15,35 +20,34 @@ import edu.stevens.cs522.bookstore.entities.Book;
 public class BookDetailsActivity extends Activity {
 
     Book book;
-    TextView details_title, details_isbn, details_authors, details_price;
+    TextView details_title, details_isbn, details_price;
+    ListView details_authorsList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_book_details);
+        setContentView(R.layout.book_details);
 
         Intent callingIntent = getIntent();
         book = getIntent().getParcelableExtra(BookStoreActivity.BOOK_DETAILS_KEY);
 
         details_title = (TextView) findViewById(R.id.details_title);
         details_isbn = (TextView) findViewById(R.id.details_isbn);
-        details_authors = (TextView) findViewById(R.id.details_authors);
         details_price = (TextView) findViewById(R.id.details_price);
+        details_authorsList = (ListView) findViewById(R.id.details_authorsList);
 
-        details_title.setText((CharSequence) "Title: " + book.getTitle());
-        details_isbn.setText((CharSequence) "ISBN: " + book.getIsbn());
+        details_title.setText((CharSequence) book.getTitle());
+        details_isbn.setText((CharSequence) book.getIsbn());
+        details_price.setText((CharSequence) "$" + String.valueOf(book.getPrice()));
 
-        details_price.setText((CharSequence) "Price: $" + String.valueOf(book.getPrice()));
-//        Author[] authors = book.getAuthors();
-//        StringBuilder authorsSb = new StringBuilder("Authors: ");
-//        authorsSb.append(authors[0].toString());
-//        if (authors.length > 1) {
-//            for (int i = 1; i < authors.length; i++) {
-//                authorsSb.append(", ")
-//                        .append(authors.toString());
-//            }
-//        }
-//        details_authors.setText((CharSequence) authorsSb.toString());
+        ArrayList<String> list = new ArrayList<>();
+        for (Author a :
+                book.getAuthors()) {
+            list.add(a.toString());
+        }
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list);
+        details_authorsList.setAdapter(adapter);
     }
 
     @Override

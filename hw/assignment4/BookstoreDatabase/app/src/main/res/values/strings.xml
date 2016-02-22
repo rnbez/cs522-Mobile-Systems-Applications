@@ -13,8 +13,8 @@
     <string name="cancel">Cancel</string>
     <string name="order">Order</string>
 
-    <string name="search_book_titleView">Title:</string>
-    <string name="search_book_authorView">Author:</string>
-    <string name="search_book_isbnView">ISBN:</string>
-    <string name="search_book_priceView">Price:</string>
+    <string name="book_titleView">Title:</string>
+    <string name="book_authorView">Authors:</string>
+    <string name="book_isbnView">ISBN:</string>
+    <string name="book_priceView">Price:</string>
 </resources>

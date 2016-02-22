@@ -16,7 +16,9 @@ import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
+import java.security.KeyPair;
 import java.util.HashMap;
+import java.util.Objects;
 
 import edu.stevens.cs522.bookstore.contracts.AuthorContract;
 import edu.stevens.cs522.bookstore.contracts.BookContract;
@@ -30,13 +32,11 @@ public class BookProvider extends ContentProvider {
 
     public  static final Uri CONTENT_URI = BookContract.CONTENT_URI;
 
-    private static final String[] DATABASE_CREATE = {
-            BookContract.CREATE_TABLE,
-            AuthorContract.CREATE_TABLE
-    };
+    private static final String[] DATABASE_CREATE;
     private static final String DATABASE_NAME = "bookstore.db";
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 3;
     private static final String DEFAULT_SORT = BookContract.ID + " ASC";
+    private static final HashMap<String, String> projectionMap;
     //---------------------------------------------------
     private SQLiteDatabase _db;
 //    private Context _context;
@@ -52,11 +52,18 @@ public class BookProvider extends ContentProvider {
 
         @Override
         public void onCreate(SQLiteDatabase db) {
-            for (String createStatement :
+            for (String query :
                     DATABASE_CREATE) {
-                db.execSQL(createStatement);
+                    Log.d("creating database", query);
+                db.execSQL(query);
             }
             Log.d("database", "tables created");
+        }
+
+        @Override
+        public void onOpen(SQLiteDatabase db) {
+            super.onOpen(db);
+            db.execSQL("PRAGMA foreign_keys=ON;");
         }
 
         @Override
@@ -79,8 +86,14 @@ public class BookProvider extends ContentProvider {
     static	{
         String path = CONTENT_URI.getPath().substring(1);
         uriMatcher = new	UriMatcher(UriMatcher.NO_MATCH);
-        uriMatcher.addURI(BookContract.AUTHORITY, "books", ALL_ROWS);
-        uriMatcher.addURI(BookContract.AUTHORITY, "books/#", SINGLE_ROW);
+        uriMatcher.addURI(BookContract.AUTHORITY, path, ALL_ROWS);
+        uriMatcher.addURI(BookContract.AUTHORITY, path + "/#", SINGLE_ROW);
+        projectionMap = new HashMap<String, String>();
+        projectionMap.put(BookContract.AUTHORS, "GROUP_CONCAT((first_name || mid_name || last_name),'|') as " + BookContract.AUTHORS);
+        DATABASE_CREATE = new String[]{
+            BookContract.CREATE_TABLE,
+            AuthorContract.CREATE_TABLE
+        };
     }
 
     @Override
@@ -103,12 +116,20 @@ public class BookProvider extends ContentProvider {
     @Nullable
     @Override
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
+
         SQLiteQueryBuilder builder = new SQLiteQueryBuilder();
         String joinStat = BookContract.TABLE_NAME
                 + " LEFT OUTER JOIN " + AuthorContract.TABLE_NAME
                 + " ON (" + BookContract.TABLE_NAME + "." + BookContract.ID
                 + " = " + AuthorContract.TABLE_NAME + "." +  AuthorContract.BOOK_ID + ")";
+        String groupby = "Books._id, title, price, isbn";
         builder.setTables(joinStat);
+        HashMap<String, String> map = projectionMap;
+        for (String field :
+                projection) {
+            if(!map.containsKey(field)) map.put(field, field);
+        }
+        builder.setProjectionMap(map);
 
         switch (uriMatcher.match(uri)){
             case ALL_ROWS:
@@ -120,8 +141,8 @@ public class BookProvider extends ContentProvider {
             default:
                 throw new IllegalArgumentException("Unknown URI " + uri);
         }
-
-        Cursor cursor = builder.query(_db, projection, selection, selectionArgs, null, null, sortOrder);
+        Log.d("query", builder.buildQuery(projection, selection, groupby, null, null, null));
+        Cursor cursor = builder.query(_db, projection, selection, selectionArgs, groupby, null, null);
         cursor.setNotificationUri(getContext().getContentResolver(), uri);
         return cursor;
     }
@@ -142,10 +163,27 @@ public class BookProvider extends ContentProvider {
     @Nullable
     @Override
     public Uri insert(Uri uri, ContentValues values){
-        long row = _db.insert(BookContract.TABLE_NAME, null, values);
+        Object objAuthors = values.get(BookContract.AUTHORS);
+        values.remove(BookContract.AUTHORS);
 
-        if (row > 0){
-            Uri instanceUri = BookContract.withExtendedPath(row);
+        long rowId = _db.insert(BookContract.TABLE_NAME, null, values);
+
+        if (rowId > 0){
+            if(objAuthors != null) {
+                Author[] authors = BookContract.getAuthorsFromString(objAuthors.toString(), BookContract.SEPARATOR_CHAR);
+                for (Author author :
+                        authors) {
+                    ContentValues autContentValues = new ContentValues();
+                    AuthorContract.putFirstName(autContentValues, author.getFirstName());
+                    AuthorContract.putMiddleName(autContentValues, author.getMiddleInitial());
+                    AuthorContract.putLastName(autContentValues, author.getLastName());
+                    AuthorContract.putBookId(autContentValues, rowId);
+
+                    _db.insert(AuthorContract.TABLE_NAME, null, autContentValues);
+                }
+            }
+
+            Uri instanceUri = BookContract.withExtendedPath(rowId);
             getContext().getContentResolver().notifyChange(instanceUri, null);
             return instanceUri;
         }
@@ -168,6 +206,7 @@ public class BookProvider extends ContentProvider {
                 selectionArgs = new String[]{
                     uri.getLastPathSegment()
                 };
+
                 count = _db.delete(BookContract.TABLE_NAME, selection, selectionArgs);
                 break;
             default:

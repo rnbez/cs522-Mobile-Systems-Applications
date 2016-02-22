@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.net.Uri;
 
 import edu.stevens.cs522.bookstore.common.CommonAssumptions;
+import edu.stevens.cs522.bookstore.entities.Author;
 
 /**
  * Created by Rafael on 2/14/2016.
@@ -33,16 +34,16 @@ public class AuthorContract {
     public static final String LAST_NAME = "last_name";
     public static final String BOOK_ID = "book_fk";
     public static final String CREATE_TABLE =
-            "CREATE TABLE Authors (" +
+            "CREATE TABLE " + TABLE_NAME + " (" +
                 ID + " INTEGER PRIMARY KEY," +
                 FIRST_NAME + " TEXT NOT NULL," +
                 MID_NAME + " TEXT," +
                 LAST_NAME + " TEXT NOT NULL," +
                 BOOK_ID + " INTEGER NOT NULL," +
                 "FOREIGN KEY(" + BOOK_ID + ") REFERENCES " + BookContract.TABLE_NAME + "(_id) ON DELETE CASCADE" +
-            ");" +
-            "CREATE INDEX AuthorsBookIndex ON " + TABLE_NAME + "(" + BOOK_ID + ");" +
-            "PRAGMA	foreign_keys=ON;";
+            ");"
+            + "CREATE INDEX AuthorsBookIndex ON " + TABLE_NAME + "(" + BOOK_ID + ");";
+
 
     public static long getId(Cursor cursor) {
         return cursor.getInt(cursor.getColumnIndexOrThrow(ID));
@@ -76,7 +77,8 @@ public class AuthorContract {
         return cursor.getInt(cursor.getColumnIndexOrThrow(BOOK_ID));
     }
 
-    public static void putBookId(ContentValues values, int book_id) {
+    public static void putBookId(ContentValues values, long book_id) {
         values.put(BOOK_ID, book_id);
     }
+
 }
