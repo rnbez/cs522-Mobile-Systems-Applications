@@ -5,10 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="87138328-adb3-422f-8149-92f491adfc98" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/managers/Manager.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/managers/BookManager.java" afterPath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/managers/BookManager.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/activities/BookStoreActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/activities/BookStoreActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/managers/QueryBuilder.java" afterPath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/managers/QueryBuilder.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="BookstoreWithEntityManager.iws" />
@@ -63,14 +61,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BookManager.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="BookManager.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/managers/BookManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="29" column="44" selection-start-line="29" selection-start-column="44" selection-end-line="29" selection-end-column="44" />
+            <state vertical-scroll-proportion="0.704918">
+              <caret line="47" column="38" selection-start-line="47" selection-start-column="38" selection-end-line="47" selection-end-column="38" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1185#1186#0" expanded="true" />
+                <element signature="e#964#1330#0" expanded="true" />
+                <element signature="e#1329#1330#0" expanded="true" />
+                <element signature="e#1536#1875#0" expanded="true" />
+                <element signature="e#1874#1875#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Manager.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/managers/Manager.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="35" column="82" selection-start-line="35" selection-start-column="82" selection-end-line="35" selection-end-column="82" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="method#executeSimpleQuery#0;class#Manager#0" expanded="false" />
+                <element signature="method#executeSimpleQuery#1;class#Manager#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -98,25 +113,25 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BookStoreActivity.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="BookStoreActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/activities/BookStoreActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7846154">
-              <caret line="104" column="0" selection-start-line="104" selection-start-column="0" selection-end-line="104" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="154" column="55" selection-start-line="154" selection-start-column="55" selection-end-line="154" selection-end-column="55" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1549#1576#0" expanded="true" />
-                <element signature="e#2415#2558#0" expanded="true" />
-                <element signature="e#2557#2558#0" expanded="true" />
-                <element signature="e#4310#4311#0" expanded="true" />
-                <element signature="e#4388#4389#0" expanded="true" />
-                <element signature="e#7294#7548#0" expanded="true" />
-                <element signature="e#7547#7548#0" expanded="true" />
-                <element signature="method#onSaveInstanceState#0;class#BookStoreActivity#0" expanded="false" />
+                <element signature="e#1468#1495#0" expanded="true" />
+                <element signature="e#2334#2477#0" expanded="true" />
+                <element signature="e#2476#2477#0" expanded="true" />
+                <element signature="method#onCreate#0;class#BookStoreActivity#0" expanded="false" />
+                <element signature="e#4229#4230#0" expanded="true" />
+                <element signature="e#4307#4308#0" expanded="true" />
+                <element signature="method#onCreateOptionsMenu#0;class#BookStoreActivity#0" expanded="false" />
                 <element signature="method#initList#0;class#BookStoreActivity#0" expanded="false" />
-                <marker date="1456118453719" expanded="true" signature="1581:3072" placeholder="..." />
-                <marker date="1456118453719" expanded="false" signature="2415:2559" placeholder="..." />
-                <marker date="1456118453719" expanded="false" signature="3150:3556" placeholder="..." />
+                <marker date="1456121189159" expanded="true" signature="1500:2991" placeholder="..." />
+                <marker date="1456121189159" expanded="false" signature="2334:2478" placeholder="..." />
+                <marker date="1456121189159" expanded="false" signature="3069:3475" placeholder="..." />
+                <marker date="1456121189159" expanded="true" signature="6624:7025" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -1610,8 +1625,8 @@
         <option value="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/managers/IQueryListener.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/managers/TypedCursor.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/managers/SimpleQueryBuilder.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/managers/Manager.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/managers/QueryBuilder.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/managers/Manager.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/activities/BookStoreActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/managers/BookManager.java" />
       </list>
@@ -1948,9 +1963,9 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3100511" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32879046" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32879046" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.39863715" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39863715" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
@@ -1963,7 +1978,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3797277" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20877458" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24960753" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -2007,7 +2022,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/managers/BookManager.java</url>
-          <line>37</line>
+          <line>40</line>
           <properties />
           <option name="timeStamp" value="7" />
         </line-breakpoint>
@@ -2019,18 +2034,24 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/activities/BookStoreActivity.java</url>
-          <line>117</line>
+          <line>114</line>
           <properties />
           <option name="timeStamp" value="13" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/activities/BookStoreActivity.java</url>
-          <line>184</line>
+          <line>176</line>
           <properties />
           <option name="timeStamp" value="14" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/activities/BookStoreActivity.java</url>
+          <line>132</line>
+          <properties />
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="15" />
+      <option name="time" value="17" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="app">
@@ -2125,26 +2146,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/providers/BookProvider.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="186" column="42" selection-start-line="186" selection-start-column="42" selection-end-line="186" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/managers/Manager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.48923078">
-          <caret line="19" column="14" selection-start-line="19" selection-start-column="14" selection-end-line="19" selection-end-column="14" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#executeSimpleQuery#0;class#Manager#0" expanded="false" />
-            <element signature="method#executeSimpleQuery#1;class#Manager#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/managers/QueryBuilder.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -2175,17 +2176,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/managers/BookManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="29" column="44" selection-start-line="29" selection-start-column="44" selection-end-line="29" selection-end-column="44" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1185#1186#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/managers/IQueryListener.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -2194,24 +2184,58 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/activities/BookStoreActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/providers/BookProvider.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7846154">
-          <caret line="104" column="0" selection-start-line="104" selection-start-column="0" selection-end-line="104" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="186" column="42" selection-start-line="186" selection-start-column="42" selection-end-line="186" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/managers/Manager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="35" column="82" selection-start-line="35" selection-start-column="82" selection-end-line="35" selection-end-column="82" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1549#1576#0" expanded="true" />
-            <element signature="e#2415#2558#0" expanded="true" />
-            <element signature="e#2557#2558#0" expanded="true" />
-            <element signature="e#4310#4311#0" expanded="true" />
-            <element signature="e#4388#4389#0" expanded="true" />
-            <element signature="e#7294#7548#0" expanded="true" />
-            <element signature="e#7547#7548#0" expanded="true" />
-            <element signature="method#onSaveInstanceState#0;class#BookStoreActivity#0" expanded="false" />
+            <element signature="method#executeSimpleQuery#0;class#Manager#0" expanded="false" />
+            <element signature="method#executeSimpleQuery#1;class#Manager#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/activities/BookStoreActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="154" column="55" selection-start-line="154" selection-start-column="55" selection-end-line="154" selection-end-column="55" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1468#1495#0" expanded="true" />
+            <element signature="e#2334#2477#0" expanded="true" />
+            <element signature="e#2476#2477#0" expanded="true" />
+            <element signature="method#onCreate#0;class#BookStoreActivity#0" expanded="false" />
+            <element signature="e#4229#4230#0" expanded="true" />
+            <element signature="e#4307#4308#0" expanded="true" />
+            <element signature="method#onCreateOptionsMenu#0;class#BookStoreActivity#0" expanded="false" />
             <element signature="method#initList#0;class#BookStoreActivity#0" expanded="false" />
-            <marker date="1456118453719" expanded="true" signature="1581:3072" placeholder="..." />
-            <marker date="1456118453719" expanded="false" signature="2415:2559" placeholder="..." />
-            <marker date="1456118453719" expanded="false" signature="3150:3556" placeholder="..." />
+            <marker date="1456121189159" expanded="true" signature="1500:2991" placeholder="..." />
+            <marker date="1456121189159" expanded="false" signature="2334:2478" placeholder="..." />
+            <marker date="1456121189159" expanded="false" signature="3069:3475" placeholder="..." />
+            <marker date="1456121189159" expanded="true" signature="6624:7025" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/managers/BookManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.704918">
+          <caret line="47" column="38" selection-start-line="47" selection-start-column="38" selection-end-line="47" selection-end-column="38" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#964#1330#0" expanded="true" />
+            <element signature="e#1329#1330#0" expanded="true" />
+            <element signature="e#1536#1875#0" expanded="true" />
+            <element signature="e#1874#1875#0" expanded="true" />
           </folding>
         </state>
       </provider>

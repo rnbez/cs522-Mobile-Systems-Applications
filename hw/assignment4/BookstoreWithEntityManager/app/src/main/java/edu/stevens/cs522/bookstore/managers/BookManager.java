@@ -11,7 +11,7 @@ import edu.stevens.cs522.bookstore.entities.Book;
 /**
  * Created by Rafael on 2/21/2016.
  */
-public class BookManager extends Manager<Book>{
+public class BookManager extends Manager<Book> {
 
     final static Uri CONTENT_URI = BookContract.CONTENT_URI;
 
@@ -29,15 +29,27 @@ public class BookManager extends Manager<Book>{
                 new IContinue<Uri>() {
                     public void kontinue(Uri uri) {
                         book.setId(BookContract.getId(uri));
-                        callback.kontinue(uri);
+                        getSyncResolver().notifyChange(uri, null);
+                        if(callback != null){
+                            callback.kontinue(uri);
+                        }
                     }
                 });
     }
 
-    public void deleteAsync(long id, final IContinue<Uri> callback) {
+    public void deleteAsync(final Uri uri, final IContinue<Integer> callback) {
         AsyncContentResolver asyncResolver = getAsyncResolver();
-        Uri uri = BookContract.withExtendedPath(id);
-        asyncResolver.deleteAsync(uri, null, null, null);
+        asyncResolver.deleteAsync(uri, null, null, new IContinue<Integer>() {
+            @Override
+            public void kontinue(Integer value) {
+                if (value > 0) {
+                    getSyncResolver().notifyChange(uri, null);
+                }
+                if(callback != null) {
+                    callback.kontinue(value);
+                }
+            }
+        });
 
     }
 

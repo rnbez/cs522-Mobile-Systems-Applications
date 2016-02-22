@@ -3,12 +3,8 @@ package edu.stevens.cs522.bookstore.activities;
 import java.util.ArrayList;
 
 import android.app.Activity;
-import android.app.LoaderManager;
-import android.content.ContentValues;
 import android.content.Context;
-import android.content.CursorLoader;
 import android.content.Intent;
-import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -32,10 +28,11 @@ import edu.stevens.cs522.bookstore.managers.BookManager;
 import edu.stevens.cs522.bookstore.managers.IContinue;
 import edu.stevens.cs522.bookstore.managers.IEntityCreator;
 import edu.stevens.cs522.bookstore.managers.IQueryListener;
+//import edu.stevens.cs522.bookstore.managers.Manager;
 import edu.stevens.cs522.bookstore.managers.QueryBuilder;
-import edu.stevens.cs522.bookstore.managers.SimpleQueryBuilder;
+//import edu.stevens.cs522.bookstore.managers.SimpleQueryBuilder;
 import edu.stevens.cs522.bookstore.managers.TypedCursor;
-import edu.stevens.cs522.bookstore.providers.BookProvider;
+//import edu.stevens.cs522.bookstore.providers.BookProvider;
 
 public class BookStoreActivity extends Activity {
 
@@ -149,11 +146,13 @@ public class BookStoreActivity extends Activity {
                 startActivityForResult(checkoutIntent, CHECKOUT_REQUEST);
                 return true;
             case R.id.delete:
+                BookManager manager = new BookManager(this, BOOK_LOADER_ID, DEFAULT_ENTITY_CREATOR);
                 for (long id :
                         selectedItemIds) {
                     try {
                         Uri uri = BookContract.withExtendedPath(id);
-                        getContentResolver().delete(uri, null, null);
+//                        getContentResolver().delete(uri, null, null);
+                        manager.deleteAsync(uri, null);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -174,26 +173,16 @@ public class BookStoreActivity extends Activity {
             switch (requestCode) {
                 case SEARCH_REQUEST:
                     if (intent.hasExtra(SearchBookActivity.BOOK_RESULT_KEY)) {
-                        Book newBook = (Book) intent.getParcelableExtra(SearchBookActivity.BOOK_RESULT_KEY);
-//                        try {
-//                            ContentValues values = new ContentValues();
-//                            BookContract.putAll(values, newBook);
-//                            getContentResolver().insert(BookProvider.CONTENT_URI, values);
-//                        } catch (Exception e) {
-//                            e.printStackTrace();
-//                        }
+                        Book book = (Book) intent.getParcelableExtra(SearchBookActivity.BOOK_RESULT_KEY);
                         BookManager manager = new BookManager(this, BOOK_LOADER_ID, DEFAULT_ENTITY_CREATOR);
-                        manager.persistAsync(newBook, new IContinue<Uri>() {
-                            @Override
-                            public void kontinue(Uri uri) {
-                                getContentResolver().notifyChange(uri, null);
-                            }
-                        });
+                        manager.persistAsync(book, null);
                     }
                     break;
                 case CHECKOUT_REQUEST:
                     try {
-                        getContentResolver().delete(BookContract.CONTENT_URI, null, null);
+                        final BookManager manager = new BookManager(this, BOOK_LOADER_ID, DEFAULT_ENTITY_CREATOR);
+                        manager.deleteAsync(BookContract.CONTENT_URI, null);
+//                        getContentResolver().delete(BookContract.CONTENT_URI, null, null);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
