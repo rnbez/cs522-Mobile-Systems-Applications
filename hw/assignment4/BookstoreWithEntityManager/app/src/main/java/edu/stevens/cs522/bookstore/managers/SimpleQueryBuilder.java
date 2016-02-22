@@ -20,16 +20,28 @@ public class SimpleQueryBuilder<T> implements IContinue<Cursor> {
         this.listener = listener;
     }
 
-    public static <T> void executeQuery(Activity context, Uri uri, IEntityCreator<T> helper, ISimpleQueryListener<T> listener){
+    public static <T> void executeQuery(Activity context, Uri uri, IEntityCreator<T> helper, ISimpleQueryListener<T> listener) {
         SimpleQueryBuilder<T> qb = new SimpleQueryBuilder<>(helper, listener);
         AsyncContentResolver resolver = new AsyncContentResolver(context.getContentResolver());
         resolver.queryAsync(uri, null, null, null, null, qb);
     }
 
+    public static <T> void executeQuery(Activity context,
+                                        Uri uri,
+                                        String[] projection,
+                                        String selection,
+                                        String[] selectionArgs,
+                                        IEntityCreator<T> helper,
+                                        ISimpleQueryListener<T> listener) {
+        SimpleQueryBuilder<T> qb = new SimpleQueryBuilder<>(helper, listener);
+        AsyncContentResolver resolver = new AsyncContentResolver(context.getContentResolver());
+        resolver.queryAsync(uri, projection, selection, selectionArgs, null, qb);
+    }
+
     @Override
     public void kontinue(Cursor cursor) {
         List<T> instances = new ArrayList<T>();
-        if(cursor.moveToFirst()){
+        if (cursor.moveToFirst()) {
             do {
                 T instance = helper.create(cursor);
                 instances.add(instance);

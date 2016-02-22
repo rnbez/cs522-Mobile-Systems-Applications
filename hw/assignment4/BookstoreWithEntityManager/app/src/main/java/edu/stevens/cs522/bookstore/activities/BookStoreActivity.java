@@ -28,6 +28,8 @@ import edu.stevens.cs522.bookstore.R;
 import edu.stevens.cs522.bookstore.contracts.BookContract;
 import edu.stevens.cs522.bookstore.entities.Book;
 import edu.stevens.cs522.bookstore.layout.adapters.BookAdapter;
+import edu.stevens.cs522.bookstore.managers.IEntityCreator;
+import edu.stevens.cs522.bookstore.managers.SimpleQueryBuilder;
 import edu.stevens.cs522.bookstore.providers.BookProvider;
 
 public class BookStoreActivity extends Activity implements LoaderManager.LoaderCallbacks<Cursor> {
@@ -80,6 +82,7 @@ public class BookStoreActivity extends Activity implements LoaderManager.LoaderC
 
         cartList = (ListView) findViewById(R.id.cartList);
         initList(null);
+
 
         LoaderManager lm = getLoaderManager();
         lm.initLoader(BOOK_LOADER_ID, null, this);
