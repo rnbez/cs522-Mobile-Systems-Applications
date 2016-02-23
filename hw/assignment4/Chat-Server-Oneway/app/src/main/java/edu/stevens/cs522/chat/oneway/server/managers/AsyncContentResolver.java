@@ -66,8 +66,8 @@ public class AsyncContentResolver extends AsyncQueryHandler {
         }
     }
 
-    public void updateAsync(Uri uri, String selection, String[] selectionArgs, IContinue<Integer> callback) {
-        this.startDelete(0, callback, uri, selection, selectionArgs);
+    public void updateAsync(Uri uri, ContentValues values, IContinue<Integer> callback) {
+        this.startUpdate(0, callback, uri, values, null, null);
     }
 
     @Override

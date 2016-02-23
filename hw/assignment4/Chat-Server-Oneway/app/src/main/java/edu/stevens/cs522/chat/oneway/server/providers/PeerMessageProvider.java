@@ -13,9 +13,11 @@ import android.net.Uri;
 import android.util.Log;
 
 import java.util.HashMap;
+import java.util.List;
 
 import edu.stevens.cs522.chat.oneway.server.contracts.MessageContract;
 import edu.stevens.cs522.chat.oneway.server.contracts.PeerContract;
+import edu.stevens.cs522.chat.oneway.server.entities.Message;
 import edu.stevens.cs522.chat.oneway.server.entities.Peer;
 
 /**
@@ -73,7 +75,10 @@ public class PeerMessageProvider extends ContentProvider {
 
     private final static int PEER_ALL_ROWS = 1;
     private final static int PEER_SINGLE_ROW = PEER_ALL_ROWS + 1;
-    private final static int MESSAGE_ALL_ROWS = PEER_SINGLE_ROW + 1;
+    private final static int PEER_QUERY_NAME = PEER_SINGLE_ROW + 1;
+    private final static int PEER_ALL_MESSAGES = PEER_QUERY_NAME + 1;
+
+    private final static int MESSAGE_ALL_ROWS = PEER_ALL_ROWS + 100;
     private final static int MESSAGE_SINGLE_ROW = MESSAGE_ALL_ROWS + 1;
     private final static UriMatcher uriMatcher;
 
@@ -81,9 +86,14 @@ public class PeerMessageProvider extends ContentProvider {
         String peer_path = PEER_CONTENT_URI.getLastPathSegment();
         String message_path = MESSAGE_CONTENT_URI.getLastPathSegment();
         uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
+
         uriMatcher.addURI(PeerContract.AUTHORITY, peer_path, PEER_ALL_ROWS);
         uriMatcher.addURI(PeerContract.AUTHORITY, peer_path + "/#", PEER_SINGLE_ROW);
+        uriMatcher.addURI(PeerContract.AUTHORITY, peer_path + "/*", PEER_QUERY_NAME);
+        uriMatcher.addURI(PeerContract.AUTHORITY, peer_path + "/#/messages", PEER_ALL_MESSAGES);
+
         uriMatcher.addURI(MessageContract.AUTHORITY, message_path, MESSAGE_ALL_ROWS);
+        uriMatcher.addURI(MessageContract.AUTHORITY, message_path + "/#", MESSAGE_SINGLE_ROW);
         uriMatcher.addURI(MessageContract.AUTHORITY, message_path + "/#", MESSAGE_SINGLE_ROW);
         DATABASE_CREATE = new String[]{
                 PeerContract.CREATE_TABLE,
@@ -101,8 +111,9 @@ public class PeerMessageProvider extends ContentProvider {
     @Override
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
         SQLiteQueryBuilder builder = new SQLiteQueryBuilder();
-        String table = "";
+        HashMap<String, String> map;
         String groupby = null;
+        Log.d("query", uri.toString());
 
         switch (uriMatcher.match(uri)){
             case PEER_ALL_ROWS:
@@ -112,12 +123,45 @@ public class PeerMessageProvider extends ContentProvider {
                 builder.setTables(PeerContract.TABLE_NAME);
                 builder.appendWhere(PeerContract.ID + " = " + PeerContract.getId(uri));
                 break;
-            case MESSAGE_ALL_ROWS:
+            case PEER_QUERY_NAME:
                 builder.setTables(PeerContract.TABLE_NAME);
+                Log.d("query", uri.getLastPathSegment());
+                builder.appendWhere(PeerContract.NAME + " = ");
+                builder.appendWhereEscapeString(uri.getLastPathSegment());
+                break;
+            case PEER_ALL_MESSAGES:
+                builder.setTables(MessageContract.TABLE_NAME
+                        + " LEFT JOIN " + PeerContract.TABLE_NAME
+                        + " ON (" + MessageContract.PEER_ID
+                        + " = " + PeerContract.ID_FULL + ")");
+
+                map = new HashMap<>();
+                map.put(MessageContract.SENDER, PeerContract.NAME_FULL + " as " + MessageContract.SENDER);
+                for (String field :
+                        projection) {
+                    if(!map.containsKey(field)) map.put(field, field);
+                }
+                builder.setProjectionMap(map);
+                List<String> pathSegments = uri.getPathSegments();
+                long peerId = Long.getLong(pathSegments.get(pathSegments.size() - 2));
+                builder.appendWhere(PeerContract.ID + " = " + peerId);
+                break;
+            case MESSAGE_ALL_ROWS:
+                builder.setTables(MessageContract.TABLE_NAME
+                        + " LEFT JOIN " + PeerContract.TABLE_NAME
+                        + " ON (" + MessageContract.PEER_ID
+                        + " = " + PeerContract.ID_FULL + ")");
+                map = new HashMap<>();
+                map.put(MessageContract.SENDER, PeerContract.NAME_FULL + " as " + MessageContract.SENDER);
+                for (String field :
+                        projection) {
+                    if(!map.containsKey(field)) map.put(field, field);
+                }
+                builder.setProjectionMap(map);
                 break;
             case MESSAGE_SINGLE_ROW:
-                builder.setTables(PeerContract.TABLE_NAME);
-                builder.appendWhere(PeerContract.ID + " = " + PeerContract.getId(uri));
+                builder.setTables(MessageContract.TABLE_NAME);
+                builder.appendWhere(MessageContract.ID + " = " + MessageContract.getId(uri));
                 break;
             default:
                 throw new IllegalArgumentException("Unknown URI " + uri);
@@ -224,10 +268,10 @@ public class PeerMessageProvider extends ContentProvider {
                 builder.appendWhere(PeerContract.ID + " = " + PeerContract.getId(uri));
                 break;
             case MESSAGE_ALL_ROWS:
-                builder.setTables(PeerContract.TABLE_NAME);
+                builder.setTables(MessageContract.TABLE_NAME);
                 break;
             case MESSAGE_SINGLE_ROW:
-                builder.setTables(PeerContract.TABLE_NAME);
+                builder.setTables(MessageContract.TABLE_NAME);
                 builder.appendWhere(MessageContract.ID + " = " + MessageContract.getId(uri));
                 break;
             default:

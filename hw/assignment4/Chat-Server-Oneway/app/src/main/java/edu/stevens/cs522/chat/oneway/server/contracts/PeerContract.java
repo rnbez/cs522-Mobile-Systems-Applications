@@ -7,6 +7,9 @@ import android.net.Uri;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
+import edu.stevens.cs522.chat.oneway.server.entities.Peer;
+import edu.stevens.cs522.chat.oneway.server.managers.IEntityCreator;
+
 /**
  * Created by Rafael on 2/22/2016.
  */
@@ -33,21 +36,32 @@ public class PeerContract {
     public static final String ID = "_id";
     public static final String ID_FULL = TABLE_NAME + "." + ID;
     public static final String NAME = "name";
+    public static final String NAME_FULL =  TABLE_NAME + "." + NAME;
     public static final String ADDRESS = "address";
     public static final String PORT = "port";
     public static final String CREATE_TABLE =
             "CREATE TABLE " + TABLE_NAME + "(" +
                     ID + " INTEGER PRIMARY KEY," +
-                    NAME + " TEXT NOT NULL," +
+                    NAME + " TEXT NOT NULL UNIQUE," +
                     ADDRESS + " BLOB NOT NULL," +
-                    PORT + " TEXT NOT NULL," +
+                    PORT + " TEXT NOT NULL" +
                     ");";
+    public static final IEntityCreator<Peer> DEFAULT_ENTITY_CREATOR = new IEntityCreator<Peer>() {
+        @Override
+        public Peer create(Cursor cursor) {
+            return new Peer(cursor);
+        }
+    };
 
 
     public static Uri withExtendedPath(Object path) {
+        return withExtendedPath(CONTENT_URI, path);
+    }
+
+    public static Uri withExtendedPath(Uri uri, Object path){
         if (path != null) {
             String stringPath = String.valueOf(path);
-            Uri.Builder builder = CONTENT_URI.buildUpon();
+            Uri.Builder builder = uri.buildUpon();
             if (!stringPath.isEmpty()) {
                 builder.appendPath(stringPath);
             }

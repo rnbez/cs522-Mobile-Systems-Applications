@@ -29,7 +29,7 @@ public class PeerManager extends Manager<Peer> {
                     public void kontinue(Uri uri) {
                         peer.setId(PeerContract.getId(uri));
                         getSyncResolver().notifyChange(uri, null);
-                        if(callback != null){
+                        if (callback != null) {
                             callback.kontinue(uri);
                         }
                     }
@@ -44,12 +44,28 @@ public class PeerManager extends Manager<Peer> {
                 if (value > 0) {
                     getSyncResolver().notifyChange(uri, null);
                 }
-                if(callback != null) {
+                if (callback != null) {
                     callback.kontinue(value);
                 }
             }
         });
+    }
 
+    public void updateAsync(final Uri uri, final Peer peer, final IContinue<Integer> callback) {
+        ContentValues values = new ContentValues();
+        peer.writeToProvider(values);
+        AsyncContentResolver asyncResolver = getAsyncResolver();
+        asyncResolver.updateAsync(uri, values, new IContinue<Integer>() {
+            @Override
+            public void kontinue(Integer value) {
+                if (value > 0) {
+                    getSyncResolver().notifyChange(uri, null);
+                }
+                if (callback != null) {
+                    callback.kontinue(value);
+                }
+            }
+        });
     }
 
     @Override

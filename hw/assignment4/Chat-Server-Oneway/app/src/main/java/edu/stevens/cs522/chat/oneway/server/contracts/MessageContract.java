@@ -4,6 +4,9 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
 
+import edu.stevens.cs522.chat.oneway.server.entities.Message;
+import edu.stevens.cs522.chat.oneway.server.managers.IEntityCreator;
+
 /**
  * Created by Rafael on 2/22/2016.
  */
@@ -39,7 +42,13 @@ public class MessageContract {
                     PEER_ID + " INTEGER NOT NULL," +
                     "FOREIGN KEY(" + PEER_ID + ") REFERENCES " + PeerContract.TABLE_NAME + "(_id) ON DELETE CASCADE" +
                     ");"
-                    + "CREATE INDEX MessagePeerIndex ON " + TABLE_NAME + "(" + PEER_ID + ");";
+             + "CREATE INDEX MessagePeerIndex ON " + TABLE_NAME + "(" + PEER_ID + ");";
+    public static final IEntityCreator<Message> DEFAULT_ENTITY_CREATOR = new IEntityCreator<Message>() {
+        @Override
+        public Message create(Cursor cursor) {
+            return new Message(cursor);
+        }
+    };
 
     public static Uri withExtendedPath(Object path) {
         if (path != null) {

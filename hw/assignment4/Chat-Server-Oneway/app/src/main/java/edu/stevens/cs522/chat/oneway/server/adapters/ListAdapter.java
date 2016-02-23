@@ -32,10 +32,10 @@ public class ListAdapter extends ArrayAdapter<Message> {
         Message item = getItem(position);
 
         if (convertView == null){
-            convertView = LayoutInflater.from(super.getContext()).inflate(R.layout.message, parent, false);
+            convertView = LayoutInflater.from(super.getContext()).inflate(R.layout.message_row, parent, false);
         }
         TextView msgView = (TextView) convertView.findViewById(R.id.msgView);
-        TextView authorView = (TextView) convertView.findViewById(R.id.authorView);
+        TextView authorView = (TextView) convertView.findViewById(R.id.senderView);
         msgView.setText(item.getMessageText());
         authorView.setText(item.getSender());
         return convertView;

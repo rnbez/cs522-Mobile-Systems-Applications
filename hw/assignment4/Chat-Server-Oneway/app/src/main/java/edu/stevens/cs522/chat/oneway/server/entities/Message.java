@@ -5,6 +5,8 @@ import android.database.Cursor;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.regex.Pattern;
+
 import edu.stevens.cs522.chat.oneway.server.contracts.MessageContract;
 
 /**
@@ -12,12 +14,24 @@ import edu.stevens.cs522.chat.oneway.server.contracts.MessageContract;
  */
 public class Message implements Parcelable {
 
+    private static final char SEPARATOR_CHAR = '#';
+    private static final Pattern SEPARATOR =
+            Pattern.compile(Character.toString(SEPARATOR_CHAR), Pattern.LITERAL);
+
     protected long id;
     protected String messageText;
     protected long peerId;
     protected String sender;
 
     public Message() {
+    }
+
+    public Message(String receivedMessage) {
+        String[] splitted = SEPARATOR.split(receivedMessage);
+        if(splitted.length > 1) {
+            this.sender = splitted[0];
+            this.messageText = splitted[1].trim();
+        }
     }
 
     public Message(long id, String messageText, String sender) {
@@ -78,7 +92,7 @@ public class Message implements Parcelable {
 
     @Override
     public String toString() {
-        return sender + ">> " + messageText;
+        return sender + "#" + messageText;
     }
 
     public long getId() {
@@ -103,6 +117,14 @@ public class Message implements Parcelable {
 
     public void setSender(String sender) {
         this.sender = sender;
+    }
+
+    public long getPeerId() {
+        return peerId;
+    }
+
+    public void setPeerId(long peerId) {
+        this.peerId = peerId;
     }
 
     public static Creator<Message> getCREATOR() {

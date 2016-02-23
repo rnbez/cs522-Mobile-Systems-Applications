@@ -5,7 +5,7 @@
     <string name="app_port">6666</string>
     <string name="latitude">40.744906</string>
     <string name="longitude">-74.023937</string>
-    
+
     <!-- String literals in the UI -->
     <string name="destination_host">Destination Host</string>
     <string name="target_host_default">10.0.2.2</string>
@@ -15,4 +15,10 @@
     <string name="send_label">SEND</string>
     <string name="next_label">NEXT</string>
     <string name="menu_show_peers">SHOW PEERS</string>
+    <string name="contacts">Contacts</string>
+    <string name="contacts_list_empty_text">You have no contacts</string>
+    <string name="contact_details_message_list_view">Messages:</string>
+    <string name="contact_details_port_view">Port:</string>
+    <string name="contact_details_ip_addr_view">IP Address:</string>
+    <string name="contact_details_name_view">Name:</string>
 </resources>

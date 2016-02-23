@@ -14,9 +14,15 @@ import java.net.InetAddress;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.content.ContentValues;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -24,7 +30,18 @@ import android.widget.ListView;
 
 import edu.stevens.cs522.chat.oneway.server.R;
 import edu.stevens.cs522.chat.oneway.server.adapters.ListAdapter;
+import edu.stevens.cs522.chat.oneway.server.adapters.MessageAdapter;
+import edu.stevens.cs522.chat.oneway.server.contracts.MessageContract;
+import edu.stevens.cs522.chat.oneway.server.contracts.PeerContract;
 import edu.stevens.cs522.chat.oneway.server.entities.Message;
+import edu.stevens.cs522.chat.oneway.server.entities.Peer;
+import edu.stevens.cs522.chat.oneway.server.managers.IContinue;
+import edu.stevens.cs522.chat.oneway.server.managers.IQueryListener;
+import edu.stevens.cs522.chat.oneway.server.managers.MessageManager;
+import edu.stevens.cs522.chat.oneway.server.managers.PeerManager;
+import edu.stevens.cs522.chat.oneway.server.managers.QueryBuilder;
+import edu.stevens.cs522.chat.oneway.server.managers.TypedCursor;
+import edu.stevens.cs522.chat.oneway.server.providers.PeerMessageProvider;
 
 public class ChatServerActivity extends Activity implements OnClickListener {
 
@@ -43,13 +60,10 @@ public class ChatServerActivity extends Activity implements OnClickListener {
     /*
      * TODO: Declare UI.
      */
-    ArrayList<Message> messageList;
+//    ArrayList<Message> messageList;
     ListView msgList;
-    /*
-     * End Todo
-	 */
-
-    Button next;
+    private Button next;
+    private MessageAdapter cursorAdapter;
 
     /*
      * Called when the activity is first created.
@@ -79,18 +93,49 @@ public class ChatServerActivity extends Activity implements OnClickListener {
             return;
         }
 
-		/*
-		 * TODO: Initialize the UI.
-		 */
-        messageList = new ArrayList<>();
-        msgList  = (ListView) findViewById(R.id.msgList);
-        ListAdapter adapter = new ListAdapter(getApplicationContext(), R.layout.main, messageList);
-        msgList.setAdapter(adapter);
+        this.cursorAdapter = new MessageAdapter(this, null);
+        this.msgList = (ListView) findViewById(R.id.msgList);
+        this.msgList.setAdapter(this.cursorAdapter);
 
-		/*
-		 * End Todo
-		 */
+        QueryBuilder.executeQuery(TAG,
+                this,
+                MessageContract.CONTENT_URI,
+                MessageContract.CURSOR_LOADER_ID,
+                MessageContract.DEFAULT_ENTITY_CREATOR,
+                new IQueryListener<Message>() {
+                    @Override
+                    public void handleResults(TypedCursor<Message> cursor) {
+                        cursorAdapter.swapCursor(cursor.getCursor());
+                    }
 
+                    @Override
+                    public void closeResults() {
+                        cursorAdapter.swapCursor(null);
+                    }
+                });
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.chat_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()){
+            case R.id.chat_menu_contacts:
+                Intent intent = new Intent(this, ContactBookActivity.class);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+
+        }
     }
 
     public void onClick(View v) {
@@ -103,33 +148,72 @@ public class ChatServerActivity extends Activity implements OnClickListener {
 
             serverSocket.receive(receivePacket);
             Log.i(TAG, "Received a packet");
-            Log.i(TAG, "Message: " + new String(receiveData, "UTF-8"));
+//            Log.i(TAG, "Message: " + new String(receiveData, "UTF-8"));
 
 //            Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
 
             InetAddress sourceIPAddress = receivePacket.getAddress();
-            Log.i(TAG, "Source IP Address: " + sourceIPAddress);
-			
-			/*
-			 * TODO: Extract sender and receiver from message and display.
-			 */
-            Message receivedMessage = new Message();//new String(receiveData, "UTF-8")
-            messageList.add(receivedMessage);
-            ListAdapter adp = (ListAdapter) msgList.getAdapter();
-            adp.notifyDataSetChanged();
+//            Log.i(TAG, "Source IP Address: " + sourceIPAddress);
 
-			/*
-			 * End Todo
-			 */
+            Message message = new Message(new String(receivePacket.getData(), "UTF-8"));
+            Peer sender = new Peer(message.getSender(), sourceIPAddress, String.valueOf(receivePacket.getPort()));
+            handleMessage(sender, message);
 
         } catch (Exception e) {
-
             Log.e(TAG, "Problems receiving packet: " + e.getMessage());
             socketOK = false;
         }
 
     }
 
+    private void handleMessage(final Peer sender, final Message message){
+        final PeerManager peerManager = new PeerManager(this, PeerContract.CURSOR_LOADER_ID, PeerContract.DEFAULT_ENTITY_CREATOR);
+        final MessageManager messageManager = new MessageManager(this, MessageContract.CURSOR_LOADER_ID, MessageContract.DEFAULT_ENTITY_CREATOR);
+
+        Uri uriWithName = PeerContract.withExtendedPath(message.getSender());
+
+        QueryBuilder.executeQuery(TAG,
+                this,
+                uriWithName,
+                PeerContract.CURSOR_LOADER_ID,
+                PeerContract.DEFAULT_ENTITY_CREATOR,
+                new IQueryListener<Peer>() {
+                    @Override
+                    public void handleResults(TypedCursor<Peer> cursor) {
+                        if (cursor.getCount() > 0) {
+                            if (cursor.moveToFirst()) {
+                                ContentValues values = new ContentValues();
+                                long peerId = cursor.getEntity().getId();
+                                message.setPeerId(peerId);
+                                Uri uriWithId = PeerContract.withExtendedPath(peerId);
+                                peerManager.updateAsync(uriWithId, sender, new IContinue<Integer>() {
+                                    @Override
+                                    public void kontinue(Integer value) {
+                                        messageManager.persistAsync(message, null);
+                                    }
+                                });
+                            }
+                        } else {
+                            peerManager.persistAsync(sender, new IContinue<Uri>() {
+                                @Override
+                                public void kontinue(Uri uri) {
+                                    long peerId = PeerContract.getId(uri);
+                                    message.setPeerId(peerId);
+                                    messageManager.persistAsync(message, null);
+                                }
+                            });
+                        }
+                    }
+
+                    @Override
+                    public void closeResults() {
+                        cursorAdapter.swapCursor(null);
+                    }
+                });
+//        messageList.add(message_row);
+//        ListAdapter adp = (ListAdapter) msgList.getAdapter();
+//        adp.notifyDataSetChanged();
+    }
     /*
      * Close the socket before exiting application
      */

@@ -130,8 +130,6 @@ public class BookStoreActivity extends Activity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        super.onOptionsItemSelected(item);
-
         switch (item.getItemId()) {
             case R.id.search:
                 Log.i(TAG, "search button clicked");
@@ -198,23 +196,11 @@ public class BookStoreActivity extends Activity {
     public void onSaveInstanceState(Bundle savedInstanceState) {
         // TODO save the shopping cart contents (which should be a list of parcelables).
         savedInstanceState.putParcelableArrayList(STATE_KEY, shoppingCart);
-        super.onSaveInstanceState(savedInstanceState);
+              super.onSaveInstanceState(savedInstanceState);
     }
 
     public void initList(final Cursor c) {
 
-
-        String[] from = new String[]{
-                BookContract.TITLE,
-//                BookContract.AUTHORS
-        };
-        int[] to = new int[]{
-                R.id.cart_row_title,
-//                R.id.cart_row_author
-        };
-
-
-//        this.cursorAdapter = new SimpleCursorAdapter(this, R.layout.cart_row, c, from, to);
         this.cursorAdapter = new BookAdapter(this, c);
         this.cartList.setAdapter(this.cursorAdapter);
         this.cartList.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);

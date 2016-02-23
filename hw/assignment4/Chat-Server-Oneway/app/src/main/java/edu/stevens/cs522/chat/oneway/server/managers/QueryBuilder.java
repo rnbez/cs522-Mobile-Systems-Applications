@@ -76,6 +76,7 @@ public class QueryBuilder<T> implements LoaderManager.LoaderCallbacks<Cursor> {
                     projection = new String[]{
                             MessageContract.ID_FULL,
                             MessageContract.MESSAGE_TEXT,
+                            MessageContract.SENDER,
                     };
                     break;
                 default:

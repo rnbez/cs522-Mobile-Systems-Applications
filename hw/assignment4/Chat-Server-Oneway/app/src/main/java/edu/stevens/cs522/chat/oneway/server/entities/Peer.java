@@ -1,6 +1,7 @@
 package edu.stevens.cs522.chat.oneway.server.entities;
 
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -22,6 +23,12 @@ public class Peer implements Parcelable{
     public Peer() {
     }
 
+    public Peer(String name, InetAddress address, String port) {
+        this.name = name;
+        this.address = address;
+        this.port = port;
+    }
+
     public Peer(long id, String name, InetAddress address, String port) {
         this.id = id;
         this.name = name;
@@ -40,6 +47,13 @@ public class Peer implements Parcelable{
             e.printStackTrace();
         }
         port = in.readString();
+    }
+
+    public Peer(Cursor in){
+        id = PeerContract.getId(in);
+        name = PeerContract.getName(in);
+        address = PeerContract.getAddress(in);
+        port = PeerContract.getPort(in);
     }
 
     public static final Creator<Peer> CREATOR = new Creator<Peer>() {
