@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <EditTextPreference
+        android:key="username"
+        android:summary="Please provide your username"
+        android:title="Your Name" />
+    <EditTextPreference
+        android:key="port"
+        android:summary="Please provide your port"
+        android:title="Your Port"
+        android:inputType="number"/>
+</PreferenceScreen>

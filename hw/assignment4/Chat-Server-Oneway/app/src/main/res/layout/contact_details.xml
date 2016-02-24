@@ -56,5 +56,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/contact_details_messages_listview"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:paddingLeft="10dp" />
 </LinearLayout>

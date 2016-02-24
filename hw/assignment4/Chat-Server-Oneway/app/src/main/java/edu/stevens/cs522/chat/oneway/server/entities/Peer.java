@@ -39,13 +39,7 @@ public class Peer implements Parcelable{
     protected Peer(Parcel in) {
         id = in.readLong();
         name = in.readString();
-        byte[] addr = new byte[1024];
-        in.readByteArray(addr);
-        try {
-            address = InetAddress.getByAddress(addr);
-        } catch (UnknownHostException e) {
-            e.printStackTrace();
-        }
+        address = (InetAddress) in.readValue(InetAddress.class.getClassLoader());
         port = in.readString();
     }
 

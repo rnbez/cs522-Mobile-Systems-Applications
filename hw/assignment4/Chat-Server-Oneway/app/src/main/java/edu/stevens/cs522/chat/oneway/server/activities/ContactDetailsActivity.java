@@ -10,13 +10,17 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
+import java.util.List;
+
 import edu.stevens.cs522.chat.oneway.server.R;
 import edu.stevens.cs522.chat.oneway.server.contracts.MessageContract;
 import edu.stevens.cs522.chat.oneway.server.contracts.PeerContract;
 import edu.stevens.cs522.chat.oneway.server.entities.Message;
 import edu.stevens.cs522.chat.oneway.server.entities.Peer;
 import edu.stevens.cs522.chat.oneway.server.managers.IQueryListener;
+import edu.stevens.cs522.chat.oneway.server.managers.ISimpleQueryListener;
 import edu.stevens.cs522.chat.oneway.server.managers.QueryBuilder;
+import edu.stevens.cs522.chat.oneway.server.managers.SimpleQueryBuilder;
 import edu.stevens.cs522.chat.oneway.server.managers.TypedCursor;
 
 public class ContactDetailsActivity extends Activity {

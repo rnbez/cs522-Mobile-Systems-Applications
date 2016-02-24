@@ -1,56 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AndroidLayouts">
+    <shared>
+      <config />
+    </shared>
+  </component>
   <component name="AndroidLogFilters">
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3fd59ea6-11f8-43e3-8944-dc4a77c876c0" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Chat-Server-Oneway/app/src/main/res/drawable-hdpi/ic_menu_contactbook.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Chat-Server-Oneway/app/src/main/res/drawable-mdpi/ic_menu_contactbook.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Chat-Server-Oneway/app/src/main/res/drawable-xhdpi/ic_menu_contactbook.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Chat-Server-Oneway/app/src/main/res/drawable-xxhdpi/ic_menu_contactbook.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Chat-Server-Oneway/app/src/main/ic_menu_contactbook2-web.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Chat-Server-Oneway/app/src/main/res/drawable-hdpi/ic_menu_contactbook2.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Chat-Server-Oneway/app/src/main/res/drawable-mdpi/ic_menu_contactbook2.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Chat-Server-Oneway/app/src/main/res/drawable-xhdpi/ic_menu_contactbook2.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Chat-Server-Oneway/app/src/main/res/drawable-xxhdpi/ic_menu_contactbook2.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Chat-Client-Oneway.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Chat-Server-Oneway/app/src/main/java/edu/stevens/cs522/chat/oneway/server/adapters/ContactAdapter.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Chat-Server-Oneway/app/src/main/java/edu/stevens/cs522/chat/oneway/server/activities/ContactBookActivity.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Chat-Server-Oneway/app/src/main/java/edu/stevens/cs522/chat/oneway/server/activities/ContactDetailsActivity.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Chat-Server-Oneway/app/src/main/java/edu/stevens/cs522/chat/oneway/server/adapters/MessageAdapter.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/app.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/appcompat_v7_23_1_1.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Chat-Server-Oneway/app/src/main/res/menu/chat_menu.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Chat-Server-Oneway/app/src/main/res/layout/contact_book.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Chat-Server-Oneway/app/src/main/res/layout/contact_details.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Chat-Server-Oneway/app/src/main/res/layout/contact_row.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Chat-Server-Oneway/app/src/main/res/layout/message_row.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Chat-Server-Oneway/app/src/main/res/layout/peers.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/runConfigurations.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Chat-Server-Oneway/app/src/main/res/layout/simple_list_row.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/support_annotations_23_1_1.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/support_v4_23_1_1.xml" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment4\Chat-Server-Oneway\app\src\main\res\layout\message.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Chat-Server-Oneway/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/../Chat-Server-Oneway/app/src/main/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Chat-Server-Oneway/app/src/main/java/edu/stevens/cs522/chat/oneway/server/managers/AsyncContentResolver.java" afterPath="$PROJECT_DIR$/../Chat-Server-Oneway/app/src/main/java/edu/stevens/cs522/chat/oneway/server/managers/AsyncContentResolver.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../BookstoreWithEntityManager/app/src/main/java/edu/stevens/cs522/bookstore/activities/BookStoreActivity.java" afterPath="$PROJECT_DIR$/../BookstoreWithEntityManager/app/src/main/java/edu/stevens/cs522/bookstore/activities/BookStoreActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Chat-Server-Oneway/app/src/main/java/edu/stevens/cs522/chat/oneway/server/activities/ChatServerActivity.java" afterPath="$PROJECT_DIR$/../Chat-Server-Oneway/app/src/main/java/edu/stevens/cs522/chat/oneway/server/activities/ChatServerActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Chat-Server-Oneway/app/src/main/java/edu/stevens/cs522/chat/oneway/server/adapters/ListAdapter.java" afterPath="$PROJECT_DIR$/../Chat-Server-Oneway/app/src/main/java/edu/stevens/cs522/chat/oneway/server/adapters/ListAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Chat-Server-Oneway/app/src/main/java/edu/stevens/cs522/chat/oneway/server/entities/Message.java" afterPath="$PROJECT_DIR$/../Chat-Server-Oneway/app/src/main/java/edu/stevens/cs522/chat/oneway/server/entities/Message.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Chat-Server-Oneway/app/src/main/java/edu/stevens/cs522/chat/oneway/server/contracts/MessageContract.java" afterPath="$PROJECT_DIR$/../Chat-Server-Oneway/app/src/main/java/edu/stevens/cs522/chat/oneway/server/contracts/MessageContract.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/ic_menu_preferences.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/ic_menu_preferences.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/ic_menu_preferences.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/ic_menu_preferences.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../icons/noun_79696_cc.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/oneway/client/PreferencesActivity.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/menu/client_menu.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/preferences.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/xml/preferences.xml" />
+      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment4\Chat-Server-Oneway\app\src\main\res\drawable-hdpi\ic_menu_contactbook2.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment4\Chat-Server-Oneway\app\src\main\res\drawable-mdpi\ic_menu_contactbook2.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment4\Chat-Server-Oneway\app\src\main\res\drawable-xhdpi\ic_menu_contactbook2.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment4\Chat-Server-Oneway\app\src\main\res\drawable-xxhdpi\ic_menu_contactbook2.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\icons\noun_18576_cc.png" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/oneway/client/ChatClient.java" afterPath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/oneway/client/ChatClient.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Chat-Server-Oneway/app/src/main/java/edu/stevens/cs522/chat/oneway/server/activities/ContactDetailsActivity.java" afterPath="$PROJECT_DIR$/../Chat-Server-Oneway/app/src/main/java/edu/stevens/cs522/chat/oneway/server/activities/ContactDetailsActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Chat-Server-Oneway/app/src/main/java/edu/stevens/cs522/chat/oneway/server/entities/Peer.java" afterPath="$PROJECT_DIR$/../Chat-Server-Oneway/app/src/main/java/edu/stevens/cs522/chat/oneway/server/entities/Peer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Chat-Server-Oneway/app/src/main/java/edu/stevens/cs522/chat/oneway/server/contracts/PeerContract.java" afterPath="$PROJECT_DIR$/../Chat-Server-Oneway/app/src/main/java/edu/stevens/cs522/chat/oneway/server/contracts/PeerContract.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Chat-Server-Oneway/app/src/main/java/edu/stevens/cs522/chat/oneway/server/managers/PeerManager.java" afterPath="$PROJECT_DIR$/../Chat-Server-Oneway/app/src/main/java/edu/stevens/cs522/chat/oneway/server/managers/PeerManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Chat-Server-Oneway/app/src/main/java/edu/stevens/cs522/chat/oneway/server/providers/PeerMessageProvider.java" afterPath="$PROJECT_DIR$/../Chat-Server-Oneway/app/src/main/java/edu/stevens/cs522/chat/oneway/server/providers/PeerMessageProvider.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Chat-Server-Oneway/app/src/main/java/edu/stevens/cs522/chat/oneway/server/managers/QueryBuilder.java" afterPath="$PROJECT_DIR$/../Chat-Server-Oneway/app/src/main/java/edu/stevens/cs522/chat/oneway/server/managers/QueryBuilder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Chat-Server-Oneway/app/src/main/res/layout/main.xml" afterPath="$PROJECT_DIR$/../Chat-Server-Oneway/app/src/main/res/layout/main.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Chat-Server-Oneway/app/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/../Chat-Server-Oneway/app/src/main/res/values/strings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../BookstoreWithEntityManager/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../BookstoreWithEntityManager/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Chat-Server-Oneway/app/src/main/res/layout/contact_details.xml" afterPath="$PROJECT_DIR$/../Chat-Server-Oneway/app/src/main/res/layout/contact_details.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../icons/the_noun_project_credits.txt" afterPath="$PROJECT_DIR$/../../icons/the_noun_project_credits.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Chat-Server-Oneway/.idea/vcs.xml" afterPath="$PROJECT_DIR$/../Chat-Server-Oneway/.idea/vcs.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../assignment2/BookstoreBasic/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../../assignment2/BookstoreBasic/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Chat-Server-Oneway/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../Chat-Server-Oneway/.idea/workspace.xml" />
     </list>
@@ -80,17 +62,62 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="ChatClient.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ChatClient.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/oneway/client/ChatClient.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5705706">
-              <caret line="148" column="31" selection-start-line="148" selection-start-column="31" selection-end-line="148" selection-end-column="31" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="99" column="8" selection-start-line="99" selection-start-column="8" selection-end-line="99" selection-end-column="8" />
+              <folding>
+                <element signature="method#onClick#0;class#ChatClient#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/main.xml">
+          <provider editor-type-id="android-designer">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-11.724138">
+              <caret line="47" column="49" selection-start-line="39" selection-start-column="3" selection-end-line="47" selection-end-column="49" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PreferencesActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/oneway/client/PreferencesActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="10" column="10" selection-start-line="10" selection-start-column="10" selection-end-line="10" selection-end-column="10" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="preferences.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/xml/preferences.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.5615616">
+              <caret line="11" column="19" selection-start-line="11" selection-start-column="19" selection-end-line="11" selection-end-column="19" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="layoutResourceFile_vertical" />
+        <option value="resourceFile" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
@@ -1525,6 +1552,18 @@
       <projects_view />
     </option>
   </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/preferences.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/menu/client_menu.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/oneway/client/PreferencesActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/oneway/client/ChatClient.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/xml/preferences.xml" />
+      </list>
+    </option>
+  </component>
   <component name="NamedScopeManager">
     <order />
   </component>
@@ -1556,7 +1595,9 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scratches" />
+      <pane id="PackagesPane" />
+      <pane id="ProjectPane" />
+      <pane id="Scope" />
       <pane id="AndroidView">
         <subPane>
           <PATH>
@@ -1585,6 +1626,56 @@
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Chat-Client-Oneway" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="menu" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Chat-Client-Oneway" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="layout" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Chat-Client-Oneway" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="java" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
             </PATH_ELEMENT>
@@ -1593,11 +1684,23 @@
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Chat-Client-Oneway" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="manifests" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidManifestsGroupNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
-      <pane id="ProjectPane" />
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1606,6 +1709,14 @@
     <property name="recentsLimit" value="5" />
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="emulator-5556" />
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_AVD" value="Nexus_6_API_23" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Projects\GitHub\stevens\cs522\hw\assignment4\Chat-Client-Oneway\app\src\main\res\menu" />
+    </key>
+    <key name="android.template.packageName">
+      <recent name="edu.stevens.cs522.chat.oneway.client" />
+    </key>
   </component>
   <component name="RunManager" selected="Android Application.app">
     <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
@@ -1627,6 +1738,26 @@
       <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
       <option name="DEEP_LINK" value="" />
       <option name="ACTIVITY_CLASS" value="" />
+      <method />
+    </configuration>
+    <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
+      <module name="" />
+      <option name="TESTING_TYPE" value="0" />
+      <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="EXTRA_OPTIONS" value="" />
+      <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
+      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
+      <option name="FORCE_STOP_RUNNING_APP" value="true" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
+      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -1667,6 +1798,11 @@
         <option name="Make" enabled="false" />
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
       </method>
+    </configuration>
+    <configuration default="true" type="JarApplication" factoryName="JAR Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <envs />
+      <method />
     </configuration>
     <configuration default="true" type="Remote" factoryName="Remote">
       <option name="USE_SOCKET_TRANSPORT" value="true" />
@@ -1760,6 +1896,7 @@
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32967034" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1778,7 +1915,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.34379905" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.40345368" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3453888" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -1801,12 +1938,72 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <option name="time" value="1" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/oneway/client/ChatClient.java">
       <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="method#onClick#0;class#ChatClient#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/oneway/client/ChatClient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="method#onClick#0;class#ChatClient#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/client_menu.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.27792916">
+          <caret line="6" column="41" selection-start-line="6" selection-start-column="41" selection-end-line="6" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/preferences.xml">
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-23/android/preference/PreferenceActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33333334">
+          <caret line="1517" column="16" selection-start-line="1517" selection-start-column="16" selection-end-line="1517" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3063063">
+          <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="30" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/client_chat.xml">
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
@@ -1815,8 +2012,39 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/oneway/client/ChatClient.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5705706">
-          <caret line="148" column="31" selection-start-line="148" selection-start-column="31" selection-end-line="148" selection-end-column="31" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="99" column="8" selection-start-line="99" selection-start-column="8" selection-end-line="99" selection-end-column="8" />
+          <folding>
+            <element signature="method#onClick#0;class#ChatClient#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/main.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-11.724138">
+          <caret line="47" column="49" selection-start-line="39" selection-start-column="3" selection-end-line="47" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/oneway/client/PreferencesActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="10" column="10" selection-start-line="10" selection-start-column="10" selection-end-line="10" selection-end-column="10" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/xml/preferences.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5615616">
+          <caret line="11" column="19" selection-start-line="11" selection-start-column="19" selection-end-line="11" selection-end-column="19" />
           <folding />
         </state>
       </provider>

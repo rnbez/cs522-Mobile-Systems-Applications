@@ -15,9 +15,14 @@ import java.net.UnknownHostException;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -78,18 +83,22 @@ public class ChatClient extends Activity implements OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.client_chat);
 
-        Intent callingIntent = getIntent();
-        if (callingIntent != null && callingIntent.getExtras() != null) {
+//        Intent callingIntent = getIntent();
+//        if (callingIntent != null && callingIntent.getExtras() != null) {
+//
+//            clientName = callingIntent.getExtras().getString(CLIENT_NAME_KEY, DEFAULT_CLIENT_NAME);
+//            clientPort = callingIntent.getExtras().getInt(CLIENT_PORT_KEY, DEFAULT_CLIENT_PORT);
+//
+//        } else {
+//
+//            clientName = DEFAULT_CLIENT_NAME;
+//            clientPort = DEFAULT_CLIENT_PORT;
+//
+//        }
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 
-            clientName = callingIntent.getExtras().getString(CLIENT_NAME_KEY, DEFAULT_CLIENT_NAME);
-            clientPort = callingIntent.getExtras().getInt(CLIENT_PORT_KEY, DEFAULT_CLIENT_PORT);
-
-        } else {
-
-            clientName = DEFAULT_CLIENT_NAME;
-            clientPort = DEFAULT_CLIENT_PORT;
-
-        }
+        clientName = prefs.getString(PreferencesActivity.PREF_KEY_USERNAME, DEFAULT_CLIENT_NAME);
+        clientPort = prefs.getInt(PreferencesActivity.PREF_KEY_PORT, DEFAULT_CLIENT_PORT);
 
         /**
          * Let's be clear, this is a HACK to allow you to do network communication on the client_chat thread.
@@ -117,6 +126,31 @@ public class ChatClient extends Activity implements OnClickListener {
             return;
         }
 
+    }
+
+
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.client_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()){
+            case R.id.chat_menu_contacts:
+                Intent intent = new Intent(this, PreferencesActivity.class);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+
+        }
     }
 
     /*
