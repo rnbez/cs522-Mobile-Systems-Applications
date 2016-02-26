@@ -12,6 +12,7 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.util.ArrayList;
+import java.util.List;
 
 import android.app.Activity;
 import android.content.ContentValues;
@@ -37,9 +38,11 @@ import edu.stevens.cs522.chat.oneway.server.entities.Message;
 import edu.stevens.cs522.chat.oneway.server.entities.Peer;
 import edu.stevens.cs522.chat.oneway.server.managers.IContinue;
 import edu.stevens.cs522.chat.oneway.server.managers.IQueryListener;
+import edu.stevens.cs522.chat.oneway.server.managers.ISimpleQueryListener;
 import edu.stevens.cs522.chat.oneway.server.managers.MessageManager;
 import edu.stevens.cs522.chat.oneway.server.managers.PeerManager;
 import edu.stevens.cs522.chat.oneway.server.managers.QueryBuilder;
+import edu.stevens.cs522.chat.oneway.server.managers.SimpleQueryBuilder;
 import edu.stevens.cs522.chat.oneway.server.managers.TypedCursor;
 import edu.stevens.cs522.chat.oneway.server.providers.PeerMessageProvider;
 
@@ -82,8 +85,8 @@ public class ChatServerActivity extends Activity implements OnClickListener {
         StrictMode.setThreadPolicy(policy);
 
         try {
-			/*
-			 * Get port information from the resources.
+            /*
+             * Get port information from the resources.
 			 */
             int port = Integer.parseInt(getResources().getString(R.string.app_port));
             serverSocket = new DatagramSocket(port);
@@ -127,7 +130,7 @@ public class ChatServerActivity extends Activity implements OnClickListener {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.chat_menu_contacts:
                 Intent intent = new Intent(this, ContactBookActivity.class);
                 startActivity(intent);
@@ -166,54 +169,95 @@ public class ChatServerActivity extends Activity implements OnClickListener {
 
     }
 
-    private void handleMessage(final Peer sender, final Message message){
+    private void handleMessage(final Peer sender, final Message message) {
+        Log.d(TAG, sender.getName() + " >> " + message.getMessageText());
         final PeerManager peerManager = new PeerManager(this, PeerContract.CURSOR_LOADER_ID, PeerContract.DEFAULT_ENTITY_CREATOR);
         final MessageManager messageManager = new MessageManager(this, MessageContract.CURSOR_LOADER_ID, MessageContract.DEFAULT_ENTITY_CREATOR);
 
         Uri uriWithName = PeerContract.withExtendedPath(message.getSender());
+        Log.d(TAG, uriWithName.toString());
 
-        QueryBuilder.executeQuery(TAG,
-                this,
+        SimpleQueryBuilder.executeQuery(this,
                 uriWithName,
-                PeerContract.CURSOR_LOADER_ID,
                 PeerContract.DEFAULT_ENTITY_CREATOR,
-                new IQueryListener<Peer>() {
+                new ISimpleQueryListener<Peer>() {
                     @Override
-                    public void handleResults(TypedCursor<Peer> cursor) {
-                        if (cursor.getCount() > 0) {
-                            if (cursor.moveToFirst()) {
-                                ContentValues values = new ContentValues();
-                                long peerId = cursor.getEntity().getId();
-                                message.setPeerId(peerId);
-                                Uri uriWithId = PeerContract.withExtendedPath(peerId);
-                                peerManager.updateAsync(uriWithId, sender, new IContinue<Integer>() {
-                                    @Override
-                                    public void kontinue(Integer value) {
-                                        messageManager.persistAsync(message, null);
-                                    }
-                                });
-                            }
+                    public void handleResults(List<Peer> results) {
+                        if (results.size() > 0) {
+                            ContentValues values = new ContentValues();
+                            Peer peer = results.get(0);
+                            long peerId = peer.getId();
+                            Log.d(TAG, peer.getId() + " >> " + peer.getName());
+                            message.setPeerId(peerId);
+                            Uri uriWithId = PeerContract.withExtendedPath(peerId);
+                            peerManager.updateAsync(uriWithId, sender, new IContinue<Integer>() {
+                                @Override
+                                public void kontinue(Integer value) {
+                                    messageManager.persistAsync(message, null);
+                                }
+                            });
                         } else {
                             peerManager.persistAsync(sender, new IContinue<Uri>() {
                                 @Override
                                 public void kontinue(Uri uri) {
                                     long peerId = PeerContract.getId(uri);
+                                    Log.d(TAG, peerId + " >> " + sender.getName());
                                     message.setPeerId(peerId);
+                                    Log.d(TAG, message.getPeerId() + " >> " + message.getMessageText());
                                     messageManager.persistAsync(message, null);
                                 }
                             });
                         }
                     }
-
-                    @Override
-                    public void closeResults() {
-                        cursorAdapter.swapCursor(null);
-                    }
-                });
+                }
+        );
+//        QueryBuilder.executeQuery(TAG,
+//                this,
+//                uriWithName,
+//                PeerContract.CURSOR_LOADER_ID,
+//                PeerContract.DEFAULT_ENTITY_CREATOR,
+//                new IQueryListener<Peer>() {
+//                    @Override
+//                    public void handleResults(TypedCursor<Peer> cursor) {
+//                        if (cursor.getCount() > 0) {
+//                            if (cursor.moveToFirst()) {
+//                                ContentValues values = new ContentValues();
+//                                Peer peer = cursor.getEntity();
+//                                long peerId = peer.getId();
+//                                Log.d(TAG, peer.getId() + " >> " + peer.getName());
+//                                message.setPeerId(peerId);
+//                                Uri uriWithId = PeerContract.withExtendedPath(peerId);
+//                                peerManager.updateAsync(uriWithId, sender, new IContinue<Integer>() {
+//                                    @Override
+//                                    public void kontinue(Integer value) {
+//                                        messageManager.persistAsync(message, null);
+//                                    }
+//                                });
+//                            }
+//                        } else {
+//                            peerManager.persistAsync(sender, new IContinue<Uri>() {
+//                                @Override
+//                                public void kontinue(Uri uri) {
+//                                    long peerId = PeerContract.getId(uri);
+//                                    Log.d(TAG, peerId + " >> " + sender.getName());
+//                                    message.setPeerId(peerId);
+//                                    Log.d(TAG, message.getPeerId() + " >> " + message.getMessageText());
+//                                    messageManager.persistAsync(message, null);
+//                                }
+//                            });
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void closeResults() {
+//                        cursorAdapter.swapCursor(null);
+//                    }
+//                });
 //        messageList.add(message_row);
 //        ListAdapter adp = (ListAdapter) msgList.getAdapter();
 //        adp.notifyDataSetChanged();
     }
+
     /*
      * Close the socket before exiting application
      */

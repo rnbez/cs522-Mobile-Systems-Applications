@@ -5,11 +5,13 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.CursorAdapter;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import edu.stevens.cs522.chat.oneway.server.R;
@@ -32,7 +34,9 @@ public class ContactDetailsActivity extends Activity {
     ListView messagesListView;
 
     Peer contact;
-    SimpleCursorAdapter cursorAdapter;
+    List<String> messageList;
+    ArrayAdapter arrayAdapter;
+//    SimpleCursorAdapter cursorAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,32 +57,52 @@ public class ContactDetailsActivity extends Activity {
         nameView.setText(contact.getName());
         portView.setText(contact.getPort());
 
-        cursorAdapter = new SimpleCursorAdapter(this,
-                R.layout.simple_list_row,
-                null,
-                new String[]{ MessageContract.MESSAGE_TEXT },
-                new int[]{ R.id.simple_list_row_textview },
-                CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
-        messagesListView.setAdapter(this.cursorAdapter);
+//        cursorAdapter = new SimpleCursorAdapter(this,
+//                R.layout.simple_list_row,
+//                null,
+//                new String[]{ MessageContract.MESSAGE_TEXT },
+//                new int[]{ R.id.simple_list_row_textview },
+//                CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
+//        messagesListView.setAdapter(this.cursorAdapter);
+//        messagesListView.setAdapter(this.cursorAdapter);
+        messageList = new ArrayList<>();
+        arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, messageList);
+        messagesListView.setAdapter(arrayAdapter);
 
         Uri uri = PeerContract.withExtendedPath(contact.getId());
         uri = PeerContract.withExtendedPath(uri, "messages");
 
-        QueryBuilder.executeQuery(TAG,
-                this,
-                MessageContract.CONTENT_URI,
-                MessageContract.CURSOR_LOADER_ID,
+        SimpleQueryBuilder.executeQuery(this,
+                uri,
                 MessageContract.DEFAULT_ENTITY_CREATOR,
-                new IQueryListener<Message>() {
+                new ISimpleQueryListener<Message>() {
                     @Override
-                    public void handleResults(TypedCursor<Message> cursor) {
-                        cursorAdapter.swapCursor(cursor.getCursor());
-                    }
+                    public void handleResults(List<Message> results) {
+                        messageList.clear();
+                        for (Message m :
+                                results) {
+                            messageList.add(m.getMessageText());
+                        }
+                        arrayAdapter.notifyDataSetChanged();
 
-                    @Override
-                    public void closeResults() {
-                        cursorAdapter.swapCursor(null);
                     }
                 });
+
+//        QueryBuilder.executeQuery(TAG,
+//                this,
+//                MessageContract.CONTENT_URI,
+//                MessageContract.CURSOR_LOADER_ID,
+//                MessageContract.DEFAULT_ENTITY_CREATOR,
+//                new IQueryListener<Message>() {
+//                    @Override
+//                    public void handleResults(TypedCursor<Message> cursor) {
+//                        cursorAdapter.swapCursor(cursor.getCursor());
+//                    }
+//
+//                    @Override
+//                    public void closeResults() {
+//                        cursorAdapter.swapCursor(null);
+//                    }
+//                });
     }
 }

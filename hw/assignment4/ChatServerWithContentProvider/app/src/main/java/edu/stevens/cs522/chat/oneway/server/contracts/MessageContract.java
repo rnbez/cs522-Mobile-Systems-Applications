@@ -34,6 +34,7 @@ public class MessageContract {
     public static final String ID_FULL = TABLE_NAME + "." + ID;
     public static final String MESSAGE_TEXT = "message_text";
     public static final String PEER_ID = "peer_fk";
+    public static final String PEER_ID_FULL =  TABLE_NAME + "." + "peer_fk";
     public static final String SENDER = "sender";
     public static final String CREATE_TABLE =
             "CREATE TABLE " + TABLE_NAME + " (" +

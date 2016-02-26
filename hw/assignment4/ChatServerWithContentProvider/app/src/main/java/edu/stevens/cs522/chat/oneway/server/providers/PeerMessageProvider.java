@@ -31,7 +31,7 @@ public class PeerMessageProvider extends ContentProvider {
 
     private static final String[] DATABASE_CREATE;
     private static final String DATABASE_NAME = "chat_server.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 3;
 
     private SQLiteDatabase _db;
     private DBHelper _dbHelper;
@@ -94,7 +94,6 @@ public class PeerMessageProvider extends ContentProvider {
 
         uriMatcher.addURI(MessageContract.AUTHORITY, message_path, MESSAGE_ALL_ROWS);
         uriMatcher.addURI(MessageContract.AUTHORITY, message_path + "/#", MESSAGE_SINGLE_ROW);
-        uriMatcher.addURI(MessageContract.AUTHORITY, message_path + "/#", MESSAGE_SINGLE_ROW);
         DATABASE_CREATE = new String[]{
                 PeerContract.CREATE_TABLE,
                 MessageContract.CREATE_TABLE
@@ -114,6 +113,8 @@ public class PeerMessageProvider extends ContentProvider {
         HashMap<String, String> map;
         String groupby = null;
         Log.d("query", uri.toString());
+
+        projection = getProjection(uri);
 
         switch (uriMatcher.match(uri)){
             case PEER_ALL_ROWS:
@@ -143,8 +144,8 @@ public class PeerMessageProvider extends ContentProvider {
                 }
                 builder.setProjectionMap(map);
                 List<String> pathSegments = uri.getPathSegments();
-                long peerId = Long.getLong(pathSegments.get(pathSegments.size() - 2));
-                builder.appendWhere(PeerContract.ID + " = " + peerId);
+                long peerId = Long.valueOf(pathSegments.get(pathSegments.size() - 2));
+                builder.appendWhere(MessageContract.PEER_ID_FULL + " = " + peerId);
                 break;
             case MESSAGE_ALL_ROWS:
                 builder.setTables(MessageContract.TABLE_NAME
@@ -170,6 +171,31 @@ public class PeerMessageProvider extends ContentProvider {
         Cursor cursor = builder.query(_db, projection, selection, selectionArgs, groupby, null, null);
         cursor.setNotificationUri(getContext().getContentResolver(), uri);
         return cursor;
+    }
+
+    private String[] getProjection(Uri uri){
+        switch (uriMatcher.match(uri)){
+            case PEER_ALL_ROWS:
+            case PEER_SINGLE_ROW:
+            case PEER_QUERY_NAME:
+                return new String[]{
+                        PeerContract.ID_FULL,
+                        PeerContract.NAME,
+                        PeerContract.ADDRESS,
+                        PeerContract.PORT
+                };
+            case MESSAGE_ALL_ROWS:
+            case MESSAGE_SINGLE_ROW:
+            case PEER_ALL_MESSAGES:
+                return new String[]{
+                        MessageContract.ID_FULL,
+                        MessageContract.MESSAGE_TEXT,
+                        MessageContract.PEER_ID,
+                        MessageContract.SENDER,
+                };
+            default:
+                throw new IllegalArgumentException("Unknown URI " + uri);
+        }
     }
 
     @Override
