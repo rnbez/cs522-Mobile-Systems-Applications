@@ -1,6 +1,8 @@
 package edu.stevens.cs522.chat.oneway.server.managers;
 
 import android.app.Activity;
+import android.content.ContentProvider;
+import android.content.ContentResolver;
 import android.database.Cursor;
 import android.net.Uri;
 
@@ -23,6 +25,12 @@ public class SimpleQueryBuilder<T> implements IContinue<Cursor> {
     public static <T> void executeQuery(Activity context, Uri uri, IEntityCreator<T> helper, ISimpleQueryListener<T> listener) {
         SimpleQueryBuilder<T> qb = new SimpleQueryBuilder<>(helper, listener);
         AsyncContentResolver resolver = new AsyncContentResolver(context.getContentResolver());
+        resolver.queryAsync(uri, null, null, null, null, qb);
+    }
+
+    public static <T> void executeQuery(ContentResolver contentResolver, Uri uri, IEntityCreator<T> helper, ISimpleQueryListener<T> listener) {
+        SimpleQueryBuilder<T> qb = new SimpleQueryBuilder<>(helper, listener);
+        AsyncContentResolver resolver = new AsyncContentResolver(contentResolver);
         resolver.queryAsync(uri, null, null, null, null, qb);
     }
 

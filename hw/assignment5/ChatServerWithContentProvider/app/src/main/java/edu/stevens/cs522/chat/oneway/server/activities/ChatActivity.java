@@ -9,10 +9,12 @@
 package edu.stevens.cs522.chat.oneway.server.activities;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -100,6 +102,7 @@ public class ChatActivity extends Activity implements OnClickListener {
             sendService = null;
         }
     };
+    private Receiver receiver;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -115,9 +118,9 @@ public class ChatActivity extends Activity implements OnClickListener {
         StrictMode.setThreadPolicy(policy);
 
 
-        this.cursorAdapter = new MessageAdapter(this, null);
-        this.msgList = (ListView) findViewById(R.id.msgList);
-        this.msgList.setAdapter(this.cursorAdapter);
+        cursorAdapter = new MessageAdapter(this, null);
+        msgList = (ListView) findViewById(R.id.msgList);
+        msgList.setAdapter(cursorAdapter);
 
         QueryBuilder.executeQuery(TAG,
                 this,
@@ -167,17 +170,34 @@ public class ChatActivity extends Activity implements OnClickListener {
             }
         });
 
+        receiver = new Receiver();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
         Intent receiverIntent = new Intent(this, ChatReceiverService.class);
         receiverIntent.putExtra(ChatReceiverService.EXTRA_SOCKET_PORT, clientPort);
         startService(receiverIntent);
 
+        IntentFilter filter = new IntentFilter(ChatReceiverService.NEW_MESSAGE_BROADCAST);
+        registerReceiver(receiver, filter);
     }
 
     @Override
-    protected void onDestroy() {
+    protected void onStop() {
         stopService(new Intent(this, ChatReceiverService.class));
-        super.onDestroy();
+
+        unregisterReceiver(receiver);
+
+        super.onStop();
     }
+
+//    @Override
+//    protected void onDestroy() {
+//        stopService(new Intent(this, ChatReceiverService.class));
+//        super.onDestroy();
+//    }
 
     @Override
     protected void onResume() {
@@ -302,5 +322,29 @@ public class ChatActivity extends Activity implements OnClickListener {
                     }
                 }
         );
+    }
+
+    public class Receiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            QueryBuilder.executeQuery(TAG,
+                    ChatActivity.this,
+                    MessageContract.CONTENT_URI,
+                    MessageContract.CURSOR_LOADER_ID,
+                    MessageContract.DEFAULT_ENTITY_CREATOR,
+                    new IQueryListener<Message>() {
+                        @Override
+                        public void handleResults(TypedCursor<Message> cursor) {
+                            cursorAdapter.swapCursor(cursor.getCursor());
+                        }
+
+                        @Override
+                        public void closeResults() {
+                            cursorAdapter.swapCursor(null);
+                        }
+
+                    });
+        }
     }
 }

@@ -46,7 +46,16 @@
         <service
             android:name=".services.ChatReceiverService"
             android:enabled="true"
-            android:exported="false"></service>
+            android:exported="false" />
+
+        <!--<receiver-->
+            <!--android:name=".services.MessageBroadcastReceiver"-->
+            <!--android:enabled="true"-->
+            <!--android:exported="false"></receiver>-->
+        <receiver
+            android:name=".activities.ChatActivity.MessageBroadcastReceiver"
+            android:enabled="true"
+            android:exported="false"></receiver>
     </application>
 
 </manifest>
