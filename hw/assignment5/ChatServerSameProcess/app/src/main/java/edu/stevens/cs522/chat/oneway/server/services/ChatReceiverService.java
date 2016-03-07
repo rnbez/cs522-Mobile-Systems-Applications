@@ -54,15 +54,16 @@ public class ChatReceiverService extends Service {
 
         @Override
         protected Integer doInBackground(Void... params) {
-            byte[] receiveData = new byte[1024];
 
-            DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
             while (true) {
                 try {
+                    byte[] receiveData = new byte[1024];
+
+                    DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
                     serverSocket.receive(receivePacket);
 
                     Log.d(TAG, "Thread id: " + Thread.currentThread().getId());
-                    Log.d(TAG, "Process id: " + android.os.Process.myTid());;
+                    Log.d(TAG, "Process id: " + android.os.Process.myTid());
 
                     InetAddress sourceIPAddress = receivePacket.getAddress();
 
@@ -165,10 +166,14 @@ public class ChatReceiverService extends Service {
         REQUEST_ID = startId;
 
         try {
-            int port = intent.getIntExtra(EXTRA_SOCKET_PORT, 0);
-            serverSocket = new DatagramSocket(port);
-            msgLstrTask.execute();
-            Log.i(TAG, "Socket successfully opened.");
+            if(serverSocket == null || serverSocket.isClosed()) {
+                int port = intent.getIntExtra(EXTRA_SOCKET_PORT, 0);
+                serverSocket = new DatagramSocket(port);
+                Log.i(TAG, "Socket successfully opened.");
+            }
+            if(msgLstrTask.getStatus() != AsyncTask.Status.RUNNING) {
+                msgLstrTask.execute();
+            }
         } catch (Exception e) {
             Log.e(TAG, "Cannot open socket" + e.getMessage());
         }
@@ -179,6 +184,7 @@ public class ChatReceiverService extends Service {
 
     @Override
     public void onDestroy() {
+        msgLstrTask.cancel(true);
         serverSocket.close();
         super.onDestroy();
     }

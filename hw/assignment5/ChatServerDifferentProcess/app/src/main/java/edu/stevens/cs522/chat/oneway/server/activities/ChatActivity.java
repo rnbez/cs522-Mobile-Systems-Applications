@@ -228,7 +228,6 @@ public class ChatActivity extends Activity {
 
     @Override
     protected void onStop() {
-        stopService(new Intent(this, ChatReceiverService.class));
         unregisterReceiver(broadcastRceiver);
         super.onStop();
     }
@@ -236,6 +235,7 @@ public class ChatActivity extends Activity {
     @Override
     protected void onDestroy() {
         resultReceicerWrapper.setReceiver(null);
+        stopService(new Intent(this, ChatReceiverService.class));
         super.onDestroy();
     }
 

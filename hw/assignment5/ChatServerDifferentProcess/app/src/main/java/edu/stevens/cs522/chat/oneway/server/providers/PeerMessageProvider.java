@@ -31,7 +31,7 @@ public class PeerMessageProvider extends ContentProvider {
 
     private static final String[] DATABASE_CREATE;
     private static final String DATABASE_NAME = "chat_server.db";
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 4;
 
     private SQLiteDatabase _db;
     private DBHelper _dbHelper;

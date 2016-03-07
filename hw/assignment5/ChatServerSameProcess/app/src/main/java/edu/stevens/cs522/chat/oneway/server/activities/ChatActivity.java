@@ -187,18 +187,16 @@ public class ChatActivity extends Activity implements OnClickListener {
 
     @Override
     protected void onStop() {
-        stopService(new Intent(this, ChatReceiverService.class));
-
         unregisterReceiver(receiver);
 
         super.onStop();
     }
 
-//    @Override
-//    protected void onDestroy() {
-//        stopService(new Intent(this, ChatReceiverService.class));
-//        super.onDestroy();
-//    }
+    @Override
+    protected void onDestroy() {
+        stopService(new Intent(this, ChatReceiverService.class));
+        super.onDestroy();
+    }
 
     @Override
     protected void onResume() {
