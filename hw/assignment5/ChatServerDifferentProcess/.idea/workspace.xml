@@ -1,130 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="AndroidLayouts">
-    <shared>
-      <config />
-    </shared>
-  </component>
   <component name="AndroidLogFilters">
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="87138328-adb3-422f-8149-92f491adfc98" name="Default" comment="">
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\Chat-Client-Oneway\.idea\.name" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\Chat-Client-Oneway\.idea\compiler.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\Chat-Client-Oneway\.idea\copyright\profiles_settings.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\Chat-Client-Oneway\.idea\encodings.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\Chat-Client-Oneway\.idea\gradle.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\Chat-Client-Oneway\.idea\libraries\appcompat_v7_23_1_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\Chat-Client-Oneway\.idea\libraries\support_annotations_23_1_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\Chat-Client-Oneway\.idea\libraries\support_v4_23_1_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\Chat-Client-Oneway\.idea\misc.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\Chat-Client-Oneway\.idea\modules.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\Chat-Client-Oneway\.idea\runConfigurations.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\Chat-Client-Oneway\.idea\vcs.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\Chat-Client-Oneway\.idea\workspace.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\Chat-Client-Oneway\Chat-Client-Oneway.iml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\Chat-Client-Oneway\app\app.iml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\Chat-Client-Oneway\app\build.gradle" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\Chat-Client-Oneway\app\src\main\AndroidManifest.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\Chat-Client-Oneway\app\src\main\java\edu\stevens\cs522\chat\oneway\client\ChatClient.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\Chat-Client-Oneway\app\src\main\java\edu\stevens\cs522\chat\oneway\client\MainActivity.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\Chat-Client-Oneway\app\src\main\java\edu\stevens\cs522\chat\oneway\client\PreferencesActivity.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\Chat-Client-Oneway\app\src\main\res\drawable-hdpi\ic_launcher.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\Chat-Client-Oneway\app\src\main\res\drawable-hdpi\ic_menu_preferences.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\Chat-Client-Oneway\app\src\main\res\drawable-ldpi\ic_launcher.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\Chat-Client-Oneway\app\src\main\res\drawable-mdpi\ic_launcher.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\Chat-Client-Oneway\app\src\main\res\drawable-mdpi\ic_menu_preferences.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\Chat-Client-Oneway\app\src\main\res\drawable-xhdpi\ic_menu_preferences.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\Chat-Client-Oneway\app\src\main\res\drawable-xxhdpi\ic_menu_preferences.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\Chat-Client-Oneway\app\src\main\res\layout\client_chat.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\Chat-Client-Oneway\app\src\main\res\layout\main.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\Chat-Client-Oneway\app\src\main\res\layout\preferences.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\Chat-Client-Oneway\app\src\main\res\menu\client_menu.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\Chat-Client-Oneway\app\src\main\res\values-w820dp\dimens.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\Chat-Client-Oneway\app\src\main\res\values\dimens.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\Chat-Client-Oneway\app\src\main\res\values\strings.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\Chat-Client-Oneway\app\src\main\res\xml\preferences.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\Chat-Client-Oneway\build.gradle" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\Chat-Client-Oneway\gradle\wrapper\gradle-wrapper.jar" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\Chat-Client-Oneway\gradle\wrapper\gradle-wrapper.properties" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\Chat-Client-Oneway\gradlew" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\Chat-Client-Oneway\gradlew.bat" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\Chat-Client-Oneway\import-summary.txt" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\Chat-Client-Oneway\settings.gradle" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\ChatServerWithContentProvider\.idea\.name" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\ChatServerWithContentProvider\.idea\compiler.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\ChatServerWithContentProvider\.idea\copyright\profiles_settings.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\ChatServerWithContentProvider\.idea\encodings.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\ChatServerWithContentProvider\.idea\gradle.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\ChatServerWithContentProvider\.idea\misc.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\ChatServerWithContentProvider\.idea\modules.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\ChatServerWithContentProvider\.idea\runConfigurations.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\ChatServerWithContentProvider\.idea\vcs.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\ChatServerWithContentProvider\.idea\workspace.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\ChatServerWithContentProvider\Chat-Server-Oneway.iml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\ChatServerWithContentProvider\ChatServerWithContentProvider.iml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\ChatServerWithContentProvider\app\app.iml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\ChatServerWithContentProvider\app\build.gradle" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\ChatServerWithContentProvider\app\src\main\AndroidManifest.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\ChatServerWithContentProvider\app\src\main\ic_menu_contactbook2-web.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\ChatServerWithContentProvider\app\src\main\java\edu\stevens\cs522\chat\oneway\server\activities\ChatActivity.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\ChatServerWithContentProvider\app\src\main\java\edu\stevens\cs522\chat\oneway\server\activities\ContactBookActivity.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\ChatServerWithContentProvider\app\src\main\java\edu\stevens\cs522\chat\oneway\server\activities\ContactDetailsActivity.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\ChatServerWithContentProvider\app\src\main\java\edu\stevens\cs522\chat\oneway\server\activities\PreferencesActivity.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\ChatServerWithContentProvider\app\src\main\java\edu\stevens\cs522\chat\oneway\server\adapters\ContactAdapter.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\ChatServerWithContentProvider\app\src\main\java\edu\stevens\cs522\chat\oneway\server\adapters\ListAdapter.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\ChatServerWithContentProvider\app\src\main\java\edu\stevens\cs522\chat\oneway\server\adapters\MessageAdapter.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\ChatServerWithContentProvider\app\src\main\java\edu\stevens\cs522\chat\oneway\server\contracts\MessageContract.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\ChatServerWithContentProvider\app\src\main\java\edu\stevens\cs522\chat\oneway\server\contracts\PeerContract.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\ChatServerWithContentProvider\app\src\main\java\edu\stevens\cs522\chat\oneway\server\entities\Message.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\ChatServerWithContentProvider\app\src\main\java\edu\stevens\cs522\chat\oneway\server\entities\Peer.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\ChatServerWithContentProvider\app\src\main\java\edu\stevens\cs522\chat\oneway\server\managers\AsyncContentResolver.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\ChatServerWithContentProvider\app\src\main\java\edu\stevens\cs522\chat\oneway\server\managers\IContinue.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\ChatServerWithContentProvider\app\src\main\java\edu\stevens\cs522\chat\oneway\server\managers\IEntityCreator.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\ChatServerWithContentProvider\app\src\main\java\edu\stevens\cs522\chat\oneway\server\managers\IQueryListener.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\ChatServerWithContentProvider\app\src\main\java\edu\stevens\cs522\chat\oneway\server\managers\ISimpleQueryListener.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\ChatServerWithContentProvider\app\src\main\java\edu\stevens\cs522\chat\oneway\server\managers\Manager.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\ChatServerWithContentProvider\app\src\main\java\edu\stevens\cs522\chat\oneway\server\managers\MessageManager.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\ChatServerWithContentProvider\app\src\main\java\edu\stevens\cs522\chat\oneway\server\managers\PeerManager.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\ChatServerWithContentProvider\app\src\main\java\edu\stevens\cs522\chat\oneway\server\managers\QueryBuilder.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\ChatServerWithContentProvider\app\src\main\java\edu\stevens\cs522\chat\oneway\server\managers\SimpleQueryBuilder.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\ChatServerWithContentProvider\app\src\main\java\edu\stevens\cs522\chat\oneway\server\managers\TypedCursor.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\ChatServerWithContentProvider\app\src\main\java\edu\stevens\cs522\chat\oneway\server\providers\PeerMessageProvider.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\ChatServerWithContentProvider\app\src\main\java\edu\stevens\cs522\chat\oneway\server\services\ChatReceiverService.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\ChatServerWithContentProvider\app\src\main\java\edu\stevens\cs522\chat\oneway\server\services\ChatSendService.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\ChatServerWithContentProvider\app\src\main\res\drawable-hdpi\ic_launcher.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\ChatServerWithContentProvider\app\src\main\res\drawable-hdpi\ic_menu_contactbook.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\ChatServerWithContentProvider\app\src\main\res\drawable-hdpi\ic_menu_preferences.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\ChatServerWithContentProvider\app\src\main\res\drawable-ldpi\ic_launcher.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\ChatServerWithContentProvider\app\src\main\res\drawable-mdpi\ic_launcher.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\ChatServerWithContentProvider\app\src\main\res\drawable-mdpi\ic_menu_contactbook.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\ChatServerWithContentProvider\app\src\main\res\drawable-mdpi\ic_menu_preferences.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\ChatServerWithContentProvider\app\src\main\res\drawable-xhdpi\ic_menu_contactbook.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\ChatServerWithContentProvider\app\src\main\res\drawable-xhdpi\ic_menu_preferences.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\ChatServerWithContentProvider\app\src\main\res\drawable-xxhdpi\ic_menu_contactbook.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\ChatServerWithContentProvider\app\src\main\res\drawable-xxhdpi\ic_menu_preferences.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\ChatServerWithContentProvider\app\src\main\res\layout\client_chat.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\ChatServerWithContentProvider\app\src\main\res\layout\contact_book.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\ChatServerWithContentProvider\app\src\main\res\layout\contact_details.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\ChatServerWithContentProvider\app\src\main\res\layout\contact_row.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\ChatServerWithContentProvider\app\src\main\res\layout\main.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\ChatServerWithContentProvider\app\src\main\res\layout\message_row.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\ChatServerWithContentProvider\app\src\main\res\layout\peers.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\ChatServerWithContentProvider\app\src\main\res\layout\simple_list_row.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\ChatServerWithContentProvider\app\src\main\res\menu\chat_menu.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\ChatServerWithContentProvider\app\src\main\res\values\strings.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\ChatServerWithContentProvider\app\src\main\res\xml\preferences.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\ChatServerWithContentProvider\build.gradle" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\ChatServerWithContentProvider\gradle\wrapper\gradle-wrapper.jar" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\ChatServerWithContentProvider\gradle\wrapper\gradle-wrapper.properties" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\ChatServerWithContentProvider\gradlew" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\ChatServerWithContentProvider\gradlew.bat" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\ChatServerWithContentProvider\import-summary.txt" afterPath="" />
-      <change type="DELETED" beforePath="C:\Projects\GitHub\stevens\cs522\hw\assignment5\ChatServerWithContentProvider\settings.gradle" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
-    <ignored path="BookstoreWithEntityManager.iws" />
+    <list default="true" id="fea8a895-f9ca-4d3b-8d9f-49b440f2d31f" name="Default" comment="" />
+    <ignored path="ChatServerDifferentProcess.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -141,65 +22,47 @@
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
-        <projects_view>
-          <tree_state />
-        </projects_view>
+        <projects_view />
       </state>
     </system>
   </component>
   <component name="FavoritesManager">
-    <favorites_list name="BookstoreWithEntityManager" />
+    <favorites_list name="ChatServerDifferentProcess" />
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="BookStoreActivity.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/activities/BookStoreActivity.java">
+      <file leaf-file-name="ChatActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/oneway/server/activities/ChatActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.035778176">
-              <caret line="195" column="64" selection-start-line="195" selection-start-column="64" selection-end-line="195" selection-end-column="64" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="247" column="0" selection-start-line="247" selection-start-column="0" selection-end-line="247" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <marker date="1456218676747" expanded="false" signature="8649:10159" placeholder="..." />
+                <element signature="class#3595:4018" expanded="false" />
+                <element signature="e#6248#8135#0" expanded="true" />
+                <element signature="e#8134#8135#0" expanded="true" />
+                <element signature="e#8288#9196#0" expanded="true" />
+                <element signature="e#9195#9196#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BookProvider.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/providers/BookProvider.java">
+      <file leaf-file-name="ChatReceiverService.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/oneway/server/services/ChatReceiverService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="63" column="26" selection-start-line="63" selection-start-column="20" selection-end-line="63" selection-end-column="26" />
+            <state vertical-scroll-proportion="3.8658893">
+              <caret line="105" column="48" selection-start-line="0" selection-start-column="0" selection-end-line="191" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CartDbAdapter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/databases/CartDbAdapter.java">
+      <file leaf-file-name="SimpleQueryBuilder.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/oneway/server/managers/SimpleQueryBuilder.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="45" column="36" selection-start-line="45" selection-start-column="24" selection-end-line="45" selection-end-column="36" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BookAdapter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/layout/adapters/BookAdapter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="32" column="69" selection-start-line="32" selection-start-column="69" selection-end-line="32" selection-end-column="69" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CheckoutActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/activities/CheckoutActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+              <caret line="32" column="55" selection-start-line="32" selection-start-column="55" selection-end-line="32" selection-end-column="55" />
               <folding />
             </state>
           </provider>
@@ -210,13 +73,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
-  </component>
-  <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
   </component>
   <component name="GradleLocalSettings">
     <option name="availableProjects">
@@ -224,7 +83,7 @@
         <entry>
           <key>
             <ExternalProjectPojo>
-              <option name="name" value="BookstoreWithEntityManager" />
+              <option name="name" value="ChatServerDifferentProcess" />
               <option name="path" value="$PROJECT_DIR$" />
             </ExternalProjectPojo>
           </key>
@@ -235,7 +94,7 @@
                 <option name="path" value="$PROJECT_DIR$/app" />
               </ExternalProjectPojo>
               <ExternalProjectPojo>
-                <option name="name" value="BookstoreWithEntityManager" />
+                <option name="name" value="ChatServerDifferentProcess" />
                 <option name="path" value="$PROJECT_DIR$" />
               </ExternalProjectPojo>
             </list>
@@ -597,26 +456,6 @@
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="preReleaseUnitTestBuild" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Prepare com.android.support:animated-vector-drawable:23.2.0" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="prepareComAndroidSupportAnimatedVectorDrawable2320Library" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Prepare com.android.support:appcompat-v7:23.2.0" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="prepareComAndroidSupportAppcompatV72320Library" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Prepare com.android.support:support-v4:23.2.0" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="prepareComAndroidSupportSupportV42320Library" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Prepare com.android.support:support-vector-drawable:23.2.0" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="prepareComAndroidSupportSupportVectorDrawable2320Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
@@ -1136,26 +975,6 @@
                 <option name="name" value="preReleaseUnitTestBuild" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Prepare com.android.support:animated-vector-drawable:23.2.0" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
-                <option name="name" value="prepareComAndroidSupportAnimatedVectorDrawable2320Library" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Prepare com.android.support:appcompat-v7:23.2.0" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
-                <option name="name" value="prepareComAndroidSupportAppcompatV72320Library" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Prepare com.android.support:support-v4:23.2.0" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
-                <option name="name" value="prepareComAndroidSupportSupportV42320Library" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Prepare com.android.support:support-vector-drawable:23.2.0" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
-                <option name="name" value="prepareComAndroidSupportSupportVectorDrawable2320Library" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
                 <option name="name" value="prepareDebugAndroidTestDependencies" />
               </ExternalTaskPojo>
@@ -1323,7 +1142,7 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="C:\Projects\GitHub\stevens\cs522\hw\assignment4\BookstoreWithEntityManager" value="4332065913080" />
+        <entry key="C:\Projects\GitHub\stevens\cs522\hw\assignment5\ChatServerDifferentProcess" value="4330497156000" />
       </map>
     </option>
     <option name="projectBuildClasspath">
@@ -1539,11 +1358,6 @@
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/commons-codec/commons-codec/1.4/commons-codec-1.4.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/intellij/annotations/12.0/annotations-12.0-sources.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/intellij/annotations/12.0/annotations-12.0.jar" />
-                            <option value="$USER_HOME$/AppData/Local/Android/sdk/extras/android/m2repository/com/android/support/appcompat-v7/23.2.0/appcompat-v7-23.2.0.aar" />
-                            <option value="$USER_HOME$/AppData/Local/Android/sdk/extras/android/m2repository/com/android/support/support-v4/23.2.0/support-v4-23.2.0.aar" />
-                            <option value="$USER_HOME$/AppData/Local/Android/sdk/extras/android/m2repository/com/android/support/animated-vector-drawable/23.2.0/animated-vector-drawable-23.2.0.aar" />
-                            <option value="$USER_HOME$/AppData/Local/Android/sdk/extras/android/m2repository/com/android/support/support-vector-drawable/23.2.0/support-vector-drawable-23.2.0.aar" />
-                            <option value="$USER_HOME$/AppData/Local/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.2.0/support-annotations-23.2.0.jar" />
                           </list>
                         </option>
                         <option name="path" value="$PROJECT_DIR$/app" />
@@ -1673,21 +1487,10 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/managers/IContinue.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/managers/AsyncQueryHandler.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/entities/Book.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/entities/Author.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/managers/AsyncContentResolver.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/managers/IEntityCreator.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/managers/ISimpleQueryListener.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/managers/IQueryListener.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/managers/TypedCursor.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/managers/SimpleQueryBuilder.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/managers/QueryBuilder.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/managers/Manager.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/managers/BookManager.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/providers/BookProvider.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/activities/BookStoreActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/oneway/server/utils/ResultReceicerWrapper.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/oneway/server/activities/ChatActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/oneway/server/services/ChatSendService.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/oneway/server/services/ChatReceiverService.java" />
       </list>
     </option>
   </component>
@@ -1695,19 +1498,18 @@
     <order />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1382" />
-    <option name="height" value="744" />
+    <option name="x" value="676" />
+    <option name="width" value="697" />
+    <option name="height" value="735" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
     <OptionsSetting value="true" id="Remove" />
     <OptionsSetting value="true" id="Checkout" />
     <OptionsSetting value="true" id="Update" />
     <OptionsSetting value="true" id="Status" />
     <OptionsSetting value="true" id="Edit" />
-    <ConfirmationsSetting value="2" id="Add" />
+    <ConfirmationsSetting value="0" id="Add" />
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
   <component name="ProjectView">
@@ -1723,20 +1525,136 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="Scratches" />
       <pane id="ProjectPane" />
-      <pane id="PackagesPane" />
       <pane id="AndroidView">
         <subPane>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="BookstoreWithEntityManager" />
+              <option name="myItemId" value="ChatServerDifferentProcess" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ChatServerDifferentProcess" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ChatServerDifferentProcess" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="server" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="utils" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ChatServerDifferentProcess" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="server" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="services" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ChatServerDifferentProcess" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="server" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="providers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ChatServerDifferentProcess" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="server" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ChatServerDifferentProcess" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="server" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="activities" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1745,10 +1663,9 @@
     <property name="recentsLimit" value="5" />
     <property name="OverrideImplement.combined" value="true" />
     <property name="OverrideImplement.overriding.sorted" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../assignment5/ChatServerDifferentProcess" />
-    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="emulator-5554" />
+    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="emulator-5556" />
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_AVD" value="Nexus_6_API_23" />
-    <property name="FullScreen" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../ChatServerSameProcess" />
   </component>
   <component name="RunManager" selected="Android Application.app">
     <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
@@ -1885,7 +1802,7 @@
       <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
       <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
       <option name="FORCE_STOP_RUNNING_APP" value="true" />
-      <option name="USE_LAST_SELECTED_DEVICE" value="true" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
       <option name="PREFERRED_AVD" value="" />
       <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
       <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
@@ -1910,61 +1827,49 @@
     </configuration>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
-  <component name="SvnConfiguration">
-    <configuration />
-  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="87138328-adb3-422f-8149-92f491adfc98" name="Default" comment="" />
-      <created>1456106148771</created>
+      <changelist id="fea8a895-f9ca-4d3b-8d9f-49b440f2d31f" name="Default" comment="" />
+      <created>1457311603547</created>
       <option name="number" value="Default" />
-      <updated>1456106148771</updated>
+      <updated>1457311603547</updated>
     </task>
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="676" y="0" width="697" height="735" extended-state="0" />
     <editor active="false" />
     <layout>
-      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33273056" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32911393" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32879046" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32967034" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32911393" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30198914" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32967034" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.38698012" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16717096" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19466248" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32911393" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32911393" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24960753" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290469" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.29131174" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39863715" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
     </layout>
-  </component>
-  <component name="Vcs.Log.UiProperties">
-    <option name="RECENTLY_FILTERED_USER_GROUPS">
-      <collection />
-    </option>
-    <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
-      <collection />
-    </option>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
@@ -1973,463 +1878,117 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/managers/AsyncContentResolver.java</url>
-          <line>56</line>
-          <properties />
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/managers/AsyncContentResolver.java</url>
-          <line>25</line>
-          <properties />
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/managers/BookManager.java</url>
-          <line>21</line>
-          <properties />
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/managers/BookManager.java</url>
-          <line>39</line>
+          <url>file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/oneway/server/activities/ChatActivity.java</url>
+          <line>199</line>
           <properties />
           <option name="timeStamp" value="7" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/managers/BookManager.java</url>
-          <line>29</line>
+          <url>file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/oneway/server/services/ChatSendService.java</url>
+          <line>98</line>
           <properties />
-          <option name="timeStamp" value="8" />
+          <option name="timeStamp" value="9" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/activities/BookStoreActivity.java</url>
-          <line>114</line>
+          <url>file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/oneway/server/services/ChatSendService.java</url>
+          <line>103</line>
           <properties />
-          <option name="timeStamp" value="13" />
+          <option name="timeStamp" value="10" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/activities/BookStoreActivity.java</url>
+          <url>file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/oneway/server/activities/ChatActivity.java</url>
           <line>174</line>
           <properties />
-          <option name="timeStamp" value="14" />
+          <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/activities/BookStoreActivity.java</url>
-          <line>124</line>
+          <url>file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/oneway/server/services/ChatReceiverService.java</url>
+          <line>105</line>
           <properties />
-          <option name="timeStamp" value="19" />
+          <option name="timeStamp" value="22" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/oneway/server/services/ChatReceiverService.java</url>
+          <line>73</line>
+          <properties />
+          <option name="timeStamp" value="25" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="20" />
+      <option name="time" value="27" />
     </breakpoint-manager>
-    <watches-manager>
-      <configuration name="app">
-        <watch expression="results.getCount()" />
-      </configuration>
-    </watches-manager>
+    <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/activities/BookStoreActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/oneway/server/managers/PeerManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.23619048">
+          <caret line="21" column="16" selection-start-line="21" selection-start-column="16" selection-end-line="21" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/oneway/server/providers/PeerMessageProvider.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.45333335">
+          <caret line="166" column="20" selection-start-line="166" selection-start-column="20" selection-end-line="167" selection-end-column="73" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/oneway/server/services/ChatSendService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <caret line="113" column="0" selection-start-line="113" selection-start-column="0" selection-end-line="113" selection-end-column="0" />
+          <folding>
+            <element signature="e#1854#1855#0" expanded="true" />
+            <element signature="e#1898#1899#0" expanded="true" />
+            <element signature="e#1901#1990#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/oneway/server/utils/ResultReceicerWrapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.25641027">
+          <caret line="15" column="31" selection-start-line="15" selection-start-column="31" selection-end-line="15" selection-end-column="31" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1456218676747" expanded="false" signature="8649:10159" placeholder="..." />
+            <element signature="e#398#399#0" expanded="true" />
+            <element signature="e#428#429#0" expanded="true" />
+            <element signature="e#479#480#0" expanded="true" />
+            <element signature="e#519#520#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/providers/BookProvider.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/oneway/server/activities/ChatActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="63" column="26" selection-start-line="63" selection-start-column="20" selection-end-line="63" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/databases/CartDbAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="45" column="36" selection-start-line="45" selection-start-column="24" selection-end-line="45" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/layout/adapters/BookAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="32" column="69" selection-start-line="32" selection-start-column="69" selection-end-line="32" selection-end-column="69" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/activities/CheckoutActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/activities/BookStoreActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <caret line="247" column="0" selection-start-line="247" selection-start-column="0" selection-end-line="247" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1456218676747" expanded="false" signature="8649:10159" placeholder="..." />
+            <element signature="class#3595:4018" expanded="false" />
+            <element signature="e#6248#8135#0" expanded="true" />
+            <element signature="e#8134#8135#0" expanded="true" />
+            <element signature="e#8288#9196#0" expanded="true" />
+            <element signature="e#9195#9196#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/layout/adapters/BookAdapter.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/oneway/server/managers/SimpleQueryBuilder.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="32" column="69" selection-start-line="32" selection-start-column="69" selection-end-line="32" selection-end-column="69" />
+          <caret line="32" column="55" selection-start-line="32" selection-start-column="55" selection-end-line="32" selection-end-column="55" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/activities/CheckoutActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/oneway/server/services/ChatReceiverService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+        <state vertical-scroll-proportion="3.8658893">
+          <caret line="105" column="48" selection-start-line="0" selection-start-column="0" selection-end-line="191" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/entities/Author.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/entities/Book.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/contracts/BookContract.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="81" column="0" selection-start-line="81" selection-start-column="0" selection-end-line="81" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/contracts/AuthorContract.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="36" column="40" selection-start-line="36" selection-start-column="40" selection-end-line="36" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/common/CommonAssumptions.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="6" column="47" selection-start-line="6" selection-start-column="47" selection-end-line="6" selection-end-column="77" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/providers/BookProvider.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="223" column="51" selection-start-line="222" selection-start-column="9" selection-end-line="223" selection-end-column="51" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="30" column="48" selection-start-line="25" selection-start-column="0" selection-end-line="30" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/managers/AsyncContentResolver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#554#555#0" expanded="false" />
-            <element signature="e#579#580#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/managers/ISimpleQueryListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/managers/BookManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/managers/Manager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="35" column="82" selection-start-line="35" selection-start-column="82" selection-end-line="35" selection-end-column="82" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/managers/IQueryListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/managers/QueryBuilder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="63" column="0" selection-start-line="63" selection-start-column="0" selection-end-line="63" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/activities/BookStoreActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="154" column="55" selection-start-line="154" selection-start-column="55" selection-end-line="154" selection-end-column="55" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <marker date="1456218676747" expanded="false" signature="8649:10159" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/providers/BookProvider.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="186" column="42" selection-start-line="186" selection-start-column="42" selection-end-line="186" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/entities/Book.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="41" column="11" selection-start-line="41" selection-start-column="11" selection-end-line="41" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/managers/TypedCursor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/managers/IContinue.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/managers/IEntityCreator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="8" column="21" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/activities/BookDetailsActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.12952381">
-          <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/managers/SimpleQueryBuilder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.53061223">
-          <caret line="22" column="55" selection-start-line="22" selection-start-column="55" selection-end-line="22" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/managers/ISimpleQueryListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-23/android/app/Activity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3323077">
-          <caret line="669" column="13" selection-start-line="669" selection-start-column="13" selection-end-line="669" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-23/android/content/AsyncQueryHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3323077">
-          <caret line="206" column="22" selection-start-line="206" selection-start-column="22" selection-end-line="206" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/managers/AsyncContentResolver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#554#555#0" expanded="false" />
-            <element signature="e#579#580#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/managers/BookManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.40710384">
-          <caret line="47" column="38" selection-start-line="47" selection-start-column="38" selection-end-line="47" selection-end-column="38" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/managers/Manager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="35" column="82" selection-start-line="35" selection-start-column="82" selection-end-line="35" selection-end-column="82" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/managers/IQueryListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.23224044">
-          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/managers/TypedCursor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/common/CommonAssumptions.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="6" column="47" selection-start-line="6" selection-start-column="47" selection-end-line="6" selection-end-column="77" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-23/android/database/Cursor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.041904762">
-          <caret line="34" column="17" selection-start-line="34" selection-start-column="17" selection-end-line="34" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/entities/Author.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="30" column="48" selection-start-line="25" selection-start-column="0" selection-end-line="30" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/contracts/AuthorContract.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="36" column="40" selection-start-line="36" selection-start-column="40" selection-end-line="36" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/contracts/BookContract.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.26857144">
-          <caret line="71" column="4" selection-start-line="71" selection-start-column="4" selection-end-line="73" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/entities/Book.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="43" column="42" selection-start-line="42" selection-start-column="8" selection-end-line="43" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/bookstore_menu.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.608229">
-          <caret line="20" column="7" selection-start-line="20" selection-start-column="7" selection-end-line="20" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/managers/QueryBuilder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.96422184">
-          <caret line="27" column="13" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/layout/adapters/BookAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="32" column="69" selection-start-line="32" selection-start-column="69" selection-end-line="32" selection-end-column="69" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/activities/CheckoutActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/databases/CartDbAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="45" column="36" selection-start-line="45" selection-start-column="24" selection-end-line="45" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/providers/BookProvider.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="63" column="26" selection-start-line="63" selection-start-column="20" selection-end-line="63" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/bookstore/activities/BookStoreActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.035778176">
-          <caret line="195" column="64" selection-start-line="195" selection-start-column="64" selection-end-line="195" selection-end-column="64" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <marker date="1456218676747" expanded="false" signature="8649:10159" placeholder="..." />
-          </folding>
         </state>
       </provider>
     </entry>
