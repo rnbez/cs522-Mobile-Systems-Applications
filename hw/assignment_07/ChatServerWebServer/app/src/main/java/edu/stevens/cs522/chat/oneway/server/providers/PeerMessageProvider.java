@@ -130,36 +130,35 @@ public class PeerMessageProvider extends ContentProvider {
                 builder.appendWhere(PeerContract.NAME + " = ");
                 builder.appendWhereEscapeString(uri.getLastPathSegment());
                 break;
-//            case PEER_ALL_MESSAGES:
-//                builder.setTables(MessageContract.TABLE_NAME
-//                        + " LEFT JOIN " + PeerContract.TABLE_NAME
-//                        + " ON (" + MessageContract.PEER_ID
-//                        + " = " + PeerContract.ID_FULL + ")");
-//
-//                map = new HashMap<>();
-//                map.put(MessageContract.SENDER, PeerContract.NAME_FULL + " as " + MessageContract.SENDER);
-//                for (String field :
-//                        projection) {
-//                    if(!map.containsKey(field)) map.put(field, field);
-//                }
-//                builder.setProjectionMap(map);
-//                List<String> pathSegments = uri.getPathSegments();
-//                long peerId = Long.valueOf(pathSegments.get(pathSegments.size() - 2));
-//                builder.appendWhere(MessageContract.PEER_ID_FULL + " = " + peerId);
-//                break;
+            case PEER_ALL_MESSAGES:
+                builder.setTables(MessageContract.TABLE_NAME
+                        + " LEFT JOIN " + PeerContract.TABLE_NAME
+                        + " ON (" + MessageContract.PEER_ID
+                        + " = " + PeerContract.ID_FULL + ")");
+
+                map = new HashMap<>();
+                map.put(MessageContract.SENDER, PeerContract.NAME_FULL + " as " + MessageContract.SENDER);
+                for (String field :
+                        projection) {
+                    if(!map.containsKey(field)) map.put(field, field);
+                }
+                builder.setProjectionMap(map);
+                List<String> pathSegments = uri.getPathSegments();
+                long peerId = Long.valueOf(pathSegments.get(pathSegments.size() - 2));
+                builder.appendWhere(MessageContract.PEER_ID_FULL + " = " + peerId);
+                break;
             case MESSAGE_ALL_ROWS:
-//                builder.setTables(MessageContract.TABLE_NAME
-//                        + " LEFT JOIN " + PeerContract.TABLE_NAME
-//                        + " ON (" + MessageContract.PEER_ID
-//                        + " = " + PeerContract.ID_FULL + ")");
-//                map = new HashMap<>();
-//                map.put(MessageContract.SENDER, PeerContract.NAME_FULL + " as " + MessageContract.SENDER);
-//                for (String field :
-//                        projection) {
-//                    if(!map.containsKey(field)) map.put(field, field);
-//                }
-//                builder.setProjectionMap(map);
-                builder.setTables(MessageContract.TABLE_NAME);
+                builder.setTables(MessageContract.TABLE_NAME
+                        + " LEFT JOIN " + PeerContract.TABLE_NAME
+                        + " ON (" + MessageContract.PEER_ID
+                        + " = " + PeerContract.ID_FULL + ")");
+                map = new HashMap<>();
+                map.put(MessageContract.SENDER, PeerContract.NAME_FULL + " as " + MessageContract.SENDER);
+                for (String field :
+                        projection) {
+                    if(!map.containsKey(field)) map.put(field, field);
+                }
+                builder.setProjectionMap(map);
                 break;
             case MESSAGE_SINGLE_ROW:
                 builder.setTables(MessageContract.TABLE_NAME);
@@ -190,10 +189,11 @@ public class PeerMessageProvider extends ContentProvider {
             case PEER_ALL_MESSAGES:
                 return new String[]{
                         MessageContract.ID_FULL,
+                        MessageContract.SEQ_NUM,
                         MessageContract.MESSAGE_TEXT,
                         MessageContract.TIMESTAMP,
                         MessageContract.PEER_ID,
-//                        MessageContract.SENDER,
+                        MessageContract.SENDER,
                 };
             default:
                 throw new IllegalArgumentException("Unknown URI " + uri);
