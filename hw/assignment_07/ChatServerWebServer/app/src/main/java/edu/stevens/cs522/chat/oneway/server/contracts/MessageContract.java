@@ -32,27 +32,24 @@ public class MessageContract {
     public static final String TABLE_NAME = CONTENT + "s";
     public static final String ID = "_id";
     public static final String ID_FULL = TABLE_NAME + "." + ID;
+    public static final String SEQ_NUM = "server_sequence_number";
+    public static final String SEQ_NUM_FULL = TABLE_NAME + "." + SEQ_NUM;
     public static final String MESSAGE_TEXT = "message_text";
     public static final String TIMESTAMP = "message_timestamp";
 //    public static final String TIMESTAMP_FULL =  TABLE_NAME + "." + TIMESTAMP;
     public static final String PEER_ID = "peer_fk";
     public static final String PEER_ID_FULL =  TABLE_NAME + "." + PEER_ID;
     public static final String SENDER = "sender";
-//    public static final String CREATE_TABLE =
-//            "CREATE TABLE " + TABLE_NAME + " (" +
-//                    ID + " INTEGER PRIMARY KEY," +
-//                    MESSAGE_TEXT + " TEXT NOT NULL," +
-//                    PEER_ID + " INTEGER NOT NULL," +
-//                    "FOREIGN KEY(" + PEER_ID + ") REFERENCES " + PeerContract.TABLE_NAME + "(_id) ON DELETE CASCADE" +
-//                    ");"
-//             + "CREATE INDEX MessagePeerIndex ON " + TABLE_NAME + "(" + PEER_ID + ");";
     public static final String CREATE_TABLE =
             "CREATE TABLE " + TABLE_NAME + " (" +
-                    ID + " INTEGER NOT NULL," +
+                    ID + " INTEGER PRIMARY KEY," +
+                    SEQ_NUM + " INTEGER NOT NULL," +
                     MESSAGE_TEXT + " TEXT NOT NULL," +
                     TIMESTAMP + " INTEGER NOT NULL," +
-                    PEER_ID + " INTEGER NOT NULL" +
-                    ");";
+                    PEER_ID + " INTEGER NOT NULL," +
+                    "FOREIGN KEY(" + PEER_ID + ") REFERENCES " + PeerContract.TABLE_NAME + "(_id) ON DELETE CASCADE" +
+                    ");"
+            + "CREATE INDEX MessagePeerIndex ON " + TABLE_NAME + "(" + PEER_ID + ");";
 
     public static final IEntityCreator<Message> DEFAULT_ENTITY_CREATOR = new IEntityCreator<Message>() {
         @Override
@@ -84,6 +81,14 @@ public class MessageContract {
 
     public static void putId(ContentValues values, long id) {
         values.put(ID, id);
+    }
+
+    public static long getSequentialNumber(Cursor cursor) {
+        return cursor.getInt(cursor.getColumnIndexOrThrow(SEQ_NUM));
+    }
+
+    public static void putSequentialNumber(ContentValues values, long seq_num) {
+        values.put(SEQ_NUM, seq_num);
     }
 
     public static String getMessage(Cursor cursor) {
