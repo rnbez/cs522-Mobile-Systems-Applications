@@ -94,7 +94,7 @@ public class RequestService extends IntentService {
 
         if (SYNCHRONIZE_ACTION.equals(intent.getAction())) {
             Synchronize req = intent.getParcelableExtra(EXTRA_SYNCHRONIZE);
-            new RequestProcessor().perform(req);
+            new RequestProcessor().perform(this, req);
             return;
         }
 

@@ -28,11 +28,10 @@ import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.util.UUID;
-import java.util.List;
 import java.util.ArrayList;
 
 import edu.stevens.cs522.chat.oneway.server.R;
-import edu.stevens.cs522.chat.oneway.server.adapters.MessageAdapter;
+import edu.stevens.cs522.chat.oneway.server.adapters.MessageRowAdapter;
 import edu.stevens.cs522.chat.oneway.server.contracts.MessageContract;
 import edu.stevens.cs522.chat.oneway.server.entities.Message;
 import edu.stevens.cs522.chat.oneway.server.managers.IQueryListener;
@@ -62,12 +61,13 @@ public class ChatActivity extends Activity {
     private EditText destinationHost;
     private EditText destinationPort;
     private EditText messageText;
-    private MessageAdapter cursorAdapter;
+    private MessageRowAdapter cursorAdapter;
 
     private ResultReceiverWrapper registerResultReceiverWrapper;
     private ResultReceiverWrapper.IReceiver registerResultReceiver;
     private ResultReceiverWrapper postMessageResultReceiverWrapper;
     private ResultReceiverWrapper.IReceiver postMessageResultReceiver;
+    private SharedPreferences sharedPreferences;
     private ServiceHelper serviceHelper;
 
 
@@ -91,15 +91,15 @@ public class ChatActivity extends Activity {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        userId = prefs.getLong(App.PREF_KEY_USERID, App.PREF_DEFAULT_USER_ID);
-        lastMessageSeqNum = prefs.getLong(App.PREF_KEY_LAST_SEQNUM, App.PREF_DEFAULT_LAST_SEQNUM);
-        userName = prefs.getString(App.PREF_KEY_USERNAME, App.PREF_DEFAULT_USER_NAME);
-        String uuidString = prefs.getString(App.PREF_KEY_REGISTRATION_ID, "");
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        userId = sharedPreferences.getLong(App.PREF_KEY_USERID, App.PREF_DEFAULT_USER_ID);
+        lastMessageSeqNum = sharedPreferences.getLong(App.PREF_KEY_LAST_SEQNUM, App.PREF_DEFAULT_LAST_SEQNUM);
+        userName = sharedPreferences.getString(App.PREF_KEY_USERNAME, App.PREF_DEFAULT_USER_NAME);
+        String uuidString = sharedPreferences.getString(App.PREF_KEY_REGISTRATION_ID, "");
         if (!uuidString.isEmpty())
             registrationID = UUID.fromString(uuidString);
 
-        cursorAdapter = new MessageAdapter(this, null);
+        cursorAdapter = new MessageRowAdapter(this, null);
         msgList = (ListView) findViewById(R.id.main_lst_messages);
         msgList.setAdapter(cursorAdapter);
 
@@ -133,15 +133,10 @@ public class ChatActivity extends Activity {
                 if (isOnline()) {
                     String msg = messageText.getText().toString();
                     if (!msg.isEmpty()) {
-                        /*serviceHelper.postMessageAsync(ChatActivity.this,
-                                registrationID,
-                                userId,
-                                userName,
-                                msg,
-                                postMessageResultReceiverWrapper);*/
                         ArrayList<Message> messages = new ArrayList<Message>();
                         messages.add(new Message(0, msg, userName, userId));
                         serviceHelper.syncAsync(ChatActivity.this, registrationID, userId, lastMessageSeqNum, messages);
+                        messageText.setText("");
                     }
                 } else {
                     Toast.makeText(getApplicationContext(), "You're offline.", Toast.LENGTH_LONG).show();
@@ -157,8 +152,7 @@ public class ChatActivity extends Activity {
                 long id = resultData.getLong(ServiceHelper.EXTRA_REGISTER_RESULT_ID);
                 UUID uuid = UUID.fromString(resultData.getString(ServiceHelper.EXTRA_REGISTER_REG_ID));
 
-                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(ChatActivity.this);
-                SharedPreferences.Editor editor = preferences.edit();
+                SharedPreferences.Editor editor = ChatActivity.this.sharedPreferences.edit();
                 editor.putString(App.PREF_KEY_REGISTRATION_ID, uuid.toString());
                 editor.putLong(App.PREF_KEY_USERID, id);
                 editor.apply();
@@ -283,8 +277,7 @@ public class ChatActivity extends Activity {
         Log.d(TAG, "returned from preferences");
         switch (requestCode) {
             case PREFERENCES_REQUEST:
-                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-                userName = prefs.getString(App.PREF_KEY_USERNAME, App.PREF_DEFAULT_USER_NAME);
+                userName = sharedPreferences.getString(App.PREF_KEY_USERNAME, App.PREF_DEFAULT_USER_NAME);
 
 //                if (!prefs.contains(App.PREF_KEY_REGISTRATION_ID)) {
 
