@@ -1,12 +1,15 @@
 package edu.stevens.cs522.chat.oneway.server.requests;
 
 import android.util.JsonReader;
+import android.util.JsonWriter;
 
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -103,6 +106,42 @@ public class RestMethod {
         return response;
     }
 
+    public HttpURLConnection connection = null;
+    public OutputStream outputStream;
+    public InputStream downloadStream;
+    public StreamingResponse perform(Synchronize request) {
+//        StreamingOutput out;
+        try{
+            URL url = new URL(request.getRequestUri().toString());
+            connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("POST");
+            connection.setUseCaches(false);
+            connection.setRequestProperty("CONNECTION", "Keep-Alive");
+
+            Map<String, String> headers = request.getRequestHeaders();
+            for (Map.Entry<String, String> header : headers.entrySet()) {
+                connection.addRequestProperty(header.getKey(),
+                        header.getValue());
+            }
+
+            connection.setDoOutput(true);
+            connection.setChunkedStreamingMode(0);
+            connection.setDoInput(true);
+//            outputStream = connection.getOutputStream();
+            OutputStream out = connection.getOutputStream();
+            JsonWriter jw = new JsonWriter(new OutputStreamWriter(out, "UTF-8"));
+            request.write(jw);
+            throwErrors(connection);
+
+            downloadStream = connection.getInputStream();
+            return new StreamingResponse(request.getResponse(connection, null));
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+
     void outputRequestEntity(HttpURLConnection connection, Request request) throws IOException {
         String requestEntity = request.getRequestEntity();
         if (requestEntity != null) {
@@ -126,4 +165,33 @@ public class RestMethod {
             throw new IOException(exceptionMessage);
         }
     }
+
+
+
+    public class StreamingResponse {
+        private Response response;
+
+        public StreamingResponse(Response response) {
+            this.response = response;
+        }
+
+        public java.io.InputStream getInputStream() throws IOException {
+            return RestMethod.this.downloadStream;
+        }
+
+        public Response getResponse() {
+            return response;
+        }
+
+        public void disconnect() {
+            // This will close upload and download streams
+            RestMethod.this.closeConnection();
+        }
+    }
+
+    private void closeConnection() {
+        if (connection != null) connection.disconnect();
+    }
+
+
 }

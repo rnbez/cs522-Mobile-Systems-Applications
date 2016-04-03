@@ -15,7 +15,6 @@ public class PostMessageResponse extends Response {
 
     public PostMessageResponse(Parcel in) {
         this.id = in.readLong();
-
     }
     public static final Creator<PostMessageResponse> CREATOR = new Creator<PostMessageResponse>() {
         @Override

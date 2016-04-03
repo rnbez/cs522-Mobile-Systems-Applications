@@ -28,6 +28,8 @@ import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.util.UUID;
+import java.util.List;
+import java.util.ArrayList;
 
 import edu.stevens.cs522.chat.oneway.server.R;
 import edu.stevens.cs522.chat.oneway.server.adapters.MessageAdapter;
@@ -37,17 +39,16 @@ import edu.stevens.cs522.chat.oneway.server.managers.IQueryListener;
 import edu.stevens.cs522.chat.oneway.server.managers.QueryBuilder;
 import edu.stevens.cs522.chat.oneway.server.managers.TypedCursor;
 import edu.stevens.cs522.chat.oneway.server.requests.ServiceHelper;
-import edu.stevens.cs522.chat.oneway.server.utils.CommonSettings;
+import edu.stevens.cs522.chat.oneway.server.utils.App;
 import edu.stevens.cs522.chat.oneway.server.utils.ResultReceiverWrapper;
 
 public class ChatActivity extends Activity {
 
     final static public String TAG = ChatActivity.class.getCanonicalName();
-    final static public long DEFAULT_USER_ID = 0;
-    final static public String DEFAULT_USER_NAME = "no name";
     final static public int PREFERENCES_REQUEST = 1;
 
     private long userId;
+    private long lastMessageSeqNum;
     private String userName;
     private UUID registrationID;
 
@@ -67,6 +68,7 @@ public class ChatActivity extends Activity {
     private ResultReceiverWrapper.IReceiver registerResultReceiver;
     private ResultReceiverWrapper postMessageResultReceiverWrapper;
     private ResultReceiverWrapper.IReceiver postMessageResultReceiver;
+    private ServiceHelper serviceHelper;
 
 
     /**
@@ -90,13 +92,12 @@ public class ChatActivity extends Activity {
         StrictMode.setThreadPolicy(policy);
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        userId = prefs.getLong(CommonSettings.PREF_KEY_USERID, DEFAULT_USER_ID);
-        userName = prefs.getString(CommonSettings.PREF_KEY_USERNAME, DEFAULT_USER_NAME);
-        String uuidString = prefs.getString(CommonSettings.PREF_KEY_REGISTRATION_ID, "");
+        userId = prefs.getLong(App.PREF_KEY_USERID, App.PREF_DEFAULT_USER_ID);
+        lastMessageSeqNum = prefs.getLong(App.PREF_KEY_LAST_SEQNUM, App.PREF_DEFAULT_LAST_SEQNUM);
+        userName = prefs.getString(App.PREF_KEY_USERNAME, App.PREF_DEFAULT_USER_NAME);
+        String uuidString = prefs.getString(App.PREF_KEY_REGISTRATION_ID, "");
         if (!uuidString.isEmpty())
             registrationID = UUID.fromString(uuidString);
-
-
 
         cursorAdapter = new MessageAdapter(this, null);
         msgList = (ListView) findViewById(R.id.main_lst_messages);
@@ -121,21 +122,29 @@ public class ChatActivity extends Activity {
                 });
 //        clientPort = Integer.valueOf(prefs.getString(PreferencesActivity.PREF_KEY_PORT, String.valueOf(DEFAULT_CLIENT_PORT)));
 
+        serviceHelper = new ServiceHelper();
+
         messageText = (EditText) findViewById(R.id.main_edt_message);
         sendButton = (Button) findViewById(R.id.main_btn_send);
         sendButton.setEnabled(registrationID != null);
         sendButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                String msg = messageText.getText().toString();
-                if (!msg.isEmpty()) {
-                    ServiceHelper helper = new ServiceHelper();
-                    helper.postMessageAsync(ChatActivity.this,
-                            registrationID,
-                            userId,
-                            userName,
-                            msg,
-                            postMessageResultReceiverWrapper);
+                if (isOnline()) {
+                    String msg = messageText.getText().toString();
+                    if (!msg.isEmpty()) {
+                        /*serviceHelper.postMessageAsync(ChatActivity.this,
+                                registrationID,
+                                userId,
+                                userName,
+                                msg,
+                                postMessageResultReceiverWrapper);*/
+                        ArrayList<Message> messages = new ArrayList<Message>();
+                        messages.add(new Message(0, msg, userName, userId));
+                        serviceHelper.syncAsync(ChatActivity.this, registrationID, userId, lastMessageSeqNum, messages);
+                    }
+                } else {
+                    Toast.makeText(getApplicationContext(), "You're offline.", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -150,15 +159,15 @@ public class ChatActivity extends Activity {
 
                 SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(ChatActivity.this);
                 SharedPreferences.Editor editor = preferences.edit();
-                editor.putString(CommonSettings.PREF_KEY_REGISTRATION_ID, uuid.toString());
-                editor.putLong(CommonSettings.PREF_KEY_USERID, id);
+                editor.putString(App.PREF_KEY_REGISTRATION_ID, uuid.toString());
+                editor.putLong(App.PREF_KEY_USERID, id);
                 editor.apply();
 
                 registrationID = uuid;
                 userId = id;
 
                 Toast.makeText(getApplicationContext(), "Registration Succeeded", Toast.LENGTH_LONG).show();
-                if(!sendButton.isEnabled()) {
+                if (!sendButton.isEnabled()) {
                     sendButton.setEnabled(true);
                 }
             }
@@ -254,9 +263,9 @@ public class ChatActivity extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         switch (item.getItemId()) {
-//            case R.id.chat_menu_contacts:
-//                startActivity(new Intent(this, ContactBookActivity.class));
-//                return true;
+            case R.id.chat_menu_contacts:
+                startActivity(new Intent(this, ContactBookActivity.class));
+                return true;
             case R.id.chat_menu_prefs:
                 startActivityForResult(new Intent(this, PreferencesActivity.class), PREFERENCES_REQUEST);
                 return true;
@@ -275,16 +284,16 @@ public class ChatActivity extends Activity {
         switch (requestCode) {
             case PREFERENCES_REQUEST:
                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-                userName = prefs.getString(CommonSettings.PREF_KEY_USERNAME, DEFAULT_USER_NAME);
+                userName = prefs.getString(App.PREF_KEY_USERNAME, App.PREF_DEFAULT_USER_NAME);
 
-                if (!prefs.contains(CommonSettings.PREF_KEY_REGISTRATION_ID)) {
+//                if (!prefs.contains(App.PREF_KEY_REGISTRATION_ID)) {
 
-                    final UUID uuid = UUID.randomUUID();
-//                final UUID uuid = UUID.fromString("54947df8-0e9e-4471-a2f9-9af509fb5889");
+//                    final UUID uuid = UUID.randomUUID();
+                final UUID uuid = UUID.fromString("54947df8-0e9e-4471-a2f9-9af509fb5889");
 
-                    ServiceHelper helper = new ServiceHelper();
-                    helper.registerAsync(this, userName, uuid, registerResultReceiverWrapper);
-                }
+                ServiceHelper helper = new ServiceHelper();
+                helper.registerAsync(this, userName, uuid, registerResultReceiverWrapper);
+//                }
 
                 break;
         }
@@ -311,6 +320,11 @@ public class ChatActivity extends Activity {
     }
 
 
+    public boolean isOnline() {
+        android.net.ConnectivityManager cm = (android.net.ConnectivityManager) this.getSystemService(this.CONNECTIVITY_SERVICE);
+        return cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnectedOrConnecting();
+    }
+
 //    public class MessageReceiver extends BroadcastReceiver {
 //
 //        @Override
@@ -334,4 +348,15 @@ public class ChatActivity extends Activity {
 //                    });
 //        }
 //    }
+
+//    private AlarmManager alarmMgr = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
+//    private PendingIntent alarmIntent= PendingIntent.getBroadcast(this, 0, new Intent(this, AlarmReceiver.class), 0);
+//
+//
+//    alarmMgr.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
+//            SystemClock.elapsedRealtime() +
+//            60 * 1000, alarmIntent);
+//    public class AlarmReceiver extends IntentService{
+//
+//    };
 }

@@ -37,16 +37,16 @@ public class Message implements Parcelable {
         }
     }
 
-    public Message(long id, long sequentialNumber, String messageText, String sender) {
-        this.id = id;
+    public Message(long sequentialNumber, String messageText, String sender) {
+//        this.id = id;
         this.sequentialNumber = sequentialNumber;
         this.messageText = messageText;
         this.sender = sender;
         this.timestamp = System.currentTimeMillis();
     }
 
-    public Message(long id, long sequentialNumber, String messageText, String sender, long peerId) {
-        this.id = id;
+    public Message(long sequentialNumber, String messageText, String sender, long peerId) {
+//        this.id = id;
         this.sequentialNumber = sequentialNumber;
         this.messageText = messageText;
         this.sender = sender;
@@ -99,7 +99,7 @@ public class Message implements Parcelable {
     }
 
     public void writeToProvider(ContentValues values) {
-        MessageContract.putId(values, id);
+//        MessageContract.putId(values, id);
         MessageContract.putSequentialNumber(values, sequentialNumber);
         MessageContract.putMessage(values, messageText);
         MessageContract.putTimestamp(values, timestamp);
@@ -155,11 +155,12 @@ public class Message implements Parcelable {
         return timestamp;
     }
 
-//    public void setTimestamp(long timestamp) {
-//        this.timestamp = timestamp;
-//    }
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
+    }
 
     public static Creator<Message> getCREATOR() {
         return CREATOR;
     }
+
 }

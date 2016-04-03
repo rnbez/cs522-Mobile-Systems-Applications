@@ -33,13 +33,13 @@ public class MessageAdapter extends ResourceCursorAdapter {
         TextView msgView = (TextView) view.findViewById(R.id.msgView);
         TextView senderView = (TextView) view.findViewById(R.id.senderView);
         msgView.setText(MessageContract.getMessage(cursor));
-//        senderView.setText(MessageContract.getSender(cursor));
-        long id = MessageContract.getId(cursor);
-        if(id > 0) {
-            senderView.setText("sent");
-        }
-        else {
-            senderView.setText("pending");
-        }
+        senderView.setText(MessageContract.getSender(cursor));
+//        long id = MessageContract.getId(cursor);
+//        if(id > 0) {
+//            senderView.setText("sent");
+//        }
+//        else {
+//            senderView.setText("pending");
+//        }
     }
 }

@@ -10,6 +10,8 @@ import android.os.ResultReceiver;
 import android.util.Log;
 
 import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.UUID;
 
 import edu.stevens.cs522.chat.oneway.server.contracts.MessageContract;
@@ -33,7 +35,6 @@ public class ServiceHelper {
 *  attach it to the intent that fires the request service.
 *
 * */
-
     public final static String EXTRA_REGISTER_RESULT_ID = RequestService.EXTRA_REGISTER_RESULT_ID;
     public final static String EXTRA_REGISTER_REG_ID = RequestService.EXTRA_REGISTER_REG_ID;
     public final static String EXTRA_POST_MSG_RESULT_ID = RequestService.EXTRA_POST_MSG_RESULT_ID;
@@ -57,6 +58,18 @@ public class ServiceHelper {
         i.setAction(RequestService.POST_MESSAGE_ACTION);
         i.putExtra(RequestService.EXTRA_POST_MESSAGE, request);
         i.putExtra(RequestService.EXTRA_CALLBACK, callback);
+        activity.startService(i);
+
+    }
+
+    public void syncAsync(Activity activity, UUID regId, long cliendId, long seqnum, ArrayList<Message> messages) {
+//        TODO: create a request object
+//        TODO: attach object to intent service
+        Synchronize request = new Synchronize(regId, cliendId, seqnum, messages);
+        Intent i = new Intent(activity, RequestService.class);
+        i.setAction(RequestService.SYNCHRONIZE_ACTION);
+        i.putExtra(RequestService.EXTRA_SYNCHRONIZE, request);
+//        i.putExtra(RequestService.EXTRA_CALLBACK, callback);
         activity.startService(i);
 
     }

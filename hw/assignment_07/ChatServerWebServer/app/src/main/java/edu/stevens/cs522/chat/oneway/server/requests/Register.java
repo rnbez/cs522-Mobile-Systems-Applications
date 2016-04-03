@@ -13,6 +13,8 @@ import java.net.URLEncoder;
 import java.util.Map;
 import java.util.UUID;
 
+import edu.stevens.cs522.chat.oneway.server.utils.App;
+
 /**
  * Created by Rafael on 3/12/2016.
  */
@@ -54,12 +56,12 @@ public class Register extends Request {
     @Override
     public Uri getRequestUri() {
 //        /chat?username=joe&regid=067e6162-3b6f-4ae2-a171-2470b63dff00
-        StringBuilder builder = new StringBuilder(Request.DEFAULT_HOST);
+        StringBuilder builder = new StringBuilder(App.DEFAULT_HOST);
         try {
             builder.append("/chat?username=")
-                    .append(URLEncoder.encode(userName, Request.DEFAULT_ENCODING))
+                    .append(URLEncoder.encode(userName, App.DEFAULT_ENCODING))
                     .append("&regid=")
-                    .append(URLEncoder.encode(registrationID.toString(), Request.DEFAULT_ENCODING));
+                    .append(URLEncoder.encode(registrationID.toString(), App.DEFAULT_ENCODING));
 
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
@@ -106,6 +108,7 @@ public class Register extends Request {
         dest.writeString(this.userName);
     }
 
-
-
+    public String getUserName() {
+        return userName;
+    }
 }

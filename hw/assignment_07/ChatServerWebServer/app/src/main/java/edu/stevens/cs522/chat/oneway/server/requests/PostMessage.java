@@ -16,6 +16,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+import edu.stevens.cs522.chat.oneway.server.utils.App;
+
 /**
  * Created by Rafael on 3/12/2016.
  */
@@ -70,12 +72,12 @@ public class PostMessage extends Request {
     @Override
     public Uri getRequestUri() {
 //        http://localhost:81/chat/1?regid=067e6162-3b6f-4ae2-a171-2470b63dff00
-        StringBuilder builder = new StringBuilder(Request.DEFAULT_HOST);
+        StringBuilder builder = new StringBuilder(App.DEFAULT_HOST);
         try {
             builder.append("/chat/")
-                    .append(URLEncoder.encode(String.valueOf(clientId), Request.DEFAULT_ENCODING))
+                    .append(URLEncoder.encode(String.valueOf(clientId), App.DEFAULT_ENCODING))
                     .append("?regid=")
-                    .append(URLEncoder.encode(registrationID.toString(), Request.DEFAULT_ENCODING));
+                    .append(URLEncoder.encode(registrationID.toString(), App.DEFAULT_ENCODING));
 
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();

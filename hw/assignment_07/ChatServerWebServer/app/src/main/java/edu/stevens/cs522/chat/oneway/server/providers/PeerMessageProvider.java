@@ -226,6 +226,7 @@ public class PeerMessageProvider extends ContentProvider {
                 instanceUri = PeerContract.withExtendedPath(rowId);
                 break;
             case MESSAGE_ALL_ROWS:
+
                 rowId = _db.insert(MessageContract.TABLE_NAME, null, values);
                 instanceUri = MessageContract.withExtendedPath(rowId);
                 break;

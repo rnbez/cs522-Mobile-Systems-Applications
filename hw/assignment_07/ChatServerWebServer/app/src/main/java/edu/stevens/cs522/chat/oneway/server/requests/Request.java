@@ -11,16 +11,14 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-import edu.stevens.cs522.chat.oneway.server.utils.CommonSettings;
+import edu.stevens.cs522.chat.oneway.server.utils.App;
 
 /**
  * Created by Rafael on 3/12/2016.
  */
 public abstract class Request implements Parcelable {
-    public static String DEFAULT_HOST = "";
-    public static final String DEFAULT_ENCODING = CommonSettings.DEFAULT_ENCODING;
 
-    //    public long clientID;
+    public long clientID;
     public UUID registrationID; // sanity check
     protected Map<String, String> headers;
     protected String requestEntity;
