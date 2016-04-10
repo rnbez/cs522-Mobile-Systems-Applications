@@ -25,7 +25,7 @@ public abstract class Request implements Parcelable {
 
     public Request() {
         headers = new HashMap<>();
-        headers.put("X-latitude", "40.7439905");
+            headers.put("X-latitude", "40.7439905");
         headers.put("X-longitude", "-74.0323626");
     }
 

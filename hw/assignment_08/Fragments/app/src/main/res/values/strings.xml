@@ -24,4 +24,10 @@
     <string name="destination_host_default">10.0.2.2</string>
     <string name="destination_port_default">6667</string>
     <string name="preferences">Preferences</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="frag_chatroom_list_isempty">No chatrooms</string>
+    <string name="frag_chatroom_list_title">Chat Rooms</string>
+    <string name="contacts_details_empty_text">Select a contact</string>
 </resources>

@@ -10,8 +10,13 @@ import android.view.ViewGroup;
 import android.widget.ResourceCursorAdapter;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 import edu.stevens.cs522.chat.oneway.server.R;
 import edu.stevens.cs522.chat.oneway.server.contracts.MessageContract;
+import edu.stevens.cs522.chat.oneway.server.entities.Message;
 import edu.stevens.cs522.chat.oneway.server.utils.App;
 
 /**
@@ -41,7 +46,22 @@ public class MessageRowAdapter extends ResourceCursorAdapter {
         TextView contentView = (TextView) view.findViewById(R.id.msg_row_content);
         TextView senderView = (TextView) view.findViewById(R.id.msg_row_sender);
         TextView statusView = (TextView) view.findViewById(R.id.msg_row_status);
+        TextView dateView = (TextView) view.findViewById(R.id.msg_row_datetime);
+
         contentView.setText(MessageContract.getMessage(cursor));
+        Calendar msgDt = Calendar.getInstance();
+        msgDt.setTimeInMillis(MessageContract.getTimestamp(cursor));
+        Calendar today = Calendar.getInstance();
+        String format = "";
+
+        if (today.get(Calendar.DAY_OF_YEAR) != msgDt.get(Calendar.DAY_OF_YEAR)){
+            format = "MM/dd/yyyy hh:mm";
+        }
+        else{
+            format = "hh:mm";
+        }
+        String dateString = new SimpleDateFormat(format).format(msgDt.getTime());
+        dateView.setText(dateString);
 
         String sender = MessageContract.getSender(cursor);
         if(sender.equals(userName)) {
