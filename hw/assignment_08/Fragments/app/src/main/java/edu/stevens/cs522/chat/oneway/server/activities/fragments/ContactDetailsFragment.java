@@ -1,6 +1,10 @@
 package edu.stevens.cs522.chat.oneway.server.activities.fragments;
 
+import android.app.Activity;
+import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,10 +17,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.stevens.cs522.chat.oneway.server.R;
+import edu.stevens.cs522.chat.oneway.server.contracts.MessageContract;
+import edu.stevens.cs522.chat.oneway.server.contracts.PeerContract;
 import edu.stevens.cs522.chat.oneway.server.entities.Message;
 import edu.stevens.cs522.chat.oneway.server.entities.Peer;
+import edu.stevens.cs522.chat.oneway.server.managers.ISimpleQueryListener;
+import edu.stevens.cs522.chat.oneway.server.managers.SimpleQueryBuilder;
 
 public class ContactDetailsFragment extends Fragment {
+
+    public interface IContactDetailsFragmentListener {
+        public void getContactMessagesAsync(long peerId);
+    }
+
 
     private static final String TAG = ContactDetailsFragment.class.getCanonicalName();
     public static final String PEER_DETAILS_KEY = TAG + "peer_details";
@@ -27,6 +40,8 @@ public class ContactDetailsFragment extends Fragment {
     Peer contact;
     List<String> messageList;
     ArrayAdapter arrayAdapter;
+    IContactDetailsFragmentListener listener;
+    boolean isActivityCreated;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -42,7 +57,6 @@ public class ContactDetailsFragment extends Fragment {
         messagesListView = (ListView) view.findViewById(R.id.contact_book_details_messages);
 
 
-
         Bundle args = getArguments();
         if (args != null && args.containsKey(PEER_DETAILS_KEY)) {
             contact = args.getParcelable(PEER_DETAILS_KEY);
@@ -55,26 +69,78 @@ public class ContactDetailsFragment extends Fragment {
             arrayAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, messageList);
             messagesListView.setAdapter(arrayAdapter);
             isEmptyMsgView.setVisibility(View.GONE);
-        }
-        else{
+        } else {
             isEmptyMsgView.setVisibility(View.VISIBLE);
 
-            nameView.setVisibility(View.GONE);
-            latitudeView.setVisibility(View.GONE);
-            longitudeView.setVisibility(View.GONE);
-            messagesListView.setVisibility(View.GONE);
+            if (view.findViewById(R.id.contact_book_details_container) != null){
+                view.findViewById(R.id.contact_book_details_container).setVisibility(View.GONE);
+            }
         }
 
 
         return view;
     }
 
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            this.listener = (IContactDetailsFragmentListener) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(this.listener.toString()
+                    + " must implement IContactListFragmentListener");
+        }
+
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        this.isActivityCreated = true;
+        if (this.contact != null) {
+//            this.listener.getContactMessagesAsync(this.contact.getId());
+            final Activity activity = getActivity();
+            Uri uri = PeerContract.withExtendedPath(this.contact.getId());
+            uri = PeerContract.withExtendedPath(uri, "messages");
+            SimpleQueryBuilder.executeQuery(activity,
+                    uri,
+                    MessageContract.DEFAULT_ENTITY_CREATOR,
+                    new ISimpleQueryListener<Message>() {
+                        @Override
+                        public void handleResults(List<Message> results) {
+                                setMessageList(results);
+                        }
+                    });
+        }
+
+
+    }
+
     public void setMessageList(List<Message> messageList) {
-        this.messageList.clear();
+        if (this.messageList != null)
+            this.messageList.clear();
+        else {
+            this.messageList = new ArrayList<>();
+            this.arrayAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, messageList);
+            this.messagesListView.setAdapter(arrayAdapter);
+        }
+
         for (Message m :
                 messageList) {
             this.messageList.add(m.getMessageText());
         }
         this.arrayAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        this.listener = new IContactDetailsFragmentListener() {
+            @Override
+            public void getContactMessagesAsync(long peerId) {
+            }
+        };
+
     }
 }

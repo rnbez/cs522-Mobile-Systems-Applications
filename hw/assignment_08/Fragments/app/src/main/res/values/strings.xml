@@ -30,4 +30,11 @@
     <string name="frag_chatroom_list_isempty">No chatrooms</string>
     <string name="frag_chatroom_list_title">Chat Rooms</string>
     <string name="contacts_details_empty_text">Select a contact</string>
+    <string name="contact_book_details_latitude_lbl">Latitude:</string>
+    <string name="contact_book_details_name_lbl">Name:</string>
+    <string name="contact_book_details_longitude_lbl">Longitude</string>
+    <string name="contact_book_details_messages_lbl">Messages:</string>
+    <string name="frag__chatroom_list_title">Chats</string>
+    <string name="frag__chatroom_list_empty_text">You don\'t have any chat</string>
+    <string name="frag__chatroom_messages_empty_text">Select a Chat Room</string>
 </resources>

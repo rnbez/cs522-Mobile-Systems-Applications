@@ -31,13 +31,12 @@ a
         </activity>
 
         <provider
-            android:name=".providers.PeerMessageProvider"
+            android:name=".providers.DatabaseProvider"
             android:authorities="edu.stevens.cs522.bookstore"
             android:enabled="true"
             android:exported="false" />
 
         <activity android:name=".activities.ContactBookActivity" />
-        <activity android:name=".activities.ContactDetailsActivity" />
         <activity android:name=".activities.PreferencesActivity" />
 
         <!--<service-->

@@ -14,14 +14,15 @@
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="vertical" android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:id="@+id/contact_book_details_container">
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/contact_book_details_name_lbl"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="@string/contact_details_name_view" />
+            android:text="@string/contact_book_details_name_lbl" />
 
         <TextView
             android:id="@+id/contact_book_details_name"
@@ -31,11 +32,11 @@
             android:text="Medium Text" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/contact_book_details_latitude_lbl"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="@string/contact_details_ip_addr_view" />
+            android:text="@string/contact_book_details_latitude_lbl" />
 
         <TextView
             android:id="@+id/contact_book_details_latitude"
@@ -45,11 +46,11 @@
             android:text="Medium Text" />
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/contact_book_details_longitude_lbl"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="@string/contact_details_port_view" />
+            android:text="@string/contact_book_details_longitude_lbl" />
 
         <TextView
                 android:id="@+id/contact_book_details_longitude"
@@ -59,11 +60,11 @@
             android:text="Medium Text" />
 
         <TextView
-            android:id="@+id/textView7"
+            android:id="@+id/contact_book_details_messages_lbl"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="@string/contact_details_message_list_view" />
+            android:text="@string/contact_book_details_messages_lbl" />
 
         <ListView
             android:id="@+id/contact_book_details_messages"

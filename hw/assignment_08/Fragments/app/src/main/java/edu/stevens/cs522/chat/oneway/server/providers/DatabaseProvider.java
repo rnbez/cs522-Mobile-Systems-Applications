@@ -23,7 +23,7 @@ import edu.stevens.cs522.chat.oneway.server.entities.Peer;
 /**
  * Created by Rafael on 2/22/2016.
  */
-public class PeerMessageProvider extends ContentProvider {
+public class DatabaseProvider extends ContentProvider {
 
 
     public static final Uri PEER_CONTENT_URI = PeerContract.CONTENT_URI;
