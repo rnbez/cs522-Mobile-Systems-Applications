@@ -15,6 +15,7 @@ import android.util.Log;
 import java.util.HashMap;
 import java.util.List;
 
+import edu.stevens.cs522.chat.oneway.server.contracts.ChatroomContract;
 import edu.stevens.cs522.chat.oneway.server.contracts.MessageContract;
 import edu.stevens.cs522.chat.oneway.server.contracts.PeerContract;
 import edu.stevens.cs522.chat.oneway.server.entities.Message;
@@ -26,6 +27,7 @@ import edu.stevens.cs522.chat.oneway.server.entities.Peer;
 public class DatabaseProvider extends ContentProvider {
 
 
+    public static final Uri CHATROOM_CONTENT_URI = ChatroomContract.CONTENT_URI;
     public static final Uri PEER_CONTENT_URI = PeerContract.CONTENT_URI;
     public static final Uri MESSAGE_CONTENT_URI = MessageContract.CONTENT_URI;
 
@@ -66,6 +68,7 @@ public class DatabaseProvider extends ContentProvider {
                     "Upgrading from version " + oldVersion
                             + "	to	" + newVersion);
 
+            db.execSQL("DROP TABLE IF EXISTS " + ChatroomContract.TABLE_NAME);
             db.execSQL("DROP TABLE IF EXISTS " + PeerContract.TABLE_NAME);
             db.execSQL("DROP TABLE IF EXISTS " + MessageContract.TABLE_NAME);
 
@@ -95,6 +98,7 @@ public class DatabaseProvider extends ContentProvider {
         uriMatcher.addURI(MessageContract.AUTHORITY, message_path, MESSAGE_ALL_ROWS);
         uriMatcher.addURI(MessageContract.AUTHORITY, message_path + "/#", MESSAGE_SINGLE_ROW);
         DATABASE_CREATE = new String[]{
+                ChatroomContract.CREATE_TABLE,
                 PeerContract.CREATE_TABLE,
                 MessageContract.CREATE_TABLE
         };

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.StringDef;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -62,8 +63,8 @@ public class ContactDetailsFragment extends Fragment {
             contact = args.getParcelable(PEER_DETAILS_KEY);
 
             nameView.setText(contact.getName());
-            latitudeView.setText("latitude");
-            longitudeView.setText("longitude");
+            latitudeView.setText(String.valueOf(contact.getLatidute()));
+            longitudeView.setText(String.valueOf(contact.getLongitude()));
 
             messageList = new ArrayList<>();
             arrayAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, messageList);

@@ -32,7 +32,7 @@ a
 
         <provider
             android:name=".providers.DatabaseProvider"
-            android:authorities="edu.stevens.cs522.bookstore"
+            android:authorities="edu.stevens.cs522.chat.oneway.server"
             android:enabled="true"
             android:exported="false" />
 

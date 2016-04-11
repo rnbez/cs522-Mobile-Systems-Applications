@@ -6,12 +6,13 @@ import android.net.Uri;
 
 import edu.stevens.cs522.chat.oneway.server.entities.Message;
 import edu.stevens.cs522.chat.oneway.server.managers.IEntityCreator;
+import edu.stevens.cs522.chat.oneway.server.utils.App;
 
 /**
  * Created by Rafael on 2/22/2016.
  */
 public class MessageContract {
-    public static final String APP_NAMESPACE = "edu.stevens.cs522.bookstore";
+    public static final String APP_NAMESPACE = App.APP_NAMESPACE;
     public static final String SCHEME = "content";
     public static final String AUTHORITY = APP_NAMESPACE;
     public static final String CONTENT = "message";
@@ -39,7 +40,10 @@ public class MessageContract {
 //    public static final String TIMESTAMP_FULL =  TABLE_NAME + "." + TIMESTAMP;
     public static final String PEER_ID = "peer_fk";
     public static final String PEER_ID_FULL =  TABLE_NAME + "." + PEER_ID;
+    public static final String CHATROOM_ID = "chatroom_fk";
+    public static final String CHATROOM_ID_FULL =  TABLE_NAME + "." + CHATROOM_ID;
     public static final String SENDER = "sender";
+    public static final String CHATROOM_NAME = "chatroom_name";
     public static final String CREATE_TABLE =
             "CREATE TABLE " + TABLE_NAME + " (" +
                     ID + " INTEGER PRIMARY KEY," +
@@ -47,9 +51,12 @@ public class MessageContract {
                     MESSAGE_TEXT + " TEXT NOT NULL," +
                     TIMESTAMP + " INTEGER NOT NULL," +
                     PEER_ID + " INTEGER NOT NULL," +
-                    "FOREIGN KEY(" + PEER_ID + ") REFERENCES " + PeerContract.TABLE_NAME + "(_id) ON DELETE CASCADE" +
+                    CHATROOM_ID + " INTEGER NOT NULL," +
+                    "FOREIGN KEY(" + PEER_ID + ") REFERENCES " + PeerContract.TABLE_NAME + "(_id) ON DELETE CASCADE," +
+                    "FOREIGN KEY(" + CHATROOM_ID + ") REFERENCES " + ChatroomContract.TABLE_NAME + "(_id) ON DELETE CASCADE" +
                     ");"
-            + "CREATE INDEX MessagePeerIndex ON " + TABLE_NAME + "(" + PEER_ID + ");";
+            + "CREATE INDEX MessagePeerIndex ON " + TABLE_NAME + "(" + PEER_ID + ");"
+            + "CREATE INDEX MessageChatroomIndex ON " + TABLE_NAME + "(" + CHATROOM_ID + ");";
 
     public static final IEntityCreator<Message> DEFAULT_ENTITY_CREATOR = new IEntityCreator<Message>() {
         @Override
@@ -117,6 +124,19 @@ public class MessageContract {
 
     public static String getSender(Cursor cursor) {
         return cursor.getString(cursor.getColumnIndexOrThrow(SENDER));
+    }
+
+    public static long getChatroomId(Cursor cursor) {
+        return cursor.getLong(cursor.getColumnIndexOrThrow(CHATROOM_ID));
+    }
+
+    public static void putChatroomId(ContentValues values, long chatroomId) {
+        values.put(CHATROOM_ID, chatroomId);
+    }
+
+
+    public static String getChatroom(Cursor cursor) {
+        return cursor.getString(cursor.getColumnIndexOrThrow(CHATROOM_NAME));
     }
 
 //    public static void putSender(ContentValues values, long peerId) {

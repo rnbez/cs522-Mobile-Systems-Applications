@@ -24,13 +24,15 @@ public class Message implements Parcelable {
     protected long timestamp;
     protected long peerId;
     protected String sender;
+    protected long chatroomId;
+    protected String chatroom;
 
     public Message() {
     }
 
     public Message(String receivedMessage) {
         String[] splitted = SEPARATOR.split(receivedMessage);
-        if(splitted.length > 1) {
+        if (splitted.length > 1) {
             this.sender = splitted[0];
             this.messageText = splitted[1].trim();
             this.timestamp = System.currentTimeMillis();
@@ -45,22 +47,25 @@ public class Message implements Parcelable {
         this.timestamp = System.currentTimeMillis();
     }
 
-    public Message(long sequentialNumber, String messageText, String sender, long peerId) {
-//        this.id = id;
-        this.sequentialNumber = sequentialNumber;
+    public Message(long sequentialNumber, String messageText, long peerId, String sender, long chatroomId, String chatroom, long timestamp) {
+        this.chatroom = chatroom;
+        this.chatroomId = chatroomId;
         this.messageText = messageText;
-        this.sender = sender;
         this.peerId = peerId;
-        this.timestamp = System.currentTimeMillis();
+        this.sender = sender;
+        this.sequentialNumber = sequentialNumber;
+        this.timestamp = timestamp;
     }
 
-    public Message(Cursor in){
+    public Message(Cursor in) {
         id = MessageContract.getId(in);
         sequentialNumber = MessageContract.getSequentialNumber(in);
         messageText = MessageContract.getMessage(in);
         timestamp = MessageContract.getTimestamp(in);
         sender = MessageContract.getSender(in);
         peerId = MessageContract.getPeerId(in);
+        chatroom = MessageContract.getChatroom(in);
+        chatroomId = MessageContract.getChatroomId(in);
     }
 
     protected Message(Parcel in) {
@@ -70,6 +75,8 @@ public class Message implements Parcelable {
         timestamp = in.readLong();
         peerId = in.readLong();
         sender = in.readString();
+        chatroomId = in.readLong();
+        chatroom = in.readString();
     }
 
     public static final Creator<Message> CREATOR = new Creator<Message>() {
@@ -90,12 +97,15 @@ public class Message implements Parcelable {
     }
 
     @Override
-    public void writeToParcel(Parcel dest, int flags) {dest.writeLong(id);
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(id);
         dest.writeLong(sequentialNumber);
         dest.writeString(messageText);
         dest.writeLong(timestamp);
         dest.writeLong(peerId);
         dest.writeString(sender);
+        dest.writeLong(chatroomId);
+        dest.writeString(chatroom);
     }
 
     public void writeToProvider(ContentValues values) {
@@ -104,6 +114,7 @@ public class Message implements Parcelable {
         MessageContract.putMessage(values, messageText);
         MessageContract.putTimestamp(values, timestamp);
         MessageContract.putPeerId(values, peerId);
+        MessageContract.putChatroomId(values, chatroomId);
     }
 
     @Override
@@ -157,6 +168,22 @@ public class Message implements Parcelable {
 
     public void setTimestamp(long timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public String getChatroom() {
+        return chatroom;
+    }
+
+    public void setChatroom(String chatroom) {
+        this.chatroom = chatroom;
+    }
+
+    public long getChatroomId() {
+        return chatroomId;
+    }
+
+    public void setChatroomId(long chatroomId) {
+        this.chatroomId = chatroomId;
     }
 
     public static Creator<Message> getCREATOR() {
