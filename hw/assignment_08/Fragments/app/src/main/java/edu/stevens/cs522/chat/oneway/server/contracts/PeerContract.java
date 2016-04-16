@@ -47,7 +47,7 @@ public class PeerContract {
                     ID + " INTEGER PRIMARY KEY," +
                     NAME + " TEXT NOT NULL UNIQUE," +
                     LATITUDE + " REAL NOT NULL," +
-                    LONGITUDE + " REAL NOT NULL," +
+                    LONGITUDE + " REAL NOT NULL" +
 //                    ADDRESS + " BLOB NOT NULL," +
 //                    PORT + " TEXT NOT NULL" +
                     ");";

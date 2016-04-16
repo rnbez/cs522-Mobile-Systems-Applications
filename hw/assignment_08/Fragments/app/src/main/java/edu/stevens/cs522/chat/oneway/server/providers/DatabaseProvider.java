@@ -18,6 +18,7 @@ import java.util.List;
 import edu.stevens.cs522.chat.oneway.server.contracts.ChatroomContract;
 import edu.stevens.cs522.chat.oneway.server.contracts.MessageContract;
 import edu.stevens.cs522.chat.oneway.server.contracts.PeerContract;
+import edu.stevens.cs522.chat.oneway.server.entities.Chatroom;
 import edu.stevens.cs522.chat.oneway.server.entities.Message;
 import edu.stevens.cs522.chat.oneway.server.entities.Peer;
 
@@ -33,7 +34,7 @@ public class DatabaseProvider extends ContentProvider {
 
     private static final String[] DATABASE_CREATE;
     private static final String DATABASE_NAME = "chat_server.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 10;
 
     private SQLiteDatabase _db;
     private DBHelper _dbHelper;
@@ -83,12 +84,24 @@ public class DatabaseProvider extends ContentProvider {
 
     private final static int MESSAGE_ALL_ROWS = PEER_ALL_ROWS + 100;
     private final static int MESSAGE_SINGLE_ROW = MESSAGE_ALL_ROWS + 1;
+
+    private final static int CHATROOM_ALL_ROWS = MESSAGE_ALL_ROWS + 100;
+    private final static int CHATROOM_SINGLE_ROW = CHATROOM_ALL_ROWS + 1;
+    private final static int CHATROOM_ALL_MESSAGES = CHATROOM_SINGLE_ROW + 1;
+    private final static int CHATROOM_QUERY_NAME = CHATROOM_ALL_MESSAGES + 1;
     private final static UriMatcher uriMatcher;
 
     static {
         String peer_path = PEER_CONTENT_URI.getLastPathSegment();
         String message_path = MESSAGE_CONTENT_URI.getLastPathSegment();
+        String chatroom_path = CHATROOM_CONTENT_URI.getLastPathSegment();
         uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
+
+
+        uriMatcher.addURI(ChatroomContract.AUTHORITY, chatroom_path, CHATROOM_ALL_ROWS);
+        uriMatcher.addURI(ChatroomContract.AUTHORITY, chatroom_path + "/#", CHATROOM_SINGLE_ROW);
+        uriMatcher.addURI(ChatroomContract.AUTHORITY, chatroom_path + "/*", CHATROOM_QUERY_NAME);
+        uriMatcher.addURI(ChatroomContract.AUTHORITY, chatroom_path + "/#/messages", PEER_ALL_MESSAGES);
 
         uriMatcher.addURI(PeerContract.AUTHORITY, peer_path, PEER_ALL_ROWS);
         uriMatcher.addURI(PeerContract.AUTHORITY, peer_path + "/#", PEER_SINGLE_ROW);
@@ -138,26 +151,66 @@ public class DatabaseProvider extends ContentProvider {
                 builder.setTables(MessageContract.TABLE_NAME
                         + " LEFT JOIN " + PeerContract.TABLE_NAME
                         + " ON (" + MessageContract.PEER_ID
-                        + " = " + PeerContract.ID_FULL + ")");
-
+                        + " = " + PeerContract.ID_FULL + ")"
+                        + " LEFT JOIN " + ChatroomContract.TABLE_NAME
+                        + " ON (" + MessageContract.CHATROOM_ID
+                        + " = " + ChatroomContract.ID_FULL + ")");
                 map = new HashMap<>();
                 map.put(MessageContract.SENDER, PeerContract.NAME_FULL + " as " + MessageContract.SENDER);
+                map.put(MessageContract.CHATROOM_NAME, ChatroomContract.NAME_FULL + " as " + MessageContract.CHATROOM_NAME);
                 for (String field :
                         projection) {
                     if(!map.containsKey(field)) map.put(field, field);
                 }
                 builder.setProjectionMap(map);
-                List<String> pathSegments = uri.getPathSegments();
-                long peerId = Long.valueOf(pathSegments.get(pathSegments.size() - 2));
+                List<String> peerPathSegments = uri.getPathSegments();
+                long peerId = Long.valueOf(peerPathSegments.get(peerPathSegments.size() - 2));
                 builder.appendWhere(MessageContract.PEER_ID_FULL + " = " + peerId);
+                break;
+            case CHATROOM_ALL_MESSAGES:
+                builder.setTables(MessageContract.TABLE_NAME
+                        + " LEFT JOIN " + PeerContract.TABLE_NAME
+                        + " ON (" + MessageContract.PEER_ID
+                        + " = " + PeerContract.ID_FULL + ")"
+                        + " LEFT JOIN " + ChatroomContract.TABLE_NAME
+                        + " ON (" + MessageContract.CHATROOM_ID
+                        + " = " + ChatroomContract.ID_FULL + ")");
+                map = new HashMap<>();
+                map.put(MessageContract.SENDER, PeerContract.NAME_FULL + " as " + MessageContract.SENDER);
+                map.put(MessageContract.CHATROOM_NAME, ChatroomContract.NAME_FULL + " as " + MessageContract.CHATROOM_NAME);
+                for (String field :
+                        projection) {
+                    if(!map.containsKey(field)) map.put(field, field);
+                }
+                builder.setProjectionMap(map);
+                List<String> chatRoomPathSegments = uri.getPathSegments();
+                long chatroomId = Long.valueOf(chatRoomPathSegments.get(chatRoomPathSegments.size() - 2));
+                builder.appendWhere(MessageContract.CHATROOM_ID_FULL + " = " + chatroomId);
+                break;
+            case CHATROOM_ALL_ROWS:
+                builder.setTables(ChatroomContract.TABLE_NAME);
+                break;
+            case CHATROOM_SINGLE_ROW:
+                builder.setTables(ChatroomContract.TABLE_NAME);
+                builder.appendWhere(ChatroomContract.ID + " = " + ChatroomContract.getId(uri));
+                break;
+            case CHATROOM_QUERY_NAME:
+                builder.setTables(ChatroomContract.TABLE_NAME);
+                Log.d("query", uri.getLastPathSegment());
+                builder.appendWhere(ChatroomContract.NAME + " = ");
+                builder.appendWhereEscapeString(uri.getLastPathSegment());
                 break;
             case MESSAGE_ALL_ROWS:
                 builder.setTables(MessageContract.TABLE_NAME
                         + " LEFT JOIN " + PeerContract.TABLE_NAME
                         + " ON (" + MessageContract.PEER_ID
-                        + " = " + PeerContract.ID_FULL + ")");
+                        + " = " + PeerContract.ID_FULL + ")"
+                        + " LEFT JOIN " + ChatroomContract.TABLE_NAME
+                        + " ON (" + MessageContract.CHATROOM_ID
+                        + " = " + ChatroomContract.ID_FULL + ")");
                 map = new HashMap<>();
                 map.put(MessageContract.SENDER, PeerContract.NAME_FULL + " as " + MessageContract.SENDER);
+                map.put(MessageContract.CHATROOM_NAME, ChatroomContract.NAME_FULL + " as " + MessageContract.CHATROOM_NAME);
                 for (String field :
                         projection) {
                     if(!map.containsKey(field)) map.put(field, field);
@@ -185,12 +238,22 @@ public class DatabaseProvider extends ContentProvider {
                 return new String[]{
                         PeerContract.ID_FULL,
                         PeerContract.NAME,
-                        PeerContract.ADDRESS,
-                        PeerContract.PORT
+                        PeerContract.LATITUDE,
+                        PeerContract.LONGITUDE
+//                        PeerContract.ADDRESS,
+//                        PeerContract.PORT
+                };
+            case CHATROOM_ALL_ROWS:
+            case CHATROOM_SINGLE_ROW:
+            case CHATROOM_QUERY_NAME:
+                return new String[]{
+                        ChatroomContract.ID_FULL,
+                        ChatroomContract.NAME
                 };
             case MESSAGE_ALL_ROWS:
             case MESSAGE_SINGLE_ROW:
             case PEER_ALL_MESSAGES:
+            case CHATROOM_ALL_MESSAGES:
                 return new String[]{
                         MessageContract.ID_FULL,
                         MessageContract.SEQ_NUM,
@@ -198,6 +261,8 @@ public class DatabaseProvider extends ContentProvider {
                         MessageContract.TIMESTAMP,
                         MessageContract.PEER_ID,
                         MessageContract.SENDER,
+                        MessageContract.CHATROOM_ID,
+                        MessageContract.CHATROOM_NAME,
                 };
             default:
                 throw new IllegalArgumentException("Unknown URI " + uri);
@@ -211,6 +276,10 @@ public class DatabaseProvider extends ContentProvider {
                 return PeerContract.CONTENT_TYPE;
             case PEER_SINGLE_ROW:
                 return PeerContract.CONTENT_TYPE_ITEM;
+            case CHATROOM_ALL_ROWS:
+                return ChatroomContract.CONTENT_TYPE;
+            case CHATROOM_SINGLE_ROW:
+                return ChatroomContract.CONTENT_TYPE_ITEM;
             case MESSAGE_ALL_ROWS:
                 return MessageContract.CONTENT_TYPE;
             case MESSAGE_SINGLE_ROW:
@@ -225,12 +294,15 @@ public class DatabaseProvider extends ContentProvider {
         long rowId = 0;
         Uri instanceUri = null;
         switch (uriMatcher.match(uri)) {
+            case CHATROOM_ALL_ROWS:
+                rowId = _db.insert(ChatroomContract.TABLE_NAME, null, values);
+                instanceUri = ChatroomContract.withExtendedPath(rowId);
+                break;
             case PEER_ALL_ROWS:
                 rowId = _db.insert(PeerContract.TABLE_NAME, null, values);
                 instanceUri = PeerContract.withExtendedPath(rowId);
                 break;
             case MESSAGE_ALL_ROWS:
-
                 rowId = _db.insert(MessageContract.TABLE_NAME, null, values);
                 instanceUri = MessageContract.withExtendedPath(rowId);
                 break;
@@ -251,6 +323,20 @@ public class DatabaseProvider extends ContentProvider {
         int rowsDeleted = 0;
         Uri notifyUri = null;
         switch (uriMatcher.match(uri)) {
+            case CHATROOM_ALL_ROWS:
+                builder.setTables(ChatroomContract.TABLE_NAME);
+                rowsDeleted = _db.delete(ChatroomContract.TABLE_NAME, selection, selectionArgs);
+                notifyUri = ChatroomContract.CONTENT_URI;
+                break;
+            case CHATROOM_SINGLE_ROW:
+                builder.setTables(ChatroomContract.TABLE_NAME);
+                selection = ChatroomContract.ID + " = ?";
+                selectionArgs = new String[]{
+                        uri.getLastPathSegment()
+                };
+                rowsDeleted = _db.delete(ChatroomContract.TABLE_NAME, selection, selectionArgs);
+                notifyUri = ChatroomContract.CONTENT_URI;
+                break;
             case PEER_ALL_ROWS:
                 builder.setTables(PeerContract.TABLE_NAME);
                 rowsDeleted = _db.delete(PeerContract.TABLE_NAME, selection, selectionArgs);
@@ -294,6 +380,20 @@ public class DatabaseProvider extends ContentProvider {
         int rowsUpdated = 0;
         Uri notifyUri = null;
         switch (uriMatcher.match(uri)) {
+            case CHATROOM_ALL_ROWS:
+                builder.setTables(ChatroomContract.TABLE_NAME);
+                rowsUpdated = _db.update(ChatroomContract.TABLE_NAME, values, selection, selectionArgs);
+                notifyUri = ChatroomContract.CONTENT_URI;
+                break;
+            case CHATROOM_SINGLE_ROW:
+                builder.setTables(ChatroomContract.TABLE_NAME);
+                selection = ChatroomContract.ID + " = ?";
+                selectionArgs = new String[]{
+                        uri.getLastPathSegment()
+                };
+                rowsUpdated = _db.update(ChatroomContract.TABLE_NAME, values, selection, selectionArgs);
+                notifyUri = ChatroomContract.CONTENT_URI;
+                break;
             case PEER_ALL_ROWS:
                 builder.setTables(PeerContract.TABLE_NAME);
                 rowsUpdated = _db.update(PeerContract.TABLE_NAME, values, selection, selectionArgs);

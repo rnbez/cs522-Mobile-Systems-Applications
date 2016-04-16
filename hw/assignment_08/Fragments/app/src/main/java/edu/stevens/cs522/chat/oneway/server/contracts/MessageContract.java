@@ -139,10 +139,6 @@ public class MessageContract {
         return cursor.getString(cursor.getColumnIndexOrThrow(CHATROOM_NAME));
     }
 
-//    public static void putSender(ContentValues values, long peerId) {
-//        values.put(PEER_ID, peerId);
-//    }
-
 
 
 

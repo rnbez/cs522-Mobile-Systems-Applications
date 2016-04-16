@@ -16,6 +16,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+import edu.stevens.cs522.chat.oneway.server.entities.Message;
+import edu.stevens.cs522.chat.oneway.server.entities.Peer;
 import edu.stevens.cs522.chat.oneway.server.utils.App;
 
 /**
@@ -23,31 +25,18 @@ import edu.stevens.cs522.chat.oneway.server.utils.App;
  */
 public class PostMessage extends Request {
 
-    private long clientId;
-    private String clientName;
-    private String chatroom;
-    private long timestamp;
-    private String text;
+    Message message;
 
-    public PostMessage(UUID regid, long clientId, String clientName, String text) {
-        super();
-        super.registrationID = regid;
-        this.clientId = clientId;
-        this.chatroom = "_default";
-        this.timestamp = System.currentTimeMillis();
-        this.text = text;
-        this.clientName = clientName;
+    public PostMessage(UUID regid, Peer client, Message message) {
+        super(regid, client);
+        this.message = message;
     }
 
     public PostMessage(Parcel in) {
-        super();
-        this.clientId = in.readLong();
+        super(in);
         String registrationID = in.readString();
         super.registrationID = UUID.fromString(registrationID);
-        this.chatroom = in.readString();
-        this.timestamp = in.readLong();
-        this.text = in.readString();
-        this.clientName = in.readString();
+        this.message = in.readParcelable(Message.class.getClassLoader());
     }
 
     public static final Creator<PostMessage> CREATOR = new Creator<PostMessage>() {
@@ -66,6 +55,8 @@ public class PostMessage extends Request {
     public Map<String, String> getRequestHeaders() {
         Map<String, String> map = super.headers;
         map.put("Content-Type", "application/json");
+        map.put("X-latitude", String.valueOf(client.getLatidute()));
+        map.put("X-longitude", String.valueOf(client.getLongitude()));
         return map;
     }
 
@@ -75,7 +66,7 @@ public class PostMessage extends Request {
         StringBuilder builder = new StringBuilder(App.DEFAULT_HOST);
         try {
             builder.append("/chat/")
-                    .append(URLEncoder.encode(String.valueOf(clientId), App.DEFAULT_ENCODING))
+                    .append(URLEncoder.encode(String.valueOf(message.getPeerId()), App.DEFAULT_ENCODING))
                     .append("?regid=")
                     .append(URLEncoder.encode(registrationID.toString(), App.DEFAULT_ENCODING));
 
@@ -91,11 +82,11 @@ public class PostMessage extends Request {
         JsonWriter writer = new JsonWriter(out);
         writer.beginObject();
         writer.name("chatroom");
-        writer.value(chatroom);
+        writer.value(message.getChatroom());
         writer.name("timestamp");
-        writer.value(timestamp);
+        writer.value(message.getTimestamp());
         writer.name("text");
-        writer.value(text);
+        writer.value(message.getMessageText());
         writer.endObject();
         return out.toString();
     }
@@ -129,36 +120,16 @@ public class PostMessage extends Request {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeLong(clientId);
         dest.writeString(String.valueOf(registrationID));
-        dest.writeString(chatroom);
-        dest.writeLong(timestamp);
-        dest.writeString(text);
-        dest.writeString(clientName);
+        dest.writeParcelable(message, 0);
 
     }
 
-    public long getClientId() {
-        return clientId;
+    public Message getMessage() {
+        return message;
     }
 
-    public void setClientId(long clientId) {
-        this.clientId = clientId;
-    }
-
-    public String getClientName() {
-        return clientName;
-    }
-
-    public void setClientName(String clientName) {
-        this.clientName = clientName;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
+    public void setMessage(Message message) {
+        this.message = message;
     }
 }

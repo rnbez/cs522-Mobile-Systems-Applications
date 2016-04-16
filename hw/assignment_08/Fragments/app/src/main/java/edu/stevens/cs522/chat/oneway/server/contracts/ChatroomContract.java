@@ -39,7 +39,7 @@ public class ChatroomContract {
     public static final String CREATE_TABLE =
             "CREATE TABLE " + TABLE_NAME + "(" +
                     ID + " INTEGER PRIMARY KEY," +
-                    NAME + " TEXT NOT NULL UNIQUE," +
+                    NAME + " TEXT NOT NULL UNIQUE" +
                     ");";
 
     public static final IEntityCreator<Chatroom> DEFAULT_ENTITY_CREATOR = new IEntityCreator<Chatroom>() {

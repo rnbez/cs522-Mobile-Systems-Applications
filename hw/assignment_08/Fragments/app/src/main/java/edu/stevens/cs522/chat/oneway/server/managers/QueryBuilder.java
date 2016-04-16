@@ -9,6 +9,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 
+import edu.stevens.cs522.chat.oneway.server.contracts.ChatroomContract;
 import edu.stevens.cs522.chat.oneway.server.contracts.MessageContract;
 import edu.stevens.cs522.chat.oneway.server.contracts.PeerContract;
 
@@ -80,10 +81,17 @@ public class QueryBuilder<T> implements LoaderManager.LoaderCallbacks<Cursor> {
                     projection = new String[]{
                             PeerContract.ID_FULL,
                             PeerContract.NAME,
-                            PeerContract.ADDRESS,
-                            PeerContract.PORT
+                            PeerContract.LATITUDE,
+                            PeerContract.LONGITUDE
+//                        PeerContract.ADDRESS,
+//                        PeerContract.PORT
                     };
                     break;
+                case ChatroomContract.CURSOR_LOADER_ID:
+                    projection = new String[]{
+                            ChatroomContract.ID_FULL,
+                            ChatroomContract.NAME
+                    };
                 case MessageContract.CURSOR_LOADER_ID:
                     projection = new String[]{
                             MessageContract.ID_FULL,

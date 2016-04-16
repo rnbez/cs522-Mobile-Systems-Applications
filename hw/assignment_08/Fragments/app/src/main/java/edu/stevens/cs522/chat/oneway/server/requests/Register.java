@@ -13,6 +13,7 @@ import java.net.URLEncoder;
 import java.util.Map;
 import java.util.UUID;
 
+import edu.stevens.cs522.chat.oneway.server.entities.Peer;
 import edu.stevens.cs522.chat.oneway.server.utils.App;
 
 /**
@@ -21,18 +22,14 @@ import edu.stevens.cs522.chat.oneway.server.utils.App;
 @SuppressLint("ParcelCreator")
 public class Register extends Request {
 
-    private String userName;
-
-    public Register(String userName, UUID regId) {
-        super();
-        super.registrationID = regId;
-        this.userName = userName;
+    public Register(UUID regId, Peer client) {
+        super(regId, client);
     }
 
     public Register(Parcel in) {
         super(in);
-        super.registrationID = ((ParcelUuid) in.readParcelable(ParcelUuid.class.getClassLoader())).getUuid();
-        this.userName = in.readString();
+        super.registrationID = UUID.fromString(in.readString());
+        super.client = in.readParcelable(Peer.class.getClassLoader());
 
     }
 
@@ -50,7 +47,10 @@ public class Register extends Request {
 
     @Override
     public Map<String, String> getRequestHeaders() {
-        return super.headers;
+        Map<String, String> map = super.headers;
+        map.put("X-latitude", String.valueOf(client.getLatidute()));
+        map.put("X-longitude", String.valueOf(client.getLongitude()));
+        return map;
     }
 
     @Override
@@ -59,7 +59,7 @@ public class Register extends Request {
         StringBuilder builder = new StringBuilder(App.DEFAULT_HOST);
         try {
             builder.append("/chat?username=")
-                    .append(URLEncoder.encode(userName, App.DEFAULT_ENCODING))
+                    .append(URLEncoder.encode(client.getName(), App.DEFAULT_ENCODING))
                     .append("&regid=")
                     .append(URLEncoder.encode(registrationID.toString(), App.DEFAULT_ENCODING));
 
@@ -104,11 +104,11 @@ public class Register extends Request {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
-        dest.writeParcelable(new ParcelUuid(registrationID), 0);
-        dest.writeString(this.userName);
+        dest.writeString(registrationID.toString());
+        dest.writeParcelable(client, 0);
     }
 
     public String getUserName() {
-        return userName;
+        return client.getName();
     }
 }

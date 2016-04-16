@@ -1,19 +1,19 @@
 package edu.stevens.cs522.chat.oneway.server.activities;
 
 import android.content.res.Configuration;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.widget.FrameLayout;
 
 import java.util.List;
 
 import edu.stevens.cs522.chat.oneway.server.R;
 import edu.stevens.cs522.chat.oneway.server.activities.fragments.ContactDetailsFragment;
 import edu.stevens.cs522.chat.oneway.server.activities.fragments.ContactListFragment;
-import edu.stevens.cs522.chat.oneway.server.adapters.ContactAdapter;
+import edu.stevens.cs522.chat.oneway.server.adapters.ContactRowAdapter;
 import edu.stevens.cs522.chat.oneway.server.contracts.MessageContract;
 import edu.stevens.cs522.chat.oneway.server.contracts.PeerContract;
 import edu.stevens.cs522.chat.oneway.server.entities.Message;
@@ -38,7 +38,9 @@ public class ContactBookActivity
     ContactListFragment contactListFragment;
     ContactDetailsFragment contactDetailsFragment;
     int orientation;
-    ContactAdapter conctactListCursorAdapter;
+    ContactRowAdapter conctactListCursorAdapter;
+    Cursor conctactListCursor;
+    List<Message> contactDetailsMessageList;
 
 
     @Override
@@ -49,7 +51,7 @@ public class ContactBookActivity
         this.fragmentManager = getSupportFragmentManager();
         this.orientation = getResources().getConfiguration().orientation;
 
-        this.conctactListCursorAdapter = new ContactAdapter(this, null);
+        this.conctactListCursorAdapter = new ContactRowAdapter(this, null);
         boolean hasSavedInstanceState = savedInstanceState != null;
 
         switch (this.orientation) {
@@ -139,12 +141,24 @@ public class ContactBookActivity
             default:
         }
 
+        Uri uri = PeerContract.withExtendedPath(peer.getId());
+        uri = PeerContract.withExtendedPath(uri, "messages");
+        SimpleQueryBuilder.executeQuery(this,
+                uri,
+                MessageContract.DEFAULT_ENTITY_CREATOR,
+                new ISimpleQueryListener<Message>() {
+                    @Override
+                    public void handleResults(List<Message> results) {
+                        contactDetailsMessageList = results;
+                        contactDetailsFragment.setMessageList(contactDetailsMessageList);
+                    }
+                });
 
     }
 
     @Override
-    public void getContactListAsync() {
-        contactListFragment.setListCursor(conctactListCursorAdapter.getCursor());
+    public Cursor getContactListCursor() {
+        return conctactListCursorAdapter.getCursor();
     }
 
     @Override

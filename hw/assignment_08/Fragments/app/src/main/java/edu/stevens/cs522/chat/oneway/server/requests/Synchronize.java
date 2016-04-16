@@ -29,14 +29,11 @@ import edu.stevens.cs522.chat.oneway.server.utils.App;
 public class Synchronize extends Request {
 
     final static String DEFAULT_CHATROOM = "_default";
-    long clientId;
     long sequentialNumber;
     ArrayList<Message> messages = null;
 
-    public Synchronize(UUID uuid, long clientId, long seqnum, ArrayList<Message> messages) {
-        super();
-        super.registrationID = uuid;
-        this.clientId = clientId;
+    public Synchronize(UUID uuid, Peer client, long seqnum, ArrayList<Message> messages) {
+        super(uuid, client);
         this.sequentialNumber = seqnum;
         this.messages = messages;
     }
@@ -44,7 +41,7 @@ public class Synchronize extends Request {
     public Synchronize(Parcel in) {
         super();
         super.registrationID = UUID.fromString(in.readString());
-        this.clientId = in.readLong();
+        super.client = in.readParcelable(Peer.class.getClassLoader());
         this.sequentialNumber = in.readLong();
         this.messages = new ArrayList<>();
         in.readTypedList(this.messages, Message.CREATOR);
@@ -54,6 +51,8 @@ public class Synchronize extends Request {
     public Map<String, String> getRequestHeaders() {
         Map<String, String> map = super.headers;
         map.put("Content-Type", "application/json");
+        map.put("X-latitude", String.valueOf(client.getLatidute()));
+        map.put("X-longitude", String.valueOf(client.getLongitude()));
         return map;
     }
 
@@ -63,7 +62,7 @@ public class Synchronize extends Request {
         StringBuilder builder = new StringBuilder(App.DEFAULT_HOST);
         try {
             builder.append("/chat/")
-                    .append(URLEncoder.encode(String.valueOf(clientId), App.DEFAULT_ENCODING))
+                    .append(URLEncoder.encode(String.valueOf(client.getId()), App.DEFAULT_ENCODING))
                     .append("?regid=")
                     .append(URLEncoder.encode(registrationID.toString(), App.DEFAULT_ENCODING))
                     .append("&seqnum=")
@@ -88,7 +87,7 @@ public class Synchronize extends Request {
         for (Message m : this.messages) {
             wr.beginObject();
             wr.name("chatroom");
-            wr.value(DEFAULT_CHATROOM);
+            wr.value(m.getChatroom());
             wr.name("timestamp");
             wr.value(m.getTimestamp());
             wr.name("text");
@@ -163,7 +162,7 @@ public class Synchronize extends Request {
                                         message.setMessageText(rd.nextString());
                                         break;
                                     case "chatroom":
-                                        rd.nextString();
+                                        message.setChatroom(rd.nextString());
                                         break;
                                     case "X-latitude":
                                     case "X-longitude":
@@ -205,7 +204,7 @@ public class Synchronize extends Request {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(registrationID.toString());
-        dest.writeLong(clientId);
+        dest.writeParcelable(client, 0);
         dest.writeLong(sequentialNumber);
         dest.writeTypedList(messages);
     }

@@ -10,15 +10,24 @@ import edu.stevens.cs522.chat.oneway.server.contracts.ChatroomContract;
 /**
  * Created by Rafael on 4/10/2016.
  */
-public class Chatroom  implements Parcelable{
-        protected long id;
-        protected String name;
+public class Chatroom implements Parcelable {
+
+    private final static String SEPARATOR = "###";
+
+    protected long id;
+    protected String name;
 
     public Chatroom() {
     }
 
-    public Chatroom(String name) {
-        this.name = name;
+    public Chatroom(String chatroom) {
+        String[] arr = chatroom.split(SEPARATOR);
+        if (arr.length > 1) {
+            this.id = Long.valueOf(arr[0]);
+            this.name = arr[1];
+        } else {
+            this.name = arr[0];
+        }
     }
 
     public Chatroom(long id, String name) {
@@ -35,7 +44,6 @@ public class Chatroom  implements Parcelable{
         id = ChatroomContract.getId(in);
         name = ChatroomContract.getName(in);
     }
-
 
 
     public static final Creator<Chatroom> CREATOR = new Creator<Chatroom>() {
@@ -77,7 +85,12 @@ public class Chatroom  implements Parcelable{
         dest.writeString(name);
     }
 
-    public void writeToProvider(ContentValues values){
+    public void writeToProvider(ContentValues values) {
         ChatroomContract.putName(values, name);
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(this.id) + SEPARATOR + this.name;
     }
 }

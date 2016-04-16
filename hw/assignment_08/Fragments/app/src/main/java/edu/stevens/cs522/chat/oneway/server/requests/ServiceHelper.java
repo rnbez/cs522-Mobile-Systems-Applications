@@ -42,7 +42,7 @@ public class ServiceHelper {
     public void registerAsync(Activity activity, String userName, UUID regId, ResultReceiver callback) {
 //        TODO: create a request object
 //        TODO: attach object to intent service
-        Register request = new Register(userName, regId);
+        Register request = new Register(regId, new Peer(userName, 0, 0));
         Intent i = new Intent(activity, RequestService.class);
         i.setAction(RequestService.REGISTER_ACTION);
         i.putExtra(RequestService.EXTRA_REGISTER, request);
@@ -50,22 +50,10 @@ public class ServiceHelper {
         activity.startService(i);
     }
 
-    public void postMessageAsync(Activity activity, UUID regId, long cliendId, String userName, String message, ResultReceiver callback) {
+    public void syncAsync(Context context, UUID regId, Peer peer, long seqnum, ArrayList<Message> messages) {
 //        TODO: create a request object
 //        TODO: attach object to intent service
-        PostMessage request = new PostMessage(regId, cliendId, userName, message);
-        Intent i = new Intent(activity, RequestService.class);
-        i.setAction(RequestService.POST_MESSAGE_ACTION);
-        i.putExtra(RequestService.EXTRA_POST_MESSAGE, request);
-        i.putExtra(RequestService.EXTRA_CALLBACK, callback);
-        activity.startService(i);
-
-    }
-
-    public void syncAsync(Context context, UUID regId, long cliendId, long seqnum, ArrayList<Message> messages) {
-//        TODO: create a request object
-//        TODO: attach object to intent service
-        Synchronize request = new Synchronize(regId, cliendId, seqnum, messages);
+        Synchronize request = new Synchronize(regId, peer, seqnum, messages);
         Intent i = new Intent(context, RequestService.class);
         i.setAction(RequestService.SYNCHRONIZE_ACTION);
         i.putExtra(RequestService.EXTRA_SYNCHRONIZE, request);

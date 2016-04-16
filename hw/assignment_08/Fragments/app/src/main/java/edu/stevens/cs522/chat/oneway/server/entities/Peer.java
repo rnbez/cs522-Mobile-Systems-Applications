@@ -32,16 +32,20 @@ public class Peer implements Parcelable{
     }
 
     public Peer(String name, double latidute, double longitude) {
-        this.latidute = latidute;
-        this.longitude = longitude;
         this.name = name;
+//        this.latidute = latidute;
+//        this.longitude = longitude;
+        this.latidute = 40.7439905;
+        this.longitude = -74.0323626;
     }
 
     public Peer(long id, String name, double latidute, double longitude) {
         this.id = id;
-        this.latidute = latidute;
-        this.longitude = longitude;
         this.name = name;
+//        this.latidute = latidute;
+//        this.longitude = longitude;
+        this.latidute = 40.7439905;
+        this.longitude = -74.0323626;
     }
 
     protected Peer(Parcel in) {

@@ -79,19 +79,6 @@ public class RequestService extends IntentService {
             return;
         }
 
-        if (POST_MESSAGE_ACTION.equals(intent.getAction())) {
-            PostMessage req = intent.getParcelableExtra(EXTRA_POST_MESSAGE);
-
-            Message m = new Message(0, req.getText(), req.getClientName(), req.getClientId());
-            handleMessage(m, true, resultReceiver);
-
-            PostMessageResponse res = new RequestProcessor().perform(req);
-//                result.putParcelable(EXTRA_POST_MESSAGE, res);
-            m = new Message(res.getId(), req.getText(), req.getClientName(), req.getClientId());
-            handleMessage(m, false, resultReceiver);
-            return;
-        }
-
         if (SYNCHRONIZE_ACTION.equals(intent.getAction())) {
             Synchronize req = intent.getParcelableExtra(EXTRA_SYNCHRONIZE);
             new RequestProcessor().perform(this, req);
@@ -109,14 +96,7 @@ public class RequestService extends IntentService {
                 context,
                 PeerContract.CURSOR_LOADER_ID,
                 PeerContract.DEFAULT_ENTITY_CREATOR);
-        final Peer peer = new Peer();
-        peer.setName(req.getUserName());
-        try {
-            peer.setAddress(InetAddress.getLocalHost());
-            peer.setPort("0");
-        } catch (UnknownHostException e) {
-            e.printStackTrace();
-        }
+        final Peer peer = new Peer(req.getUserName(), 0, 0);
 
         Uri uriWithName = PeerContract.withExtendedPath(peer.getName());
         Log.d(TAG, uriWithName.toString());

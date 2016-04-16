@@ -27,25 +27,25 @@
             android:transcriptMode="alwaysScroll" >
         </ListView>
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal">
+        <!--<LinearLayout-->
+            <!--android:orientation="horizontal"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center_horizontal">-->
 
-            <EditText
-                android:id="@+id/frag__chatroom_messages_message"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="9" />
+            <!--<EditText-->
+                <!--android:id="@+id/frag__chatroom_messages_message"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="9" />-->
 
-            <Button
-                android:id="@+id/frag__chatroom_messages_send"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/send_label"
-                android:layout_weight="1" />
-        </LinearLayout>
+            <!--<Button-->
+                <!--android:id="@+id/frag__chatroom_messages_send"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="@string/send_label"-->
+                <!--android:layout_weight="1" />-->
+        <!--</LinearLayout>-->
 
     </LinearLayout>
 

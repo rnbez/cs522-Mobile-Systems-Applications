@@ -39,11 +39,12 @@ public class Message implements Parcelable {
         }
     }
 
-    public Message(long sequentialNumber, String messageText, String sender) {
+    public Message(long sequentialNumber, String messageText, String sender, String chatroom) {
 //        this.id = id;
         this.sequentialNumber = sequentialNumber;
         this.messageText = messageText;
         this.sender = sender;
+        this.chatroom = chatroom;
         this.timestamp = System.currentTimeMillis();
     }
 

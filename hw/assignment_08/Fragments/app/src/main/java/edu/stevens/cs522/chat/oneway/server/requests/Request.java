@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+import edu.stevens.cs522.chat.oneway.server.entities.Peer;
 import edu.stevens.cs522.chat.oneway.server.utils.App;
 
 /**
@@ -18,15 +19,20 @@ import edu.stevens.cs522.chat.oneway.server.utils.App;
  */
 public abstract class Request implements Parcelable {
 
-    public long clientID;
+    //    public long clientID;
+    public Peer client;
     public UUID registrationID; // sanity check
     protected Map<String, String> headers;
     protected String requestEntity;
 
     public Request() {
         headers = new HashMap<>();
-            headers.put("X-latitude", "40.7439905");
-        headers.put("X-longitude", "-74.0323626");
+    }
+
+    public Request(UUID registrationID, Peer client) {
+        headers = new HashMap<>();
+        this.client = client;
+        this.registrationID = registrationID;
     }
 
     protected Request(Parcel in) {
@@ -59,4 +65,5 @@ public abstract class Request implements Parcelable {
     public UUID getRegistrationID() {
         return registrationID;
     }
+
 }

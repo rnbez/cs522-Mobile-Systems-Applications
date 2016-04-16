@@ -1,28 +1,33 @@
 /*********************************************************************
  * Chat server: accept chat messages from clients.
- * <p/>
+ * <p>
  * Sender name and GPS coordinates are encoded
  * in the messages, and stripped off upon receipt.
- * <p/>
+ * <p>
  * Copyright (c) 2012 Stevens Institute of Technology
  **********************************************************************/
 package edu.stevens.cs522.chat.oneway.server.activities;
 
-import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
+import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.*;
 import android.preference.PreferenceManager;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -36,9 +41,14 @@ import java.util.UUID;
 import java.util.ArrayList;
 
 import edu.stevens.cs522.chat.oneway.server.R;
+import edu.stevens.cs522.chat.oneway.server.activities.fragments.ChatroomListFragment;
+import edu.stevens.cs522.chat.oneway.server.activities.fragments.ChatroomMessagesFragment;
 import edu.stevens.cs522.chat.oneway.server.adapters.MessageRowAdapter;
+import edu.stevens.cs522.chat.oneway.server.contracts.ChatroomContract;
 import edu.stevens.cs522.chat.oneway.server.contracts.MessageContract;
+import edu.stevens.cs522.chat.oneway.server.entities.Chatroom;
 import edu.stevens.cs522.chat.oneway.server.entities.Message;
+import edu.stevens.cs522.chat.oneway.server.entities.Peer;
 import edu.stevens.cs522.chat.oneway.server.managers.IQueryListener;
 import edu.stevens.cs522.chat.oneway.server.managers.QueryBuilder;
 import edu.stevens.cs522.chat.oneway.server.managers.TypedCursor;
@@ -46,7 +56,10 @@ import edu.stevens.cs522.chat.oneway.server.requests.ServiceHelper;
 import edu.stevens.cs522.chat.oneway.server.utils.App;
 import edu.stevens.cs522.chat.oneway.server.utils.ResultReceiverWrapper;
 
-public class ChatActivity extends Activity {
+public class ChatActivity
+        extends FragmentActivity
+        implements ChatroomListFragment.IChatroomListFragmentListener,
+        ChatroomMessagesFragment.IChatroomMessagesFragmentListener {
 
     final static public String TAG = ChatActivity.class.getCanonicalName();
     final static public int PREFERENCES_REQUEST = 1;
@@ -55,6 +68,7 @@ public class ChatActivity extends Activity {
 
     private long userId;
     private long lastMessageSeqNum;
+    private Chatroom currentChatroom;
     private String userName;
     private UUID registrationID;
 
@@ -68,6 +82,9 @@ public class ChatActivity extends Activity {
     private EditText destinationHost;
     private EditText destinationPort;
     private EditText messageText;
+
+    private Cursor chatroomListCursor;
+    private Cursor messageListCursor;
     private MessageRowAdapter cursorAdapter;
 
     private ResultReceiverWrapper registerResultReceiverWrapper;
@@ -80,6 +97,11 @@ public class ChatActivity extends Activity {
     PendingIntent alarmIntent;
 
 
+    FragmentManager fragmentManager;
+    ChatroomListFragment chatroomListFragment;
+    ChatroomMessagesFragment chatroomMessagesFragment;
+
+
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -90,7 +112,7 @@ public class ChatActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
+        setContentView(R.layout.layt__main);
 
         /**
          * Let's be clear, this is a HACK to allow you to do network communication on the main thread.
@@ -103,74 +125,80 @@ public class ChatActivity extends Activity {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         userId = sharedPreferences.getLong(App.PREF_KEY_USERID, App.PREF_DEFAULT_USER_ID);
         lastMessageSeqNum = sharedPreferences.getLong(App.PREF_KEY_LAST_SEQNUM, App.PREF_DEFAULT_LAST_SEQNUM);
+        currentChatroom = new Chatroom(sharedPreferences.getString(App.PREF_KEY_CHATROOM, App.PREF_DEFAULT_CHATROOM));
         userName = sharedPreferences.getString(App.PREF_KEY_USERNAME, App.PREF_DEFAULT_USER_NAME);
         String uuidString = sharedPreferences.getString(App.PREF_KEY_REGISTRATION_ID, "");
         if (!uuidString.isEmpty())
             registrationID = UUID.fromString(uuidString);
 
-        cursorAdapter = new MessageRowAdapter(this, null);
-        msgList = (ListView) findViewById(R.id.main_lst_messages);
-        msgList.setAdapter(cursorAdapter);
 
-        QueryBuilder.executeQuery(TAG,
-                this,
-                MessageContract.CONTENT_URI,
-                MessageContract.CURSOR_LOADER_ID,
-                MessageContract.DEFAULT_ENTITY_CREATOR,
-                new IQueryListener<Message>() {
-                    @Override
-                    public void handleResults(TypedCursor<Message> cursor) {
-                        cursorAdapter.swapCursor(cursor.getCursor());
-                    }
+        fragmentManager = getSupportFragmentManager();
+        boolean hasSavedInstanceState = savedInstanceState != null;
 
-                    @Override
-                    public void closeResults() {
-                        cursorAdapter.swapCursor(null);
-                    }
+        launchFragments(hasSavedInstanceState);
 
-                });
+//        cursorAdapter = new MessageRowAdapter(this, null);
+//        msgList = (ListView) findViewById(R.id.main_lst_messages);
+//        msgList.setAdapter(cursorAdapter);
+
+
+        if (currentChatroom.getId() == 0) {
+            ContentResolver cr = this.getContentResolver();
+            ContentValues values = new ContentValues();
+            currentChatroom.writeToProvider(values);
+            Uri uri = cr.insert(ChatroomContract.CONTENT_URI, values);
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+            SharedPreferences.Editor editor = prefs.edit();
+            currentChatroom.setId(Long.valueOf(uri.getLastPathSegment()));
+            editor.putString(App.PREF_KEY_CHATROOM, currentChatroom.toString());
+            editor.apply();
+        }
+
 //        clientPort = Integer.valueOf(prefs.getString(PreferencesActivity.PREF_KEY_PORT, String.valueOf(DEFAULT_CLIENT_PORT)));
 
         serviceHelper = new ServiceHelper();
         if (isOnline() && registrationID != null) {
-            serviceHelper.syncAsync(ChatActivity.this, registrationID, userId, lastMessageSeqNum, new ArrayList<Message>());
+            Peer peer = new Peer(userId, userName, 0, 0);
+            serviceHelper.syncAsync(ChatActivity.this, registrationID, peer, lastMessageSeqNum, new ArrayList<Message>());
         }
 
         alarmMgr = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
 
 
-        messageText = (EditText) findViewById(R.id.main_edt_message);
-        sendButton = (Button) findViewById(R.id.main_btn_send);
-        sendButton.setEnabled(registrationID != null);
-        sendButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!isOnline()) {
-//                    long delay = 10 * 1000;
-//                    AlarmManager mgr = (AlarmManager) ChatActivity.this.getSystemService(Context.ALARM_SERVICE);
-//                    Intent intent = new Intent(ChatActivity.this, SynchronizationAlarmReceiver.class);
-//                    intent.putExtra(SynchronizationAlarmReceiver.EXTRA_DELAY, delay);
-//                    PendingIntent listener = PendingIntent.getBroadcast(
-//                            ChatActivity.this,
-//                            BROADCAST_NETWORK_REQUEST,
-//                            intent,
-//                            0);
+//        messageText = (EditText) findViewById(R.id.main_edt_message);
+//        sendButton = (Button) findViewById(R.id.main_btn_send);
+//        sendButton.setEnabled(registrationID != null);
+//        sendButton.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (!isOnline()) {
+////                    long delay = 10 * 1000;
+////                    AlarmManager mgr = (AlarmManager) ChatActivity.this.getSystemService(Context.ALARM_SERVICE);
+////                    Intent intent = new Intent(ChatActivity.this, SynchronizationAlarmReceiver.class);
+////                    intent.putExtra(SynchronizationAlarmReceiver.EXTRA_DELAY, delay);
+////                    PendingIntent listener = PendingIntent.getBroadcast(
+////                            ChatActivity.this,
+////                            BROADCAST_NETWORK_REQUEST,
+////                            intent,
+////                            0);
+////
+////                    mgr.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + delay, listener);
 //
-//                    mgr.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + delay, listener);
-
-                    Toast.makeText(getApplicationContext(), "You're offline.", Toast.LENGTH_LONG).show();
-                }
-
-                String msg = messageText.getText().toString();
-                if (!msg.isEmpty()) {
-                    ArrayList<Message> messages = new ArrayList<Message>();
-                    messages.add(new Message(0, msg, userName, userId));
-                    lastMessageSeqNum = sharedPreferences.getLong(App.PREF_KEY_LAST_SEQNUM, App.PREF_DEFAULT_LAST_SEQNUM);
-                    serviceHelper.syncAsync(ChatActivity.this, registrationID, userId, lastMessageSeqNum, messages);
-                    messageText.setText("");
-                }
-            }
-        });
+//                    Toast.makeText(getApplicationContext(), "You're offline.", Toast.LENGTH_LONG).show();
+//                }
+//
+//                String msg = messageText.getText().toString();
+//                if (!msg.isEmpty()) {
+//                    ArrayList<Message> messages = new ArrayList<Message>();
+//                    Message message = new Message(0, msg, userId, userName, currentChatroom.getId(), currentChatroom.getName(), System.currentTimeMillis());
+//                    messages.add(message);
+//                    lastMessageSeqNum = sharedPreferences.getLong(App.PREF_KEY_LAST_SEQNUM, App.PREF_DEFAULT_LAST_SEQNUM);
+//                    Peer peer = new Peer(userId, userName, 0, 0);
+//                    serviceHelper.syncAsync(ChatActivity.this, registrationID, peer, lastMessageSeqNum, messages);
+//                    messageText.setText("");
+//                }
+//            }
+//        });
 
         registerResultReceiverWrapper = new ResultReceiverWrapper(new Handler());
         registerResultReceiver = new ResultReceiverWrapper.IReceiver() {
@@ -229,10 +257,47 @@ public class ChatActivity extends Activity {
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
+    private void launchFragments(boolean hasSavedInstanceState) {
+        switch (getResources().getConfiguration().orientation) {
+            case Configuration.ORIENTATION_PORTRAIT:
+                if (findViewById(R.id.fragment_container) != null) {
+                    chatroomListFragment = new ChatroomListFragment();
+                    chatroomListFragment.setArguments(getIntent().getExtras());
+                    FragmentTransaction transaction = fragmentManager.beginTransaction();
+                    if (!hasSavedInstanceState) {
+                        transaction.add(R.id.fragment_container, chatroomListFragment);
+                    } else {
+                        transaction.replace(R.id.fragment_container, chatroomListFragment);
+                    }
+                    transaction.commit();
+                }
+                break;
+            case Configuration.ORIENTATION_LANDSCAPE:
+                if (fragmentManager.findFragmentById(R.id.layt__main_chatroom_list) != null) {
+                    chatroomListFragment = (ChatroomListFragment) fragmentManager.findFragmentById(R.id.layt__main_chatroom_list);
+                }
+                if (findViewById(R.id.fragment_container) != null) {
+                    chatroomMessagesFragment = new ChatroomMessagesFragment();
+                    chatroomMessagesFragment.setArguments(getIntent().getExtras());
+
+                    FragmentTransaction transaction = fragmentManager.beginTransaction();
+                    if (!hasSavedInstanceState) {
+                        transaction.add(R.id.fragment_container, chatroomMessagesFragment);
+                    } else {
+                        transaction.replace(R.id.fragment_container, chatroomMessagesFragment);
+                    }
+                    transaction.commit();
+                }
+                break;
+            default:
+        }
+        getChatroomListAsync();
+    }
+
     @Override
     protected void onStart() {
         super.onStart();
-        if(alarmIntent == null) {
+        if (alarmIntent == null) {
             Log.d("ALARM", "starting alarm manager");
             Intent intent = new Intent(this, SynchronizationAlarmReceiver.class);
             alarmIntent = PendingIntent.getBroadcast(this, this.BROADCAST_NETWORK_REQUEST, intent, 0);
@@ -332,6 +397,7 @@ public class ChatActivity extends Activity {
         }
     }
 
+
     public void updateListView() {
         QueryBuilder.executeQuery(TAG,
                 ChatActivity.this,
@@ -356,6 +422,99 @@ public class ChatActivity extends Activity {
     public boolean isOnline() {
         android.net.ConnectivityManager cm = (android.net.ConnectivityManager) this.getSystemService(this.CONNECTIVITY_SERVICE);
         return cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnectedOrConnecting();
+    }
+
+    @Override
+    public void showChatroomDetails(Chatroom chatroom) {
+        switch (getResources().getConfiguration().orientation) {
+            case Configuration.ORIENTATION_PORTRAIT:
+                if (findViewById(R.id.fragment_container) != null) {
+                    chatroomMessagesFragment = new ChatroomMessagesFragment();
+                    Bundle args = new Bundle();
+                    args.putParcelable(ChatroomMessagesFragment.CHATROOM_DETAILS_KEY, chatroom);
+                    chatroomMessagesFragment.setArguments(args);
+
+                    FragmentTransaction transaction = fragmentManager.beginTransaction();
+                    transaction.replace(R.id.fragment_container, chatroomMessagesFragment);
+                    transaction.addToBackStack(TAG + "contact_details_fragment");
+                    transaction.commit();
+                }
+                break;
+            case Configuration.ORIENTATION_LANDSCAPE:
+                if (findViewById(R.id.fragment_container) != null) {
+                    chatroomMessagesFragment = new ChatroomMessagesFragment();
+                    Bundle args = new Bundle();
+                    args.putParcelable(ChatroomMessagesFragment.CHATROOM_DETAILS_KEY, chatroom);
+                    chatroomMessagesFragment.setArguments(args);
+
+                    FragmentTransaction transaction = fragmentManager.beginTransaction();
+                    transaction.replace(R.id.fragment_container, chatroomMessagesFragment);
+//                    transaction.addToBackStack(TAG + "contact_details_fragment");
+                    transaction.commit();
+                }
+                break;
+            default:
+        }
+
+        getChatroomMessagesAsync(chatroom);
+    }
+
+    @Override
+    public Cursor getChatroomListCursor() {
+        return chatroomListCursor;
+    }
+
+    @Override
+    public Cursor getMessageListCursor() {
+        return messageListCursor;
+    }
+
+    @Override
+    public void getChatroomListAsync() {
+        QueryBuilder.executeQuery(TAG,
+                this,
+                ChatroomContract.CONTENT_URI,
+                ChatroomContract.CURSOR_LOADER_ID,
+                ChatroomContract.DEFAULT_ENTITY_CREATOR,
+                new IQueryListener<Chatroom>() {
+                    @Override
+                    public void handleResults(TypedCursor<Chatroom> typedCursor) {
+                        chatroomListCursor = typedCursor.getCursor();
+                        chatroomListFragment.setListCursor(chatroomListCursor);
+                    }
+
+                    @Override
+                    public void closeResults() {
+                        chatroomListCursor = null;
+                        chatroomListFragment.setListCursor(chatroomListCursor);
+                    }
+                });
+    }
+
+    @Override
+    public void getChatroomMessagesAsync(Chatroom chatroom) {
+        Uri uri = ChatroomContract.withExtendedPath(chatroom.getId());
+        uri = ChatroomContract.withExtendedPath(uri, "messages");
+        QueryBuilder.executeQuery(TAG,
+                this,
+                uri,
+                MessageContract.CURSOR_LOADER_ID,
+                MessageContract.DEFAULT_ENTITY_CREATOR,
+                new IQueryListener<Message>() {
+                    @Override
+                    public void handleResults(TypedCursor<Message> typedCursor) {
+                        messageListCursor = typedCursor.getCursor();
+//                        if (chatroomMessagesFragment != null)
+                            chatroomMessagesFragment.setListCursor(messageListCursor);
+                    }
+
+                    @Override
+                    public void closeResults() {
+                        messageListCursor = null;
+//                        if (chatroomMessagesFragment != null)
+                            chatroomMessagesFragment.setListCursor(messageListCursor);
+                    }
+                });
     }
 
 //    public class MessageReceiver extends BroadcastReceiver {
@@ -395,15 +554,18 @@ public class ChatActivity extends Activity {
         @Override
         public void onReceive(Context context, Intent intent) {
             Log.i("ALARME", "Alarm executed at: " + new java.util.Date());
-            if (isOnline(context)){
+            if (isOnline(context)) {
                 ServiceHelper serviceHelper = new ServiceHelper();
                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
                 long userId = prefs.getLong(App.PREF_KEY_USERID, App.PREF_DEFAULT_USER_ID);
                 long lastMessageSeqNum = prefs.getLong(App.PREF_KEY_LAST_SEQNUM, App.PREF_DEFAULT_LAST_SEQNUM);
+                String userName = prefs.getString(App.PREF_KEY_USERNAME, App.PREF_DEFAULT_USER_NAME);
+
                 String uuidString = prefs.getString(App.PREF_KEY_REGISTRATION_ID, "");
                 if (!uuidString.isEmpty()) {
                     UUID registrationID = UUID.fromString(uuidString);
-                    serviceHelper.syncAsync(context, registrationID, userId, lastMessageSeqNum, new ArrayList<Message>());
+                    Peer peer = new Peer(userId, userName, 0, 0);
+                    serviceHelper.syncAsync(context, registrationID, peer, lastMessageSeqNum, new ArrayList<Message>());
                 }
             }
         }

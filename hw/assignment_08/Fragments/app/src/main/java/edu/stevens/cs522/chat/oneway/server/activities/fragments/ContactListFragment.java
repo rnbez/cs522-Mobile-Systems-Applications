@@ -3,7 +3,6 @@ package edu.stevens.cs522.chat.oneway.server.activities.fragments;
 import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -16,35 +15,26 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import edu.stevens.cs522.chat.oneway.server.R;
-import edu.stevens.cs522.chat.oneway.server.adapters.ContactAdapter;
-import edu.stevens.cs522.chat.oneway.server.contracts.MessageContract;
-import edu.stevens.cs522.chat.oneway.server.contracts.PeerContract;
-import edu.stevens.cs522.chat.oneway.server.entities.Message;
+import edu.stevens.cs522.chat.oneway.server.adapters.ContactRowAdapter;
 import edu.stevens.cs522.chat.oneway.server.entities.Peer;
-import edu.stevens.cs522.chat.oneway.server.managers.IQueryListener;
-import edu.stevens.cs522.chat.oneway.server.managers.ISimpleQueryListener;
-import edu.stevens.cs522.chat.oneway.server.managers.QueryBuilder;
-import edu.stevens.cs522.chat.oneway.server.managers.SimpleQueryBuilder;
-import edu.stevens.cs522.chat.oneway.server.managers.TypedCursor;
 
 public class ContactListFragment extends Fragment {
 
     public interface IContactListFragmentListener {
         public void showContactDetails(Peer peer);
 
-        public void getContactListAsync();
+        public Cursor getContactListCursor();
     }
 
     private static final String TAG = ContactListFragment.class.getCanonicalName();
 
 
-    ListView contacts;
+    ListView listView;
     TextView listEmptyView;
-    ContactAdapter cursorAdapter;
+    ContactRowAdapter cursorAdapter;
     List<String> contactList;
     ArrayAdapter arrayAdapter;
     IContactListFragmentListener listener;
@@ -56,20 +46,20 @@ public class ContactListFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.frag__contact_book_list, container, false);
-        this.contacts = (ListView) view.findViewById(R.id.frag__contact_book_list_content);
+        this.listView = (ListView) view.findViewById(R.id.frag__contact_book_list_content);
         this.listEmptyView = (TextView) view.findViewById(R.id.frag__contact_book_list_empty);
         this.listEmptyView.setVisibility(View.VISIBLE);
         this.cursorAdapter = null;
 
 //        contactList = new ArrayList<>();
 //        arrayAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, contactList);
-//        this.contacts.setAdapter(arrayAdapter);
+//        this.listView.setAdapter(arrayAdapter);
 
-        this.cursorAdapter = new ContactAdapter(getActivity(), null);
-        this.contacts.setAdapter(this.cursorAdapter);
-        this.contacts.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
+        this.cursorAdapter = new ContactRowAdapter(getActivity(), null);
+        this.listView.setAdapter(this.cursorAdapter);
+        this.listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
 
-        this.contacts.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        this.listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Log.d(TAG, "contact clicked");
@@ -139,7 +129,7 @@ public class ContactListFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         this.isActivityCreated = true;
-        this.listener.getContactListAsync();
+        this.setListCursor(this.listener.getContactListCursor());
     }
 
     public void setListCursor(Cursor cursor) {
@@ -161,7 +151,8 @@ public class ContactListFragment extends Fragment {
             }
 
             @Override
-            public void getContactListAsync() {
+            public Cursor getContactListCursor() {
+                return null;
             }
         };
     }

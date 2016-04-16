@@ -13,12 +13,14 @@ public class App {
 
     public static final String PREF_KEY_USERID = "userid";
     public static final String PREF_KEY_LAST_SEQNUM = "last_seq_num";
+    public static final String PREF_KEY_CHATROOM = "chatroom";
     public static final String PREF_KEY_USERNAME = "username";
     public static final String PREF_KEY_HOST = "host";
     public static final String PREF_KEY_REGISTRATION_ID = "reg_id";
 
     final static public long PREF_DEFAULT_USER_ID = 0;
     final static public long PREF_DEFAULT_LAST_SEQNUM = 0;
+    final static public String PREF_DEFAULT_CHATROOM = "_default";
     final static public String PREF_DEFAULT_USER_NAME = "no name";
 
 
