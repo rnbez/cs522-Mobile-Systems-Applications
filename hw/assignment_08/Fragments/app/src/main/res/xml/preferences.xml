@@ -3,7 +3,8 @@
     <EditTextPreference
         android:key="host"
         android:summary="Please provide your port"
-        android:title="Server Address"/>
+        android:title="Server Address"
+        android:hint="@string/default_host"/>
     <EditTextPreference
         android:key="username"
         android:summary="Please provide your username"

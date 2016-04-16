@@ -1,14 +1,16 @@
 /*********************************************************************
  * Chat server: accept chat messages from clients.
- * <p>
+ * <p/>
  * Sender name and GPS coordinates are encoded
  * in the messages, and stripped off upon receipt.
- * <p>
+ * <p/>
  * Copyright (c) 2012 Stevens Institute of Technology
  **********************************************************************/
 package edu.stevens.cs522.chat.oneway.server.activities;
 
+import android.app.Activity;
 import android.app.AlarmManager;
+import android.app.Dialog;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
@@ -37,20 +39,28 @@ import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.util.Calendar;
+import java.util.List;
 import java.util.UUID;
 import java.util.ArrayList;
 
 import edu.stevens.cs522.chat.oneway.server.R;
 import edu.stevens.cs522.chat.oneway.server.activities.fragments.ChatroomListFragment;
 import edu.stevens.cs522.chat.oneway.server.activities.fragments.ChatroomMessagesFragment;
+import edu.stevens.cs522.chat.oneway.server.activities.fragments.ConfirmDialogFragment;
+import edu.stevens.cs522.chat.oneway.server.activities.fragments.NewChatFragment;
+import edu.stevens.cs522.chat.oneway.server.activities.fragments.NewMessageFragment;
 import edu.stevens.cs522.chat.oneway.server.adapters.MessageRowAdapter;
 import edu.stevens.cs522.chat.oneway.server.contracts.ChatroomContract;
 import edu.stevens.cs522.chat.oneway.server.contracts.MessageContract;
 import edu.stevens.cs522.chat.oneway.server.entities.Chatroom;
 import edu.stevens.cs522.chat.oneway.server.entities.Message;
 import edu.stevens.cs522.chat.oneway.server.entities.Peer;
+import edu.stevens.cs522.chat.oneway.server.managers.ChatroomManager;
+import edu.stevens.cs522.chat.oneway.server.managers.IContinue;
 import edu.stevens.cs522.chat.oneway.server.managers.IQueryListener;
+import edu.stevens.cs522.chat.oneway.server.managers.ISimpleQueryListener;
 import edu.stevens.cs522.chat.oneway.server.managers.QueryBuilder;
+import edu.stevens.cs522.chat.oneway.server.managers.SimpleQueryBuilder;
 import edu.stevens.cs522.chat.oneway.server.managers.TypedCursor;
 import edu.stevens.cs522.chat.oneway.server.requests.ServiceHelper;
 import edu.stevens.cs522.chat.oneway.server.utils.App;
@@ -59,11 +69,18 @@ import edu.stevens.cs522.chat.oneway.server.utils.ResultReceiverWrapper;
 public class ChatActivity
         extends FragmentActivity
         implements ChatroomListFragment.IChatroomListFragmentListener,
-        ChatroomMessagesFragment.IChatroomMessagesFragmentListener {
+        ChatroomMessagesFragment.IChatroomMessagesFragmentListener,
+        NewChatFragment.INewChatFragmentListener,
+        NewMessageFragment.INewMessageFragmentListener,
+        ConfirmDialogFragment.IConfirmDialogFragmentListener {
 
     final static public String TAG = ChatActivity.class.getCanonicalName();
     final static public int PREFERENCES_REQUEST = 1;
     final static public int BROADCAST_NETWORK_REQUEST = 100;
+
+    final static public int DIALOG_NEW_CHAT_ID = 1;
+    final static public int DIALOG_NEW_CHAT_CONFIRM_ID = DIALOG_NEW_CHAT_ID + 1;
+    final static public int DIALOG_NEW_MSG_ID = DIALOG_NEW_CHAT_CONFIRM_ID + 1;
 
 
     private long userId;
@@ -142,17 +159,17 @@ public class ChatActivity
 //        msgList.setAdapter(cursorAdapter);
 
 
-        if (currentChatroom.getId() == 0) {
-            ContentResolver cr = this.getContentResolver();
-            ContentValues values = new ContentValues();
-            currentChatroom.writeToProvider(values);
-            Uri uri = cr.insert(ChatroomContract.CONTENT_URI, values);
-            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-            SharedPreferences.Editor editor = prefs.edit();
-            currentChatroom.setId(Long.valueOf(uri.getLastPathSegment()));
-            editor.putString(App.PREF_KEY_CHATROOM, currentChatroom.toString());
-            editor.apply();
-        }
+//        if (currentChatroom.getId() == 0) {
+//            ContentResolver cr = this.getContentResolver();
+//            ContentValues values = new ContentValues();
+//            currentChatroom.writeToProvider(values);
+//            Uri uri = cr.insert(ChatroomContract.CONTENT_URI, values);
+//            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+//            SharedPreferences.Editor editor = prefs.edit();
+//            currentChatroom.setId(Long.valueOf(uri.getLastPathSegment()));
+//            editor.putString(App.PREF_KEY_CHATROOM, currentChatroom.toString());
+//            editor.apply();
+//        }
 
 //        clientPort = Integer.valueOf(prefs.getString(PreferencesActivity.PREF_KEY_PORT, String.valueOf(DEFAULT_CLIENT_PORT)));
 
@@ -204,22 +221,19 @@ public class ChatActivity
         registerResultReceiver = new ResultReceiverWrapper.IReceiver() {
             @Override
             public void onReceiveResult(int resultCode, Bundle resultData) {
-                Log.d(TAG, String.valueOf(resultCode));
-                long id = resultData.getLong(ServiceHelper.EXTRA_REGISTER_RESULT_ID);
-                UUID uuid = UUID.fromString(resultData.getString(ServiceHelper.EXTRA_REGISTER_REG_ID));
-
-                SharedPreferences.Editor editor = ChatActivity.this.sharedPreferences.edit();
-                editor.putString(App.PREF_KEY_REGISTRATION_ID, uuid.toString());
-                editor.putLong(App.PREF_KEY_USERID, id);
-                editor.apply();
-
-                registrationID = uuid;
-                userId = id;
-
-                Toast.makeText(getApplicationContext(), "Registration Succeeded", Toast.LENGTH_LONG).show();
-                if (!sendButton.isEnabled()) {
-                    sendButton.setEnabled(true);
-                }
+//                Log.d(TAG, String.valueOf(resultCode));
+//                long id = resultData.getLong(ServiceHelper.EXTRA_REGISTER_RESULT_ID);
+//                UUID uuid = UUID.fromString(resultData.getString(ServiceHelper.EXTRA_REGISTER_REG_ID));
+//
+//                SharedPreferences.Editor editor = ChatActivity.this.sharedPreferences.edit();
+//                editor.putString(App.PREF_KEY_REGISTRATION_ID, uuid.toString());
+//                editor.putLong(App.PREF_KEY_USERID, id);
+//                editor.apply();
+//
+//                registrationID = uuid;
+//                userId = id;
+//
+//                Toast.makeText(getApplicationContext(), "Registration Succeeded", Toast.LENGTH_LONG).show();
             }
         };
 
@@ -364,6 +378,25 @@ public class ChatActivity
     public boolean onOptionsItemSelected(MenuItem item) {
 
         switch (item.getItemId()) {
+            case R.id.chat_menu_new_chat:
+                NewChatFragment.launch(this, DIALOG_NEW_CHAT_ID, "NEW_CHAT");
+                return true;
+            case R.id.chat_menu_new_msg:
+                if (chatroomListCursor != null && chatroomListCursor.getCount() > 0) {
+                    if (chatroomListCursor.moveToFirst()) {
+                        ArrayList<Chatroom> list = new ArrayList<>();
+                        int currentChat = 0;
+                        do {
+                            Chatroom chatroom = new Chatroom(chatroomListCursor);
+                            list.add(chatroom);
+                            if (chatroom.getId() == currentChatroom.getId())
+                                currentChat = chatroomListCursor.getPosition();
+                        } while (chatroomListCursor.moveToNext());
+                        chatroomListCursor.moveToFirst();
+                        NewMessageFragment.launch(this, DIALOG_NEW_MSG_ID, "NEW_MSG", list, currentChat);
+                    }
+                }
+                return true;
             case R.id.chat_menu_contacts:
                 startActivity(new Intent(this, ContactBookActivity.class));
                 return true;
@@ -390,7 +423,7 @@ public class ChatActivity
                     final UUID uuid = UUID.randomUUID();
 //                final UUID uuid = UUID.fromString("54947df8-0e9e-4471-a2f9-9af509fb5889");
                     ServiceHelper helper = new ServiceHelper();
-                    helper.registerAsync(this, userName, uuid, registerResultReceiverWrapper);
+                    helper.registerAsync(this, userName, uuid);
                 }
 
                 break;
@@ -426,9 +459,15 @@ public class ChatActivity
 
     @Override
     public void showChatroomDetails(Chatroom chatroom) {
+        currentChatroom = chatroom;
+        SharedPreferences.Editor editor = ChatActivity.this.sharedPreferences.edit();
+        editor.putString(App.PREF_KEY_CHATROOM, currentChatroom.toString());
+        editor.apply();
+
         switch (getResources().getConfiguration().orientation) {
             case Configuration.ORIENTATION_PORTRAIT:
                 if (findViewById(R.id.fragment_container) != null) {
+                    messageListCursor = null;
                     chatroomMessagesFragment = new ChatroomMessagesFragment();
                     Bundle args = new Bundle();
                     args.putParcelable(ChatroomMessagesFragment.CHATROOM_DETAILS_KEY, chatroom);
@@ -442,6 +481,7 @@ public class ChatActivity
                 break;
             case Configuration.ORIENTATION_LANDSCAPE:
                 if (findViewById(R.id.fragment_container) != null) {
+                    messageListCursor = null;
                     chatroomMessagesFragment = new ChatroomMessagesFragment();
                     Bundle args = new Bundle();
                     args.putParcelable(ChatroomMessagesFragment.CHATROOM_DETAILS_KEY, chatroom);
@@ -495,26 +535,120 @@ public class ChatActivity
     public void getChatroomMessagesAsync(Chatroom chatroom) {
         Uri uri = ChatroomContract.withExtendedPath(chatroom.getId());
         uri = ChatroomContract.withExtendedPath(uri, "messages");
+
+
         QueryBuilder.executeQuery(TAG,
                 this,
                 uri,
-                MessageContract.CURSOR_LOADER_ID,
+                MessageContract.CURSOR_LOADER_ID + 100 + (int)chatroom.getId(),
                 MessageContract.DEFAULT_ENTITY_CREATOR,
                 new IQueryListener<Message>() {
                     @Override
                     public void handleResults(TypedCursor<Message> typedCursor) {
                         messageListCursor = typedCursor.getCursor();
 //                        if (chatroomMessagesFragment != null)
-                            chatroomMessagesFragment.setListCursor(messageListCursor);
+                        chatroomMessagesFragment.setListCursor(messageListCursor);
                     }
 
                     @Override
                     public void closeResults() {
                         messageListCursor = null;
 //                        if (chatroomMessagesFragment != null)
-                            chatroomMessagesFragment.setListCursor(messageListCursor);
+                        chatroomMessagesFragment.setListCursor(messageListCursor);
                     }
                 });
+    }
+
+    @Override
+    public void newChatAcknowledge(Dialog dialog, boolean confirm, final String chatroom) {
+        if (dialog != null) {
+            dialog.dismiss();
+            if (confirm) {
+                final ChatroomManager manager = new ChatroomManager(
+                        this,
+                        ChatroomContract.CURSOR_LOADER_ID,
+                        ChatroomContract.DEFAULT_ENTITY_CREATOR);
+
+                final Activity context = this;
+                Uri uriWithName = ChatroomContract.withExtendedPath(chatroom);
+                Log.d(TAG, uriWithName.toString());
+
+                SimpleQueryBuilder.executeQuery(
+                        getContentResolver(),
+                        uriWithName,
+                        ChatroomContract.DEFAULT_ENTITY_CREATOR,
+                        new ISimpleQueryListener<Chatroom>() {
+                            @Override
+                            public void handleResults(List<Chatroom> results) {
+                                if (results.size() > 0) {
+                                    int dialogId = DIALOG_NEW_CHAT_CONFIRM_ID;
+                                    int infoMsgId = R.string.frag__new_chat_error_message;
+                                    int confirm = R.string.frag__new_chat_error_ack;
+                                    int cancel = 0;
+                                    String tag = "CHAT_CONFIRM_ID";
+                                    ConfirmDialogFragment.launch(context, dialogId, tag, infoMsgId, confirm, cancel);
+                                } else {
+                                    manager.persistAsync(new Chatroom(chatroom), new IContinue<Uri>() {
+                                        @Override
+                                        public void kontinue(Uri uri) {
+                                            currentChatroom = new Chatroom(Long.valueOf(uri.getLastPathSegment()), chatroom);
+                                            SharedPreferences.Editor editor = ChatActivity.this.sharedPreferences.edit();
+                                            editor.putString(App.PREF_KEY_CHATROOM, currentChatroom.toString());
+                                            editor.apply();
+//                                            if (chatroomListFragment != null) {
+//                                                int pos = 0;
+//                                                if (chatroomListCursor.moveToFirst()) {
+//                                                    do {
+//                                                        Chatroom cursorChat = new Chatroom(chatroomListCursor);
+//                                                        if (cursorChat.getId() == currentChatroom.getId()){
+//                                                            pos = chatroomListCursor.getPosition();
+//                                                            break;
+//                                                        }
+//                                                    }while (chatroomListCursor.moveToNext());
+//
+//                                                    chatroomListFragment.setSelectItem(pos);
+//                                                }
+//                                            }
+//                                            showChatroomDetails(currentChatroom);
+                                        }
+                                    });
+                                }
+                            }
+                        }
+                );
+            }
+        }
+    }
+
+    @Override
+    public void newMessageAcknowledge(Dialog dialog, boolean confirm, String inputText, Chatroom
+            selectedChatroom) {
+        if (dialog != null) {
+            dialog.dismiss();
+            if (confirm) {
+                if (!isOnline()) {
+                    Toast.makeText(getApplicationContext(), "You're offline.", Toast.LENGTH_LONG).show();
+                }
+
+                if (!inputText.isEmpty()) {
+                    currentChatroom = new Chatroom(sharedPreferences.getString(App.PREF_KEY_CHATROOM, App.PREF_DEFAULT_CHATROOM));
+                    lastMessageSeqNum = sharedPreferences.getLong(App.PREF_KEY_LAST_SEQNUM, App.PREF_DEFAULT_LAST_SEQNUM);
+
+                    ArrayList<Message> messages = new ArrayList<>();
+                    Message message = new Message(0, inputText, userId, userName, currentChatroom.getId(), currentChatroom.getName(), System.currentTimeMillis());
+                    messages.add(message);
+                    Peer peer = new Peer(userId, userName, 0, 0);
+                    serviceHelper.syncAsync(ChatActivity.this, registrationID, peer, lastMessageSeqNum, messages);
+                    messageText.setText("");
+                }
+            }
+        }
+    }
+
+    @Override
+    public void confirmDialogCallback(int dialogId, Dialog dialog, boolean confirm) {
+        if (dialog != null)
+            dialog.dismiss();
     }
 
 //    public class MessageReceiver extends BroadcastReceiver {

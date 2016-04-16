@@ -1,5 +1,6 @@
 package edu.stevens.cs522.chat.oneway.server.utils;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 

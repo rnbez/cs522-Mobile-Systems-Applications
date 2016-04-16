@@ -102,7 +102,8 @@ public class QueryBuilder<T> implements LoaderManager.LoaderCallbacks<Cursor> {
                     };
                     break;
                 default:
-                    throw new IllegalArgumentException("Unexpected loader id: " + id);
+//                    throw new IllegalArgumentException("Unexpected loader id: " + id);
+                    break;
             }
             return new CursorLoader(context,
                     uri,

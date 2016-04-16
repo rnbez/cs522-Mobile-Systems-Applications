@@ -1,10 +1,8 @@
 package edu.stevens.cs522.chat.oneway.server.activities.fragments;
 
 
-import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -14,14 +12,10 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.util.List;
-
 import edu.stevens.cs522.chat.oneway.server.R;
 import edu.stevens.cs522.chat.oneway.server.adapters.MessageRowAdapter;
 import edu.stevens.cs522.chat.oneway.server.entities.Chatroom;
-import edu.stevens.cs522.chat.oneway.server.entities.Message;
 import edu.stevens.cs522.chat.oneway.server.managers.IQueryListener;
-import edu.stevens.cs522.chat.oneway.server.managers.TypedCursor;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -39,7 +33,7 @@ public class ChatroomMessagesFragment extends Fragment {
     public static final String CHATROOM_DETAILS_KEY = TAG + "chatroom_details";
 
 
-    private TextView isEmptyMsgView;
+    private TextView infoMsgView;
     private ListView listView;
 
     IQueryListener queryListener;
@@ -59,16 +53,17 @@ public class ChatroomMessagesFragment extends Fragment {
         View view = inflater.inflate(R.layout.frag__chatroom_messages, container, false);
 
         cursorAdapter = new MessageRowAdapter(getActivity(), null);
-        isEmptyMsgView = (TextView) view.findViewById(R.id.frag__chatroom_messages_empty);
+        infoMsgView = (TextView) view.findViewById(R.id.frag__chatroom_messages_info);
 
         Bundle args = getArguments();
         if (args != null && args.containsKey(CHATROOM_DETAILS_KEY)) {
             chatroom = args.getParcelable(CHATROOM_DETAILS_KEY);
             listView = (ListView) view.findViewById(R.id.frag__chatroom_messages_list);
             listView.setAdapter(cursorAdapter);
-            isEmptyMsgView.setVisibility(View.GONE);
+            infoMsgView.setVisibility(View.GONE);
         } else {
-            isEmptyMsgView.setVisibility(View.VISIBLE);
+            infoMsgView.setText(getResources().getText(R.string.frag__chatroom_messages_no_chat));
+            infoMsgView.setVisibility(View.VISIBLE);
 
             if (view.findViewById(R.id.frag__chatroom_messages_container) != null) {
                 view.findViewById(R.id.frag__chatroom_messages_container).setVisibility(View.GONE);
@@ -127,5 +122,15 @@ public class ChatroomMessagesFragment extends Fragment {
     public void setListCursor(Cursor cursor) {
         if (cursorAdapter != null)
             cursorAdapter.swapCursor(cursor);
+        if (infoMsgView != null) {
+            if (cursor != null && cursor.getCount() > 0) {
+                infoMsgView.setVisibility(View.GONE);
+            }
+            else {
+                infoMsgView.setText(getResources().getText(R.string.frag__chatroom_messages_empty_list));
+                infoMsgView.setVisibility(View.VISIBLE);
+            }
+        }
     }
+
 }

@@ -5,8 +5,8 @@
     tools:context="edu.stevens.cs522.chat.oneway.server.activities.fragments.ChatroomMessagesFragment">
 
     <TextView
-        android:id="@+id/frag__chatroom_messages_empty"
-        android:text="@string/frag__chatroom_messages_empty_text"
+        android:id="@+id/frag__chatroom_messages_info"
+        android:text="@string/frag__chatroom_messages_no_chat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"

@@ -11,10 +11,12 @@ import android.os.Bundle;
 import android.os.ResultReceiver;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.List;
+import java.util.UUID;
 
 import edu.stevens.cs522.chat.oneway.server.contracts.MessageContract;
 import edu.stevens.cs522.chat.oneway.server.contracts.PeerContract;
@@ -71,11 +73,15 @@ public class RequestService extends IntentService {
             Register req = intent.getParcelableExtra(EXTRA_REGISTER);
             RegisterResponse res = new RequestProcessor().perform(req);
             handleSender(req, res);
-//            result.putParcelable(EXTRA_REGISTER, res);
-            Bundle bundle = new Bundle();
-            bundle.putLong(EXTRA_REGISTER_RESULT_ID, res.getId());
-            bundle.putString(EXTRA_REGISTER_REG_ID, req.getRegistrationID().toString());
-            resultReceiver.send(0, bundle);
+
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putString(App.PREF_KEY_REGISTRATION_ID, req.registrationID.toString());
+            editor.putLong(App.PREF_KEY_USERID, res.getId());
+            editor.apply();
+
+            Toast.makeText(this, "Registration Succeeded", Toast.LENGTH_LONG).show();
+
             return;
         }
 

@@ -3,8 +3,10 @@ package edu.stevens.cs522.chat.oneway.server.activities.fragments;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -20,12 +22,12 @@ import edu.stevens.cs522.chat.oneway.server.adapters.ChatroomRowAdapter;
 import edu.stevens.cs522.chat.oneway.server.entities.Chatroom;
 import edu.stevens.cs522.chat.oneway.server.managers.IQueryListener;
 import edu.stevens.cs522.chat.oneway.server.managers.TypedCursor;
+import edu.stevens.cs522.chat.oneway.server.utils.App;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class ChatroomListFragment extends Fragment {
-
 
     public interface IChatroomListFragmentListener {
         public void showChatroomDetails(Chatroom chatroom);
@@ -58,7 +60,7 @@ public class ChatroomListFragment extends Fragment {
 
         this.cursorAdapter = new ChatroomRowAdapter(getActivity(), null);
         this.listView.setAdapter(this.cursorAdapter);
-        this.listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
+        this.listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 
         this.listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -138,8 +140,29 @@ public class ChatroomListFragment extends Fragment {
         if (cursorAdapter != null)
             cursorAdapter.swapCursor(cursor);
         if (listEmptyView != null)
-            if (cursor != null && cursor.getCount() > 0)
+            if (cursor != null && cursor.getCount() > 0) {
                 listEmptyView.setVisibility(View.GONE);
+
+//                if (cursor != null) {
+//                    SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+//                    Chatroom currentChatroom = new Chatroom(sharedPreferences.getString(App.PREF_KEY_CHATROOM, App.PREF_DEFAULT_CHATROOM));
+//                    int pos = 0;
+//                    if (cursor.moveToFirst()) {
+//                        do {
+//                            Chatroom cursorChat = new Chatroom(cursor);
+//                            if (cursorChat.getId() == currentChatroom.getId()) {
+//                                pos = cursor.getPosition();
+//                                break;
+//                            }
+//                        } while (cursor.moveToNext());
+//                        listView.setItemChecked(pos, true);
+//                        listView.setSelection(pos);
+//                        if (listView.getSelectedView() != null)
+//                            listView.getSelectedView().setSelected(true);
+//                    }
+//                }
+//                listener.showChatroomDetails(currentChatroom);
+            }
             else
                 listEmptyView.setVisibility(View.VISIBLE);
     }

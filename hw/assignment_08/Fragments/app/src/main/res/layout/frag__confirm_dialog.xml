@@ -2,9 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="edu.stevens.cs522.chat.oneway.server.activities.fragments.NewChatFragment"
-    android:padding="20dp">
-
+    tools:context="edu.stevens.cs522.chat.oneway.server.activities.fragments.NewChatFragment">
 
 
     <LinearLayout
@@ -14,14 +12,14 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/frag__new_chat_message"
+            android:id="@+id/frag__confirm_dialog_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/frag__new_chat_message"
+            android:text="Medium Text"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <EditText
-            android:id="@+id/frag__new_chat_input_text"
+            android:id="@+id/frag__confirm_dialog_input_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -34,16 +32,16 @@
 
 
             <Button
-                android:id="@+id/frag__new_chat_confirm"
+                android:id="@+id/frag__confirm_dialog_confirm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/frag__new_chat_confirm_button"
+                android:text="@string/dialog_confirm"
                 android:layout_weight="1" />
             <Button
-                android:id="@+id/frag__new_chat_cancel"
+                android:id="@+id/frag__confirm_dialog_cancel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/frag__new_chat_cancel_button"
+                android:text="@string/dialog_cancel"
                 android:layout_weight="1" />
 
 
