@@ -140,11 +140,9 @@ public class ContactBookActivity
                 break;
             default:
         }
-
-        Uri uri = PeerContract.withExtendedPath(peer.getId());
-        uri = PeerContract.withExtendedPath(uri, "messages");
+        
         SimpleQueryBuilder.executeQuery(this,
-                uri,
+                PeerContract.getMessagesUri(peer.getId()),
                 MessageContract.DEFAULT_ENTITY_CREATOR,
                 new ISimpleQueryListener<Message>() {
                     @Override
@@ -163,18 +161,5 @@ public class ContactBookActivity
 
     @Override
     public void getContactMessagesAsync(long peerId) {
-//        Uri uri = PeerContract.withExtendedPath(peerId);
-//        uri = PeerContract.withExtendedPath(uri, "messages");
-//        SimpleQueryBuilder.executeQuery(this,
-//                uri,
-//                MessageContract.DEFAULT_ENTITY_CREATOR,
-//                new ISimpleQueryListener<Message>() {
-//                    @Override
-//                    public void handleResults(List<Message> results) {
-//                        if (contactDetailsFragment != null){
-//                            contactDetailsFragment.setMessageList(results);
-//                        }
-//                    }
-//                });
     }
 }

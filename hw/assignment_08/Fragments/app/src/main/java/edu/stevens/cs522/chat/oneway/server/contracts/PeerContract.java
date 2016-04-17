@@ -76,6 +76,11 @@ public class PeerContract {
         }
     }
 
+    public static Uri getMessagesUri(long id) {
+        Uri uri = withExtendedPath(withExtendedPath(id), "messages");
+        return uri;
+    }
+
     public static long getId(Uri uri) {
         return Long.parseLong(uri.getLastPathSegment());
     }

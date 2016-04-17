@@ -417,9 +417,8 @@ public class ChatActivity
         Log.d(TAG, "returned from preferences");
         switch (requestCode) {
             case PREFERENCES_REQUEST:
-                userName = sharedPreferences.getString(App.PREF_KEY_USERNAME, App.PREF_DEFAULT_USER_NAME);
-
                 if (!sharedPreferences.contains(App.PREF_KEY_REGISTRATION_ID)) {
+                    userName = sharedPreferences.getString(App.PREF_KEY_USERNAME, App.PREF_DEFAULT_USER_NAME);
                     final UUID uuid = UUID.randomUUID();
 //                final UUID uuid = UUID.fromString("54947df8-0e9e-4471-a2f9-9af509fb5889");
                     ServiceHelper helper = new ServiceHelper();
@@ -467,7 +466,7 @@ public class ChatActivity
         switch (getResources().getConfiguration().orientation) {
             case Configuration.ORIENTATION_PORTRAIT:
                 if (findViewById(R.id.fragment_container) != null) {
-                    messageListCursor = null;
+//                    messageListCursor = null;
                     chatroomMessagesFragment = new ChatroomMessagesFragment();
                     Bundle args = new Bundle();
                     args.putParcelable(ChatroomMessagesFragment.CHATROOM_DETAILS_KEY, chatroom);
@@ -481,7 +480,7 @@ public class ChatActivity
                 break;
             case Configuration.ORIENTATION_LANDSCAPE:
                 if (findViewById(R.id.fragment_container) != null) {
-                    messageListCursor = null;
+//                    messageListCursor = null;
                     chatroomMessagesFragment = new ChatroomMessagesFragment();
                     Bundle args = new Bundle();
                     args.putParcelable(ChatroomMessagesFragment.CHATROOM_DETAILS_KEY, chatroom);
@@ -533,14 +532,12 @@ public class ChatActivity
 
     @Override
     public void getChatroomMessagesAsync(Chatroom chatroom) {
-        Uri uri = ChatroomContract.withExtendedPath(chatroom.getId());
-        uri = ChatroomContract.withExtendedPath(uri, "messages");
-
+        Uri uri = ChatroomContract.getMessagesUri(chatroom.getId());
 
         QueryBuilder.executeQuery(TAG,
                 this,
                 uri,
-                MessageContract.CURSOR_LOADER_ID + 100 + (int)chatroom.getId(),
+                MessageContract.CURSOR_LOADER_ID + (100 * (int)chatroom.getId()),
                 MessageContract.DEFAULT_ENTITY_CREATOR,
                 new IQueryListener<Message>() {
                     @Override
@@ -584,7 +581,7 @@ public class ChatActivity
                                     int dialogId = DIALOG_NEW_CHAT_CONFIRM_ID;
                                     int infoMsgId = R.string.frag__new_chat_error_message;
                                     int confirm = R.string.frag__new_chat_error_ack;
-                                    int cancel = 0;
+                                    int cancel = -1;
                                     String tag = "CHAT_CONFIRM_ID";
                                     ConfirmDialogFragment.launch(context, dialogId, tag, infoMsgId, confirm, cancel);
                                 } else {
@@ -631,15 +628,20 @@ public class ChatActivity
                 }
 
                 if (!inputText.isEmpty()) {
-                    currentChatroom = new Chatroom(sharedPreferences.getString(App.PREF_KEY_CHATROOM, App.PREF_DEFAULT_CHATROOM));
+                    userId = sharedPreferences.getLong(App.PREF_KEY_USERID, App.PREF_DEFAULT_USER_ID);
                     lastMessageSeqNum = sharedPreferences.getLong(App.PREF_KEY_LAST_SEQNUM, App.PREF_DEFAULT_LAST_SEQNUM);
+//                    currentChatroom = new Chatroom(sharedPreferences.getString(App.PREF_KEY_CHATROOM, App.PREF_DEFAULT_CHATROOM));
+                    userName = sharedPreferences.getString(App.PREF_KEY_USERNAME, App.PREF_DEFAULT_USER_NAME);
+                    String uuidString = sharedPreferences.getString(App.PREF_KEY_REGISTRATION_ID, "");
+                    if (!uuidString.isEmpty())
+                        registrationID = UUID.fromString(uuidString);
 
                     ArrayList<Message> messages = new ArrayList<>();
-                    Message message = new Message(0, inputText, userId, userName, currentChatroom.getId(), currentChatroom.getName(), System.currentTimeMillis());
+                    Message message = new Message(0, inputText, userId, userName, selectedChatroom.getId(), selectedChatroom.getName(), System.currentTimeMillis());
                     messages.add(message);
                     Peer peer = new Peer(userId, userName, 0, 0);
                     serviceHelper.syncAsync(ChatActivity.this, registrationID, peer, lastMessageSeqNum, messages);
-                    messageText.setText("");
+                    showChatroomDetails(selectedChatroom);
                 }
             }
         }

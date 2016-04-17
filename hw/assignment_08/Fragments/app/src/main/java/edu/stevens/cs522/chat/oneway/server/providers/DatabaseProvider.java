@@ -12,6 +12,7 @@ import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import android.util.Log;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -34,7 +35,7 @@ public class DatabaseProvider extends ContentProvider {
 
     private static final String[] DATABASE_CREATE;
     private static final String DATABASE_NAME = "chat_server.db";
-    private static final int DATABASE_VERSION = 10;
+    private static final int DATABASE_VERSION = 1;
 
     private SQLiteDatabase _db;
     private DBHelper _dbHelper;
@@ -101,7 +102,7 @@ public class DatabaseProvider extends ContentProvider {
         uriMatcher.addURI(ChatroomContract.AUTHORITY, chatroom_path, CHATROOM_ALL_ROWS);
         uriMatcher.addURI(ChatroomContract.AUTHORITY, chatroom_path + "/#", CHATROOM_SINGLE_ROW);
         uriMatcher.addURI(ChatroomContract.AUTHORITY, chatroom_path + "/*", CHATROOM_QUERY_NAME);
-        uriMatcher.addURI(ChatroomContract.AUTHORITY, chatroom_path + "/#/messages", PEER_ALL_MESSAGES);
+        uriMatcher.addURI(ChatroomContract.AUTHORITY, chatroom_path + "/#/messages", CHATROOM_ALL_MESSAGES);
 
         uriMatcher.addURI(PeerContract.AUTHORITY, peer_path, PEER_ALL_ROWS);
         uriMatcher.addURI(PeerContract.AUTHORITY, peer_path + "/#", PEER_SINGLE_ROW);
@@ -292,27 +293,32 @@ public class DatabaseProvider extends ContentProvider {
     @Override
     public Uri insert(Uri uri, ContentValues values) {
         long rowId = 0;
-        Uri instanceUri = null;
+        ArrayList<Uri> notificationUris = new ArrayList<>();
         switch (uriMatcher.match(uri)) {
             case CHATROOM_ALL_ROWS:
                 rowId = _db.insert(ChatroomContract.TABLE_NAME, null, values);
-                instanceUri = ChatroomContract.withExtendedPath(rowId);
+                notificationUris.add(ChatroomContract.withExtendedPath(rowId));
                 break;
             case PEER_ALL_ROWS:
                 rowId = _db.insert(PeerContract.TABLE_NAME, null, values);
-                instanceUri = PeerContract.withExtendedPath(rowId);
+                notificationUris.add(PeerContract.withExtendedPath(rowId));
                 break;
             case MESSAGE_ALL_ROWS:
                 rowId = _db.insert(MessageContract.TABLE_NAME, null, values);
-                instanceUri = MessageContract.withExtendedPath(rowId);
+                notificationUris.add(MessageContract.withExtendedPath(rowId));
+                notificationUris.add(PeerContract.getMessagesUri(values.getAsLong(MessageContract.PEER_ID)));
+                notificationUris.add(ChatroomContract.getMessagesUri(values.getAsLong(MessageContract.CHATROOM_ID)));
                 break;
             default:
                 throw new IllegalArgumentException("Unknown URI " + uri);
         }
 
-        if (rowId > 0 && instanceUri != null) {
-            getContext().getContentResolver().notifyChange(instanceUri, null);
-            return instanceUri;
+        if (rowId > 0 && notificationUris.size() > 0) {
+            for (Uri notifyUri :
+                    notificationUris) {
+                getContext().getContentResolver().notifyChange(notifyUri, null);
+            }
+            return notificationUris.get(0);
         }
         throw new SQLException("Insertion failed");
     }
@@ -321,12 +327,12 @@ public class DatabaseProvider extends ContentProvider {
     public int delete(Uri uri, String selection, String[] selectionArgs) {
         SQLiteQueryBuilder builder = new SQLiteQueryBuilder();
         int rowsDeleted = 0;
-        Uri notifyUri = null;
+        ArrayList<Uri> notificationUris = new ArrayList<>();
         switch (uriMatcher.match(uri)) {
             case CHATROOM_ALL_ROWS:
                 builder.setTables(ChatroomContract.TABLE_NAME);
                 rowsDeleted = _db.delete(ChatroomContract.TABLE_NAME, selection, selectionArgs);
-                notifyUri = ChatroomContract.CONTENT_URI;
+                notificationUris.add(ChatroomContract.CONTENT_URI);
                 break;
             case CHATROOM_SINGLE_ROW:
                 builder.setTables(ChatroomContract.TABLE_NAME);
@@ -335,12 +341,12 @@ public class DatabaseProvider extends ContentProvider {
                         uri.getLastPathSegment()
                 };
                 rowsDeleted = _db.delete(ChatroomContract.TABLE_NAME, selection, selectionArgs);
-                notifyUri = ChatroomContract.CONTENT_URI;
+                notificationUris.add(ChatroomContract.CONTENT_URI);
                 break;
             case PEER_ALL_ROWS:
                 builder.setTables(PeerContract.TABLE_NAME);
                 rowsDeleted = _db.delete(PeerContract.TABLE_NAME, selection, selectionArgs);
-                notifyUri = PeerContract.CONTENT_URI;
+                notificationUris.add(PeerContract.CONTENT_URI);
                 break;
             case PEER_SINGLE_ROW:
                 builder.setTables(PeerContract.TABLE_NAME);
@@ -349,12 +355,14 @@ public class DatabaseProvider extends ContentProvider {
                         uri.getLastPathSegment()
                 };
                 rowsDeleted = _db.delete(PeerContract.TABLE_NAME, selection, selectionArgs);
-                notifyUri = PeerContract.CONTENT_URI;
+                notificationUris.add(PeerContract.CONTENT_URI);
                 break;
             case MESSAGE_ALL_ROWS:
                 builder.setTables(MessageContract.TABLE_NAME);
                 rowsDeleted = _db.delete(MessageContract.TABLE_NAME, selection, selectionArgs);
-                notifyUri = MessageContract.CONTENT_URI;
+                notificationUris.add(MessageContract.CONTENT_URI);
+//                notificationUris.add(PeerContract.getMessagesUri(values.getAsLong(MessageContract.PEER_ID)));
+//                notificationUris.add(ChatroomContract.getMessagesUri(values.getAsLong(MessageContract.CHATROOM_ID)));
                 break;
             case MESSAGE_SINGLE_ROW:
                 builder.setTables(MessageContract.TABLE_NAME);
@@ -363,13 +371,18 @@ public class DatabaseProvider extends ContentProvider {
                         uri.getLastPathSegment()
                 };
                 rowsDeleted = _db.delete(MessageContract.TABLE_NAME, selection, selectionArgs);
-                notifyUri = MessageContract.CONTENT_URI;
+                notificationUris.add(MessageContract.CONTENT_URI);
+//                notificationUris.add(PeerContract.getMessagesUri(values.getAsLong(MessageContract.PEER_ID)));
+//                notificationUris.add(ChatroomContract.getMessagesUri(values.getAsLong(MessageContract.CHATROOM_ID)));
                 break;
             default:
                 throw new IllegalArgumentException("Unknown URI " + uri);
         }
         if(rowsDeleted > 0){
-            getContext().getContentResolver().notifyChange(notifyUri, null);
+            for (Uri notifyUri :
+                    notificationUris) {
+                getContext().getContentResolver().notifyChange(notifyUri, null);
+            }
         }
         return rowsDeleted;
     }
@@ -378,12 +391,12 @@ public class DatabaseProvider extends ContentProvider {
     public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
         SQLiteQueryBuilder builder = new SQLiteQueryBuilder();
         int rowsUpdated = 0;
-        Uri notifyUri = null;
+        ArrayList<Uri> notificationUris = new ArrayList<>();
         switch (uriMatcher.match(uri)) {
             case CHATROOM_ALL_ROWS:
                 builder.setTables(ChatroomContract.TABLE_NAME);
                 rowsUpdated = _db.update(ChatroomContract.TABLE_NAME, values, selection, selectionArgs);
-                notifyUri = ChatroomContract.CONTENT_URI;
+                notificationUris.add(ChatroomContract.CONTENT_URI);
                 break;
             case CHATROOM_SINGLE_ROW:
                 builder.setTables(ChatroomContract.TABLE_NAME);
@@ -392,12 +405,12 @@ public class DatabaseProvider extends ContentProvider {
                         uri.getLastPathSegment()
                 };
                 rowsUpdated = _db.update(ChatroomContract.TABLE_NAME, values, selection, selectionArgs);
-                notifyUri = ChatroomContract.CONTENT_URI;
+                notificationUris.add(ChatroomContract.CONTENT_URI);
                 break;
             case PEER_ALL_ROWS:
                 builder.setTables(PeerContract.TABLE_NAME);
                 rowsUpdated = _db.update(PeerContract.TABLE_NAME, values, selection, selectionArgs);
-                notifyUri = PeerContract.CONTENT_URI;
+                notificationUris.add(PeerContract.CONTENT_URI);
                 break;
             case PEER_SINGLE_ROW:
                 builder.setTables(PeerContract.TABLE_NAME);
@@ -406,12 +419,14 @@ public class DatabaseProvider extends ContentProvider {
                         uri.getLastPathSegment()
                 };
                 rowsUpdated = _db.update(PeerContract.TABLE_NAME, values, selection, selectionArgs);
-                notifyUri = PeerContract.CONTENT_URI;
+                notificationUris.add(PeerContract.CONTENT_URI);
                 break;
             case MESSAGE_ALL_ROWS:
                 builder.setTables(MessageContract.TABLE_NAME);
                 rowsUpdated = _db.update(MessageContract.TABLE_NAME, values, selection, selectionArgs);
-                notifyUri = MessageContract.CONTENT_URI;
+                notificationUris.add(MessageContract.CONTENT_URI);
+                notificationUris.add(PeerContract.getMessagesUri(values.getAsLong(MessageContract.PEER_ID)));
+                notificationUris.add(ChatroomContract.getMessagesUri(values.getAsLong(MessageContract.CHATROOM_ID)));
                 break;
             case MESSAGE_SINGLE_ROW:
                 builder.setTables(MessageContract.TABLE_NAME);
@@ -420,13 +435,18 @@ public class DatabaseProvider extends ContentProvider {
                         uri.getLastPathSegment()
                 };
                 rowsUpdated = _db.update(MessageContract.TABLE_NAME,values, selection, selectionArgs);
-                notifyUri = MessageContract.CONTENT_URI;
+                notificationUris.add(MessageContract.CONTENT_URI);
+                notificationUris.add(PeerContract.getMessagesUri(values.getAsLong(MessageContract.PEER_ID)));
+                notificationUris.add(ChatroomContract.getMessagesUri(values.getAsLong(MessageContract.CHATROOM_ID)));
                 break;
             default:
                 throw new IllegalArgumentException("Unknown URI " + uri);
         }
         if(rowsUpdated > 0){
-            getContext().getContentResolver().notifyChange(notifyUri, null);
+            for (Uri notifyUri :
+                    notificationUris) {
+                getContext().getContentResolver().notifyChange(notifyUri, null);
+            }
         }
         return rowsUpdated;
     }

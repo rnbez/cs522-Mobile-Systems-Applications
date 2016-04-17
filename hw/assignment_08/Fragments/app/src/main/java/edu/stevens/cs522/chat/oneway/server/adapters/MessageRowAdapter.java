@@ -55,10 +55,10 @@ public class MessageRowAdapter extends ResourceCursorAdapter {
         String format = "";
 
         if (today.get(Calendar.DAY_OF_YEAR) != msgDt.get(Calendar.DAY_OF_YEAR)){
-            format = "MM/dd/yyyy hh:mm";
+            format = "MM/dd/yyyy hh:mm aa";
         }
         else{
-            format = "hh:mm";
+            format = "hh:mm aa";
         }
         String dateString = new SimpleDateFormat(format).format(msgDt.getTime());
         dateView.setText(dateString);

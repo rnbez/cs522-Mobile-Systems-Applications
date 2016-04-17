@@ -102,10 +102,9 @@ public class ContactDetailsFragment extends Fragment {
         if (this.contact != null) {
 //            this.listener.getContactMessagesAsync(this.contact.getId());
             final Activity activity = getActivity();
-            Uri uri = PeerContract.withExtendedPath(this.contact.getId());
-            uri = PeerContract.withExtendedPath(uri, "messages");
+
             SimpleQueryBuilder.executeQuery(activity,
-                    uri,
+                    PeerContract.getMessagesUri(this.contact.getId()),
                     MessageContract.DEFAULT_ENTITY_CREATOR,
                     new ISimpleQueryListener<Message>() {
                         @Override

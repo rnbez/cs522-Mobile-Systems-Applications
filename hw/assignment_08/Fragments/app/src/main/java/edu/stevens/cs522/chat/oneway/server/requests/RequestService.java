@@ -8,15 +8,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.ResultReceiver;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Toast;
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.util.List;
-import java.util.UUID;
 
 import edu.stevens.cs522.chat.oneway.server.contracts.MessageContract;
 import edu.stevens.cs522.chat.oneway.server.contracts.PeerContract;
@@ -52,8 +50,11 @@ public class RequestService extends IntentService {
     public static final String EXTRA_REGISTER_REG_ID = "extra_register_reg_id";
     public static final String EXTRA_POST_MSG_RESULT_ID = "extra_post_msg_result_id";
 
+    Handler toastHandler;
+
     public RequestService() {
         super("RequestService");
+        toastHandler = new Handler();
     }
 
     public String setServerHost() {
@@ -80,7 +81,8 @@ public class RequestService extends IntentService {
             editor.putLong(App.PREF_KEY_USERID, res.getId());
             editor.apply();
 
-            Toast.makeText(this, "Registration Succeeded", Toast.LENGTH_LONG).show();
+            toastHandler.post(new DisplayToast(this, "Registration Succeeded"));
+//            Toast.makeText(getApplicationContext(), "Registration Succeeded", Toast.LENGTH_LONG).show();
 
             return;
         }
@@ -217,4 +219,17 @@ public class RequestService extends IntentService {
 
     }
 
+    public class DisplayToast implements Runnable {
+        private final Context context;
+        String message;
+
+        public DisplayToast(Context context, String text){
+            this.context = context;
+            message = text;
+        }
+
+        public void run(){
+            Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+        }
+    }
 }

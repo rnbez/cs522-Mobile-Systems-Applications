@@ -84,7 +84,7 @@ public class ConfirmDialogFragment extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.frag__new_message, container, false);
+        View view = inflater.inflate(R.layout.frag__confirm_dialog, container, false);
         Bundle args = getArguments();
 
         TextView messageView = (TextView) view.findViewById(R.id.frag__confirm_dialog_message);

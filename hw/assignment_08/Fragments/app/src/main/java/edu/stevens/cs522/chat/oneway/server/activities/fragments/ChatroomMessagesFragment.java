@@ -54,12 +54,12 @@ public class ChatroomMessagesFragment extends Fragment {
 
         cursorAdapter = new MessageRowAdapter(getActivity(), null);
         infoMsgView = (TextView) view.findViewById(R.id.frag__chatroom_messages_info);
+        listView = (ListView) view.findViewById(R.id.frag__chatroom_messages_list);
+        listView.setAdapter(cursorAdapter);
 
         Bundle args = getArguments();
         if (args != null && args.containsKey(CHATROOM_DETAILS_KEY)) {
             chatroom = args.getParcelable(CHATROOM_DETAILS_KEY);
-            listView = (ListView) view.findViewById(R.id.frag__chatroom_messages_list);
-            listView.setAdapter(cursorAdapter);
             infoMsgView.setVisibility(View.GONE);
         } else {
             infoMsgView.setText(getResources().getText(R.string.frag__chatroom_messages_no_chat));
