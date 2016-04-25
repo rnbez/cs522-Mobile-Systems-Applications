@@ -2,7 +2,6 @@ package edu.stevens.cs522.chat.oneway.server.requests;
 
 import android.os.Parcel;
 import android.util.JsonWriter;
-import android.annotation.SuppressLint;
 import android.net.Uri;
 import android.util.JsonReader;
 import android.util.JsonToken;
@@ -12,7 +11,6 @@ import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URLEncoder;
-import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.UUID;
@@ -51,7 +49,7 @@ public class Synchronize extends Request {
     public Map<String, String> getRequestHeaders() {
         Map<String, String> map = super.headers;
         map.put("Content-Type", "application/json");
-        map.put("X-latitude", String.valueOf(client.getLatidute()));
+        map.put("X-latitude", String.valueOf(client.getLatitute()));
         map.put("X-longitude", String.valueOf(client.getLongitude()));
         return map;
     }
@@ -90,6 +88,10 @@ public class Synchronize extends Request {
             wr.value(m.getChatroom());
             wr.name("timestamp");
             wr.value(m.getTimestamp());
+            wr.name("latitude");
+            wr.value(m.getLatitute());
+            wr.name("longitude");
+            wr.value(m.getLongitude());
             wr.name("text");
             wr.value(m.getMessageText());
             wr.endObject();
@@ -127,9 +129,11 @@ public class Synchronize extends Request {
                                     case "sender":
                                         client.setName(rd.nextString());
                                         break;
-                                    case "X-latitude":
-                                    case "X-longitude":
-                                        rd.nextDouble();
+                                    case "latitude":
+                                        client.setLatitute(rd.nextDouble());
+                                        break;
+                                    case "longitude":
+                                        client.setLongitude(rd.nextDouble());
                                         break;
                                     default:
                                         throw new IllegalArgumentException("Unknown Label " + label);
@@ -151,6 +155,12 @@ public class Synchronize extends Request {
                                 switch (label) {
                                     case "timestamp":
                                         message.setTimestamp(rd.nextLong());
+                                        break;
+                                    case "latitude":
+                                        message.setLatitute(rd.nextDouble());
+                                        break;
+                                    case "longitude":
+                                        message.setLongitude(rd.nextDouble());
                                         break;
                                     case "seqnum":
                                         message.setSequentialNumber(rd.nextLong());

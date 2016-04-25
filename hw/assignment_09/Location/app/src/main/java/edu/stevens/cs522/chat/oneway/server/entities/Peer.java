@@ -5,9 +5,6 @@ import android.database.Cursor;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
-
 import edu.stevens.cs522.chat.oneway.server.contracts.PeerContract;
 
 /**
@@ -16,7 +13,7 @@ import edu.stevens.cs522.chat.oneway.server.contracts.PeerContract;
 public class Peer implements Parcelable{
     protected long id;
     protected String name;
-    protected double latidute;
+    protected double latitute;
     protected double longitude;
 //    protected InetAddress address;
 //    protected String port;
@@ -31,27 +28,25 @@ public class Peer implements Parcelable{
 //        }
     }
 
-    public Peer(String name, double latidute, double longitude) {
+    public Peer(String name, double latitute, double longitude) {
         this.name = name;
-//        this.latidute = latidute;
-//        this.longitude = longitude;
-        this.latidute = 40.7439905;
-        this.longitude = -74.0323626;
+        this.latitute = latitute;
+        this.longitude = longitude;
     }
 
-    public Peer(long id, String name, double latidute, double longitude) {
+    public Peer(long id, String name, double latitute, double longitude) {
         this.id = id;
         this.name = name;
-//        this.latidute = latidute;
-//        this.longitude = longitude;
-        this.latidute = 40.7439905;
-        this.longitude = -74.0323626;
+        this.latitute = latitute;
+        this.longitude = longitude;
+//        this.latitute = 40.7439905;
+//        this.longitude = -74.0323626;
     }
 
     protected Peer(Parcel in) {
         id = in.readLong();
         name = in.readString();
-        latidute = in.readDouble();
+        latitute = in.readDouble();
         longitude = in.readDouble();
 
 //        address = (InetAddress) in.readValue(InetAddress.class.getClassLoader());
@@ -61,7 +56,7 @@ public class Peer implements Parcelable{
     public Peer(Cursor in){
         id = PeerContract.getId(in);
         name = PeerContract.getName(in);
-        latidute = PeerContract.getLatitude(in);
+        latitute = PeerContract.getLatitude(in);
         longitude = PeerContract.getLongitude(in);
 //        address = PeerContract.getAddress(in);
 //        port = PeerContract.getPort(in);
@@ -88,7 +83,7 @@ public class Peer implements Parcelable{
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeLong(id);
         dest.writeString(name);
-        dest.writeDouble(latidute);
+        dest.writeDouble(latitute);
         dest.writeDouble(longitude);
 //        dest.writeValue(address);
 //        dest.writeString(port);
@@ -99,7 +94,7 @@ public class Peer implements Parcelable{
 //            PeerContract.putId(values, id);
 //        }
         PeerContract.putName(values, name);
-        PeerContract.putLatitude(values, latidute);
+        PeerContract.putLatitude(values, latitute);
         PeerContract.putLongitude(values, longitude);
 //        PeerContract.putAddress(values, address);
 //        PeerContract.putPort(values, port);
@@ -121,12 +116,12 @@ public class Peer implements Parcelable{
         this.name = name;
     }
 
-    public double getLatidute() {
-        return latidute;
+    public double getLatitute() {
+        return latitute;
     }
 
-    public void setLatidute(double latidute) {
-        this.latidute = latidute;
+    public void setLatitute(double latitute) {
+        this.latitute = latitute;
     }
 
     public double getLongitude() {

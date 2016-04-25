@@ -34,7 +34,7 @@ public class DatabaseProvider extends ContentProvider {
     public static final Uri MESSAGE_CONTENT_URI = MessageContract.CONTENT_URI;
 
     private static final String[] DATABASE_CREATE;
-    private static final String DATABASE_NAME = "chat_server.db";
+    private static final String DATABASE_NAME = "chat.db";
     private static final int DATABASE_VERSION = 1;
 
     private SQLiteDatabase _db;
@@ -260,6 +260,8 @@ public class DatabaseProvider extends ContentProvider {
                         MessageContract.SEQ_NUM,
                         MessageContract.MESSAGE_TEXT,
                         MessageContract.TIMESTAMP,
+                        MessageContract.LATITUDE_FULL,
+                        MessageContract.LONGITUDE_FULL,
                         MessageContract.PEER_ID,
                         MessageContract.SENDER,
                         MessageContract.CHATROOM_ID,

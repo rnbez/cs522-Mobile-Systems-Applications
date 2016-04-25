@@ -22,6 +22,8 @@ public class Message implements Parcelable {
     protected long sequentialNumber;
     protected String messageText;
     protected long timestamp;
+    protected double latitute;
+    protected double longitude;
     protected long peerId;
     protected String sender;
     protected long chatroomId;
@@ -39,16 +41,18 @@ public class Message implements Parcelable {
         }
     }
 
-    public Message(long sequentialNumber, String messageText, String sender, String chatroom) {
+    public Message(long sequentialNumber, String messageText, String sender, String chatroom, double latitute, double longitude) {
 //        this.id = id;
         this.sequentialNumber = sequentialNumber;
         this.messageText = messageText;
         this.sender = sender;
         this.chatroom = chatroom;
+        this.latitute = latitute;
+        this.longitude = longitude;
         this.timestamp = System.currentTimeMillis();
     }
 
-    public Message(long sequentialNumber, String messageText, long peerId, String sender, long chatroomId, String chatroom, long timestamp) {
+    public Message(long sequentialNumber, String messageText, long peerId, String sender, long chatroomId, String chatroom, long timestamp, double latitute, double longitude) {
         this.chatroom = chatroom;
         this.chatroomId = chatroomId;
         this.messageText = messageText;
@@ -56,6 +60,8 @@ public class Message implements Parcelable {
         this.sender = sender;
         this.sequentialNumber = sequentialNumber;
         this.timestamp = timestamp;
+        this.latitute = latitute;
+        this.longitude = longitude;
     }
 
     public Message(Cursor in) {
@@ -63,6 +69,8 @@ public class Message implements Parcelable {
         sequentialNumber = MessageContract.getSequentialNumber(in);
         messageText = MessageContract.getMessage(in);
         timestamp = MessageContract.getTimestamp(in);
+        latitute = MessageContract.getLatitude(in);
+        longitude = MessageContract.getLongitude(in);
         sender = MessageContract.getSender(in);
         peerId = MessageContract.getPeerId(in);
         chatroom = MessageContract.getChatroom(in);
@@ -74,6 +82,8 @@ public class Message implements Parcelable {
         sequentialNumber = in.readLong();
         messageText = in.readString();
         timestamp = in.readLong();
+        latitute = in.readDouble();
+        longitude = in.readDouble();
         peerId = in.readLong();
         sender = in.readString();
         chatroomId = in.readLong();
@@ -103,6 +113,8 @@ public class Message implements Parcelable {
         dest.writeLong(sequentialNumber);
         dest.writeString(messageText);
         dest.writeLong(timestamp);
+        dest.writeDouble(latitute);
+        dest.writeDouble(longitude);
         dest.writeLong(peerId);
         dest.writeString(sender);
         dest.writeLong(chatroomId);
@@ -116,6 +128,8 @@ public class Message implements Parcelable {
         MessageContract.putTimestamp(values, timestamp);
         MessageContract.putPeerId(values, peerId);
         MessageContract.putChatroomId(values, chatroomId);
+        MessageContract.putLatitude(values, latitute);
+        MessageContract.putLongitude(values, longitude);
     }
 
     @Override
@@ -185,6 +199,22 @@ public class Message implements Parcelable {
 
     public void setChatroomId(long chatroomId) {
         this.chatroomId = chatroomId;
+    }
+
+    public double getLatitute() {
+        return latitute;
+    }
+
+    public void setLatitute(double latitute) {
+        this.latitute = latitute;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
     }
 
     public static Creator<Message> getCREATOR() {

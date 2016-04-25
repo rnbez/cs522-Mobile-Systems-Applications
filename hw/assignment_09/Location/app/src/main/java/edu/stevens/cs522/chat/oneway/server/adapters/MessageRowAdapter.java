@@ -47,21 +47,14 @@ public class MessageRowAdapter extends ResourceCursorAdapter {
         TextView senderView = (TextView) view.findViewById(R.id.msg_row_sender);
         TextView statusView = (TextView) view.findViewById(R.id.msg_row_status);
         TextView dateView = (TextView) view.findViewById(R.id.msg_row_datetime);
+        TextView latitudeView = (TextView) view.findViewById(R.id.msg_row_latitude);
+        TextView longitudeView = (TextView) view.findViewById(R.id.msg_row_longitude);
 
         contentView.setText(MessageContract.getMessage(cursor));
-        Calendar msgDt = Calendar.getInstance();
-        msgDt.setTimeInMillis(MessageContract.getTimestamp(cursor));
-        Calendar today = Calendar.getInstance();
-        String format = "";
-
-        if (today.get(Calendar.DAY_OF_YEAR) != msgDt.get(Calendar.DAY_OF_YEAR)){
-            format = "MM/dd/yyyy hh:mm aa";
-        }
-        else{
-            format = "hh:mm aa";
-        }
-        String dateString = new SimpleDateFormat(format).format(msgDt.getTime());
-        dateView.setText(dateString);
+        latitudeView.setText(String.valueOf(MessageContract.getLatitude(cursor)));
+        longitudeView.setText(String.valueOf(MessageContract.getLongitude(cursor)));
+        long timestamp = MessageContract.getTimestamp(cursor);
+        dateView.setText(getDateString(timestamp));
 
         String sender = MessageContract.getSender(cursor);
         if(sender.equals(userName)) {
@@ -80,5 +73,20 @@ public class MessageRowAdapter extends ResourceCursorAdapter {
         }
 
 
+    }
+
+    private String getDateString(long timestamp) {
+        Calendar msgDt = Calendar.getInstance();
+        msgDt.setTimeInMillis(timestamp);
+        Calendar today = Calendar.getInstance();
+        String format = "";
+
+        if (today.get(Calendar.DAY_OF_YEAR) != msgDt.get(Calendar.DAY_OF_YEAR)){
+            format = "MM/dd/yyyy hh:mm aa";
+        }
+        else{
+            format = "hh:mm aa";
+        }
+        return new SimpleDateFormat(format).format(msgDt.getTime());
     }
 }

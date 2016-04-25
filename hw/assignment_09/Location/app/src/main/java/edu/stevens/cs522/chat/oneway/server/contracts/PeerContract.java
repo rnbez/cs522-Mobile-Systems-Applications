@@ -105,8 +105,8 @@ public class PeerContract {
         return cursor.getDouble(cursor.getColumnIndexOrThrow(LATITUDE));
     }
 
-    public static void putLatitude(ContentValues values, double latidute) {
-        values.put(LATITUDE, latidute);
+    public static void putLatitude(ContentValues values, double latitude) {
+        values.put(LATITUDE, latitude);
     }
 
     public static double getLongitude(Cursor cursor) {

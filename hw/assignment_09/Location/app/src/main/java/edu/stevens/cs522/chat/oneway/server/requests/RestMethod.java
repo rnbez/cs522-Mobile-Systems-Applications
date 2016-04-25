@@ -69,43 +69,6 @@ public class RestMethod {
         return response;
     }
 
-    public Response perform(PostMessage request) {
-        Response response = null;
-        HttpURLConnection connection = null;
-        try {
-            URL url = new URL(request.getRequestUri().toString());
-            connection = (HttpURLConnection) url.openConnection();
-//            connection.setRequestProperty("USER_AGENT", "");
-            connection.setRequestMethod("POST");
-            connection.setUseCaches(false);
-            connection.setRequestProperty("CONNECTION", "Keep-Alive");
-//            connection.setConnectTimeout(...);
-//            connection.setReadTimeout(...);
-
-            Map<String, String> headers = request.getRequestHeaders();
-            for (Map.Entry<String, String> header : headers.entrySet()) {
-                connection.addRequestProperty(header.getKey(),
-                        header.getValue());
-            }
-
-            outputRequestEntity(connection, request);
-            throwErrors(connection);
-            JsonReader rd = new JsonReader(
-                    new BufferedReader(
-                            new InputStreamReader(connection.getInputStream())));
-            response = request.getResponse(connection, rd);
-            rd.close();
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (connection != null) connection.disconnect();
-        }
-
-        return response;
-    }
-
     public HttpURLConnection connection = null;
     public OutputStream uploadStream;
     public InputStream downloadStream;

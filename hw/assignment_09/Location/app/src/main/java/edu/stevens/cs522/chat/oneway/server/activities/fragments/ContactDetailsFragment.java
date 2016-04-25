@@ -2,10 +2,8 @@ package edu.stevens.cs522.chat.oneway.server.activities.fragments;
 
 import android.app.Activity;
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.annotation.StringDef;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -63,7 +61,7 @@ public class ContactDetailsFragment extends Fragment {
             contact = args.getParcelable(PEER_DETAILS_KEY);
 
             nameView.setText(contact.getName());
-            latitudeView.setText(String.valueOf(contact.getLatidute()));
+            latitudeView.setText(String.valueOf(contact.getLatitute()));
             longitudeView.setText(String.valueOf(contact.getLongitude()));
 
             messageList = new ArrayList<>();

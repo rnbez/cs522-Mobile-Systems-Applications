@@ -18,6 +18,8 @@ public class App {
     public static final String PREF_KEY_USERNAME = "username";
     public static final String PREF_KEY_HOST = "host";
     public static final String PREF_KEY_REGISTRATION_ID = "reg_id";
+    public static final String PREF_KEY_LATITUDE = "latitude";
+    public static final String PREF_KEY_LONGITUDE = "longitude";
 
     final static public long PREF_DEFAULT_USER_ID = 0;
     final static public long PREF_DEFAULT_LAST_SEQNUM = 0;

@@ -220,11 +220,6 @@ public class RequestProcessor {
         }
     }
 
-    public PostMessageResponse perform(PostMessage request) {
-//    TODO: call RestMethod
-        return (PostMessageResponse) new RestMethod().perform(request);
-    }
-
     public boolean isOnline(Context context) {
         android.net.ConnectivityManager cm = (android.net.ConnectivityManager) context.getSystemService(context.CONNECTIVITY_SERVICE);
         return cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnectedOrConnecting();

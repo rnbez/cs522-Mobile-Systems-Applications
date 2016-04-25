@@ -124,6 +124,8 @@ public class ChatActivity
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
     private GoogleApiClient client;
+    private double userLatitude;
+    private double userLongitude;
 
 
     @Override
@@ -144,6 +146,8 @@ public class ChatActivity
         lastMessageSeqNum = sharedPreferences.getLong(App.PREF_KEY_LAST_SEQNUM, App.PREF_DEFAULT_LAST_SEQNUM);
         currentChatroom = new Chatroom(sharedPreferences.getString(App.PREF_KEY_CHATROOM, App.PREF_DEFAULT_CHATROOM));
         userName = sharedPreferences.getString(App.PREF_KEY_USERNAME, App.PREF_DEFAULT_USER_NAME);
+        userLatitude = (double) sharedPreferences.getFloat(App.PREF_KEY_LATITUDE, 0);
+        userLongitude =(double) sharedPreferences.getFloat(App.PREF_KEY_LONGITUDE, 0);
         String uuidString = sharedPreferences.getString(App.PREF_KEY_REGISTRATION_ID, "");
         if (!uuidString.isEmpty())
             registrationID = UUID.fromString(uuidString);
@@ -154,25 +158,6 @@ public class ChatActivity
 
         launchFragments(hasSavedInstanceState);
 
-//        cursorAdapter = new MessageRowAdapter(this, null);
-//        msgList = (ListView) findViewById(R.id.main_lst_messages);
-//        msgList.setAdapter(cursorAdapter);
-
-
-//        if (currentChatroom.getId() == 0) {
-//            ContentResolver cr = this.getContentResolver();
-//            ContentValues values = new ContentValues();
-//            currentChatroom.writeToProvider(values);
-//            Uri uri = cr.insert(ChatroomContract.CONTENT_URI, values);
-//            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-//            SharedPreferences.Editor editor = prefs.edit();
-//            currentChatroom.setId(Long.valueOf(uri.getLastPathSegment()));
-//            editor.putString(App.PREF_KEY_CHATROOM, currentChatroom.toString());
-//            editor.apply();
-//        }
-
-//        clientPort = Integer.valueOf(prefs.getString(PreferencesActivity.PREF_KEY_PORT, String.valueOf(DEFAULT_CLIENT_PORT)));
-
         serviceHelper = new ServiceHelper();
         if (isOnline() && registrationID != null) {
             Peer peer = new Peer(userId, userName, 0, 0);
@@ -182,58 +167,10 @@ public class ChatActivity
         alarmMgr = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
 
 
-//        messageText = (EditText) findViewById(R.id.main_edt_message);
-//        sendButton = (Button) findViewById(R.id.main_btn_send);
-//        sendButton.setEnabled(registrationID != null);
-//        sendButton.setOnClickListener(new OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (!isOnline()) {
-////                    long delay = 10 * 1000;
-////                    AlarmManager mgr = (AlarmManager) ChatActivity.this.getSystemService(Context.ALARM_SERVICE);
-////                    Intent intent = new Intent(ChatActivity.this, SynchronizationAlarmReceiver.class);
-////                    intent.putExtra(SynchronizationAlarmReceiver.EXTRA_DELAY, delay);
-////                    PendingIntent listener = PendingIntent.getBroadcast(
-////                            ChatActivity.this,
-////                            BROADCAST_NETWORK_REQUEST,
-////                            intent,
-////                            0);
-////
-////                    mgr.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + delay, listener);
-//
-//                    Toast.makeText(getApplicationContext(), "You're offline.", Toast.LENGTH_LONG).show();
-//                }
-//
-//                String msg = messageText.getText().toString();
-//                if (!msg.isEmpty()) {
-//                    ArrayList<Message> messages = new ArrayList<Message>();
-//                    Message message = new Message(0, msg, userId, userName, currentChatroom.getId(), currentChatroom.getName(), System.currentTimeMillis());
-//                    messages.add(message);
-//                    lastMessageSeqNum = sharedPreferences.getLong(App.PREF_KEY_LAST_SEQNUM, App.PREF_DEFAULT_LAST_SEQNUM);
-//                    Peer peer = new Peer(userId, userName, 0, 0);
-//                    serviceHelper.syncAsync(ChatActivity.this, registrationID, peer, lastMessageSeqNum, messages);
-//                    messageText.setText("");
-//                }
-//            }
-//        });
-
         registerResultReceiverWrapper = new ResultReceiverWrapper(new Handler());
         registerResultReceiver = new ResultReceiverWrapper.IReceiver() {
             @Override
             public void onReceiveResult(int resultCode, Bundle resultData) {
-//                Log.d(TAG, String.valueOf(resultCode));
-//                long id = resultData.getLong(ServiceHelper.EXTRA_REGISTER_RESULT_ID);
-//                UUID uuid = UUID.fromString(resultData.getString(ServiceHelper.EXTRA_REGISTER_REG_ID));
-//
-//                SharedPreferences.Editor editor = ChatActivity.this.sharedPreferences.edit();
-//                editor.putString(App.PREF_KEY_REGISTRATION_ID, uuid.toString());
-//                editor.putLong(App.PREF_KEY_USERID, id);
-//                editor.apply();
-//
-//                registrationID = uuid;
-//                userId = id;
-//
-//                Toast.makeText(getApplicationContext(), "Registration Succeeded", Toast.LENGTH_LONG).show();
             }
         };
 
@@ -245,27 +182,7 @@ public class ChatActivity
                 updateListView();
             }
         };
-//        broadcastRceiver = new MessageReceiver();
-//        resultReceicerWrapper = new ResultReceiverWrapper(new Handler());
-//        resultReceiver = new ResultReceiverWrapper.IReceiver() {
-//            @Override
-//            public void onReceiveResult(int resultCode, Bundle resultData) {
-//                String toastMessage = "";
-//                switch (resultCode) {
-//                    case ChatSendService.RESULT_RECEIVER_RESULT_CODE_SUCCESS:
-//                        toastMessage = "Your message was sent!";
-//                        messageText.setText("");
-//                        break;
-//                    case ChatSendService.RESULT_RECEIVER_RESULT_CODE_ERROR:
-//                        toastMessage = "Sorry, an unexpected error has occurred. Try again.";
-//                        break;
-//                    default:
-//                        throw new IllegalArgumentException("Unknown Result Code: " + resultCode);
-//                }
-//                Toast.makeText(getApplicationContext(), toastMessage, Toast.LENGTH_LONG).show();
-//
-//            }
-//        };
+
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
@@ -323,13 +240,6 @@ public class ChatActivity
             long intervalMillis = 10 * 1000;
             alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP, triggerAtMillis, intervalMillis, alarmIntent);
         }
-//        client.connect();
-//        Intent receiverIntent = new Intent(this, ChatReceiverService.class);
-//        receiverIntent.putExtra(ChatReceiverService.EXTRA_SOCKET_PORT, clientPort);
-//        startService(receiverIntent);
-//
-//        IntentFilter filter = new IntentFilter(ChatReceiverService.NEW_MESSAGE_BROADCAST);
-//        registerReceiver(broadcastRceiver, filter);
 
     }
 
@@ -600,21 +510,7 @@ public class ChatActivity
                                             SharedPreferences.Editor editor = ChatActivity.this.sharedPreferences.edit();
                                             editor.putString(App.PREF_KEY_CHATROOM, currentChatroom.toString());
                                             editor.apply();
-//                                            if (chatroomListFragment != null) {
-//                                                int pos = 0;
-//                                                if (chatroomListCursor.moveToFirst()) {
-//                                                    do {
-//                                                        Chatroom cursorChat = new Chatroom(chatroomListCursor);
-//                                                        if (cursorChat.getId() == currentChatroom.getId()){
-//                                                            pos = chatroomListCursor.getPosition();
-//                                                            break;
-//                                                        }
-//                                                    }while (chatroomListCursor.moveToNext());
 //
-//                                                    chatroomListFragment.setSelectItem(pos);
-//                                                }
-//                                            }
-//                                            showChatroomDetails(currentChatroom);
                                         }
                                     });
                                 }
@@ -638,6 +534,8 @@ public class ChatActivity
                 if (!inputText.isEmpty()) {
                     userId = sharedPreferences.getLong(App.PREF_KEY_USERID, App.PREF_DEFAULT_USER_ID);
                     lastMessageSeqNum = sharedPreferences.getLong(App.PREF_KEY_LAST_SEQNUM, App.PREF_DEFAULT_LAST_SEQNUM);
+                    userLatitude = (double) sharedPreferences.getFloat(App.PREF_KEY_LATITUDE, 0);
+                    userLongitude =(double) sharedPreferences.getFloat(App.PREF_KEY_LONGITUDE, 0);
 //                    currentChatroom = new Chatroom(sharedPreferences.getString(App.PREF_KEY_CHATROOM, App.PREF_DEFAULT_CHATROOM));
                     userName = sharedPreferences.getString(App.PREF_KEY_USERNAME, App.PREF_DEFAULT_USER_NAME);
                     String uuidString = sharedPreferences.getString(App.PREF_KEY_REGISTRATION_ID, "");
@@ -645,9 +543,13 @@ public class ChatActivity
                         registrationID = UUID.fromString(uuidString);
 
                     ArrayList<Message> messages = new ArrayList<>();
-                    Message message = new Message(0, inputText, userId, userName, selectedChatroom.getId(), selectedChatroom.getName(), System.currentTimeMillis());
+                    Message message = new Message(0, inputText,
+                            userId, userName,
+                            selectedChatroom.getId(), selectedChatroom.getName(),
+                            System.currentTimeMillis(),
+                            userLatitude, userLongitude);
                     messages.add(message);
-                    Peer peer = new Peer(userId, userName, 0, 0);
+                    Peer peer = new Peer(userId, userName, userLatitude, userLongitude);
                     serviceHelper.syncAsync(ChatActivity.this, registrationID, peer, lastMessageSeqNum, messages);
                     showChatroomDetails(selectedChatroom);
                 }
@@ -660,31 +562,6 @@ public class ChatActivity
         if (dialog != null)
             dialog.dismiss();
     }
-
-//    public class MessageReceiver extends BroadcastReceiver {
-//
-//        @Override
-//        public void onReceive(Context context, Intent intent) {
-//            QueryBuilder.executeQuery(TAG,
-//                    ChatActivity.this,
-//                    MessageContract.CONTENT_URI,
-//                    MessageContract.CURSOR_LOADER_ID,
-//                    MessageContract.DEFAULT_ENTITY_CREATOR,
-//                    new IQueryListener<Message>() {
-//                        @Override
-//                        public void handleResults(TypedCursor<Message> cursor) {
-//                            cursorAdapter.swapCursor(cursor.getCursor());
-//                        }
-//
-//                        @Override
-//                        public void closeResults() {
-//                            cursorAdapter.swapCursor(null);
-//                        }
-//
-//                    });
-//        }
-//    }
-
 
     static public class SynchronizationAlarmReceiver extends BroadcastReceiver {
 
@@ -704,11 +581,13 @@ public class ChatActivity
                 long userId = prefs.getLong(App.PREF_KEY_USERID, App.PREF_DEFAULT_USER_ID);
                 long lastMessageSeqNum = prefs.getLong(App.PREF_KEY_LAST_SEQNUM, App.PREF_DEFAULT_LAST_SEQNUM);
                 String userName = prefs.getString(App.PREF_KEY_USERNAME, App.PREF_DEFAULT_USER_NAME);
+                double userLatitude = (double) prefs.getFloat(App.PREF_KEY_LATITUDE, 0);
+                double userLongitude =(double) prefs.getFloat(App.PREF_KEY_LONGITUDE, 0);
 
                 String uuidString = prefs.getString(App.PREF_KEY_REGISTRATION_ID, "");
                 if (!uuidString.isEmpty()) {
                     UUID registrationID = UUID.fromString(uuidString);
-                    Peer peer = new Peer(userId, userName, 0, 0);
+                    Peer peer = new Peer(userId, userName, userLatitude, userLongitude);
                     serviceHelper.syncAsync(context, registrationID, peer, lastMessageSeqNum, new ArrayList<Message>());
                 }
             }

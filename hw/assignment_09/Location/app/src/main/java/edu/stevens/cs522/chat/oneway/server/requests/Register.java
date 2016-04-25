@@ -3,7 +3,6 @@ package edu.stevens.cs522.chat.oneway.server.requests;
 import android.annotation.SuppressLint;
 import android.net.Uri;
 import android.os.Parcel;
-import android.os.ParcelUuid;
 import android.util.JsonReader;
 
 import java.io.IOException;
@@ -48,7 +47,7 @@ public class Register extends Request {
     @Override
     public Map<String, String> getRequestHeaders() {
         Map<String, String> map = super.headers;
-        map.put("X-latitude", String.valueOf(client.getLatidute()));
+        map.put("X-latitude", String.valueOf(client.getLatitute()));
         map.put("X-longitude", String.valueOf(client.getLongitude()));
         return map;
     }

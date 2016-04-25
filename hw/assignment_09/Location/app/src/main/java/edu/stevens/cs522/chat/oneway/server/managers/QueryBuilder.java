@@ -98,6 +98,8 @@ public class QueryBuilder<T> implements LoaderManager.LoaderCallbacks<Cursor> {
                             MessageContract.SEQ_NUM,
                             MessageContract.MESSAGE_TEXT,
                             MessageContract.TIMESTAMP,
+                            MessageContract.LATITUDE_FULL,
+                            MessageContract.LONGITUDE_FULL,
                             MessageContract.SENDER,
                     };
                     break;
