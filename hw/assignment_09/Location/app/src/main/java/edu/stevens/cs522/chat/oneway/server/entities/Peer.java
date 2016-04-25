@@ -15,6 +15,7 @@ public class Peer implements Parcelable{
     protected String name;
     protected double latitute;
     protected double longitude;
+    protected String address;
 //    protected InetAddress address;
 //    protected String port;
 
@@ -32,6 +33,7 @@ public class Peer implements Parcelable{
         this.name = name;
         this.latitute = latitute;
         this.longitude = longitude;
+        this.address = "-";
     }
 
     public Peer(long id, String name, double latitute, double longitude) {
@@ -39,6 +41,7 @@ public class Peer implements Parcelable{
         this.name = name;
         this.latitute = latitute;
         this.longitude = longitude;
+        this.address = "-";
 //        this.latitute = 40.7439905;
 //        this.longitude = -74.0323626;
     }
@@ -48,6 +51,7 @@ public class Peer implements Parcelable{
         name = in.readString();
         latitute = in.readDouble();
         longitude = in.readDouble();
+        address = in.readString();
 
 //        address = (InetAddress) in.readValue(InetAddress.class.getClassLoader());
 //        port = in.readString();
@@ -58,8 +62,7 @@ public class Peer implements Parcelable{
         name = PeerContract.getName(in);
         latitute = PeerContract.getLatitude(in);
         longitude = PeerContract.getLongitude(in);
-//        address = PeerContract.getAddress(in);
-//        port = PeerContract.getPort(in);
+        address = PeerContract.getAddress(in);
     }
 
     public static final Creator<Peer> CREATOR = new Creator<Peer>() {
@@ -85,19 +88,14 @@ public class Peer implements Parcelable{
         dest.writeString(name);
         dest.writeDouble(latitute);
         dest.writeDouble(longitude);
-//        dest.writeValue(address);
-//        dest.writeString(port);
+        dest.writeString(address);
     }
 
     public void writeToProvider(ContentValues values) {
-//        if(id > 0){
-//            PeerContract.putId(values, id);
-//        }
         PeerContract.putName(values, name);
         PeerContract.putLatitude(values, latitute);
         PeerContract.putLongitude(values, longitude);
-//        PeerContract.putAddress(values, address);
-//        PeerContract.putPort(values, port);
+        PeerContract.putAddress(values, address);
     }
 
     public long getId() {
@@ -130,6 +128,14 @@ public class Peer implements Parcelable{
 
     public void setLongitude(double longitude) {
         this.longitude = longitude;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     //    public InetAddress getAddress() {

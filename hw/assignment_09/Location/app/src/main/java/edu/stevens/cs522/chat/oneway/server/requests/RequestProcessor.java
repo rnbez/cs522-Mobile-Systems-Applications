@@ -5,6 +5,8 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.location.Address;
+import android.location.Geocoder;
 import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.util.JsonReader;
@@ -18,6 +20,7 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import edu.stevens.cs522.chat.oneway.server.contracts.ChatroomContract;
 import edu.stevens.cs522.chat.oneway.server.contracts.MessageContract;
@@ -36,6 +39,8 @@ public class RequestProcessor {
     *  registration and posting messages.
     * */
 
+    Geocoder geocoder;
+
     public RegisterResponse perform(Register request) {
 //    TODO: call RestMethod
         return (RegisterResponse) new RestMethod().perform(request);
@@ -46,6 +51,7 @@ public class RequestProcessor {
 
         ContentResolver contentResolver = ctx.getContentResolver();
         insertMessages(contentResolver, sync.messages);
+        geocoder = new Geocoder(ctx);
 
         if (!isOnline(ctx)) {
             return;
@@ -135,6 +141,19 @@ public class RequestProcessor {
 
     private void insertUpdatePeers(ContentResolver contentResolver, ArrayList<Peer> peers) {
         for (Peer peer : peers) {
+            try {
+                List<Address> addresses = geocoder.getFromLocation(peer.getLatitute(), peer.getLongitude(), 1);
+                if (addresses != null && addresses.size() > 0) {
+                    Address addr = addresses.get(0);
+                    peer.setAddress(addr.getLocality() + ", " + addr.getCountryCode());
+                }
+                else{
+                    peer.setAddress("-");
+                }
+            } catch (IOException e) {
+                peer.setAddress("-");
+            }
+
             ContentValues values = new ContentValues();
             long peerId = getPeerId(contentResolver, peer.getName());
 

@@ -81,6 +81,7 @@ public class QueryBuilder<T> implements LoaderManager.LoaderCallbacks<Cursor> {
                     projection = new String[]{
                             PeerContract.ID_FULL,
                             PeerContract.NAME,
+                            PeerContract.ADDRESS,
                             PeerContract.LATITUDE,
                             PeerContract.LONGITUDE
 //                        PeerContract.ADDRESS,

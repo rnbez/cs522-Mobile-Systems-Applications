@@ -25,6 +25,8 @@ import edu.stevens.cs522.chat.oneway.server.managers.SimpleQueryBuilder;
 
 public class ContactDetailsFragment extends Fragment {
 
+
+
     public interface IContactDetailsFragmentListener {
         public void getContactMessagesAsync(long peerId);
     }
@@ -33,7 +35,7 @@ public class ContactDetailsFragment extends Fragment {
     private static final String TAG = ContactDetailsFragment.class.getCanonicalName();
     public static final String PEER_DETAILS_KEY = TAG + "peer_details";
 
-    TextView nameView, latitudeView, longitudeView, isEmptyMsgView;
+    TextView nameView, locationView, latitudeView, longitudeView, isEmptyMsgView;
     ListView messagesListView;
 
     Peer contact;
@@ -50,8 +52,9 @@ public class ContactDetailsFragment extends Fragment {
 
 
         nameView = (TextView) view.findViewById(R.id.contact_book_details_name);
-        latitudeView = (TextView) view.findViewById(R.id.contact_book_details_latitude);
-        longitudeView = (TextView) view.findViewById(R.id.contact_book_details_longitude);
+//        latitudeView = (TextView) view.findViewById(R.id.contact_book_details_latitude);
+//        longitudeView = (TextView) view.findViewById(R.id.contact_book_details_longitude);
+        locationView = (TextView) view.findViewById(R.id.contact_book_details_location);
         isEmptyMsgView = (TextView) view.findViewById(R.id.contact_book_details_list_empty);
         messagesListView = (ListView) view.findViewById(R.id.contact_book_details_messages);
 
@@ -61,8 +64,10 @@ public class ContactDetailsFragment extends Fragment {
             contact = args.getParcelable(PEER_DETAILS_KEY);
 
             nameView.setText(contact.getName());
-            latitudeView.setText(String.valueOf(contact.getLatitute()));
-            longitudeView.setText(String.valueOf(contact.getLongitude()));
+            locationView.setText(String.valueOf(contact.getAddress()));
+//            latitudeView.setText(String.valueOf(contact.getLatitute()));
+//            longitudeView.setText(String.valueOf(contact.getLongitude()));
+
 
             messageList = new ArrayList<>();
             arrayAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, messageList);

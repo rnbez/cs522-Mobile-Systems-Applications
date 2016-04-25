@@ -32,32 +32,47 @@
             android:text="Medium Text" />
 
         <TextView
-            android:id="@+id/contact_book_details_latitude_lbl"
+            android:id="@+id/contact_book_details_location_lbl"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="@string/contact_book_details_latitude_lbl" />
+            android:text="@string/contact_book_details_location_lbl" />
 
         <TextView
-            android:id="@+id/contact_book_details_latitude"
+            android:id="@+id/contact_book_details_location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Medium Text" />
 
-        <TextView
-            android:id="@+id/contact_book_details_longitude_lbl"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="@string/contact_book_details_longitude_lbl" />
 
-        <TextView
-                android:id="@+id/contact_book_details_longitude"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Medium Text" />
+        <!--<TextView-->
+            <!--android:id="@+id/contact_book_details_latitude_lbl"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:textAppearance="?android:attr/textAppearanceSmall"-->
+            <!--android:text="@string/contact_book_details_latitude_lbl" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/contact_book_details_latitude"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+            <!--android:text="Medium Text" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/contact_book_details_longitude_lbl"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:textAppearance="?android:attr/textAppearanceSmall"-->
+            <!--android:text="@string/contact_book_details_longitude_lbl" />-->
+
+        <!--<TextView-->
+                <!--android:id="@+id/contact_book_details_longitude"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+            <!--android:text="Medium Text" />-->
 
         <TextView
             android:id="@+id/contact_book_details_messages_lbl"

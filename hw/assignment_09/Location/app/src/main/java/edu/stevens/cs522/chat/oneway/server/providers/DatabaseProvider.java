@@ -239,6 +239,7 @@ public class DatabaseProvider extends ContentProvider {
                 return new String[]{
                         PeerContract.ID_FULL,
                         PeerContract.NAME,
+                        PeerContract.ADDRESS,
                         PeerContract.LATITUDE,
                         PeerContract.LONGITUDE
 //                        PeerContract.ADDRESS,

@@ -37,15 +37,17 @@ public class PeerContract {
     public static final String ID = "_id";
     public static final String ID_FULL = TABLE_NAME + "." + ID;
     public static final String NAME = "name";
-    public static final String NAME_FULL =  TABLE_NAME + "." + NAME;
+    public static final String NAME_FULL = TABLE_NAME + "." + NAME;
     public static final String LATITUDE = "latitude";
-    public static final String LONGITUDE= "longitude";
+    public static final String LONGITUDE = "longitude";
+    public static final String ADDRESS = "address";
     //    public static final String ADDRESS = "address";
 //    public static final String PORT = "port";
     public static final String CREATE_TABLE =
             "CREATE TABLE " + TABLE_NAME + "(" +
                     ID + " INTEGER PRIMARY KEY," +
                     NAME + " TEXT NOT NULL UNIQUE," +
+                    ADDRESS + " TEXT," +
                     LATITUDE + " REAL NOT NULL," +
                     LONGITUDE + " REAL NOT NULL" +
 //                    ADDRESS + " BLOB NOT NULL," +
@@ -63,7 +65,7 @@ public class PeerContract {
         return withExtendedPath(CONTENT_URI, path);
     }
 
-    public static Uri withExtendedPath(Uri uri, Object path){
+    public static Uri withExtendedPath(Uri uri, Object path) {
         if (path != null) {
             String stringPath = String.valueOf(path);
             Uri.Builder builder = uri.buildUpon();
@@ -89,7 +91,7 @@ public class PeerContract {
         return cursor.getInt(cursor.getColumnIndexOrThrow(ID));
     }
 
-    public static void putId(ContentValues values,  long id) {
+    public static void putId(ContentValues values, long id) {
         values.put(ID, id);
     }
 
@@ -116,6 +118,15 @@ public class PeerContract {
     public static void putLongitude(ContentValues values, double longitude) {
         values.put(LONGITUDE, longitude);
     }
+
+    public static String getAddress(Cursor cursor) {
+        return cursor.getString(cursor.getColumnIndexOrThrow(ADDRESS));
+    }
+
+    public static void putAddress(ContentValues values, String address) {
+        values.put(ADDRESS, address);
+    }
+
 
 //    public static InetAddress getAddress(Cursor cursor) {
 //        byte[] addr = cursor.getBlob(cursor.getColumnIndexOrThrow(ADDRESS));

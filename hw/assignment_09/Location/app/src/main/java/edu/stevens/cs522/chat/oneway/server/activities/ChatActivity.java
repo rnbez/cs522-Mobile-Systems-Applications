@@ -8,21 +8,28 @@
  **********************************************************************/
 package edu.stevens.cs522.chat.oneway.server.activities;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.Dialog;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
-import android.content.ContentResolver;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentSender;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.database.Cursor;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.*;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -30,13 +37,14 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.Toast;
 
-import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
 
 import java.util.Calendar;
 import java.util.List;
@@ -49,7 +57,6 @@ import edu.stevens.cs522.chat.oneway.server.activities.fragments.ChatroomMessage
 import edu.stevens.cs522.chat.oneway.server.activities.fragments.ConfirmDialogFragment;
 import edu.stevens.cs522.chat.oneway.server.activities.fragments.NewChatFragment;
 import edu.stevens.cs522.chat.oneway.server.activities.fragments.NewMessageFragment;
-import edu.stevens.cs522.chat.oneway.server.adapters.MessageRowAdapter;
 import edu.stevens.cs522.chat.oneway.server.contracts.ChatroomContract;
 import edu.stevens.cs522.chat.oneway.server.contracts.MessageContract;
 import edu.stevens.cs522.chat.oneway.server.entities.Chatroom;
@@ -72,10 +79,13 @@ public class ChatActivity
         ChatroomMessagesFragment.IChatroomMessagesFragmentListener,
         NewChatFragment.INewChatFragmentListener,
         NewMessageFragment.INewMessageFragmentListener,
-        ConfirmDialogFragment.IConfirmDialogFragmentListener {
+        ConfirmDialogFragment.IConfirmDialogFragmentListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     final static public String TAG = ChatActivity.class.getCanonicalName();
     final static public int PREFERENCES_REQUEST = 1;
+    final static public int PLAY_SERVICES_RESOLUTION_REQUEST = PREFERENCES_REQUEST + 1;
+    final static public int CONNECTION_FAILURE_RESOLUTION_REQUEST = PLAY_SERVICES_RESOLUTION_REQUEST + 1;
+    final static public int PLAY_SERVICES_LOCATION_PERMISION_REQUEST = CONNECTION_FAILURE_RESOLUTION_REQUEST + 1;
     final static public int BROADCAST_NETWORK_REQUEST = 100;
 
     final static public int DIALOG_NEW_CHAT_ID = 1;
@@ -87,6 +97,8 @@ public class ChatActivity
     private long lastMessageSeqNum;
     private Chatroom currentChatroom;
     private String userName;
+    private double userLatitude;
+    private double userLongitude;
     private UUID registrationID;
 
 
@@ -94,20 +106,11 @@ public class ChatActivity
      * TODO: Declare UI.
      */
 //    ArrayList<Message> messageList;
-    private ListView msgList;
-    private Button sendButton;
-    private EditText destinationHost;
-    private EditText destinationPort;
-    private EditText messageText;
-
     private Cursor chatroomListCursor;
     private Cursor messageListCursor;
-    private MessageRowAdapter cursorAdapter;
 
     private ResultReceiverWrapper registerResultReceiverWrapper;
     private ResultReceiverWrapper.IReceiver registerResultReceiver;
-    private ResultReceiverWrapper postMessageResultReceiverWrapper;
-    private ResultReceiverWrapper.IReceiver postMessageResultReceiver;
     private SharedPreferences sharedPreferences;
     private ServiceHelper serviceHelper;
     private AlarmManager alarmMgr;
@@ -123,9 +126,9 @@ public class ChatActivity
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
-    private GoogleApiClient client;
-    private double userLatitude;
-    private double userLongitude;
+    private GoogleApiClient googleApiClient;
+    LocationManager locationManager;
+    private LocationListener locationListener;
 
 
     @Override
@@ -147,7 +150,7 @@ public class ChatActivity
         currentChatroom = new Chatroom(sharedPreferences.getString(App.PREF_KEY_CHATROOM, App.PREF_DEFAULT_CHATROOM));
         userName = sharedPreferences.getString(App.PREF_KEY_USERNAME, App.PREF_DEFAULT_USER_NAME);
         userLatitude = (double) sharedPreferences.getFloat(App.PREF_KEY_LATITUDE, 0);
-        userLongitude =(double) sharedPreferences.getFloat(App.PREF_KEY_LONGITUDE, 0);
+        userLongitude = (double) sharedPreferences.getFloat(App.PREF_KEY_LONGITUDE, 0);
         String uuidString = sharedPreferences.getString(App.PREF_KEY_REGISTRATION_ID, "");
         if (!uuidString.isEmpty())
             registrationID = UUID.fromString(uuidString);
@@ -167,26 +170,45 @@ public class ChatActivity
         alarmMgr = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
 
 
-        registerResultReceiverWrapper = new ResultReceiverWrapper(new Handler());
-        registerResultReceiver = new ResultReceiverWrapper.IReceiver() {
+//        registerResultReceiverWrapper = new ResultReceiverWrapper(new Handler());
+//        registerResultReceiver = new ResultReceiverWrapper.IReceiver() {
+//            @Override
+//            public void onReceiveResult(int resultCode, Bundle resultData) {
+//            }
+//        };
+
+//        postMessageResultReceiverWrapper = new ResultReceiverWrapper(new Handler());
+//        postMessageResultReceiver = new ResultReceiverWrapper.IReceiver() {
+//            @Override
+//            public void onReceiveResult(int resultCode, Bundle resultData) {
+//                messageText.setText("");
+//                updateListView();
+//            }
+//        };
+
+        if (googleApiClient == null) {
+            googleApiClient = new GoogleApiClient.Builder(this)
+                    .addConnectionCallbacks(this)
+                    .addOnConnectionFailedListener(this)
+                    .addApi(LocationServices.API)
+                    .build();
+        }
+
+
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        locationListener = new LocationListener() {
             @Override
-            public void onReceiveResult(int resultCode, Bundle resultData) {
+            public void onLocationChanged(Location location) {
+                SharedPreferences.Editor editor = ChatActivity.this.sharedPreferences.edit();
+                editor.putFloat(App.PREF_KEY_LATITUDE, (float) location.getLatitude());
+                editor.putFloat(App.PREF_KEY_LONGITUDE, (float) location.getLongitude());
+                editor.apply();
+
+                Log.d(TAG, "updating location");
             }
         };
-
-        postMessageResultReceiverWrapper = new ResultReceiverWrapper(new Handler());
-        postMessageResultReceiver = new ResultReceiverWrapper.IReceiver() {
-            @Override
-            public void onReceiveResult(int resultCode, Bundle resultData) {
-                messageText.setText("");
-                updateListView();
-            }
-        };
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
+
 
     private void launchFragments(boolean hasSavedInstanceState) {
         switch (getResources().getConfiguration().orientation) {
@@ -227,7 +249,7 @@ public class ChatActivity
 
     @Override
     protected void onStart() {
-        super.onStart();
+        googleApiClient.connect();
         if (alarmIntent == null) {
             Log.d("ALARM", "starting alarm manager");
             Intent intent = new Intent(this, SynchronizationAlarmReceiver.class);
@@ -241,20 +263,22 @@ public class ChatActivity
             alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP, triggerAtMillis, intervalMillis, alarmIntent);
         }
 
+        super.onStart();
     }
 
     @Override
     protected void onStop() {
         alarmMgr.cancel(alarmIntent);
         alarmIntent = null;
+        googleApiClient.disconnect();
 //        unregisterReceiver(broadcastRceiver);
         super.onStop();
     }
 
     @Override
     protected void onDestroy() {
-        registerResultReceiverWrapper.setReceiver(null);
-        postMessageResultReceiverWrapper.setReceiver(null);
+//        registerResultReceiverWrapper.setReceiver(null);
+//        postMessageResultReceiverWrapper.setReceiver(null);
 //        stopService(new Intent(this, ChatReceiverService.class));
         super.onDestroy();
     }
@@ -262,8 +286,8 @@ public class ChatActivity
     @Override
     protected void onResume() {
         super.onResume();
-        registerResultReceiverWrapper.setReceiver(registerResultReceiver);
-        postMessageResultReceiverWrapper.setReceiver(postMessageResultReceiver);
+//        registerResultReceiverWrapper.setReceiver(registerResultReceiver);
+//        postMessageResultReceiverWrapper.setReceiver(postMessageResultReceiver);
 //        resultReceicerWrapper.setReceiver(resultReceiver);
 //        Intent bindIntent = new Intent(this, ChatSendService.class);
 //        bindService(bindIntent, conn, Context.BIND_AUTO_CREATE);
@@ -346,28 +370,6 @@ public class ChatActivity
                 break;
         }
     }
-
-
-    public void updateListView() {
-        QueryBuilder.executeQuery(TAG,
-                ChatActivity.this,
-                MessageContract.CONTENT_URI,
-                MessageContract.CURSOR_LOADER_ID,
-                MessageContract.DEFAULT_ENTITY_CREATOR,
-                new IQueryListener<Message>() {
-                    @Override
-                    public void handleResults(TypedCursor<Message> cursor) {
-                        cursorAdapter.swapCursor(cursor.getCursor());
-                    }
-
-                    @Override
-                    public void closeResults() {
-                        cursorAdapter.swapCursor(null);
-                    }
-
-                });
-    }
-
 
     public boolean isOnline() {
         android.net.ConnectivityManager cm = (android.net.ConnectivityManager) this.getSystemService(this.CONNECTIVITY_SERVICE);
@@ -461,15 +463,15 @@ public class ChatActivity
                     @Override
                     public void handleResults(TypedCursor<Message> typedCursor) {
                         messageListCursor = typedCursor.getCursor();
-//                        if (chatroomMessagesFragment != null)
-                        chatroomMessagesFragment.setListCursor(messageListCursor);
+                        if (chatroomMessagesFragment != null)
+                            chatroomMessagesFragment.setListCursor(messageListCursor);
                     }
 
                     @Override
                     public void closeResults() {
                         messageListCursor = null;
-//                        if (chatroomMessagesFragment != null)
-                        chatroomMessagesFragment.setListCursor(messageListCursor);
+                        if (chatroomMessagesFragment != null)
+                            chatroomMessagesFragment.setListCursor(messageListCursor);
                     }
                 });
     }
@@ -535,7 +537,7 @@ public class ChatActivity
                     userId = sharedPreferences.getLong(App.PREF_KEY_USERID, App.PREF_DEFAULT_USER_ID);
                     lastMessageSeqNum = sharedPreferences.getLong(App.PREF_KEY_LAST_SEQNUM, App.PREF_DEFAULT_LAST_SEQNUM);
                     userLatitude = (double) sharedPreferences.getFloat(App.PREF_KEY_LATITUDE, 0);
-                    userLongitude =(double) sharedPreferences.getFloat(App.PREF_KEY_LONGITUDE, 0);
+                    userLongitude = (double) sharedPreferences.getFloat(App.PREF_KEY_LONGITUDE, 0);
 //                    currentChatroom = new Chatroom(sharedPreferences.getString(App.PREF_KEY_CHATROOM, App.PREF_DEFAULT_CHATROOM));
                     userName = sharedPreferences.getString(App.PREF_KEY_USERNAME, App.PREF_DEFAULT_USER_NAME);
                     String uuidString = sharedPreferences.getString(App.PREF_KEY_REGISTRATION_ID, "");
@@ -563,6 +565,83 @@ public class ChatActivity
             dialog.dismiss();
     }
 
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+        Log.d(TAG, "location: onConnected");
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                String[] permissions = new String[]{
+                        Manifest.permission.ACCESS_COARSE_LOCATION,
+                        Manifest.permission.ACCESS_FINE_LOCATION
+                };
+                requestPermissions(permissions, PLAY_SERVICES_LOCATION_PERMISION_REQUEST);
+            }
+            Log.d(TAG, "location: onConnected - PERMISSION DENIED");
+            return;
+        }
+
+        Criteria criteria = new Criteria();
+        criteria.setAccuracy(Criteria.ACCURACY_FINE);
+        criteria.setAltitudeRequired(false);
+        criteria.setBearingRequired(false);
+        criteria.setCostAllowed(true);
+        criteria.setPowerRequirement(Criteria.NO_REQUIREMENT);
+        criteria.setSpeedRequired(false);
+        String provider = locationManager.getBestProvider(criteria, true);
+
+        LocationRequest locationRequest = new LocationRequest();
+        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        locationRequest.setInterval(5000);
+        LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient, locationRequest, locationListener);
+//        locationManager.requestLocationUpdates(
+//                provider,
+//                2000,
+//                10,
+//                (android.location.LocationListener) locationListener);
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+        Log.d(TAG, "location: onConnectionSuspended");
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            Log.d(TAG, "location: onConnectionSuspended - PERMISSION DENIED");
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                String[] permissions = new String[]{
+                        Manifest.permission.ACCESS_COARSE_LOCATION,
+                        Manifest.permission.ACCESS_FINE_LOCATION
+                };
+                requestPermissions(permissions, PLAY_SERVICES_LOCATION_PERMISION_REQUEST);
+            }
+            return;
+        }
+        LocationServices.FusedLocationApi.removeLocationUpdates(googleApiClient, locationListener);
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+        if (connectionResult.hasResolution()) {
+            try {
+                connectionResult.startResolutionForResult(this, CONNECTION_FAILURE_RESOLUTION_REQUEST);
+            } catch (IntentSender.SendIntentException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     static public class SynchronizationAlarmReceiver extends BroadcastReceiver {
 
         public static final String EXTRA_DELAY = "extra_delay";
@@ -582,7 +661,7 @@ public class ChatActivity
                 long lastMessageSeqNum = prefs.getLong(App.PREF_KEY_LAST_SEQNUM, App.PREF_DEFAULT_LAST_SEQNUM);
                 String userName = prefs.getString(App.PREF_KEY_USERNAME, App.PREF_DEFAULT_USER_NAME);
                 double userLatitude = (double) prefs.getFloat(App.PREF_KEY_LATITUDE, 0);
-                double userLongitude =(double) prefs.getFloat(App.PREF_KEY_LONGITUDE, 0);
+                double userLongitude = (double) prefs.getFloat(App.PREF_KEY_LONGITUDE, 0);
 
                 String uuidString = prefs.getString(App.PREF_KEY_REGISTRATION_ID, "");
                 if (!uuidString.isEmpty()) {
@@ -593,5 +672,23 @@ public class ChatActivity
             }
         }
 
+    }
+
+    public static boolean checkPlayServices(Activity context) {
+        int resultCode = GooglePlayServicesUtil
+                .isGooglePlayServicesAvailable(context);
+        if (resultCode != ConnectionResult.SUCCESS) {
+            if (GooglePlayServicesUtil
+                    .isUserRecoverableError(resultCode)) {
+                GooglePlayServicesUtil.getErrorDialog(resultCode, context,
+                        PLAY_SERVICES_RESOLUTION_REQUEST)
+                        .show();
+            } else {
+                Log.e(TAG, "This device is not supported.");
+                context.finish();
+            }
+            return false;
+        }
+        return true;
     }
 }

@@ -47,12 +47,11 @@ public class MessageRowAdapter extends ResourceCursorAdapter {
         TextView senderView = (TextView) view.findViewById(R.id.msg_row_sender);
         TextView statusView = (TextView) view.findViewById(R.id.msg_row_status);
         TextView dateView = (TextView) view.findViewById(R.id.msg_row_datetime);
-        TextView latitudeView = (TextView) view.findViewById(R.id.msg_row_latitude);
-        TextView longitudeView = (TextView) view.findViewById(R.id.msg_row_longitude);
+        TextView coordView = (TextView) view.findViewById(R.id.msg_row_coordinates);
 
         contentView.setText(MessageContract.getMessage(cursor));
-        latitudeView.setText(String.valueOf(MessageContract.getLatitude(cursor)));
-        longitudeView.setText(String.valueOf(MessageContract.getLongitude(cursor)));
+        String coord = String.format("@ %.3f, %.3f",MessageContract.getLatitude(cursor), MessageContract.getLongitude(cursor));
+        coordView.setText(coord);
         long timestamp = MessageContract.getTimestamp(cursor);
         dateView.setText(getDateString(timestamp));
 

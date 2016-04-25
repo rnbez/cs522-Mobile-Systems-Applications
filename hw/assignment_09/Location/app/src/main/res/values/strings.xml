@@ -53,5 +53,6 @@
     <string name="frag__new_message_message">Type your new message:</string>
     <string name="frag__new_message_confirm_button">Send</string>
     <string name="frag__new_message_cancel_button">Cancel</string>
+    <string name="contact_book_details_location_lbl">Location:</string>
 
 </resources>
