@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Chat Server (Basic)</string>
+    <string name="user_name">Client</string>
+    <string name="app_port">6666</string>
+    <string name="latitude">40.744906</string>
+    <string name="longitude">-74.023937</string>
+
+    <!-- String literals in the UI -->
+    <string name="destination_host">Destination Host</string>
+    <string name="target_host_default">10.0.2.2</string>
+    <string name="destination_port">Destination Port</string>
+    <string name="target_port_default">6666</string>
+    <string name="message_edit_text">Type your message here.</string>
+    <string name="send_label">SEND</string>
+    <string name="next_label">NEXT</string>
+    <string name="menu_show_peers">SHOW PEERS</string>
+    <string name="contacts">Contacts</string>
+    <string name="preferences">Preferences</string>
+    <string name="new_chat">New Chat</string>
+    <string name="new_msg">New Message</string>
+    <string name="contacts_list_empty_text">You have no contacts</string>
+    <string name="contact_details_message_list_view">Messages:</string>
+    <string name="contact_details_port_view">Port:</string>
+    <string name="contact_details_ip_addr_view">IP Address:</string>
+    <string name="contact_details_name_view">Name:</string>
+    <string name="destination_host_default">10.0.2.2</string>
+    <string name="destination_port_default">6667</string>
+    <string name="default_host">http://10.0.2.2:81</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="frag_chatroom_list_isempty">No chatrooms</string>
+    <string name="frag_chatroom_list_title">Chat Rooms</string>
+    <string name="contacts_details_empty_text">Select a contact</string>
+    <string name="contact_book_details_latitude_lbl">Latitude:</string>
+    <string name="contact_book_details_name_lbl">Name:</string>
+    <string name="contact_book_details_longitude_lbl">Longitude</string>
+    <string name="contact_book_details_messages_lbl">Messages:</string>
+    <string name="frag__chatroom_list_title">Chats</string>
+    <string name="frag__chatroom_list_empty_text">You don\'t have any chat</string>
+    <string name="frag__chatroom_messages_no_chat">Select a Chat Room</string>
+    <string name="frag__chatroom_messages_empty_list">This chat doesn\'t have any messages</string>
+    <string name="dialog_confirm">Ok</string>
+    <string name="dialog_cancel">Cancel</string>
+
+    <string name="frag__new_chat_message">Type a name for your new chat:</string>
+    <string name="frag__new_chat_confirm_button">Create Chat</string>
+    <string name="frag__new_chat_cancel_button">Cancel</string>
+    <string name="frag__new_chat_error_message">This chat already exists!</string>
+    <string name="frag__new_chat_error_ack">Ok</string>
+    <string name="frag__new_message_chat">Select a chat:</string>
+    <string name="frag__new_message_message">Type your new message:</string>
+    <string name="frag__new_message_confirm_button">Send</string>
+    <string name="frag__new_message_cancel_button">Cancel</string>
+
+</resources>
