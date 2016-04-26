@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <EditTextPreference
+        android:key="host"
+        android:summary="Please provide your port"
+        android:title="Server Address"
+        android:hint="@string/default_host"/>
+    <EditTextPreference
+        android:key="username"
+        android:summary="Please provide your username"
+        android:title="Your Name" />
+</PreferenceScreen>

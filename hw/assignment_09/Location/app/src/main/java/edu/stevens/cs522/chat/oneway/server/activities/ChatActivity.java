@@ -80,7 +80,9 @@ public class ChatActivity
         ChatroomMessagesFragment.IChatroomMessagesFragmentListener,
         NewChatFragment.INewChatFragmentListener,
         NewMessageFragment.INewMessageFragmentListener,
-        ConfirmDialogFragment.IConfirmDialogFragmentListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+        ConfirmDialogFragment.IConfirmDialogFragmentListener,
+        GoogleApiClient.ConnectionCallbacks,
+        GoogleApiClient.OnConnectionFailedListener {
 
     final static public String TAG = ChatActivity.class.getCanonicalName();
     final static public int PREFERENCES_REQUEST = 1;
