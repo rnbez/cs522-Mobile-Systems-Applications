@@ -36,9 +36,11 @@ public class ContactRowAdapter extends ResourceCursorAdapter {
     public void bindView(View view, Context context, Cursor cursor) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         String userName = prefs.getString(App.PREF_KEY_USERNAME, App.PREF_DEFAULT_USER_NAME);
-        TextView line = (TextView) view.findViewById(R.id.contactNameView);
+        TextView name = (TextView) view.findViewById(R.id.contact_row_user_name);
+        TextView location = (TextView) view.findViewById(R.id.contact_row_user_location);
         String text = PeerContract.getName(cursor);
         if(text.equalsIgnoreCase(userName)) text += " (me)";
-        line.setText(text);
+        name.setText(text);
+        location.setText(PeerContract.getAddress(cursor));
     }
 }

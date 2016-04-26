@@ -34,8 +34,9 @@ public class ChatroomRowAdapter extends ResourceCursorAdapter {
 
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
-        TextView line = (TextView) view.findViewById(R.id.contactNameView);
+        TextView line = (TextView) view.findViewById(R.id.contact_row_user_name);
         line.setText(ChatroomContract.getName(cursor));
 //        Log.d(TAG, "bindView: "+view.isSelected());
+        view.findViewById(R.id.contact_row_user_location).setVisibility(View.GONE);
     }
 }

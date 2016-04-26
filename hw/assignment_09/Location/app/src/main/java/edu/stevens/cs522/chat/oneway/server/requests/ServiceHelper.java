@@ -39,12 +39,19 @@ public class ServiceHelper {
     public final static String EXTRA_REGISTER_REG_ID = RequestService.EXTRA_REGISTER_REG_ID;
     public final static String EXTRA_POST_MSG_RESULT_ID = RequestService.EXTRA_POST_MSG_RESULT_ID;
 
-    public void registerAsync(Activity activity, String userName, UUID regId) {
-
-        Register request = new Register(regId, new Peer(userName, 0, 0));
+    public void registerAsync(Activity activity, UUID regId, Peer peer) {
+        Register request = new Register(regId, peer);
         Intent i = new Intent(activity, RequestService.class);
         i.setAction(RequestService.REGISTER_ACTION);
         i.putExtra(RequestService.EXTRA_REGISTER, request);
+        activity.startService(i);
+    }
+
+    public void unregisterAsync(Activity activity, UUID regId, Peer peer) {
+        Unregister request = new Unregister(regId, peer);
+        Intent i = new Intent(activity, RequestService.class);
+        i.setAction(RequestService.UNREGISTER_ACTION);
+        i.putExtra(RequestService.EXTRA_UNREGISTER, request);
         activity.startService(i);
     }
 

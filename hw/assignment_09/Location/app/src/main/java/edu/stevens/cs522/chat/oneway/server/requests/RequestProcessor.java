@@ -46,9 +46,13 @@ public class RequestProcessor {
         return (RegisterResponse) new RestMethod().perform(request);
     }
 
+    public UnregisterResponse perform(Unregister request) {
+//    TODO: call RestMethod
+        return (UnregisterResponse) new RestMethod().perform(request);
+    }
+
     public void perform(Context ctx, Synchronize sync) {
 //    TODO: call RestMethod
-
         ContentResolver contentResolver = ctx.getContentResolver();
         insertMessages(contentResolver, sync.messages);
         geocoder = new Geocoder(ctx);

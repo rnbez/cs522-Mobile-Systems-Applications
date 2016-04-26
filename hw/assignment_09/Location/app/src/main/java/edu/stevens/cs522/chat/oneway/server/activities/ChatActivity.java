@@ -1,9 +1,9 @@
 /*********************************************************************
  * Chat server: accept chat messages from clients.
- * <p/>
+ * <p>
  * Sender name and GPS coordinates are encoded
  * in the messages, and stripped off upon receipt.
- * <p/>
+ * <p>
  * Copyright (c) 2012 Stevens Institute of Technology
  **********************************************************************/
 package edu.stevens.cs522.chat.oneway.server.activities;
@@ -37,6 +37,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -163,7 +164,7 @@ public class ChatActivity
 
         serviceHelper = new ServiceHelper();
         if (isOnline() && registrationID != null) {
-            Peer peer = new Peer(userId, userName, 0, 0);
+            Peer peer = new Peer(userId, userName, userLatitude, userLongitude);
             serviceHelper.syncAsync(ChatActivity.this, registrationID, peer, lastMessageSeqNum, new ArrayList<Message>());
         }
 
@@ -309,6 +310,18 @@ public class ChatActivity
     }
 
     @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+//        String uuidString = sharedPreferences.getString(App.PREF_KEY_REGISTRATION_ID, "");
+        MenuItem menuItem;
+        boolean isVisible = registrationID != null;
+
+        menuItem = menu.findItem(R.id.chat_menu_unregister);
+        if (menuItem != null) menuItem.setVisible(isVisible);
+
+        return super.onPrepareOptionsMenu(menu);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         String uuidString = sharedPreferences.getString(App.PREF_KEY_REGISTRATION_ID, "");
         switch (item.getItemId()) {
@@ -345,6 +358,16 @@ public class ChatActivity
             case R.id.chat_menu_prefs:
                 startActivityForResult(new Intent(this, PreferencesActivity.class), PREFERENCES_REQUEST);
                 return true;
+            case R.id.chat_menu_unregister:
+                Peer peer = new Peer(userId, userName, userLatitude, userLongitude);
+                serviceHelper.unregisterAsync(this, registrationID, peer);
+                userId = App.PREF_DEFAULT_USER_ID;
+//                lastMessageSeqNum = App.PREF_DEFAULT_LAST_SEQNUM;
+//                currentChatroom = new Chatroom("");
+                userName = "";
+                registrationID = null;
+                invalidateOptionsMenu();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
 
@@ -364,9 +387,10 @@ public class ChatActivity
                     final UUID uuid = UUID.randomUUID();
 //                final UUID uuid = UUID.fromString("54947df8-0e9e-4471-a2f9-9af509fb5889");
                     ServiceHelper helper = new ServiceHelper();
-                    helper.registerAsync(this, userName, uuid);
+                    helper.registerAsync(this, uuid, new Peer(userName, userLatitude, userLongitude));
+                    registrationID = uuid;
+                    invalidateOptionsMenu();
                 }
-
                 break;
         }
     }
@@ -569,13 +593,7 @@ public class ChatActivity
     public void onConnected(@Nullable Bundle bundle) {
         Log.d(TAG, "location: onConnected");
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
+            Log.d(TAG, "location: onConnected - PERMISSION DENIED");
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 String[] permissions = new String[]{
                         Manifest.permission.ACCESS_COARSE_LOCATION,
@@ -583,10 +601,17 @@ public class ChatActivity
                 };
                 requestPermissions(permissions, PLAY_SERVICES_LOCATION_PERMISION_REQUEST);
             }
-            Log.d(TAG, "location: onConnected - PERMISSION DENIED");
             return;
         }
 
+        requestLocationUpdates();
+    }
+
+    private void requestLocationUpdates() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        Log.d(TAG, "location: onConnected - PERMISSION GRANTED");
         Criteria criteria = new Criteria();
         criteria.setAccuracy(Criteria.ACCURACY_FINE);
         criteria.setAltitudeRequired(false);
@@ -599,12 +624,8 @@ public class ChatActivity
         LocationRequest locationRequest = new LocationRequest();
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         locationRequest.setInterval(5000);
+
         LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient, locationRequest, locationListener);
-//        locationManager.requestLocationUpdates(
-//                provider,
-//                2000,
-//                10,
-//                (android.location.LocationListener) locationListener);
     }
 
     @Override
@@ -640,6 +661,12 @@ public class ChatActivity
                 e.printStackTrace();
             }
         }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        requestLocationUpdates();
     }
 
     static public class SynchronizationAlarmReceiver extends BroadcastReceiver {

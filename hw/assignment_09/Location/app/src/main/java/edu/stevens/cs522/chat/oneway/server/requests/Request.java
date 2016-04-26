@@ -66,4 +66,7 @@ public abstract class Request implements Parcelable {
         return registrationID;
     }
 
+    public Peer getClient() {
+        return client;
+    }
 }

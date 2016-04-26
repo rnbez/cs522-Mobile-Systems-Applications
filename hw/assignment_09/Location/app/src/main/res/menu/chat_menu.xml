@@ -20,4 +20,9 @@
         android:icon="@drawable/ic_menu_preferences"
         android:showAsAction="ifRoom"
         android:title="@string/preferences"/>
+    <item
+        android:id="@+id/chat_menu_unregister"
+        android:icon="@drawable/ic_menu_unregister"
+        android:showAsAction="ifRoom"
+        android:title="@string/unregister"/>
 </menu>
