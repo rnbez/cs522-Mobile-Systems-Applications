@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="google_api_key" templateMergeStrategy="preserve" translatable="false">
+        AIzaSyA263VPp31A1GVFn9dRebZ05FTqsi80BIw
+    </string>
+</resources>
