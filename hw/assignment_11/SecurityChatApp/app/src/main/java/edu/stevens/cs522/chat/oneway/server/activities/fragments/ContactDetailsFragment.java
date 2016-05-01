@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.stevens.cs522.chat.oneway.server.R;
+import edu.stevens.cs522.chat.oneway.server.activities.base.BaseFragmentActivity;
 import edu.stevens.cs522.chat.oneway.server.contracts.MessageContract;
 import edu.stevens.cs522.chat.oneway.server.contracts.PeerContract;
 import edu.stevens.cs522.chat.oneway.server.entities.Message;
@@ -29,6 +30,7 @@ public class ContactDetailsFragment extends Fragment {
 
     public interface IContactDetailsFragmentListener {
         public void getContactMessagesAsync(long peerId);
+        public char[] getDatabaseKey();
     }
 
 
@@ -107,7 +109,7 @@ public class ContactDetailsFragment extends Fragment {
             final Activity activity = getActivity();
 
             SimpleQueryBuilder.executeQuery(activity,
-                    PeerContract.getMessagesUri(this.contact.getId()),
+                    PeerContract.withDatabaseKeyUri(listener.getDatabaseKey(),PeerContract.getMessagesUri(this.contact.getId())),
                     MessageContract.DEFAULT_ENTITY_CREATOR,
                     new ISimpleQueryListener<Message>() {
                         @Override
@@ -142,6 +144,11 @@ public class ContactDetailsFragment extends Fragment {
         this.listener = new IContactDetailsFragmentListener() {
             @Override
             public void getContactMessagesAsync(long peerId) {
+            }
+
+            @Override
+            public char[] getDatabaseKey() {
+                return new char[0];
             }
         };
 

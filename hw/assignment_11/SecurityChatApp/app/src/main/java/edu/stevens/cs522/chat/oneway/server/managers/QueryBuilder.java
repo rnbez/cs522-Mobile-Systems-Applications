@@ -46,37 +46,37 @@ public class QueryBuilder<T> implements LoaderManager.LoaderCallbacks<Cursor> {
     }
 
     public static <T> void reexecuteQuery(String tag,
-                                        Activity context,
-                                        Uri uri,
-                                        int loaderID,
-                                        IEntityCreator<T> creator,
-                                        IQueryListener<T> listener) {
+                                          Activity context,
+                                          Uri uri,
+                                          int loaderID,
+                                          IEntityCreator<T> creator,
+                                          IQueryListener<T> listener) {
         QueryBuilder<T> qb = new QueryBuilder<T>(tag, context, uri, loaderID, creator, listener);
         LoaderManager lm = context.getLoaderManager();
         lm.destroyLoader(loaderID);
         lm.initLoader(loaderID, null, qb);
     }
 
-    public static <T> void executeQuery(String tag, Activity context, Uri uri, int loaderID, String[] projection, String selection, String[] selectionArgs, IEntityCreator<T> creator, IQueryListener<T> listener) {
-        QueryBuilder<T> qb = new QueryBuilder<T>(tag, context, uri, loaderID, creator, listener);
-        LoaderManager lm = context.getLoaderManager();
-        lm.initLoader(loaderID, null, qb);
-    }
-
-
-    public static <T> void reexecuteQuery(String tag, Activity context, Uri uri, int loaderID, String[] projection, String selection, String[] selectionArgs, IEntityCreator<T> creator, IQueryListener<T> listener) {
-        QueryBuilder<T> qb = new QueryBuilder<T>(tag, context, uri, loaderID, creator, listener);
-        LoaderManager lm = context.getLoaderManager();
-        lm.destroyLoader(loaderID);
-        lm.initLoader(loaderID, null, qb);
-    }
+//    public static <T> void executeQuery(String tag, Activity context, Uri uri, int loaderID, String[] projection, String selection, String[] selectionArgs, IEntityCreator<T> creator, IQueryListener<T> listener) {
+//        QueryBuilder<T> qb = new QueryBuilder<T>(tag, context, uri, loaderID, creator, listener);
+//        LoaderManager lm = context.getLoaderManager();
+//        lm.initLoader(loaderID, null, qb);
+//    }
+//
+//
+//    public static <T> void reexecuteQuery(String tag, Activity context, Uri uri, char [] a, int loaderID, String[] projection, String selection, String[] selectionArgs, IEntityCreator<T> creator, IQueryListener<T> listener) {
+//        QueryBuilder<T> qb = new QueryBuilder<T>(tag, context, uri, loaderID, creator, listener);
+//        LoaderManager lm = context.getLoaderManager();
+//        lm.destroyLoader(loaderID);
+//        lm.initLoader(loaderID, null, qb);
+//    }
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
 
         if (id == loaderId) {
             String[] projection = null;
-            switch (id){
+            switch (id) {
                 case PeerContract.CURSOR_LOADER_ID:
                     projection = new String[]{
                             PeerContract.ID_FULL,

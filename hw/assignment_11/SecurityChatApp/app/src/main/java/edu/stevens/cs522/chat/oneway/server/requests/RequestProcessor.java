@@ -40,6 +40,7 @@ public class RequestProcessor {
     * */
 
     Geocoder geocoder;
+    private char[] databaseKey;
 
     public RegisterResponse perform(Register request) {
 //    TODO: call RestMethod
@@ -62,7 +63,7 @@ public class RequestProcessor {
         }
 
         Cursor c = contentResolver.query(
-                MessageContract.CONTENT_URI,
+                MessageContract.withDatabaseKeyUri(databaseKey),
                 null,
                 MessageContract.SEQ_NUM + "=?",
                 new String[]{"0"},
@@ -108,7 +109,7 @@ public class RequestProcessor {
 
             if (response.messages != null && !response.messages.isEmpty()) {
                 contentResolver.delete(
-                        MessageContract.CONTENT_URI,
+                        MessageContract.withDatabaseKeyUri(databaseKey),
                         MessageContract.SEQ_NUM + "=?",
                         new String[]{"0"});
 
@@ -127,7 +128,7 @@ public class RequestProcessor {
 
 
     private long getPeerId(ContentResolver contentResolver, String peerName) {
-        Uri uri = PeerContract.withExtendedPath(peerName);
+        Uri uri = PeerContract.withDatabaseKeyUri(databaseKey, PeerContract.withExtendedPath(peerName));
         Cursor c = contentResolver.query(uri, null, null, null, null);
 
         if (c.getCount() > 0) {
@@ -163,18 +164,18 @@ public class RequestProcessor {
 
             if (peerId != -1) {
                 peer.setId(peerId);
-                Uri uri = PeerContract.withExtendedPath(peer.getId());
+                Uri uri = PeerContract.withDatabaseKeyUri(databaseKey, PeerContract.withExtendedPath(peer.getId()));
                 peer.writeToProvider(values);
                 contentResolver.update(uri, values, null, null);
             } else {
                 peer.writeToProvider(values);
-                contentResolver.insert(PeerContract.CONTENT_URI, values);
+                contentResolver.insert(PeerContract.withDatabaseKeyUri(databaseKey), values);
             }
         }
     }
 
     private long getChatroomId(ContentResolver contentResolver, String chatroom) {
-        Uri uri = ChatroomContract.withExtendedPath(chatroom);
+        Uri uri = ChatroomContract.withDatabaseKeyUri(databaseKey, ChatroomContract.withExtendedPath(chatroom));
         Cursor c = contentResolver.query(uri, null, null, null, null);
 
         if (c.getCount() > 0) {
@@ -202,7 +203,7 @@ public class RequestProcessor {
                     Chatroom chat = new Chatroom(m.getChatroom());
                     ContentValues values = new ContentValues();
                     chat.writeToProvider(values);
-                    Uri uri = contentResolver.insert(ChatroomContract.CONTENT_URI, values);
+                    Uri uri = contentResolver.insert(ChatroomContract.withDatabaseKeyUri(databaseKey), values);
                     chatroomId = Long.valueOf(uri.getLastPathSegment());
 
                 }
@@ -230,7 +231,7 @@ public class RequestProcessor {
                     Peer peer = new Peer(m.getSender(), 0, 0);
                     ContentValues values = new ContentValues();
                     peer.writeToProvider(values);
-                    Uri uri = contentResolver.insert(PeerContract.CONTENT_URI, values);
+                    Uri uri = contentResolver.insert(PeerContract.withDatabaseKeyUri(databaseKey), values);
                     peerId = Long.valueOf(uri.getLastPathSegment());
                 }
                 idMap.put(m.getSender(), peerId);
@@ -238,7 +239,7 @@ public class RequestProcessor {
             m.setPeerId(peerId);
             ContentValues values = new ContentValues();
             m.writeToProvider(values);
-            contentResolver.insert(MessageContract.CONTENT_URI, values);
+            contentResolver.insert(MessageContract.withDatabaseKeyUri(databaseKey), values);
 
         }
     }
@@ -249,4 +250,7 @@ public class RequestProcessor {
     }
 
 
+    public void setDatabaseKey(char[] databaseKey) {
+        this.databaseKey = databaseKey;
+    }
 }

@@ -11,6 +11,8 @@ import edu.stevens.cs522.chat.oneway.server.activities.PreferencesActivity;
  */
 public class App {
     public static final String APP_NAMESPACE = "edu.stevens.cs522.chat.oneway.server";
+    public static final String EXTRA_SECURITY_DATABASE_KEY = "";
+    public static final String DATABASE_KEY_URI_PARAM = "key";
 
     public static final String PREF_KEY_USERID = "userid";
     public static final String PREF_KEY_LAST_SEQNUM = "last_seq_num";
@@ -19,8 +21,8 @@ public class App {
     public static final String PREF_KEY_HOST = "host";
     public static final String PREF_KEY_REGISTRATION_ID = "reg_id";
     public static final String PREF_KEY_LATITUDE = "latitude";
-    public static final String PREF_KEY_LONGITUDE = "longitude";
 
+    public static final String PREF_KEY_LONGITUDE = "longitude";
     final static public long PREF_DEFAULT_USER_ID = 0;
     final static public long PREF_DEFAULT_LAST_SEQNUM = 0;
     final static public String PREF_DEFAULT_CHATROOM = "_default";
@@ -29,5 +31,4 @@ public class App {
 
     public static String DEFAULT_HOST = "";
     public static final String DEFAULT_ENCODING = "UTF-8";
-
 }

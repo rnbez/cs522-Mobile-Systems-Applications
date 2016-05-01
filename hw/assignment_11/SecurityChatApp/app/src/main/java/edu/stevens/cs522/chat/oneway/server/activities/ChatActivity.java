@@ -53,6 +53,7 @@ import java.util.UUID;
 import java.util.ArrayList;
 
 import edu.stevens.cs522.chat.oneway.server.R;
+import edu.stevens.cs522.chat.oneway.server.activities.base.BaseFragmentActivity;
 import edu.stevens.cs522.chat.oneway.server.activities.fragments.ChatroomListFragment;
 import edu.stevens.cs522.chat.oneway.server.activities.fragments.ChatroomMessagesFragment;
 import edu.stevens.cs522.chat.oneway.server.activities.fragments.ConfirmDialogFragment;
@@ -75,7 +76,7 @@ import edu.stevens.cs522.chat.oneway.server.utils.App;
 import edu.stevens.cs522.chat.oneway.server.utils.ResultReceiverWrapper;
 
 public class ChatActivity
-        extends FragmentActivity
+        extends BaseFragmentActivity
         implements ChatroomListFragment.IChatroomListFragmentListener,
         ChatroomMessagesFragment.IChatroomMessagesFragmentListener,
         NewChatFragment.INewChatFragmentListener,
@@ -148,6 +149,13 @@ public class ChatActivity
         StrictMode.setThreadPolicy(policy);
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        String host = sharedPreferences.getString(App.PREF_KEY_HOST, "");
+        if (host.isEmpty()) {
+            SharedPreferences.Editor prefEditor = sharedPreferences.edit();
+            prefEditor.putString(App.PREF_KEY_HOST, "http://10.0.2.2:81");
+            prefEditor.apply();
+        }
+
         userId = sharedPreferences.getLong(App.PREF_KEY_USERID, App.PREF_DEFAULT_USER_ID);
         lastMessageSeqNum = sharedPreferences.getLong(App.PREF_KEY_LAST_SEQNUM, App.PREF_DEFAULT_LAST_SEQNUM);
         currentChatroom = new Chatroom(sharedPreferences.getString(App.PREF_KEY_CHATROOM, App.PREF_DEFAULT_CHATROOM));
@@ -164,6 +172,7 @@ public class ChatActivity
 
         launchFragments(hasSavedInstanceState);
 
+        ServiceHelper.setDatabaseKey(super.getDatabaseKey());
         serviceHelper = new ServiceHelper();
         if (isOnline() && registrationID != null) {
             Peer peer = new Peer(userId, userName, userLatitude, userLongitude);
@@ -458,7 +467,7 @@ public class ChatActivity
     public void getChatroomListAsync() {
         QueryBuilder.executeQuery(TAG,
                 this,
-                ChatroomContract.CONTENT_URI,
+                ChatroomContract.withDatabaseKeyUri(super.getDatabaseKey()),
                 ChatroomContract.CURSOR_LOADER_ID,
                 ChatroomContract.DEFAULT_ENTITY_CREATOR,
                 new IQueryListener<Chatroom>() {
@@ -482,7 +491,7 @@ public class ChatActivity
 
         QueryBuilder.executeQuery(TAG,
                 this,
-                uri,
+                ChatroomContract.withDatabaseKeyUri(super.getDatabaseKey(), uri),
                 MessageContract.CURSOR_LOADER_ID + (100 * (int) chatroom.getId()),
                 MessageContract.DEFAULT_ENTITY_CREATOR,
                 new IQueryListener<Message>() {
@@ -509,6 +518,7 @@ public class ChatActivity
             if (confirm) {
                 final ChatroomManager manager = new ChatroomManager(
                         this,
+                        super.getDatabaseKey(),
                         ChatroomContract.CURSOR_LOADER_ID,
                         ChatroomContract.DEFAULT_ENTITY_CREATOR);
 
@@ -518,7 +528,7 @@ public class ChatActivity
 
                 SimpleQueryBuilder.executeQuery(
                         getContentResolver(),
-                        uriWithName,
+                        ChatroomContract.withDatabaseKeyUri(super.getDatabaseKey(), uriWithName),
                         ChatroomContract.DEFAULT_ENTITY_CREATOR,
                         new ISimpleQueryListener<Chatroom>() {
                             @Override

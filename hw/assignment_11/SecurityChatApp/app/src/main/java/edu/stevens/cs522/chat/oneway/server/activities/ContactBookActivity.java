@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import java.util.List;
 
 import edu.stevens.cs522.chat.oneway.server.R;
+import edu.stevens.cs522.chat.oneway.server.activities.base.BaseFragmentActivity;
 import edu.stevens.cs522.chat.oneway.server.activities.fragments.ContactDetailsFragment;
 import edu.stevens.cs522.chat.oneway.server.activities.fragments.ContactListFragment;
 import edu.stevens.cs522.chat.oneway.server.adapters.ContactRowAdapter;
@@ -33,7 +34,7 @@ import edu.stevens.cs522.chat.oneway.server.managers.TypedCursor;
 import edu.stevens.cs522.chat.oneway.server.utils.App;
 
 public class ContactBookActivity
-        extends FragmentActivity
+        extends BaseFragmentActivity
         implements ContactListFragment.IContactListFragmentListener,
         ContactDetailsFragment.IContactDetailsFragmentListener {
 
@@ -98,7 +99,7 @@ public class ContactBookActivity
 
         QueryBuilder.executeQuery(TAG,
                 this,
-                PeerContract.CONTENT_URI,
+                PeerContract.withDatabaseKeyUri(super.getDatabaseKey()),
                 PeerContract.CURSOR_LOADER_ID,
                 PeerContract.DEFAULT_ENTITY_CREATOR,
                 new IQueryListener<Peer>() {
@@ -181,7 +182,7 @@ public class ContactBookActivity
         }
         
         SimpleQueryBuilder.executeQuery(this,
-                PeerContract.getMessagesUri(peer.getId()),
+                PeerContract.withDatabaseKeyUri(super.getDatabaseKey(), PeerContract.getMessagesUri(peer.getId())),
                 MessageContract.DEFAULT_ENTITY_CREATOR,
                 new ISimpleQueryListener<Message>() {
                     @Override

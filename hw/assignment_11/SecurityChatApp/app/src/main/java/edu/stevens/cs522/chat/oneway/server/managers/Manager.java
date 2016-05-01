@@ -64,32 +64,32 @@ public abstract class Manager<T> {
                 listener);
     }
 
-    protected void executeQuery(Uri uri,
-                                String[] projection,
-                                String selection,
-                                String[] selectionArgs,
-                                IQueryListener<T> listener) {
-        QueryBuilder.executeQuery(tag,
-                (Activity) context,
-                uri,
-                loaderID,
-                projection,
-                selection,
-                selectionArgs,
-                creator,
-                listener);
-    }
-    protected void reexecuteQuery(Uri uri, String[] projection,
-                                        String selection, String[] selectionArgs,
-                                        IQueryListener<T> listener) {
-        QueryBuilder.reexecuteQuery(tag,
-                (Activity) context,
-                uri,
-                loaderID,
-                projection,
-                selection,
-                selectionArgs,
-                creator,
-                listener);
-    }
+//    protected void executeQuery(Uri uri,
+//                                String[] projection,
+//                                String selection,
+//                                String[] selectionArgs,
+//                                IQueryListener<T> listener) {
+//        QueryBuilder.executeQuery(tag,
+//                (Activity) context,
+//                uri,
+//                loaderID,
+//                projection,
+//                selection,
+//                selectionArgs,
+//                creator,
+//                listener);
+//    }
+//    protected void reexecuteQuery(Uri uri, String[] projection,
+//                                        String selection, String[] selectionArgs,
+//                                        IQueryListener<T> listener) {
+//        QueryBuilder.reexecuteQuery(tag,
+//                (Activity) context,
+//                uri,
+//                loaderID,
+//                projection,
+//                selection,
+//                selectionArgs,
+//                creator,
+//                listener);
+//    }
 }

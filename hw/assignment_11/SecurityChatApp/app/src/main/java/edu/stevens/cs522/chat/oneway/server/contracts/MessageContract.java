@@ -84,6 +84,19 @@ public class MessageContract {
         }
     }
 
+    public static Uri withDatabaseKeyUri(char[]	databaseKey, Uri baseUri) {
+        Uri.Builder	builder = baseUri.buildUpon();
+        Uri	uri = builder
+                .appendQueryParameter(App.DATABASE_KEY_URI_PARAM,
+                        new	String(databaseKey))
+                .build();
+        return uri;
+    }
+
+    public static Uri withDatabaseKeyUri(char[]	databaseKey) {
+        return withDatabaseKeyUri(databaseKey, CONTENT_URI);
+    }
+
     public static long getId(Uri uri) {
         return Long.parseLong(uri.getLastPathSegment());
     }

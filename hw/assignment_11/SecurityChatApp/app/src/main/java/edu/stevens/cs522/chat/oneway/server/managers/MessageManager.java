@@ -6,6 +6,7 @@ import android.net.Uri;
 
 import edu.stevens.cs522.chat.oneway.server.contracts.MessageContract;
 import edu.stevens.cs522.chat.oneway.server.entities.Message;
+import edu.stevens.cs522.chat.oneway.server.utils.App;
 
 /**
  * Created by Rafael on 2/21/2016.
@@ -13,9 +14,11 @@ import edu.stevens.cs522.chat.oneway.server.entities.Message;
 public class MessageManager extends Manager<Message> {
 
     final static Uri CONTENT_URI = MessageContract.CONTENT_URI;
+    private char[] databaseKey;
 
-    public MessageManager(Context context, int loaderId, IEntityCreator<Message> creator) {
+    public MessageManager(Context context, char[] databaseKey, int loaderId, IEntityCreator<Message> creator) {
         super(context, loaderId, creator);
+        this.databaseKey = databaseKey;
     }
 
     public void persistAsync(final Message message, final IContinue<Uri> callback) {
@@ -23,7 +26,8 @@ public class MessageManager extends Manager<Message> {
         message.writeToProvider(values);
         AsyncContentResolver asyncResolver = getAsyncResolver();
 //        asyncResolver.insertAsync(CONTENT_URI, values, callback);
-        asyncResolver.insertAsync(CONTENT_URI,
+        Uri uri = MessageContract.withDatabaseKeyUri(this.databaseKey);
+        asyncResolver.insertAsync(uri,
                 values,
                 new IContinue<Uri>() {
                     public void kontinue(Uri uri) {
@@ -36,7 +40,15 @@ public class MessageManager extends Manager<Message> {
                 });
     }
 
-    public void updateAsync(final Uri uri, final Message message, final IContinue<Integer> callback) {
+    public void updateAsync(final Uri updateUri, final Message message, final IContinue<Integer> callback) {
+        String k = updateUri.getQueryParameter(App.DATABASE_KEY_URI_PARAM);
+        final Uri uri;
+        if (k == null) {
+            uri = MessageContract.withDatabaseKeyUri(databaseKey, updateUri);
+        } else {
+            uri = updateUri;
+        }
+
         AsyncContentResolver asyncResolver = getAsyncResolver();
         ContentValues values = new ContentValues();
         message.writeToProvider(values);
@@ -54,7 +66,15 @@ public class MessageManager extends Manager<Message> {
 
     }
 
-    public void deleteAsync(final Uri uri, final IContinue<Integer> callback) {
+    public void deleteAsync(final Uri deleteUri, final IContinue<Integer> callback) {
+        String k = deleteUri.getQueryParameter(App.DATABASE_KEY_URI_PARAM);
+        final Uri uri;
+        if (k == null) {
+            uri = MessageContract.withDatabaseKeyUri(databaseKey, deleteUri);
+        } else {
+            uri = deleteUri;
+        }
+
         AsyncContentResolver asyncResolver = getAsyncResolver();
         asyncResolver.deleteAsync(uri, null, null, new IContinue<Integer>() {
             @Override

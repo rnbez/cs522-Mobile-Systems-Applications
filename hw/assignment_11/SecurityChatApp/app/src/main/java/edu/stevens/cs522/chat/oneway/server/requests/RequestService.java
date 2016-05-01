@@ -56,6 +56,9 @@ public class RequestService extends IntentService {
     public static final String EXTRA_POST_MSG_RESULT_ID = "extra_post_msg_result_id";
 
     Handler toastHandler;
+    char[] databaseKey;
+    RequestProcessor requestProcessor;
+
 
     public RequestService() {
         super("RequestService");
@@ -72,12 +75,15 @@ public class RequestService extends IntentService {
     @Override
     protected void onHandleIntent(Intent intent) {
         setServerHost();
+        databaseKey = intent.getCharArrayExtra(App.EXTRA_SECURITY_DATABASE_KEY);
+        requestProcessor = new RequestProcessor();
+        requestProcessor.setDatabaseKey(databaseKey);
         ResultReceiver resultReceiver = intent.getParcelableExtra(EXTRA_CALLBACK);
 //        final Bundle result = new Bundle();
 //      RESPONSE
         if (REGISTER_ACTION.equals(intent.getAction())) {
             Register req = intent.getParcelableExtra(EXTRA_REGISTER);
-            RegisterResponse res = new RequestProcessor().perform(req);
+            RegisterResponse res = requestProcessor.perform(req);
             handleSender(req, res);
 
             if (res != null) {
@@ -96,7 +102,7 @@ public class RequestService extends IntentService {
 
         if (UNREGISTER_ACTION.equals(intent.getAction())) {
             Unregister req = intent.getParcelableExtra(EXTRA_UNREGISTER);
-            UnregisterResponse res = new RequestProcessor().perform(req);
+            UnregisterResponse res = requestProcessor.perform(req);
 //            handleSender(req, res);
 
             if (res != null) {
@@ -119,7 +125,7 @@ public class RequestService extends IntentService {
 
         if (SYNCHRONIZE_ACTION.equals(intent.getAction())) {
             Synchronize req = intent.getParcelableExtra(EXTRA_SYNCHRONIZE);
-            new RequestProcessor().perform(this, req);
+            requestProcessor.perform(this, req);
             return;
         }
 
@@ -138,13 +144,14 @@ public class RequestService extends IntentService {
         try {
             SimpleQueryBuilder.executeQuery(
                     contentResolver,
-                    uriWithName,
+                    PeerContract.withDatabaseKeyUri(databaseKey, uriWithName),
                     PeerContract.DEFAULT_ENTITY_CREATOR,
                     new ISimpleQueryListener<Peer>() {
                         @Override
                         public void handleResults(List<Peer> results) {
                             PeerManager manager = new PeerManager(
                                     RequestService.this,
+                                    databaseKey,
                                     PeerContract.CURSOR_LOADER_ID,
                                     PeerContract.DEFAULT_ENTITY_CREATOR);
                             if (results.size() > 0) {
@@ -184,10 +191,12 @@ public class RequestService extends IntentService {
         ContentResolver contentResolver = getContentResolver(); //ChatReceiverService.this.getContentResolver();
         final PeerManager peerManager = new PeerManager(
                 context,
+                databaseKey,
                 PeerContract.CURSOR_LOADER_ID,
                 PeerContract.DEFAULT_ENTITY_CREATOR);
         final MessageManager messageManager = new MessageManager(
                 context,
+                databaseKey,
                 MessageContract.CURSOR_LOADER_ID,
                 MessageContract.DEFAULT_ENTITY_CREATOR);
 
@@ -198,7 +207,7 @@ public class RequestService extends IntentService {
         try {
             SimpleQueryBuilder.executeQuery(
                     contentResolver,
-                    uriWithName,
+                    PeerContract.withDatabaseKeyUri(databaseKey, uriWithName),
                     PeerContract.DEFAULT_ENTITY_CREATOR,
                     new ISimpleQueryListener<Peer>() {
                         @Override
@@ -210,18 +219,6 @@ public class RequestService extends IntentService {
                                 Log.d(TAG, peer.getId() + " >> " + peer.getName());
                                 message.setPeerId(peerId);
                                 saveMessage(message, newMessage, resultReceiver);
-                            } else {
-                                Log.d(TAG, "UNEXPECTED 901H2E7");
-//                                peerManager.persistAsync(peer, new IContinue<Uri>() {
-//                                    @Override
-//                                    public void kontinue(Uri uri) {
-//                                        long peerId = PeerContract.getId(uri);
-//                                        Log.d(TAG, peerId + " >> " + peer.getName());
-//                                        message.setPeerId(peerId);
-//                                        Log.d(TAG, message.getPeerId() + " >> " + message.getMessageText());
-//                                        saveMessage(message, newMessage, resultReceiver);
-//                                    }
-//                                });
                             }
                         }
                     }
@@ -237,6 +234,7 @@ public class RequestService extends IntentService {
         ContentResolver contentResolver = getContentResolver(); //ChatReceiverService.this.getContentResolver();
         final MessageManager messageManager = new MessageManager(
                 context,
+                databaseKey,
                 MessageContract.CURSOR_LOADER_ID,
                 MessageContract.DEFAULT_ENTITY_CREATOR);
 

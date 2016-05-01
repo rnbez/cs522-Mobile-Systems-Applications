@@ -6,6 +6,7 @@ import android.net.Uri;
 
 import edu.stevens.cs522.chat.oneway.server.contracts.PeerContract;
 import edu.stevens.cs522.chat.oneway.server.entities.Peer;
+import edu.stevens.cs522.chat.oneway.server.utils.App;
 
 
 /**
@@ -14,16 +15,21 @@ import edu.stevens.cs522.chat.oneway.server.entities.Peer;
 public class PeerManager extends Manager<Peer> {
 
     final static Uri CONTENT_URI = PeerContract.CONTENT_URI;
+    private char[] databaseKey;
 
-    public PeerManager(Context context, int loaderId, IEntityCreator<Peer> creator) {
+    public PeerManager(Context context, char[] databaseKey, int loaderId, IEntityCreator<Peer> creator) {
         super(context, loaderId, creator);
+        this.databaseKey = databaseKey;
+
     }
 
     public void persistAsync(final Peer peer, final IContinue<Uri> callback) {
+        Uri uri = PeerContract.withDatabaseKeyUri(databaseKey);
+
         ContentValues values = new ContentValues();
         peer.writeToProvider(values);
         AsyncContentResolver asyncResolver = getAsyncResolver();
-        asyncResolver.insertAsync(CONTENT_URI,
+        asyncResolver.insertAsync(uri,
                 values,
                 new IContinue<Uri>() {
                     public void kontinue(Uri uri) {
@@ -36,7 +42,15 @@ public class PeerManager extends Manager<Peer> {
                 });
     }
 
-    public void deleteAsync(final Uri uri, final IContinue<Integer> callback) {
+    public void deleteAsync(final Uri deleteUri, final IContinue<Integer> callback) {
+        String k = deleteUri.getQueryParameter(App.DATABASE_KEY_URI_PARAM);
+        final Uri uri;
+        if (k == null) {
+            uri = PeerContract.withDatabaseKeyUri(databaseKey, deleteUri);
+        } else {
+            uri = deleteUri;
+        }
+
         AsyncContentResolver asyncResolver = getAsyncResolver();
         asyncResolver.deleteAsync(uri, null, null, new IContinue<Integer>() {
             @Override
@@ -51,7 +65,15 @@ public class PeerManager extends Manager<Peer> {
         });
     }
 
-    public void updateAsync(final Uri uri, final Peer peer, final IContinue<Integer> callback) {
+    public void updateAsync(final Uri updateUri, final Peer peer, final IContinue<Integer> callback) {
+        String k = updateUri.getQueryParameter(App.DATABASE_KEY_URI_PARAM);
+        final Uri uri;
+        if (k == null) {
+            uri = PeerContract.withDatabaseKeyUri(databaseKey, updateUri);
+        } else {
+            uri = updateUri;
+        }
+
         ContentValues values = new ContentValues();
         peer.writeToProvider(values);
         AsyncContentResolver asyncResolver = getAsyncResolver();
