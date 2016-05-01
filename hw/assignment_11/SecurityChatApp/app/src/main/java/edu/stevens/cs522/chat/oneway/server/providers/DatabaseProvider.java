@@ -126,7 +126,9 @@ public class DatabaseProvider extends ContentProvider {
 
     @Override
     public boolean onCreate() {
-        this._dbHelper = new DBHelper(getContext());
+        Context context = getContext();
+        SQLiteDatabase.loadLibs(context);
+        this._dbHelper = new DBHelper(context);
         _db = _dbHelper.getWritableDatabase("my_secure_key");
         return (_db == null) ? false : true;
     }

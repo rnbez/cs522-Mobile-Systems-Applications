@@ -2,100 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8b1c87b0-da54-4dfc-b3f6-0ecaeeddc5ae" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/android_database_sqlcipher_3_3_1_1.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServer.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/.idea/.name" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/.idea/compiler.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/.idea/copyright/profiles_settings.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/.idea/encodings.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/.idea/gradle.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/.idea/libraries/android_android_23.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/.idea/libraries/play_services_appindexing_8_1_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/.idea/libraries/play_services_basement_8_1_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/.idea/libraries/support_annotations_22_2_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/.idea/libraries/support_v4_22_2_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/.idea/misc.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/.idea/modules.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/.idea/runConfigurations.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/.idea/workspace.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/Chat-Server-Oneway.iml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/ChatServerDifferentProcess.iml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/ChatServerWebServer.iml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/ChatServerWithContentProvider.iml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/app/app.iml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/app/build.gradle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/app/src/main/AndroidManifest.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/app/src/main/ic_menu_contactbook2-web.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/app/src/main/java/edu/stevens/cs522/chat/oneway/server/activities/ChatActivity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/app/src/main/java/edu/stevens/cs522/chat/oneway/server/activities/ContactBookActivity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/app/src/main/java/edu/stevens/cs522/chat/oneway/server/activities/ContactDetailsActivity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/app/src/main/java/edu/stevens/cs522/chat/oneway/server/activities/PreferencesActivity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/app/src/main/java/edu/stevens/cs522/chat/oneway/server/adapters/ContactAdapter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/app/src/main/java/edu/stevens/cs522/chat/oneway/server/adapters/MessageRowAdapter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/app/src/main/java/edu/stevens/cs522/chat/oneway/server/contracts/MessageContract.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/app/src/main/java/edu/stevens/cs522/chat/oneway/server/contracts/PeerContract.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/app/src/main/java/edu/stevens/cs522/chat/oneway/server/entities/Message.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/app/src/main/java/edu/stevens/cs522/chat/oneway/server/entities/Peer.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/app/src/main/java/edu/stevens/cs522/chat/oneway/server/managers/AsyncContentResolver.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/app/src/main/java/edu/stevens/cs522/chat/oneway/server/managers/IContinue.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/app/src/main/java/edu/stevens/cs522/chat/oneway/server/managers/IEntityCreator.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/app/src/main/java/edu/stevens/cs522/chat/oneway/server/managers/IQueryListener.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/app/src/main/java/edu/stevens/cs522/chat/oneway/server/managers/ISimpleQueryListener.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/app/src/main/java/edu/stevens/cs522/chat/oneway/server/managers/Manager.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/app/src/main/java/edu/stevens/cs522/chat/oneway/server/managers/MessageManager.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/app/src/main/java/edu/stevens/cs522/chat/oneway/server/managers/PeerManager.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/app/src/main/java/edu/stevens/cs522/chat/oneway/server/managers/QueryBuilder.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/app/src/main/java/edu/stevens/cs522/chat/oneway/server/managers/SimpleQueryBuilder.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/app/src/main/java/edu/stevens/cs522/chat/oneway/server/managers/TypedCursor.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/app/src/main/java/edu/stevens/cs522/chat/oneway/server/providers/PeerMessageProvider.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/app/src/main/java/edu/stevens/cs522/chat/oneway/server/requests/PostMessage.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/app/src/main/java/edu/stevens/cs522/chat/oneway/server/requests/PostMessageResponse.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/app/src/main/java/edu/stevens/cs522/chat/oneway/server/requests/Register.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/app/src/main/java/edu/stevens/cs522/chat/oneway/server/requests/RegisterResponse.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/app/src/main/java/edu/stevens/cs522/chat/oneway/server/requests/Request.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/app/src/main/java/edu/stevens/cs522/chat/oneway/server/requests/RequestProcessor.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/app/src/main/java/edu/stevens/cs522/chat/oneway/server/requests/RequestService.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/app/src/main/java/edu/stevens/cs522/chat/oneway/server/requests/Response.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/app/src/main/java/edu/stevens/cs522/chat/oneway/server/requests/RestMethod.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/app/src/main/java/edu/stevens/cs522/chat/oneway/server/requests/ServiceHelper.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/app/src/main/java/edu/stevens/cs522/chat/oneway/server/requests/SyncResponse.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/app/src/main/java/edu/stevens/cs522/chat/oneway/server/requests/Synchronize.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/app/src/main/java/edu/stevens/cs522/chat/oneway/server/services/ChatReceiverService.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/app/src/main/java/edu/stevens/cs522/chat/oneway/server/services/ChatSendService.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/app/src/main/java/edu/stevens/cs522/chat/oneway/server/utils/App.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/app/src/main/java/edu/stevens/cs522/chat/oneway/server/utils/ResultReceiverWrapper.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/app/src/main/res/drawable-hdpi/ic_launcher.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/app/src/main/res/drawable-hdpi/ic_menu_contactbook.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/app/src/main/res/drawable-hdpi/ic_menu_preferences.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/app/src/main/res/drawable-ldpi/ic_launcher.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/app/src/main/res/drawable-mdpi/ic_launcher.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/app/src/main/res/drawable-mdpi/ic_menu_contactbook.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/app/src/main/res/drawable-mdpi/ic_menu_preferences.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/app/src/main/res/drawable-xhdpi/ic_menu_contactbook.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/app/src/main/res/drawable-xhdpi/ic_menu_preferences.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/app/src/main/res/drawable-xxhdpi/ic_menu_contactbook.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/app/src/main/res/drawable-xxhdpi/ic_menu_preferences.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/app/src/main/res/layout/client_chat.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/app/src/main/res/layout/contact_book.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/app/src/main/res/layout/contact_details.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/app/src/main/res/layout/contact_row.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/app/src/main/res/layout/main.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/app/src/main/res/layout/message_row.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/app/src/main/res/layout/peers.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/app/src/main/res/layout/simple_list_row.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/app/src/main/res/menu/chat_menu.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/app/src/main/res/values/strings.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/app/src/main/res/xml/preferences.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/build.gradle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/gradle/wrapper/gradle-wrapper.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/gradle/wrapper/gradle-wrapper.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/gradlew" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/gradlew.bat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/import-summary.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../assignment_12/ChatServerWebServer/settings.gradle" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../assignment_10/Location/app/app.iml" afterPath="$PROJECT_DIR$/../../assignment_10/Location/app/app.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../assignment_10/Location/build.gradle" afterPath="$PROJECT_DIR$/../../assignment_10/Location/build.gradle" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/oneway/server/providers/DatabaseProvider.java" afterPath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/oneway/server/providers/DatabaseProvider.java" />
     </list>
     <ignored path="SecurityChatApp.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -119,8 +26,8 @@
       <file leaf-file-name="DatabaseProvider.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/oneway/server/providers/DatabaseProvider.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.78223">
-              <caret line="239" column="44" selection-start-line="239" selection-start-column="44" selection-end-line="239" selection-end-column="44" />
+            <state vertical-scroll-proportion="0.5139373">
+              <caret line="132" column="44" selection-start-line="132" selection-start-column="44" selection-end-line="132" selection-end-column="44" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -2109,8 +2016,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/oneway/server/providers/DatabaseProvider.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.78223">
-          <caret line="239" column="44" selection-start-line="239" selection-start-column="44" selection-end-line="239" selection-end-column="44" />
+        <state vertical-scroll-proportion="0.5139373">
+          <caret line="132" column="44" selection-start-line="132" selection-start-column="44" selection-end-line="132" selection-end-column="44" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
