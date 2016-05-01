@@ -2,10 +2,12 @@ package edu.stevens.cs522.chat.oneway.server.activities;
 
 import android.content.ComponentName;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -126,9 +128,18 @@ public class ContactBookActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.chat_menu_maps:
+                SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+                long userId = sharedPreferences.getLong(App.PREF_KEY_USERID, App.PREF_DEFAULT_USER_ID);
+                double userLatitude = (double) sharedPreferences.getFloat(App.PREF_KEY_LATITUDE, 0);
+                double userLongitude = (double) sharedPreferences.getFloat(App.PREF_KEY_LONGITUDE, 0);
 //                startActivityForResult(new Intent(this, PreferencesActivity.class), MAPS_REQUEST);
-                Intent intent = getPackageManager().getLaunchIntentForPackage("com.chat_maps.chatmaps");
-                Bundle b = new Bundle();
+//                Intent intent = getPackageManager().getLaunchIntentForPackage("com.chat_maps.chatmaps");
+                Intent intent = new Intent();
+                intent.setAction("com.chat_maps.chatmaps.SHOW_PEERS");
+                intent.setType("*/*");
+                intent.putExtra("com.chat_maps.chatmaps.EXTRA_USERID", userId);
+                intent.putExtra("com.chat_maps.chatmaps.EXTRA_LATITUDE", userLatitude);
+                intent.putExtra("com.chat_maps.chatmaps.EXTRA_LONGITUDE", userLongitude);
                 startActivity(intent);
                 return true;
             default:

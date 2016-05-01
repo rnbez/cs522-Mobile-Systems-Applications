@@ -4,7 +4,8 @@ package com.chat_maps.chatmaps.utils;
  * Created by Rafael on 3/13/2016.
  */
 public class App {
-    public static final String APP_NAMESPACE = "edu.stevens.cs522.chat.oneway.server";
+    public static final String APP_NAMESPACE = "com.chat_maps.chatmaps";
+    public static final String CHAT_APP_NAMESPACE = "edu.stevens.cs522.chat.oneway.server";
 
     public static final String PREF_KEY_USERID = "userid";
     public static final String PREF_KEY_LAST_SEQNUM = "last_seq_num";

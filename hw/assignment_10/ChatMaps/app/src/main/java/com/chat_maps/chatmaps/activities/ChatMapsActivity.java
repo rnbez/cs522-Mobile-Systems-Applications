@@ -1,18 +1,19 @@
 package com.chat_maps.chatmaps.activities;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.chat_maps.chatmaps.R;
-import com.chat_maps.chatmaps.contracts.ChatroomContract;
 import com.chat_maps.chatmaps.contracts.PeerContract;
-import com.chat_maps.chatmaps.entities.Chatroom;
 import com.chat_maps.chatmaps.entities.Peer;
 import com.chat_maps.chatmaps.managers.IQueryListener;
 import com.chat_maps.chatmaps.managers.QueryBuilder;
 import com.chat_maps.chatmaps.managers.TypedCursor;
+import com.chat_maps.chatmaps.utils.App;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -25,9 +26,16 @@ import java.util.ArrayList;
 
 public class ChatMapsActivity extends FragmentActivity implements OnMapReadyCallback {
     final static public String TAG = ChatMapsActivity.class.getCanonicalName();
+    final static public String EXTRA_USERID = App.APP_NAMESPACE + ".EXTRA_USERID";
+    final static public String EXTRA_LATITUDE = App.APP_NAMESPACE + ".EXTRA_LATITUDE";
+    final static public String EXTRA_LONGITUDE = App.APP_NAMESPACE + ".EXTRA_LONGITUDE";
 
     private GoogleMap map;
     private ArrayList<Peer> peers;
+    private long userId;
+    private double latitude;
+    private double longitude;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +45,33 @@ public class ChatMapsActivity extends FragmentActivity implements OnMapReadyCall
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+        userId = -1;
+        latitude = Double.MAX_VALUE;
+        longitude = Double.MAX_VALUE;
+
+        Intent callingIntent = this.getIntent();
+        if (callingIntent != null) {
+            Bundle bundle = callingIntent.getExtras();
+            if (bundle != null) {
+                if (bundle.containsKey(EXTRA_USERID))
+                    userId = bundle.getLong(EXTRA_USERID);
+                if (bundle.containsKey(EXTRA_LATITUDE))
+                    latitude = bundle.getDouble(EXTRA_LATITUDE);
+                if (bundle.containsKey(EXTRA_LONGITUDE))
+                    longitude = bundle.getDouble(EXTRA_LONGITUDE);
+                getPeers();
+            } else
+                Toast.makeText(getApplicationContext(), "You need to launch this app from the ChatApp.", Toast.LENGTH_LONG).show();
+//            Uri uri  = callingIntent.getData();
+//            Log.d(TAG, uri.toString());
+        } else
+            Toast.makeText(getApplicationContext(), "You need to launch this app from the ChatApp.", Toast.LENGTH_LONG).show();
+
+
+        getPeers();
+    }
+
+    private void getPeers() {
         QueryBuilder.executeQuery(TAG,
                 this,
                 PeerContract.CONTENT_URI,
@@ -48,10 +83,10 @@ public class ChatMapsActivity extends FragmentActivity implements OnMapReadyCall
                         Log.d(TAG, "QueryBuilder returned");
                         peers = new ArrayList<>();
                         Cursor cursor = typedCursor.getCursor();
-                        if (cursor.moveToFirst()){
-                            do{
+                        if (cursor.moveToFirst()) {
+                            do {
                                 peers.add(new Peer(cursor));
-                            }while(cursor.moveToNext());
+                            } while (cursor.moveToNext());
                         }
 
                         updateMap();
@@ -69,14 +104,18 @@ public class ChatMapsActivity extends FragmentActivity implements OnMapReadyCall
         for (Peer p :
                 peers) {
 //            LatLng hoboken = new LatLng(40.7447, -74.0299);
+            String name = p.getName();
+            if (userId == p.getId()){
+                name += " (me)";
+            }
             map.addMarker(new MarkerOptions()
                     .position(new LatLng(p.getLatitute(), p.getLongitude()))
-                    .title(p.getName())
+                    .title(name)
                     .snippet(p.getAddress())
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
         }
-        if (!peers.isEmpty())
-            map.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(peers.get(0).getLatitute(), peers.get(0).getLongitude())));
+        if (!peers.isEmpty() && this.latitude != Double.MAX_VALUE && this.longitude != Double.MAX_VALUE)
+            map.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(this.latitude, this.longitude)));
     }
 
 
