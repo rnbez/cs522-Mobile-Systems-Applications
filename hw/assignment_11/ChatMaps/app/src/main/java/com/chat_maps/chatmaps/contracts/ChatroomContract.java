@@ -12,7 +12,7 @@ import com.chat_maps.chatmaps.utils.App;
  * Created by Rafael on 4/10/2016.
  */
 public class ChatroomContract {
-    public static final String APP_NAMESPACE = App.APP_NAMESPACE;
+    public static final String APP_NAMESPACE = App.CHAT_APP_NAMESPACE;
     public static final String SCHEME = "content";
     public static final String AUTHORITY = APP_NAMESPACE;
     public static final String CONTENT = "chatroom";

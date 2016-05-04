@@ -10,75 +10,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8b1c87b0-da54-4dfc-b3f6-0ecaeeddc5ae" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Capture/app/src/main/ic_launcher-web.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../ChatMaps/app/src/main/ic_launcher-web.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/ic_launcher-web.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-hdpi/ic_launcher.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-mdpi/ic_launcher.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/ic_launcher.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/ic_launcher.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/oneway/server/utils/CaptureClient.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../ChatMaps/app/src/main/java/com/chat_maps/chatmaps/providers/ChatDatabaseProvider.java" afterPath="$PROJECT_DIR$/../ChatMaps/app/src/main/java/com/chat_maps/chatmaps/providers/DatabaseProvider.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Capture/app/src/main/res/mipmap-hdpi/ic_launcher.png" afterPath="$PROJECT_DIR$/../Capture/app/src/main/res/mipmap-hdpi/ic_launcher.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Capture/app/src/main/res/mipmap-mdpi/ic_launcher.png" afterPath="$PROJECT_DIR$/../Capture/app/src/main/res/mipmap-mdpi/ic_launcher.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Capture/app/src/main/res/mipmap-xhdpi/ic_launcher.png" afterPath="$PROJECT_DIR$/../Capture/app/src/main/res/mipmap-xhdpi/ic_launcher.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Capture/app/src/main/res/mipmap-xxhdpi/ic_launcher.png" afterPath="$PROJECT_DIR$/../Capture/app/src/main/res/mipmap-xxhdpi/ic_launcher.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Capture/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" afterPath="$PROJECT_DIR$/../Capture/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ChatMaps/app/src/main/res/mipmap-hdpi/ic_launcher.png" afterPath="$PROJECT_DIR$/../ChatMaps/app/src/main/res/mipmap-hdpi/ic_launcher.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ChatMaps/app/src/main/res/mipmap-mdpi/ic_launcher.png" afterPath="$PROJECT_DIR$/../ChatMaps/app/src/main/res/mipmap-mdpi/ic_launcher.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ChatMaps/app/src/main/res/mipmap-xhdpi/ic_launcher.png" afterPath="$PROJECT_DIR$/../ChatMaps/app/src/main/res/mipmap-xhdpi/ic_launcher.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ChatMaps/app/src/main/res/mipmap-xxhdpi/ic_launcher.png" afterPath="$PROJECT_DIR$/../ChatMaps/app/src/main/res/mipmap-xxhdpi/ic_launcher.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ChatMaps/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" afterPath="$PROJECT_DIR$/../ChatMaps/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/ic_menu_unregister.png" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/ic_menu_unregister.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/ic_menu_unregister.png" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/ic_menu_unregister.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/ic_menu_unregister.png" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/ic_menu_unregister.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/ic_menu_unregister.png" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/ic_menu_unregister.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../icons/noun_11141_cc.png" afterPath="$PROJECT_DIR$/../../icons/noun_11141_cc.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../assignment_05/ChatServerDifferentProcess/.idea/compiler.xml" afterPath="$PROJECT_DIR$/../../assignment_05/ChatServerDifferentProcess/.idea/compiler.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../assignment_05/ChatServerDifferentProcess/.idea/encodings.xml" afterPath="$PROJECT_DIR$/../../assignment_05/ChatServerDifferentProcess/.idea/encodings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../assignment_05/ChatServerDifferentProcess/.idea/gradle.xml" afterPath="$PROJECT_DIR$/../../assignment_05/ChatServerDifferentProcess/.idea/gradle.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../assignment_05/ChatServerDifferentProcess/.idea/misc.xml" afterPath="$PROJECT_DIR$/../../assignment_05/ChatServerDifferentProcess/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../assignment_05/ChatServerDifferentProcess/.idea/modules.xml" afterPath="$PROJECT_DIR$/../../assignment_05/ChatServerDifferentProcess/.idea/modules.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../assignment_05/ChatServerDifferentProcess/.idea/runConfigurations.xml" afterPath="$PROJECT_DIR$/../../assignment_05/ChatServerDifferentProcess/.idea/runConfigurations.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../assignment_05/ChatServerDifferentProcess/.idea/vcs.xml" afterPath="$PROJECT_DIR$/../../assignment_05/ChatServerDifferentProcess/.idea/vcs.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../assignment_05/ChatServerDifferentProcess/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../../assignment_05/ChatServerDifferentProcess/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../assignment_05/ChatServerDifferentProcess/app/app.iml" afterPath="$PROJECT_DIR$/../../assignment_05/ChatServerDifferentProcess/app/app.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../assignment_05/ChatServerDifferentProcess/build.gradle" afterPath="$PROJECT_DIR$/../../assignment_05/ChatServerDifferentProcess/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../assignment_07/ChatServerWebServer/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../../assignment_07/ChatServerWebServer/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../assignment_07/ChatServerWebServer/app/app.iml" afterPath="$PROJECT_DIR$/../../assignment_07/ChatServerWebServer/app/app.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../assignment_07/ChatServerWebServer/build.gradle" afterPath="$PROJECT_DIR$/../../assignment_07/ChatServerWebServer/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../assignment_08/Fragments/.idea/misc.xml" afterPath="$PROJECT_DIR$/../../assignment_08/Fragments/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../assignment_08/Fragments/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../../assignment_08/Fragments/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../assignment_08/Fragments/app/app.iml" afterPath="$PROJECT_DIR$/../../assignment_08/Fragments/app/app.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../assignment_08/Fragments/app/src/main/java/edu/stevens/cs522/chat/oneway/server/activities/ChatActivity.java" afterPath="$PROJECT_DIR$/../../assignment_08/Fragments/app/src/main/java/edu/stevens/cs522/chat/oneway/server/activities/ChatActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Capture/.idea/copyright/profiles_settings.xml" afterPath="$PROJECT_DIR$/../Capture/.idea/copyright/profiles_settings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Capture/.idea/gradle.xml" afterPath="$PROJECT_DIR$/../Capture/.idea/gradle.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Capture/.idea/misc.xml" afterPath="$PROJECT_DIR$/../Capture/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Capture/app/build.gradle" afterPath="$PROJECT_DIR$/../Capture/app/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Capture/app/src/main/java/edu/stevens/cs522/capture/client/camera/CameraManager.java" afterPath="$PROJECT_DIR$/../Capture/app/src/main/java/edu/stevens/cs522/capture/client/camera/CameraManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Capture/app/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/../Capture/app/src/main/res/values/strings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Capture/build.gradle" afterPath="$PROJECT_DIR$/../Capture/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ChatMaps/app/build.gradle" afterPath="$PROJECT_DIR$/../ChatMaps/app/build.gradle" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ChatMaps/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/../ChatMaps/app/src/main/AndroidManifest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ChatMaps/app/src/main/java/com/chat_maps/chatmaps/activities/ChatMapsActivity.java" afterPath="$PROJECT_DIR$/../ChatMaps/app/src/main/java/com/chat_maps/chatmaps/activities/ChatMapsActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ChatMaps/app/src/main/java/com/chat_maps/chatmaps/contracts/ChatroomContract.java" afterPath="$PROJECT_DIR$/../ChatMaps/app/src/main/java/com/chat_maps/chatmaps/contracts/ChatroomContract.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ChatMaps/app/src/main/java/com/chat_maps/chatmaps/contracts/MessageContract.java" afterPath="$PROJECT_DIR$/../ChatMaps/app/src/main/java/com/chat_maps/chatmaps/contracts/MessageContract.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ChatMaps/app/src/main/java/com/chat_maps/chatmaps/contracts/PeerContract.java" afterPath="$PROJECT_DIR$/../ChatMaps/app/src/main/java/com/chat_maps/chatmaps/contracts/PeerContract.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ChatMaps/app/src/main/java/com/chat_maps/chatmaps/managers/ChatroomManager.java" afterPath="$PROJECT_DIR$/../ChatMaps/app/src/main/java/com/chat_maps/chatmaps/managers/ChatroomManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ChatMaps/app/src/main/java/com/chat_maps/chatmaps/managers/Manager.java" afterPath="$PROJECT_DIR$/../ChatMaps/app/src/main/java/com/chat_maps/chatmaps/managers/Manager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ChatMaps/app/src/main/java/com/chat_maps/chatmaps/managers/MessageManager.java" afterPath="$PROJECT_DIR$/../ChatMaps/app/src/main/java/com/chat_maps/chatmaps/managers/MessageManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ChatMaps/app/src/main/java/com/chat_maps/chatmaps/managers/PeerManager.java" afterPath="$PROJECT_DIR$/../ChatMaps/app/src/main/java/com/chat_maps/chatmaps/managers/PeerManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ChatMaps/app/src/main/java/com/chat_maps/chatmaps/managers/QueryBuilder.java" afterPath="$PROJECT_DIR$/../ChatMaps/app/src/main/java/com/chat_maps/chatmaps/managers/QueryBuilder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ChatMaps/app/src/main/java/com/chat_maps/chatmaps/utils/App.java" afterPath="$PROJECT_DIR$/../ChatMaps/app/src/main/java/com/chat_maps/chatmaps/utils/App.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ChatMaps/build.gradle" afterPath="$PROJECT_DIR$/../ChatMaps/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/oneway/server/activities/ChatActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/oneway/server/activities/ChatActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/oneway/server/activities/base/BaseFragmentActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/oneway/server/activities/base/BaseFragmentActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/oneway/server/utils/App.java" afterPath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/oneway/server/utils/App.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/frag__new_message.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/frag__new_message.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../icons/the_noun_project_credits.txt" afterPath="$PROJECT_DIR$/../../icons/the_noun_project_credits.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/oneway/server/activities/ContactBookActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/oneway/server/activities/ContactBookActivity.java" />
     </list>
     <ignored path="SecurityChatApp.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -109,11 +47,46 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="App.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="App.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/oneway/server/utils/App.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.2591362">
-              <caret line="14" column="105" selection-start-line="14" selection-start-column="105" selection-end-line="16" selection-end-column="81" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="20" column="62" selection-start-line="20" selection-start-column="62" selection-end-line="20" selection-end-column="62" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DatabaseProvider.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/oneway/server/providers/DatabaseProvider.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="1.4492754">
+              <caret line="276" column="0" selection-start-line="276" selection-start-column="0" selection-end-line="276" selection-end-column="0" />
+              <folding>
+                <element signature="method#getProjection#0;class#DatabaseProvider#0" expanded="false" />
+                <element signature="method#getType#0;class#DatabaseProvider#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ContactBookActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/oneway/server/activities/ContactBookActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="57" column="0" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
+              <folding>
+                <element signature="method#showContactDetails#0;class#ContactBookActivity#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BaseFragmentActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/oneway/server/activities/base/BaseFragmentActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="75" column="33" selection-start-line="75" selection-start-column="33" selection-end-line="75" selection-end-column="33" />
               <folding />
             </state>
           </provider>
@@ -1786,7 +1759,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/oneway/server/managers/Manager.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/oneway/server/managers/QueryBuilder.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/oneway/server/managers/SimpleQueryBuilder.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/oneway/server/activities/ContactBookActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/oneway/server/activities/fragments/ContactDetailsFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/oneway/server/providers/DatabaseProvider.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/oneway/server/requests/RequestProcessor.java" />
@@ -1801,6 +1773,7 @@
         <option value="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/oneway/server/activities/base/BaseFragmentActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/frag__new_message.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/oneway/server/utils/App.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/oneway/server/activities/ContactBookActivity.java" />
       </list>
     </option>
   </component>
@@ -1900,6 +1873,28 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="server" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SecurityChatApp" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="server" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="providers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -2325,7 +2320,7 @@
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32962137" sideWeight="0.5021322" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19283277" sideWeight="0.4978678" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.834471" sideWeight="0.4978678" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980332" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32962137" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32935154" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -2340,7 +2335,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.43856657" sideWeight="0.4978678" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.43856657" sideWeight="0.4978678" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -2393,12 +2388,6 @@
           <option name="timeStamp" value="23" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/oneway/server/providers/DatabaseProvider.java</url>
-          <line>146</line>
-          <properties />
-          <option name="timeStamp" value="27" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/oneway/server/activities/base/BaseFragmentActivity.java</url>
           <line>72</line>
           <properties />
@@ -2410,8 +2399,26 @@
           <properties />
           <option name="timeStamp" value="38" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/oneway/server/providers/DatabaseProvider.java</url>
+          <line>177</line>
+          <properties />
+          <option name="timeStamp" value="39" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/oneway/server/providers/DatabaseProvider.java</url>
+          <line>276</line>
+          <properties />
+          <option name="timeStamp" value="41" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/oneway/server/providers/DatabaseProvider.java</url>
+          <line>146</line>
+          <properties />
+          <option name="timeStamp" value="42" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="39" />
+      <option name="time" value="43" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="app">
@@ -2426,17 +2433,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/oneway/server/requests/RequestService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="78" column="0" selection-start-line="78" selection-start-column="0" selection-end-line="78" selection-end-column="0" />
-          <folding>
-            <element signature="method#setServerHost#0;class#RequestService#0" expanded="false" />
-            <element signature="method#getAddress#0;class#RequestService#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/oneway/server/providers/DatabaseProvider.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -2736,17 +2732,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.1923075">
-          <caret line="35" column="0" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
-          <folding>
-            <element signature="e#1897#1915#0" expanded="true" />
-            <element signature="e#2022#2046#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/oneway/server/utils/CaptureClient.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -2803,14 +2788,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/oneway/server/activities/base/BaseFragmentActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="78" column="0" selection-start-line="78" selection-start-column="0" selection-end-line="78" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/message_row.xml">
       <provider editor-type-id="android-designer">
         <state />
@@ -2843,25 +2820,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/oneway/server/activities/ContactBookActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="57" column="0" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/oneway/server/providers/DatabaseProvider.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.61461794">
-          <caret line="182" column="0" selection-start-line="182" selection-start-column="0" selection-end-line="182" selection-end-column="0" />
-          <folding>
-            <element signature="method#getProjection#0;class#DatabaseProvider#0" expanded="false" />
-            <element signature="method#getType#0;class#DatabaseProvider#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -2870,11 +2828,56 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.12781955">
+          <caret line="17" column="36" selection-start-line="17" selection-start-column="36" selection-end-line="17" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/oneway/server/utils/App.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2591362">
-          <caret line="14" column="105" selection-start-line="14" selection-start-column="105" selection-end-line="16" selection-end-column="81" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="20" column="62" selection-start-line="20" selection-start-column="62" selection-end-line="20" selection-end-column="62" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/oneway/server/activities/base/BaseFragmentActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="75" column="33" selection-start-line="75" selection-start-column="33" selection-end-line="75" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-23/java/lang/String.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33222592">
+          <caret line="42" column="19" selection-start-line="42" selection-start-column="19" selection-end-line="42" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/oneway/server/activities/ContactBookActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="57" column="0" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
+          <folding>
+            <element signature="method#showContactDetails#0;class#ContactBookActivity#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/oneway/server/providers/DatabaseProvider.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.4492754">
+          <caret line="276" column="0" selection-start-line="276" selection-start-column="0" selection-end-line="276" selection-end-column="0" />
+          <folding>
+            <element signature="method#getProjection#0;class#DatabaseProvider#0" expanded="false" />
+            <element signature="method#getType#0;class#DatabaseProvider#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

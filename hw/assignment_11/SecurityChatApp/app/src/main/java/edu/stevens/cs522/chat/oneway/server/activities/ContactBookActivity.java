@@ -138,6 +138,7 @@ public class ContactBookActivity
                 Intent intent = new Intent();
                 intent.setAction("com.chat_maps.chatmaps.SHOW_PEERS");
                 intent.setType("*/*");
+                intent.putExtra("com.chat_maps.chatmaps.EXTRA_DATABASE_KEY", super.getDatabaseKey());
                 intent.putExtra("com.chat_maps.chatmaps.EXTRA_USERID", userId);
                 intent.putExtra("com.chat_maps.chatmaps.EXTRA_LATITUDE", userLatitude);
                 intent.putExtra("com.chat_maps.chatmaps.EXTRA_LONGITUDE", userLongitude);

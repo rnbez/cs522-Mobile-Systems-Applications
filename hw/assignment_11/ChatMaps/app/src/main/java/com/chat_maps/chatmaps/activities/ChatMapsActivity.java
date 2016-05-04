@@ -26,11 +26,14 @@ import java.util.ArrayList;
 
 public class ChatMapsActivity extends FragmentActivity implements OnMapReadyCallback {
     final static public String TAG = ChatMapsActivity.class.getCanonicalName();
+
+    final static public String EXTRA_DATABASE_KEY = App.APP_NAMESPACE + ".EXTRA_DATABASE_KEY";
     final static public String EXTRA_USERID = App.APP_NAMESPACE + ".EXTRA_USERID";
     final static public String EXTRA_LATITUDE = App.APP_NAMESPACE + ".EXTRA_LATITUDE";
     final static public String EXTRA_LONGITUDE = App.APP_NAMESPACE + ".EXTRA_LONGITUDE";
 
     private GoogleMap map;
+    private char[] databaseKey;
     private ArrayList<Peer> peers;
     private long userId;
     private double latitude;
@@ -53,6 +56,8 @@ public class ChatMapsActivity extends FragmentActivity implements OnMapReadyCall
         if (callingIntent != null) {
             Bundle bundle = callingIntent.getExtras();
             if (bundle != null) {
+                if (bundle.containsKey(EXTRA_DATABASE_KEY))
+                    databaseKey = bundle.getCharArray(EXTRA_DATABASE_KEY);
                 if (bundle.containsKey(EXTRA_USERID))
                     userId = bundle.getLong(EXTRA_USERID);
                 if (bundle.containsKey(EXTRA_LATITUDE))
@@ -68,13 +73,13 @@ public class ChatMapsActivity extends FragmentActivity implements OnMapReadyCall
             Toast.makeText(getApplicationContext(), "You need to launch this app from the ChatApp.", Toast.LENGTH_LONG).show();
 
 
-        getPeers();
+//        getPeers();
     }
 
     private void getPeers() {
         QueryBuilder.executeQuery(TAG,
                 this,
-                PeerContract.CONTENT_URI,
+                PeerContract.withDatabaseKeyUri(databaseKey),
                 PeerContract.CURSOR_LOADER_ID,
                 PeerContract.DEFAULT_ENTITY_CREATOR,
                 new IQueryListener<Peer>() {
