@@ -11,8 +11,10 @@ import edu.stevens.cs522.chat.oneway.server.activities.PreferencesActivity;
  */
 public class App {
     public static final String APP_NAMESPACE = "edu.stevens.cs522.chat.oneway.server";
-    public static final String EXTRA_SECURITY_DATABASE_KEY = "";
-    public static final String DATABASE_KEY_URI_PARAM = "key";
+    public static final String CAMERA_APP_PACKAGE = "edu.stevens.cs522.capture";
+    public static final String CAMERA_APP_NAMESPACE = "edu.stevens.cs522.capture.client.CaptureActivity";
+    public static final String EXTRA_SECURITY_DATABASE_KEY = "security_database_key";
+    public static final String DATABASE_KEY_URI_PARAM = "database_key_uri_param";
 
     public static final String PREF_KEY_USERID = "userid";
     public static final String PREF_KEY_LAST_SEQNUM = "last_seq_num";

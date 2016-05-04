@@ -5,11 +5,23 @@
     tools:context=".activities.fragments.NewMessageFragment"
     android:padding="20dp">
 
+
+    <!--<View-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_weight="6"/>-->
+
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:orientation="vertical">-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:weightSum="1">
 
         <TextView
             android:id="@+id/frag__new_message_chatroom_text"
@@ -36,6 +48,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
+        <!--<EditText-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:inputType="textMultiLine"-->
+            <!--android:ems="10"-->
+            <!--android:id="@+id/frag__new_message_input_text"-->
+            <!--android:layout_weight="0.32" />-->
+
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -56,6 +76,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/frag__new_message_cancel_button"
                 android:layout_weight="1" />
+
 
 
         </LinearLayout>

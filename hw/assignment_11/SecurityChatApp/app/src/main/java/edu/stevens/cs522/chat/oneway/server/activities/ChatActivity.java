@@ -1,9 +1,9 @@
 /*********************************************************************
  * Chat server: accept chat messages from clients.
- * <p>
+ * <p/>
  * Sender name and GPS coordinates are encoded
  * in the messages, and stripped off upon receipt.
- * <p>
+ * <p/>
  * Copyright (c) 2012 Stevens Institute of Technology
  **********************************************************************/
 package edu.stevens.cs522.chat.oneway.server.activities;
@@ -138,6 +138,7 @@ public class ChatActivity
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.layt__main);
 
         /**
@@ -148,6 +149,8 @@ public class ChatActivity
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
+        if (super.getDatabaseKey() == null)
+            return;
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         String host = sharedPreferences.getString(App.PREF_KEY_HOST, "");
         if (host.isEmpty()) {
@@ -261,28 +264,33 @@ public class ChatActivity
 
     @Override
     protected void onStart() {
-        googleApiClient.connect();
-        if (alarmIntent == null) {
-            Log.d("ALARM", "starting alarm manager");
-            Intent intent = new Intent(this, SynchronizationAlarmReceiver.class);
-            alarmIntent = PendingIntent.getBroadcast(this, this.BROADCAST_NETWORK_REQUEST, intent, 0);
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTimeInMillis(System.currentTimeMillis());
-            calendar.set(Calendar.HOUR_OF_DAY, 14);
-            long triggerAtMillis = calendar.getTimeInMillis();
+        if (googleApiClient != null)
+            googleApiClient.connect();
+        if (super.getDatabaseKey() != null)
+            if (alarmIntent == null) {
+                Log.d("ALARM", "starting alarm manager");
+                Intent intent = new Intent(this, SynchronizationAlarmReceiver.class);
+                alarmIntent = PendingIntent.getBroadcast(this, this.BROADCAST_NETWORK_REQUEST, intent, 0);
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTimeInMillis(System.currentTimeMillis());
+                calendar.set(Calendar.HOUR_OF_DAY, 14);
+                long triggerAtMillis = calendar.getTimeInMillis();
 
-            long intervalMillis = 10 * 1000;
-            alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP, triggerAtMillis, intervalMillis, alarmIntent);
-        }
+                long intervalMillis = 10 * 1000;
+                alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP, triggerAtMillis, intervalMillis, alarmIntent);
+            }
 
         super.onStart();
     }
 
     @Override
     protected void onStop() {
-        alarmMgr.cancel(alarmIntent);
-        alarmIntent = null;
-        googleApiClient.disconnect();
+        if (alarmIntent != null) {
+            alarmMgr.cancel(alarmIntent);
+            alarmIntent = null;
+        }
+        if (googleApiClient != null)
+            googleApiClient.disconnect();
 //        unregisterReceiver(broadcastRceiver);
         super.onStop();
     }
@@ -364,7 +372,9 @@ public class ChatActivity
                 }
                 return true;
             case R.id.chat_menu_contacts:
-                startActivity(new Intent(this, ContactBookActivity.class));
+                Intent intent = new Intent(this, ContactBookActivity.class);
+                intent.putExtra(App.EXTRA_SECURITY_DATABASE_KEY, super.getDatabaseKey());
+                startActivity(intent);
                 return true;
             case R.id.chat_menu_prefs:
                 startActivityForResult(new Intent(this, PreferencesActivity.class), PREFERENCES_REQUEST);

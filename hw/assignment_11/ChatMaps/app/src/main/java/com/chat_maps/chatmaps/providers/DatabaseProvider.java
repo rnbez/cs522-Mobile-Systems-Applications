@@ -4,26 +4,27 @@ import android.content.ContentProvider;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.UriMatcher;
-import android.database.Cursor;
-import android.database.SQLException;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import android.util.Log;
 
 import com.chat_maps.chatmaps.contracts.ChatroomContract;
 import com.chat_maps.chatmaps.contracts.MessageContract;
 import com.chat_maps.chatmaps.contracts.PeerContract;
+import com.chat_maps.chatmaps.utils.App;
+
+import net.sqlcipher.Cursor;
+import net.sqlcipher.SQLException;
+import net.sqlcipher.database.SQLiteDatabase;
+import net.sqlcipher.database.SQLiteOpenHelper;
+import net.sqlcipher.database.SQLiteQueryBuilder;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
 /**
  * Created by Rafael on 2/22/2016.
  */
-public class ChatDatabaseProvider extends ContentProvider {
+public class DatabaseProvider extends ContentProvider {
 
 
     public static final Uri CHATROOM_CONTENT_URI = ChatroomContract.CONTENT_URI;
@@ -36,6 +37,11 @@ public class ChatDatabaseProvider extends ContentProvider {
 
     private SQLiteDatabase _db;
     private DBHelper _dbHelper;
+
+    private enum DatabaseAccessType{
+        READ,
+        WRITE
+    };
 
     private static class DBHelper extends SQLiteOpenHelper {
 
@@ -117,13 +123,50 @@ public class ChatDatabaseProvider extends ContentProvider {
 
     @Override
     public boolean onCreate() {
-        this._dbHelper = new DBHelper(getContext());
-        _db = _dbHelper.getWritableDatabase();
-        return (_db == null) ? false : true;
+        Context context = getContext();
+        SQLiteDatabase.loadLibs(context);
+        this._dbHelper = new DBHelper(context);
+//        SQLiteDatabase db = _dbHelper.getWritableDatabase("my_secure_key");
+//        return (db == null) ? false : true;
+        return true;
+    }
+
+    private SQLiteDatabase getDatabaseWithKey(Uri uri, DatabaseAccessType type) {
+        String k = uri.getQueryParameter(App.DATABASE_KEY_URI_PARAM);
+        char[] databaseKey = null;
+        if (k == null) {
+            throw new IllegalArgumentException("...");
+        } else {
+            databaseKey = k.toCharArray();
+        }
+
+        try {
+            SQLiteDatabase db;
+            switch (type){
+                case READ:
+                    db = _dbHelper.getReadableDatabase(databaseKey);
+                    break;
+                case WRITE:
+                    db = _dbHelper.getWritableDatabase(databaseKey);
+                    break;
+                default:
+                    throw new IllegalArgumentException("Not a valid access type");
+            }
+            return db;
+        } catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+        finally {
+            for (int i = 0; i < databaseKey.length; i++) {
+                databaseKey[i] = ' ';
+            }
+        }
     }
 
     @Override
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
+        SQLiteDatabase _db = getDatabaseWithKey(uri, DatabaseAccessType.READ);
         SQLiteQueryBuilder builder = new SQLiteQueryBuilder();
         HashMap<String, String> map;
         String groupby = null;
@@ -131,7 +174,7 @@ public class ChatDatabaseProvider extends ContentProvider {
 
         projection = getProjection(uri);
 
-        switch (uriMatcher.match(uri)){
+        switch (uriMatcher.match(uri)) {
             case PEER_ALL_ROWS:
                 builder.setTables(PeerContract.TABLE_NAME);
                 break;
@@ -158,7 +201,7 @@ public class ChatDatabaseProvider extends ContentProvider {
                 map.put(MessageContract.CHATROOM_NAME, ChatroomContract.NAME_FULL + " as " + MessageContract.CHATROOM_NAME);
                 for (String field :
                         projection) {
-                    if(!map.containsKey(field)) map.put(field, field);
+                    if (!map.containsKey(field)) map.put(field, field);
                 }
                 builder.setProjectionMap(map);
                 List<String> peerPathSegments = uri.getPathSegments();
@@ -178,7 +221,7 @@ public class ChatDatabaseProvider extends ContentProvider {
                 map.put(MessageContract.CHATROOM_NAME, ChatroomContract.NAME_FULL + " as " + MessageContract.CHATROOM_NAME);
                 for (String field :
                         projection) {
-                    if(!map.containsKey(field)) map.put(field, field);
+                    if (!map.containsKey(field)) map.put(field, field);
                 }
                 builder.setProjectionMap(map);
                 List<String> chatRoomPathSegments = uri.getPathSegments();
@@ -211,7 +254,7 @@ public class ChatDatabaseProvider extends ContentProvider {
                 map.put(MessageContract.CHATROOM_NAME, ChatroomContract.NAME_FULL + " as " + MessageContract.CHATROOM_NAME);
                 for (String field :
                         projection) {
-                    if(!map.containsKey(field)) map.put(field, field);
+                    if (!map.containsKey(field)) map.put(field, field);
                 }
                 builder.setProjectionMap(map);
                 break;
@@ -222,14 +265,15 @@ public class ChatDatabaseProvider extends ContentProvider {
             default:
                 throw new IllegalArgumentException("Unknown URI " + uri);
         }
-        Log.d("query", builder.buildQuery(projection, selection, groupby, null, null, null));
+        Log.d("query", builder.buildQuery(projection, selection, selectionArgs, groupby, null, null, null));
         Cursor cursor = builder.query(_db, projection, selection, selectionArgs, groupby, null, null);
         cursor.setNotificationUri(getContext().getContentResolver(), uri);
         return cursor;
     }
 
-    private String[] getProjection(Uri uri){
-        switch (uriMatcher.match(uri)){
+
+    private String[] getProjection(Uri uri) {
+        switch (uriMatcher.match(uri)) {
             case PEER_ALL_ROWS:
             case PEER_SINGLE_ROW:
             case PEER_QUERY_NAME:
@@ -292,6 +336,7 @@ public class ChatDatabaseProvider extends ContentProvider {
 
     @Override
     public Uri insert(Uri uri, ContentValues values) {
+        SQLiteDatabase _db = getDatabaseWithKey(uri, DatabaseAccessType.WRITE);
         long rowId = 0;
         ArrayList<Uri> notificationUris = new ArrayList<>();
         switch (uriMatcher.match(uri)) {
@@ -325,6 +370,7 @@ public class ChatDatabaseProvider extends ContentProvider {
 
     @Override
     public int delete(Uri uri, String selection, String[] selectionArgs) {
+        SQLiteDatabase _db = getDatabaseWithKey(uri, DatabaseAccessType.WRITE);
         SQLiteQueryBuilder builder = new SQLiteQueryBuilder();
         int rowsDeleted = 0;
         ArrayList<Uri> notificationUris = new ArrayList<>();
@@ -378,7 +424,7 @@ public class ChatDatabaseProvider extends ContentProvider {
             default:
                 throw new IllegalArgumentException("Unknown URI " + uri);
         }
-        if(rowsDeleted > 0){
+        if (rowsDeleted > 0) {
             for (Uri notifyUri :
                     notificationUris) {
                 getContext().getContentResolver().notifyChange(notifyUri, null);
@@ -389,6 +435,7 @@ public class ChatDatabaseProvider extends ContentProvider {
 
     @Override
     public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
+        SQLiteDatabase _db = getDatabaseWithKey(uri, DatabaseAccessType.WRITE);
         SQLiteQueryBuilder builder = new SQLiteQueryBuilder();
         int rowsUpdated = 0;
         ArrayList<Uri> notificationUris = new ArrayList<>();
@@ -434,7 +481,7 @@ public class ChatDatabaseProvider extends ContentProvider {
                 selectionArgs = new String[]{
                         uri.getLastPathSegment()
                 };
-                rowsUpdated = _db.update(MessageContract.TABLE_NAME,values, selection, selectionArgs);
+                rowsUpdated = _db.update(MessageContract.TABLE_NAME, values, selection, selectionArgs);
                 notificationUris.add(MessageContract.CONTENT_URI);
                 notificationUris.add(PeerContract.getMessagesUri(values.getAsLong(MessageContract.PEER_ID)));
                 notificationUris.add(ChatroomContract.getMessagesUri(values.getAsLong(MessageContract.CHATROOM_ID)));
@@ -442,7 +489,7 @@ public class ChatDatabaseProvider extends ContentProvider {
             default:
                 throw new IllegalArgumentException("Unknown URI " + uri);
         }
-        if(rowsUpdated > 0){
+        if (rowsUpdated > 0) {
             for (Uri notifyUri :
                     notificationUris) {
                 getContext().getContentResolver().notifyChange(notifyUri, null);

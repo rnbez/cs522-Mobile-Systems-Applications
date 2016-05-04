@@ -13,7 +13,7 @@ import com.chat_maps.chatmaps.utils.App;
  * Created by Rafael on 2/22/2016.
  */
 public class MessageContract {
-    public static final String APP_NAMESPACE = App.CHAT_APP_NAMESPACE;
+    public static final String APP_NAMESPACE = App.APP_NAMESPACE;
     public static final String SCHEME = "content";
     public static final String AUTHORITY = APP_NAMESPACE;
     public static final String CONTENT = "message";
@@ -83,6 +83,19 @@ public class MessageContract {
         } else {
             throw new IllegalArgumentException("Null argument path: " + path);
         }
+    }
+
+    public static Uri withDatabaseKeyUri(char[]	databaseKey, Uri baseUri) {
+        Uri.Builder	builder = baseUri.buildUpon();
+        Uri	uri = builder
+                .appendQueryParameter(App.DATABASE_KEY_URI_PARAM,
+                        new	String(databaseKey))
+                .build();
+        return uri;
+    }
+
+    public static Uri withDatabaseKeyUri(char[]	databaseKey) {
+        return withDatabaseKeyUri(databaseKey, CONTENT_URI);
     }
 
     public static long getId(Uri uri) {

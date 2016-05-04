@@ -55,7 +55,7 @@
         </activity>
 
         <!--<provider-->
-            <!--android:name=".providers.ChatDatabaseProvider"-->
+            <!--android:name=".providers.DatabaseProvider"-->
             <!--android:authorities="edu.stevens.cs522.chat.oneway.server"-->
             <!--android:enabled="true"-->
             <!--android:exported="false"></provider>-->

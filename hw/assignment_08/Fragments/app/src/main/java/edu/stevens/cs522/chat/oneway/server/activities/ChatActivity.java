@@ -140,7 +140,7 @@ public class ChatActivity
         StrictMode.setThreadPolicy(policy);
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        userId = sharedPreferences.getLong(App.PREF_KEY_USERID, App.PREF_DEFAULT_USER_ID);
+        userId = sharedPreferences.getLong(App.PREF_KEY_U   SERID, App.PREF_DEFAULT_USER_ID);
         lastMessageSeqNum = sharedPreferences.getLong(App.PREF_KEY_LAST_SEQNUM, App.PREF_DEFAULT_LAST_SEQNUM);
         currentChatroom = new Chatroom(sharedPreferences.getString(App.PREF_KEY_CHATROOM, App.PREF_DEFAULT_CHATROOM));
         userName = sharedPreferences.getString(App.PREF_KEY_USERNAME, App.PREF_DEFAULT_USER_NAME);

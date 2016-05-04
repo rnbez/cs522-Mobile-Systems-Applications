@@ -5,7 +5,9 @@ import android.content.Context;
 import android.net.Uri;
 
 import com.chat_maps.chatmaps.contracts.ChatroomContract;
+import com.chat_maps.chatmaps.contracts.PeerContract;
 import com.chat_maps.chatmaps.entities.Chatroom;
+import com.chat_maps.chatmaps.utils.App;
 
 
 /**
@@ -14,16 +16,20 @@ import com.chat_maps.chatmaps.entities.Chatroom;
 public class ChatroomManager extends Manager<Chatroom> {
 
     final static Uri CONTENT_URI = ChatroomContract.CONTENT_URI;
+    private char[] databaseKey;
 
-    public ChatroomManager(Context context, int loaderId, IEntityCreator<Chatroom> creator) {
+    public ChatroomManager(Context context, char[] databaseKey, int loaderId, IEntityCreator<Chatroom> creator) {
         super(context, loaderId, creator);
+        this.databaseKey = databaseKey;
+
     }
 
     public void persistAsync(final Chatroom chatroom, final IContinue<Uri> callback) {
+        Uri uri = ChatroomContract.withDatabaseKeyUri(databaseKey);
         ContentValues values = new ContentValues();
         chatroom.writeToProvider(values);
         AsyncContentResolver asyncResolver = getAsyncResolver();
-        asyncResolver.insertAsync(CONTENT_URI,
+        asyncResolver.insertAsync(uri,
                 values,
                 new IContinue<Uri>() {
                     public void kontinue(Uri uri) {
@@ -36,7 +42,15 @@ public class ChatroomManager extends Manager<Chatroom> {
                 });
     }
 
-    public void deleteAsync(final Uri uri, final IContinue<Integer> callback) {
+    public void deleteAsync(final Uri deleteUri, final IContinue<Integer> callback) {
+        String k = deleteUri.getQueryParameter(App.DATABASE_KEY_URI_PARAM);
+        final Uri uri;
+        if (k == null) {
+            uri = ChatroomContract.withDatabaseKeyUri(databaseKey, deleteUri);
+        } else {
+            uri = deleteUri;
+        }
+
         AsyncContentResolver asyncResolver = getAsyncResolver();
         asyncResolver.deleteAsync(uri, null, null, new IContinue<Integer>() {
             @Override
@@ -51,7 +65,15 @@ public class ChatroomManager extends Manager<Chatroom> {
         });
     }
 
-    public void updateAsync(final Uri uri, final Chatroom chatroom, final IContinue<Integer> callback) {
+    public void updateAsync(final Uri updateUri, final Chatroom chatroom, final IContinue<Integer> callback) {
+        String k = updateUri.getQueryParameter(App.DATABASE_KEY_URI_PARAM);
+        final Uri uri;
+        if (k == null) {
+            uri = PeerContract.withDatabaseKeyUri(databaseKey, updateUri);
+        } else {
+            uri = updateUri;
+        }
+
         ContentValues values = new ContentValues();
         chatroom.writeToProvider(values);
         AsyncContentResolver asyncResolver = getAsyncResolver();
