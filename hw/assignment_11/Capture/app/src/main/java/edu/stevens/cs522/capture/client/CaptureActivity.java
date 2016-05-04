@@ -15,8 +15,10 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Point;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Surface;
@@ -43,7 +45,9 @@ public class CaptureActivity extends Activity implements OnClickListener, Surfac
 
 	private static final int REQUEST_PERMISSION_CANCEL = 3;
 
-	private Activity context = this;
+    private static final int CAMERA_PERMISION_REQUEST = 4;
+
+    private Activity context = this;
 
 	private boolean hasPermission = false;
 
@@ -108,6 +112,20 @@ public class CaptureActivity extends Activity implements OnClickListener, Surfac
 		Intent intent = getIntent();
 		message = intent.getStringExtra(CaptureClient.MESSAGE_KEY);
 		cameraId = intent.getIntExtra(CaptureClient.CAMERA_KEY, -1);
+
+		/*
+		 * Request camera permission.
+		 */
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            Log.d(TAG, "camera: PERMISSION DENIED");
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                String[] permissions = new String[]{
+                        Manifest.permission.CAMERA,
+                };
+                requestPermissions(permissions, CAMERA_PERMISION_REQUEST);
+            }
+            return;
+        }
 
 		/*
 		 * Initialize the UI.
