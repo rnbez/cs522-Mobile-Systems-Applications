@@ -1,6 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="edu.stevens.cs522.capture">
 
+    <uses-permission android:name="edu.stevens.cs522.chat.oneway.server.permission.OPEN_CAMERA" />
+
     <uses-permission android:name="android.permission.CAMERA" />
 
     <uses-feature android:name="android.hardware.camera.any" />

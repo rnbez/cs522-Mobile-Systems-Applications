@@ -47,6 +47,8 @@ public class CaptureActivity extends Activity implements OnClickListener, Surfac
 
     private static final int CAMERA_PERMISION_REQUEST = 4;
 
+	private static final String CHATAPP_OPEN_CAMERA_PERMISSION = "edu.stevens.cs522.chat.oneway.server.permission.OPEN_CAMERA";
+
     private Activity context = this;
 
 	private boolean hasPermission = false;
@@ -116,7 +118,8 @@ public class CaptureActivity extends Activity implements OnClickListener, Surfac
 		/*
 		 * Request camera permission.
 		 */
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+//        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(this, CHATAPP_OPEN_CAMERA_PERMISSION) != PackageManager.PERMISSION_GRANTED) {
             Log.d(TAG, "camera: PERMISSION DENIED");
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 String[] permissions = new String[]{
